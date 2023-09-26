@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/goosetrack-group6-project/static/css/main.9e1dcdd0.css",
+    "main.js": "/goosetrack-group6-project/static/js/main.07d3183d.js",
+    "static/media/Inter-700.woff": "/goosetrack-group6-project/static/media/Inter-700.a9221dece54e5fc1087a.woff",
+    "static/media/Inter-600.woff": "/goosetrack-group6-project/static/media/Inter-600.d703b3892cb1a467cf8a.woff",
+    "static/media/Inter-500.woff": "/goosetrack-group6-project/static/media/Inter-500.f65c8c00e68bb792e264.woff",
+    "static/media/Inter-400.woff": "/goosetrack-group6-project/static/media/Inter-400.8a19fc72bf6ea80a89e8.woff",
+    "static/media/Inter-700.woff2": "/goosetrack-group6-project/static/media/Inter-700.74a8620796c795315a62.woff2",
+    "static/media/Inter-600.woff2": "/goosetrack-group6-project/static/media/Inter-600.d873c5ea912cb7dff6d9.woff2",
+    "static/media/Inter-500.woff2": "/goosetrack-group6-project/static/media/Inter-500.19e05b2238d4f2d8d3d5.woff2",
+    "static/media/Inter-400.woff2": "/goosetrack-group6-project/static/media/Inter-400.e976b84791e6a5f65646.woff2",
+    "index.html": "/goosetrack-group6-project/index.html",
+    "main.9e1dcdd0.css.map": "/goosetrack-group6-project/static/css/main.9e1dcdd0.css.map",
+    "main.07d3183d.js.map": "/goosetrack-group6-project/static/js/main.07d3183d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9e1dcdd0.css",
+    "static/js/main.07d3183d.js"
+  ]
+}
