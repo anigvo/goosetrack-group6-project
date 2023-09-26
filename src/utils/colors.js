@@ -29,3 +29,4 @@ export const reviewCancelBtnBackgroundColor = '#E5EDFA';
 
 export const startColorActive = '#FFAC33';
 export const startColorInactive = '#CEC9C1';
+ 
