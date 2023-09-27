@@ -1,16 +1,41 @@
+import { ThemeProvider } from "@emotion/react";
+import { lazy } from "react";
+import { Routes, Route } from "react-router-dom";
+import { GlobalStyles } from "utils/GlobalStyle";
+import { darkTheme, lightTheme } from "utils/colors";
+
+const MainPage = lazy(() => import('../pages/MainPage/MainPage'));
+const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
+const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
+const MainLayout = lazy(() => import('../layout/MainLayout/MainLayout'));
+const AccountPage = lazy(() => import('../pages/AccountPage/AccountPage'));
+const CalendarPage = lazy(() => import('../pages/CalendarPage/CalendarPage'));
+const StatisticsPage = lazy(() => import('../pages/StatisticsPage/StatisticsPage'));
+const ChoosedDay = lazy(() => import('../layout/ChoosedDay/ChoosedDay'));
+const ChoosedMonth = lazy(() => import('../layout/ChoosedMonth/ChoosedMonth'));
+const NotFound = lazy(() => import(('../pages/NotFound/NotFound')));
+
 export const App = () => {
+  const isLoggedIn = true;
+  const theme = 'light';
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <Routes>
+        <Route path="/">
+          <Route path="/" element={!isLoggedIn ? <MainPage /> : <MainLayout />}>
+            <Route path="calendar" element={<CalendarPage />}>
+              <Route path="month/:currentDate" element={<ChoosedMonth />} />
+              <Route path="day/:currentDay" element={<ChoosedDay />} />
+            </Route>
+            <Route path="account" element={<AccountPage />} />
+            <Route path="statistics" element={<StatisticsPage />} />
+          </Route>
+          <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+      <GlobalStyles />
+    </ThemeProvider>
   );
 };
