@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/goosetrack-group6-project/static/css/main.9e1dcdd0.css",
+    "main.css": "/goosetrack-group6-project/static/css/main.e60f4e57.css",
     "main.js": "/goosetrack-group6-project/static/js/main.07d3183d.js",
     "static/media/Inter-700.woff": "/goosetrack-group6-project/static/media/Inter-700.a9221dece54e5fc1087a.woff",
     "static/media/Inter-600.woff": "/goosetrack-group6-project/static/media/Inter-600.d703b3892cb1a467cf8a.woff",
@@ -11,11 +11,11 @@
     "static/media/Inter-500.woff2": "/goosetrack-group6-project/static/media/Inter-500.19e05b2238d4f2d8d3d5.woff2",
     "static/media/Inter-400.woff2": "/goosetrack-group6-project/static/media/Inter-400.e976b84791e6a5f65646.woff2",
     "index.html": "/goosetrack-group6-project/index.html",
-    "main.9e1dcdd0.css.map": "/goosetrack-group6-project/static/css/main.9e1dcdd0.css.map",
+    "main.e60f4e57.css.map": "/goosetrack-group6-project/static/css/main.e60f4e57.css.map",
     "main.07d3183d.js.map": "/goosetrack-group6-project/static/js/main.07d3183d.js.map"
   },
   "entrypoints": [
-    "static/css/main.9e1dcdd0.css",
+    "static/css/main.e60f4e57.css",
     "static/js/main.07d3183d.js"
   ]
 }
