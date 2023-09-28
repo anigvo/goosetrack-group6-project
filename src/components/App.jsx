@@ -5,18 +5,17 @@ import { GlobalStyles } from "utils/GlobalStyle";
 import { darkTheme, lightTheme } from "utils/colors";
 import { useSelector } from "react-redux";
 import { selectTheme } from "redux/selectors";
+import MainLayout from "layout/MainLayout/MainLayout";
+import MainPage from "pages/MainPage/MainPage";
+import LoginPage from "pages/LoginPage/LoginPage";
+import RegisterPage from "pages/RegisterPage/RegisterPage";
+import NotFound from "pages/NotFound/NotFound";
 
-
-const MainPage = lazy(() => import('../pages/MainPage/MainPage'));
-const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
-const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
-const MainLayout = lazy(() => import('../layout/MainLayout/MainLayout'));
 const AccountPage = lazy(() => import('../pages/AccountPage/AccountPage'));
 const CalendarPage = lazy(() => import('../pages/CalendarPage/CalendarPage'));
 const StatisticsPage = lazy(() => import('../pages/StatisticsPage/StatisticsPage'));
 const ChoosedDay = lazy(() => import('../layout/ChoosedDay/ChoosedDay'));
 const ChoosedMonth = lazy(() => import('../layout/ChoosedMonth/ChoosedMonth'));
-const NotFound = lazy(() => import('../pages/NotFound/NotFound'));
 
 export const App = () => {
   const [pageName, setPageName] = useState(null);
