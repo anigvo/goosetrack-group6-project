@@ -1,38 +1,30 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import {
+  persistStore,
   FLUSH,
   REHYDRATE,
   PAUSE,
   PERSIST,
   PURGE,
   REGISTER,
-  persistStore,
-  persistReducer,
 } from 'redux-persist';
-import { themeReducer } from './theme/slice';
-import storage from 'redux-persist/lib/storage';
 import { authReducer } from './auth/authSlice';
+import { themeReducer } from './theme/slice';
 
-const middleware = {
+const middlewares = {
   serializableCheck: {
     ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-  }
-}
-
-const persistConfigTheme = {
-  key: 'theme',
-  storage,
-  whitelist: ['value']
-}
+  },
+};
 
 const reducers = combineReducers({
-  theme: persistReducer(persistConfigTheme, themeReducer),
+  theme: themeReducer,
   auth: authReducer,
-})
+});
 
 export const store = configureStore({
   reducer: reducers,
-  middleware: getDefaultMiddleware => getDefaultMiddleware(middleware)
+  middleware: getDefaultMiddleware => getDefaultMiddleware(middlewares),
 });
 
 export const persistor = persistStore(store);
