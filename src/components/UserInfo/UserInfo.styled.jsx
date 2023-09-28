@@ -1,0 +1,36 @@
+import styled from '@emotion/styled';
+import { media } from 'utils/queries';
+
+export const UserInfoWrapper = styled.div`
+display: flex;
+gap: 8px;
+align-items: center;
+    ${media('tablet', '')`
+        gap: 14px;
+    `}
+`;
+
+export const Username = styled.p`
+color: ${props => props.theme.headerUsernameText};
+font-family: 'Inter';
+font-size: 14px;
+font-weight: 700;
+line-height: 1.28;
+    ${media('tablet', '')`
+    font-size: 18px;
+    line-height: normal;
+    `}
+`;
+
+export const UserPhoto = styled.img`
+border: 1.8px solid ${props => props.theme.userAvatarBorder};
+border-radius: 50%;
+width: 32px;
+height: 32px;
+object-fit: cover;
+    ${media('tablet', '')`
+    width: 44px;
+    height: 44px;
+    `}
+`;
+

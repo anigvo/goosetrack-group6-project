@@ -73,7 +73,8 @@ export const lightTheme = Object.freeze({
     modalCancelBtnTaskBackground: '#EFEFEF',
     // кольори кнопок (однакові на темній та світлій темах)
     btnBackgroundColor: '#3E85F3',
-    btnTextColor: '#FFFFFF'
+    btnTextColor: '#FFFFFF',
+    btnHoverBackground: '#2B78EF'
 });
 
 export const darkTheme = Object.freeze({
@@ -150,5 +151,6 @@ export const darkTheme = Object.freeze({
     modalCancelBtnTaskBackground: '#EFEFEF',
     // кольори кнопок (однакові на темній та світлій темах)
     btnBackgroundColor: '#3E85F3',
-    btnTextColor: '#FFFFFF'
+    btnTextColor: '#FFFFFF',
+    btnHoverBackground: '#2B78EF'
 })
