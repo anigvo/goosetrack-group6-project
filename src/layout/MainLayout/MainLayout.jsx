@@ -6,7 +6,7 @@ import { LayoutWrapper, MainContent } from "./MainLayout.styled";
 import { useMediaQuery } from "hooks/useMediaQuery";
 import { AnimatePresence } from "framer-motion";
 
-const MainLayout = () => {
+const MainLayout = ({pageName}) => {
     const [isOpenSidebar, setIsOpenSidebar] = useState(false);
     const isNotDesktop = useMediaQuery("(max-width: 1439px)");
 
@@ -28,7 +28,7 @@ const MainLayout = () => {
                 {isOpenSidebar && <SideBar closeMethod={closeSidebar} />}
             </AnimatePresence>
             <MainContent>
-                <Header openMethod={openSidebar} />
+                <Header openMethod={openSidebar} title={pageName}/>
                 <Suspense fallback={<></>}>
                     <Outlet />
                 </Suspense>
