@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkreact_homework_template=self.webpackChunkreact_homework_template||[]).push([[816],{816:function(e,a,n){n.r(a);var r=n(791),t=n(689),s=n(184);a.default=function(e){var a=e.updatePageName;return(0,r.useEffect)((function(){a("Calendar")}),[a]),(0,s.jsxs)(s.Fragment,{children:[(0,s.jsx)("h1",{children:"Calendar page"}),(0,s.jsx)(r.Suspense,{children:(0,s.jsx)(t.j3,{})})]})}}}]);
-//# sourceMappingURL=816.345b5ee8.chunk.js.map
