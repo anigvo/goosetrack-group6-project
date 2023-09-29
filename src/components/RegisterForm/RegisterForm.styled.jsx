@@ -12,15 +12,15 @@ export const Container = styled.div`
   border-radius: 8px;
   padding: 40px 24px;
   margin: 0 20px;
-  background: var(--color-white);
+  background:  #ffffff;
 `;
 
 export const Title = styled.h1`
   margin: 0 0 32px 0;
-  color: var(--color-blue);
+  color: #3e85f3;
   text-shadow: 0px 9.399999618530273px 57.6875px rgba(0, 0, 0, 0.04),
     0px 47px 355px rgba(0, 0, 0, 0.07);
-  font-family: Inter;
+  font-family: 'Inter', sans-serif;
   font-size: 18px;
   font-weight: 600;
   line-height: 1.3;
@@ -36,10 +36,10 @@ export const Label = styled.label`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  color: var(--color-black);
+  color: #13151a;
   font-size: 12px;
   font-weight: 600;
-  font-family: Inter;
+  font-family: 'Inter', sans-serif;
   line-height: 1.28;
   margin-bottom: ${(props) => (props.last ? '34px' : '24px')};
 `;
@@ -49,23 +49,23 @@ export const Input = styled.input`
   padding: 0 14px;
   border-radius: 8px;
   border: 1px solid rgba(220, 227, 229, 0.6);
-  background-color: var(--color-white);
-  color: var(--color-black);
+  background-color:  #ffffff;
+  color: #13151a;
   font-size: 14px;
-  font-family: Inter;
+  font-family: 'Inter', sans-serif;
   line-height: 1.28;
   ::placeholder {
-    color: var(--input-placeholder-color);
+    color:  #dce3e5;
     font-size: 14px;
     font-family: Inter;
     line-height: 1.28;
   }
   :hover,
   :focus {
-    border: 1px solid var(--color-blue);
+    border: 1px solid #3e85f3;
   }
   &.is-valid {
-    border: 1px solid var(--green-color);
+    border: 1px solid green;
     background-color: rgba(15, 216, 102, 0.038);
   }
   &.is-invalid {

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const StyledAuthNavigate = styled(NavLink)`
   color: #3e85f3;
-  font-family: Inter;
+  font-family: 'Inter', sans-serif;
   font-size: 12px;
   font-weight: 600;
   line-height: 1.16;
