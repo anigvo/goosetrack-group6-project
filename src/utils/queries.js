@@ -26,9 +26,7 @@ export const media =
       `;
     } else {
       return css`
-        @media screen and (min-width: ${size[minWidth]}) and (max-width: ${size[
-            maxWidth
-          ]}) {
+        @media screen and (min-width: ${size[minWidth]}) and (max-width: ${size[maxWidth]}) {
           ${css(...args)}
         }
       `;

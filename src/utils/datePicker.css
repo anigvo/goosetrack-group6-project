@@ -1,0 +1,42 @@
+.react-datepicker__current-month {
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.16;
+  }
+
+.react-datepicker__day-name {
+   
+  }
+
+   .react-datepicker__day {
+
+  }
+
+   .react-datepicker__day--selected {
+
+  }
+
+   .react-datepicker__day--today {
+
+  }
+
+   .react-datepicker__day--weekend {
+
+  }
+
+   .react-datepicker__month {
+
+  }
+
+   .react-datepicker__navigation {
+
+  }
+
+   .react-datepicker__input-container {
+
+  }
+
+   .react-datepicker-popper {
+
+  }

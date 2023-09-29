@@ -1,16 +1,19 @@
 import { Suspense, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
+import { CalendarToolbar } from 'layout/CalendarToolbar/CalendarToolbar';
+import {CalendarContainer} from './CalendarPage.styled'
+
 const CalendarPage = ({ updatePageName }) => {
   useEffect(() => {
     updatePageName('Calendar');
   }, [updatePageName]);
   return (
-    <>
-      <h1>Calendar page</h1>
+    <CalendarContainer>
+      <CalendarToolbar />
       <Suspense>
         <Outlet />
       </Suspense>
-    </>
+    </CalendarContainer>
   );
 };
 
