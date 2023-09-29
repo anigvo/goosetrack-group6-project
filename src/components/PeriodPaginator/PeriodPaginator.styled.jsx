@@ -15,7 +15,7 @@ export const CalendarBtn = styled.button`
   &:focus {
     background-color: ${props => props.theme.btnHoverBackground};
   }
-  width: 118px;
+  width: 148px;
   height: 30px;
   background-color: ${props => props.theme.btnBackgroundColor};
   padding: 6px 12px;
@@ -31,7 +31,7 @@ export const CalendarBtn = styled.button`
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   ${media('tablet', '')`
   margin-right: 8px;
-        width: 131px;
+        width: 161px;
         height: 34px;
         font-size: 16px;
         line-height: 1.12;
