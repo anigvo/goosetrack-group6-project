@@ -19,7 +19,7 @@ export const RegisterPageContainer = styled.div`
     background-repeat: no-repeat;
     background-position: 49px 100%;
   }
-`;
+`; 
 
 // export default RegisterPageContainer;
 

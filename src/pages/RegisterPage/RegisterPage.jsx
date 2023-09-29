@@ -15,10 +15,11 @@ const RegisterPage = () => {
   return (
     <RegisterPageContainer>
       <RegisterForm />
-      <AuthNavigate />
+      <AuthNavigate route={'/login'} pageName={'Login'}/>
     </RegisterPageContainer>
   );
 };
 
 export default RegisterPage;
+
 

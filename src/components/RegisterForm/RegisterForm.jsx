@@ -8,8 +8,8 @@ import {
   StyledForm,
   Label,
   Input,
-  ValidIcon,
-  InvalidIcon,
+//   ValidIcon,
+//   InvalidIcon,
   Togle,
   ButtonContainer,
   Button,
@@ -108,8 +108,8 @@ const RegisterForm = () => {
                     placeholder="Enter your name"
                     className={`${isValid('name')}`}
                   />
-                  {isValid('name') === 'is-valid' && <ValidIcon />}
-                  {isValid('name') === 'is-invalid' && <InvalidIcon />}
+                  {/* {isValid('name') === 'is-valid' && <ValidIcon />}
+                  {isValid('name') === 'is-invalid' && <InvalidIcon />} */}
                   <ErrorMessage
                     name="name"
                     component="div"
@@ -125,8 +125,8 @@ const RegisterForm = () => {
                     placeholder="Enter email"
                     className={`${isValid('email')}`}
                   />
-                  {isValid('email') === 'is-valid' && <ValidIcon />}
-                  {isValid('email') === 'is-invalid' && <InvalidIcon />}
+                  {/* {isValid('email') === 'is-valid' && <ValidIcon />}
+                  {isValid('email') === 'is-invalid' && <InvalidIcon />} */}
                   <ErrorMessage
                     name="email"
                     component="div"
@@ -146,8 +146,8 @@ const RegisterForm = () => {
                   <Togle onClick={changeVisible}>
                     {/* {passVisible ? <FiEye /> : <FiEyeOff />} */}
                   </Togle>
-                  {isValid('password') === 'is-valid' && <ValidIcon />}
-                  {isValid('password') === 'is-invalid' && <InvalidIcon />}
+                  {/* {isValid('password') === 'is-valid' && <ValidIcon />}
+                  {isValid('password') === 'is-invalid' && <InvalidIcon />} */}
                   <ErrorMessage
                     name="password"
                     component="div"
@@ -171,4 +171,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default RegisterForm; 

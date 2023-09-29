@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
+import { NavLink } from 'react-router-dom';
 
-const StyledAuthNavigate = styled.button`
-  color: var(--color-blue);
+const StyledAuthNavigate = styled(NavLink)`
+  color: #3e85f3;
   font-family: Inter;
   font-size: 12px;
   font-weight: 600;
@@ -17,6 +18,9 @@ const StyledAuthNavigate = styled.button`
 `;
 
 export default StyledAuthNavigate;
+
+
+
 
 
 
