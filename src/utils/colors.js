@@ -18,12 +18,16 @@ export const lightTheme = Object.freeze({
   // фон для всіх сторінок з mainlayout
   oddBackground: '#FFFFFF',
   // кольори сторінки юзера
+
+  userAvatarBackground: '#FFFFFF',
   userAvatarBorder: '#3E85F3',
   userAvatarInsideBackground: '#F8F8F8',
   userNameTextColor: '#343434',
   userInputLabelColor: '#111111',
   userInputBorderColor: 'rgba(17, 17, 17, 0.15)',
   userInputTextColor: '#111111',
+  userFillCollor: '#3E85F3',
+  userInputBorderHoverColor: '#111111',
   // кольори хедера
   headerUsernameText: '#343434',
   themeTogglerIcon: '#3E85F3',
@@ -103,12 +107,15 @@ export const darkTheme = Object.freeze({
   // фон для всіх сторінок з mainlayout
   oddBackground: '#21222C',
   // кольори сторінки юзера
+  userAvatarBackground: '#21222C',
   userAvatarBorder: '#3E85F3',
   userAvatarInsideBackground: '#171820',
   userNameTextColor: '#FFFFFF',
   userInputLabelColor: 'rgba(250, 250, 250, 0.3)',
   userInputBorderColor: 'rgba(255, 255, 255, 0.15)',
   userInputTextColor: '#FFFFFF',
+  userFillCollor: '#FFFFFF',
+  userInputBorderHoverColor: '#FFFFFF',
   // кольори хедера
   headerUsernameText: '#FFFFFF',
   themeTogglerIcon: '#3E85F3',
