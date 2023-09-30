@@ -28,7 +28,7 @@ export const lightTheme = Object.freeze({
     chartBorderColor: '#E3F3FF',
     // кольори сторінки календаря
     calendarBackground: '#ffffff',
-    calendarBorderColor: 'rgba(220, 227, 229, 0.80)',
+    calendarBorderColor: 'rgba(220, 227, 229, 0.50)',
     calendarTextColor: '#343434',
     calendarLowTaskBackground: '#CEEEFD',
     calendarLowTaskText: '#3E85F3',
@@ -46,8 +46,7 @@ export const lightTheme = Object.freeze({
     taskBackground: '#F7F6F9',
     taskBorderColor: 'rgba(220, 227, 229, 0.8)',
     taskPriorityTextColor: '#F7F6F9',
-    taskIconColor: '#111111',
-    taskActiveIconColor: '#3E85F3',
+    taskScrollbarColor: '#E7E5E5',
     taskScrollBarBackfround: '#F2F2F2',
     // пріорітетність тасків
     taskLowPriority: '#72C2F8',
@@ -55,6 +54,7 @@ export const lightTheme = Object.freeze({
     taskHighPriority: '#EA3D65',
     // кнопка додавання таски, для кнопки текст mainFont
     addTaskBtnBackground: '#E3F3FF',
+    addTaskBtnHover: '#CAE8FF',
     addTaskBtnBorder: '#3E85F3',
     // модалки для рейтингу та додавання тасків
     modalBackground: '#FFF',
@@ -125,15 +125,15 @@ export const darkTheme = Object.freeze({
   taskBackground: '#17182',
   taskBorderColor: 'rgba(255, 255, 255, 0.15)',
   taskPriorityTextColor: '#FFF',
-  taskIconColor: '#FFF',
-  taskActiveIconColor: '#3E85F3',
   taskScrollBarBackfround: '#171820',
+  taskScrollbarColor: '#2D3037',
   // пріорітетність тасків
   taskLowPriority: '#72C2F8',
   taskMediumPriority: '#F3B249',
   taskHighPriority: '#EA3D65',
   // кнопка додавання таски, для кнопки текст mainFont
   addTaskBtnBackground: '#3E85F3',
+  addTaskBtnHover: '#2B78EF',
   addTaskBtnBorder: '#3E85F3',
   // модалки для рейтингу та додавання тасків
   modalBackground: '#171820',
