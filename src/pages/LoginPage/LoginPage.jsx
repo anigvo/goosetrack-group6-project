@@ -1,8 +1,16 @@
-const LoginPage = () => {
-    return (
-        <h1>Login page</h1>
-    )
-}
+// import React from 'react';
+// import LoginForm from 'components/LoginForm/LoginForm';
+// import AuthNavigate from 'components/AuthNavigate/AuthNavigate';
+// import { LoginPageContainer } from './LoginPage.styled';
 
-export default LoginPage;
+// const LoginPage = () => {
+//   return (
+//     <LoginPageContainer>
+//       <LoginForm />
+//       <AuthNavigate route={'/register'} pageName={'Sign up'} />
+//     </LoginPageContainer>
+//   );
+// };
+
+// export default LoginPage;
 

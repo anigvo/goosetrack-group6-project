@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
+// import logOutIcon from '../assets/icons/log-out.svg';
 import {
   RegisterContainer,
   Container,
@@ -158,7 +159,7 @@ const RegisterForm = () => {
                   <Button type="submit">
                     Sign Up
                     <svg className="icon">
-                      {/* <use href={sprite + '#icon-log-in'}></use> */}
+                      {/* <use href={icons + '#icon-log-out'}></use> */}
                     </svg>
                   </Button>
                 </ButtonContainer>

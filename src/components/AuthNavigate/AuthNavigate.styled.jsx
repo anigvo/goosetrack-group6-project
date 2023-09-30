@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
+import { media } from 'utils/queries';
 
 const StyledAuthNavigate = styled(NavLink)`
   color: #3e85f3;
-  font-family: 'Inter', sans-serif;
+  font-family: Inter;
   font-size: 12px;
   font-weight: 600;
   line-height: 1.16;
@@ -12,9 +13,9 @@ const StyledAuthNavigate = styled(NavLink)`
   background-color: inherit;
   cursor: pointer;
 
-  @media (min-width: 768px) {
+  ${media('tablet', '')`
     font-size: 18px;
-  }
+  `}
 `;
 
 export default StyledAuthNavigate;

@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { media } from 'utils/queries';
 
 export const RegisterPageContainer = styled.div`
   display: flex;
@@ -10,16 +11,16 @@ export const RegisterPageContainer = styled.div`
   height: 100vh;
   background-color: #dcebf7;
 
-  @media (min-width: 768px) {
+  ${media('tablet', '')`
     gap: 24px;
-  }
+  `}
 
-  @media (min-width: 1440px) {
-    background-image: url(../..asserts/images/loginpage-goose-form.png);
+  ${media('desktop', '')`
+    background-image: url('../asserts/images/loginpage-goose-form.png');
     background-repeat: no-repeat;
     background-position: 49px 100%;
-  }
-`; 
+  `}
+  `;
 
-// export default RegisterPageContainer;
+
 
