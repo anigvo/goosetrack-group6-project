@@ -39,6 +39,43 @@ export const CalendarBtn = styled.button`
     `}
 `;
 
+export const DatePickerButton = styled.button`
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  cursor: ${props => (props.disabledStyle ? 'auto' : 'pointer')};
+  & > svg {
+    width: 16px;
+    height: 16px;
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    stroke: ${props =>
+      props.disabledStyle
+        ? props.theme.btnCalendarArrowDisabled
+        : props.theme.btnCalendarArrowEnabled};
+    ${media('tablet', '')`
+    width: 18px;
+    height: 18px;
+    `}
+  }
+`;
+
+export const DatePickerCustomHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-top: 15px;
+`;
+
+export const DatePickerCustomHeaderTitle = styled.p`
+  color: ${props => props.theme.btnTextColor};
+  font-size: 24px;
+  line-height: 1.16;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+`;
+
 export const PaginatorBtnWrapper = styled.div`
   display: flex;
 `;
@@ -47,7 +84,10 @@ export const PaginatorBtn = styled.button`
     width: 16px;
     height: 16px;
     transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    stroke: ${props => props.theme.arrowEnabledColor};
+    stroke: ${props =>
+      props.disabledStyle
+        ? props.theme.arrowDisabledColor
+        : props.theme.arrowEnabledColor};
     ${media('tablet', '')`
     width: 18px;
     height: 18px;
@@ -55,11 +95,12 @@ export const PaginatorBtn = styled.button`
   }
   &:hover,
   &:focus {
-    background-color: ${props => props.theme.calendarBorderColor};
+    background-color: ${props =>
+      !props.disabledStyle && props.theme.calendarBorderColor};
   }
   width: 36px;
   height: 30px;
-  cursor: pointer;
+  cursor: ${props => (props.disabledStyle ? 'auto' : 'pointer')};
   background-color: ${props => props.theme.calendarBackground};
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid ${props => props.theme.arrowDisabledColor};

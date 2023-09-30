@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../utils/datePicker.css';
@@ -9,76 +9,106 @@ import {
   PeriodPaginatorContainer,
   CalendarBtn,
   PaginatorBtnWrapper,
+  DatePickerCustomHeader,
+  DatePickerCustomHeaderTitle,
+  DatePickerButton,
 } from './PeriodPaginator.styled';
 
 export const PeriodPaginator = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [filterMonth, setFilterMonth] = useState(startDate.getMonth());
-    const currentMonth = new Date().getMonth();
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [filterMonth, setFilterMonth] = useState(selectedDate.getMonth());
+  const [filterYear, setFilterYear] = useState(selectedDate.getFullYear());
+  const [selectedHeaderDate, setSelectedHeaderDate] = useState(selectedDate);
+
+  const currentMonth = new Date().getMonth();
+  const currentYear = new Date().getFullYear();
 
   const handleDateChange = date => {
-    setStartDate(date);
+    setSelectedDate(date);
   };
 
   const filterDate = date => {
     const selectedMonth = filterMonth;
+    const selectedYear = filterYear;
+    const year = date.getFullYear();
     const month = date.getMonth();
-    return month === selectedMonth;
+    return month === selectedMonth && year === selectedYear;
   };
 
   const handleMonthChange = date => {
     const selectedMonth = date.getMonth();
-    setFilterMonth(selectedMonth);
+    const selectedYear = date.getFullYear();
+    if (selectedMonth !== filterMonth || selectedYear !== filterYear) {
+      setFilterMonth(selectedMonth);
+      setFilterYear(selectedYear);
+      setSelectedHeaderDate(date);
+    }
   };
-const handlePrevMonth = () => {
-  const prevMonthDate = new Date(startDate);
-  prevMonthDate.setMonth(prevMonthDate.getMonth() - 1);
-  setStartDate(prevMonthDate);
-  setFilterMonth(prevMonthDate.getMonth());
-};
 
-const handleNextMonth = () => {
-  const nextMonthDate = new Date(startDate);
-  nextMonthDate.setMonth(nextMonthDate.getMonth() + 1);
-  setStartDate(nextMonthDate);
-  setFilterMonth(nextMonthDate.getMonth()); 
-};
+  useEffect(() => {
+    setSelectedHeaderDate(selectedDate);
+  }, [selectedDate]);
 
-  
+  const handlePrevMonth = () => {
+    const prevMonthDate = new Date(selectedDate);
+    prevMonthDate.setMonth(prevMonthDate.getMonth() - 1);
+    setSelectedDate(prevMonthDate);
+    setFilterMonth(prevMonthDate.getMonth());
+    setFilterYear(prevMonthDate.getFullYear());
+  };
+
+  const handleNextMonth = () => {
+    const nextMonthDate = new Date(selectedDate);
+    nextMonthDate.setMonth(nextMonthDate.getMonth() + 1);
+    setSelectedDate(nextMonthDate);
+    setFilterMonth(nextMonthDate.getMonth());
+    setFilterYear(nextMonthDate.getFullYear());
+  };
+
   const customHeader = ({ date, decreaseMonth, increaseMonth }) => {
     const currentMonth = new Date().getMonth();
     const selectedMonth = date.getMonth();
+    const currentYear = new Date().getFullYear();
+    const selectedYear = date.getFullYear();
 
     return (
-      <div className="date-picker-header">
-        <button
-          className="date-picker-navigation"
+      <DatePickerCustomHeader>
+        <DatePickerButton
           onClick={decreaseMonth}
-          disabled={selectedMonth === currentMonth}
+          disabled={
+            selectedMonth === currentMonth && selectedYear === currentYear
+          }
+          disabledStyle={
+            selectedMonth === currentMonth && selectedYear === currentYear
+              ? true
+              : false
+          }
         >
           <ArrowLeft />
-        </button>
-        <div className="date-picker-current-month">
-          {date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-        </div>
-        <button className="date-picker-navigation" onClick={increaseMonth}>
+        </DatePickerButton>
+
+        <DatePickerCustomHeaderTitle>
+          {selectedHeaderDate.toLocaleDateString('en-US', {
+            month: 'long',
+            year: 'numeric',
+          })}
+        </DatePickerCustomHeaderTitle>
+        <DatePickerButton onClick={increaseMonth}>
           <ArrowRight />
-        </button>
-      </div>
+        </DatePickerButton>
+      </DatePickerCustomHeader>
     );
   };
-  
-  
-  
+
   return (
     <PeriodPaginatorContainer>
       <DatePicker
-        selected={startDate}
+        selected={selectedHeaderDate}
         onChange={handleDateChange}
         onMonthChange={handleMonthChange}
         customInput={
           <CalendarBtn type="button">
-            {startDate.toLocaleDateString('en-US', {
+            {selectedHeaderDate.toLocaleDateString('en-US', {
               month: 'long',
               year: 'numeric',
             })}
@@ -93,7 +123,12 @@ const handleNextMonth = () => {
           direction={'left'}
           type="button"
           onClick={handlePrevMonth}
-          disabled={filterMonth === currentMonth}
+          disabled={filterMonth === currentMonth && filterYear === currentYear}
+          disabledStyle={
+            filterMonth === currentMonth && filterYear === currentYear
+              ? true
+              : false
+          }
         >
           <ArrowLeft />
         </PaginatorBtn>
