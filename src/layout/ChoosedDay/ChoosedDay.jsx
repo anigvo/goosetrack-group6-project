@@ -1,6 +1,14 @@
+import { TasksColumnsList } from "components/TasksColumnsList/TasksColumnsList";
+import { useParams } from "react-router-dom";
+import { exampleTasks } from "./temp_example";
+
 const ChoosedDay = () => {
+    const { currentDay } = useParams();
+    console.log(currentDay);
     return (
-        <h1>ChoosedDay</h1>
+        <>
+            <TasksColumnsList tasks={exampleTasks}/>
+        </>
     )
 }
 
