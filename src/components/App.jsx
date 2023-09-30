@@ -1,19 +1,21 @@
-import { ThemeProvider } from "@emotion/react";
-import { lazy, useState } from "react";
-import { Routes, Route } from "react-router-dom";
-import { GlobalStyles } from "utils/GlobalStyle";
-import { darkTheme, lightTheme } from "utils/colors";
-import { useSelector } from "react-redux";
-import { selectTheme } from "redux/selectors";
-import MainLayout from "layout/MainLayout/MainLayout";
-import MainPage from "pages/MainPage/MainPage";
-import LoginPage from "pages/LoginPage/LoginPage";
-import RegisterPage from "pages/RegisterPage/RegisterPage";
-import NotFound from "pages/NotFound/NotFound";
+import { ThemeProvider } from '@emotion/react';
+import { lazy, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { GlobalStyles } from 'utils/GlobalStyle';
+import { darkTheme, lightTheme } from 'utils/colors';
+import { useSelector } from 'react-redux';
+import { selectTheme } from 'redux/selectors';
+import MainLayout from 'layout/MainLayout/MainLayout';
+import MainPage from 'pages/MainPage/MainPage';
+import LoginPage from 'pages/LoginPage/LoginPage';
+import RegisterPage from 'pages/RegisterPage/RegisterPage';
+import NotFound from 'pages/NotFound/NotFound';
 
 const AccountPage = lazy(() => import('../pages/AccountPage/AccountPage'));
 const CalendarPage = lazy(() => import('../pages/CalendarPage/CalendarPage'));
-const StatisticsPage = lazy(() => import('../pages/StatisticsPage/StatisticsPage'));
+const StatisticsPage = lazy(() =>
+  import('../pages/StatisticsPage/StatisticsPage')
+);
 const ChoosedDay = lazy(() => import('../layout/ChoosedDay/ChoosedDay'));
 const ChoosedMonth = lazy(() => import('../layout/ChoosedMonth/ChoosedMonth'));
 
