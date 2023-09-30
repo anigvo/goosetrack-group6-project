@@ -1,10 +1,10 @@
 {
   "files": {
     "main.css": "/goosetrack-group6-project/static/css/main.b9c57d53.css",
-    "main.js": "/goosetrack-group6-project/static/js/main.68a10639.js",
+    "main.js": "/goosetrack-group6-project/static/js/main.c8401a3c.js",
     "static/js/900.490e7a67.chunk.js": "/goosetrack-group6-project/static/js/900.490e7a67.chunk.js",
-    "static/css/508.68e76ddb.chunk.css": "/goosetrack-group6-project/static/css/508.68e76ddb.chunk.css",
-    "static/js/508.268b2eed.chunk.js": "/goosetrack-group6-project/static/js/508.268b2eed.chunk.js",
+    "static/css/508.a664fb64.chunk.css": "/goosetrack-group6-project/static/css/508.a664fb64.chunk.css",
+    "static/js/508.39363532.chunk.js": "/goosetrack-group6-project/static/js/508.39363532.chunk.js",
     "static/js/552.480df0ed.chunk.js": "/goosetrack-group6-project/static/js/552.480df0ed.chunk.js",
     "static/js/436.8987a65f.chunk.js": "/goosetrack-group6-project/static/js/436.8987a65f.chunk.js",
     "static/js/65.49420a99.chunk.js": "/goosetrack-group6-project/static/js/65.49420a99.chunk.js",
@@ -41,16 +41,16 @@
     "static/media/chevron-right.svg": "/goosetrack-group6-project/static/media/chevron-right.7104809e4b4b455f9d3d188ffc19de5f.svg",
     "static/media/close.svg": "/goosetrack-group6-project/static/media/close.7241e85da3b30e42b36747dccef5f401.svg",
     "main.b9c57d53.css.map": "/goosetrack-group6-project/static/css/main.b9c57d53.css.map",
-    "main.68a10639.js.map": "/goosetrack-group6-project/static/js/main.68a10639.js.map",
+    "main.c8401a3c.js.map": "/goosetrack-group6-project/static/js/main.c8401a3c.js.map",
     "900.490e7a67.chunk.js.map": "/goosetrack-group6-project/static/js/900.490e7a67.chunk.js.map",
-    "508.68e76ddb.chunk.css.map": "/goosetrack-group6-project/static/css/508.68e76ddb.chunk.css.map",
-    "508.268b2eed.chunk.js.map": "/goosetrack-group6-project/static/js/508.268b2eed.chunk.js.map",
+    "508.a664fb64.chunk.css.map": "/goosetrack-group6-project/static/css/508.a664fb64.chunk.css.map",
+    "508.39363532.chunk.js.map": "/goosetrack-group6-project/static/js/508.39363532.chunk.js.map",
     "552.480df0ed.chunk.js.map": "/goosetrack-group6-project/static/js/552.480df0ed.chunk.js.map",
     "436.8987a65f.chunk.js.map": "/goosetrack-group6-project/static/js/436.8987a65f.chunk.js.map",
     "65.49420a99.chunk.js.map": "/goosetrack-group6-project/static/js/65.49420a99.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b9c57d53.css",
-    "static/js/main.68a10639.js"
+    "static/js/main.c8401a3c.js"
   ]
 }
