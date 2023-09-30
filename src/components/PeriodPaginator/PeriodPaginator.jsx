@@ -4,7 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../../utils/datePicker.css';
 import { ReactComponent as ArrowLeft } from '../../assets/icons/chevron-left.svg';
 import { ReactComponent as ArrowRight } from '../../assets/icons/chevron-right.svg';
-import {
+import { 
   PaginatorBtn,
   PeriodPaginatorContainer,
   CalendarBtn,
