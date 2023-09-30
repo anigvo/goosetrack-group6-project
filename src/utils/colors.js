@@ -84,7 +84,8 @@ export const lightTheme = Object.freeze({
   btnBackgroundColor: '#3E85F3',
   btnTextColor: '#FFFFFF',
   btnHoverBackground: '#2B78EF',
-  // колір тексту на 404
+  btnCalendarArrowEnabled: '#FFFFFF',
+  btnCalendarArrowDisabled: '#DCE3E5CC', // колір тексту на 404
   apologizeTextColor: 'rgba(17, 17, 17, 0.698)',
 });
 
@@ -165,6 +166,8 @@ export const darkTheme = Object.freeze({
   btnBackgroundColor: '#3E85F3',
   btnTextColor: '#FFFFFF',
   btnHoverBackground: '#2B78EF',
+  btnCalendarArrowEnabled: '#FFFFFF',
+  btnCalendarArrowDisabled: '#DCE3E5CC',
   // колір тексту на 404
   apologizeTextColor: '#FFFFFF',
 });
