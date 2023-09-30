@@ -1,3 +1,11 @@
+export const mainPageColors = Object.freeze({
+  mainBackground: '#3E85F3',
+  secondBackground: '#FFFFFF',
+  mainFontColor: '#FFFFFF',
+  secondFontColor: '#3E85F3',
+  accentBackground: '#DCEBF7',
+});
+
 export const lightTheme = Object.freeze({
   mainFont: '#111111',
   mainBackground: '#F7F6F9',
@@ -77,7 +85,8 @@ export const lightTheme = Object.freeze({
   btnTextColor: '#FFFFFF',
   btnHoverBackground: '#2B78EF',
   btnCalendarArrowEnabled: '#FFFFFF',
-  btnCalendarArrowDisabled: '#DCE3E5CC',
+  btnCalendarArrowDisabled: '#DCE3E5CC', // колір тексту на 404
+  apologizeTextColor: 'rgba(17, 17, 17, 0.698)',
 });
 
 export const darkTheme = Object.freeze({
@@ -159,4 +168,6 @@ export const darkTheme = Object.freeze({
   btnHoverBackground: '#2B78EF',
   btnCalendarArrowEnabled: '#FFFFFF',
   btnCalendarArrowDisabled: '#DCE3E5CC',
+  // колір тексту на 404
+  apologizeTextColor: '#FFFFFF',
 });

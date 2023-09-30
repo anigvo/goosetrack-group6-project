@@ -1,6 +1,18 @@
+import AuthSection from "components/AuthSection/AuthSection";
+import Description from "components/Description/Description";
+import ReviewSlider from "components/ReviewsSlider/ReviewsSlider";
+import { MainPageContainer } from "./MainPage.styled";
+
 const MainPage = () => {
     return (
-        <h1>Main page</h1>
+        <>
+        <AuthSection/>
+        <MainPageContainer>
+            <Description />
+            <ReviewSlider/>
+        </MainPageContainer>
+        </>
+        
     )
 }
 
