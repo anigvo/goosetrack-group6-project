@@ -1,3 +1,11 @@
+export const mainPageColors = Object.freeze({
+  mainBackground: '#3E85F3',
+  secondBackground: '#FFFFFF',
+  mainFontColor: '#FFFFFF',
+  secondFontColor: '#3E85F3',
+  accentBackground: '#DCEBF7',
+});
+
 export const lightTheme = Object.freeze({
   mainFont: '#111111',
   mainBackground: '#F7F6F9',
@@ -10,6 +18,7 @@ export const lightTheme = Object.freeze({
   // фон для всіх сторінок з mainlayout
   oddBackground: '#FFFFFF',
   // кольори сторінки юзера
+
   userAvatarBackground: '#FFFFFF',
   userAvatarBorder: '#3E85F3',
   userAvatarInsideBackground: '#F8F8F8',
@@ -79,6 +88,11 @@ export const lightTheme = Object.freeze({
   btnBackgroundColor: '#3E85F3',
   btnTextColor: '#FFFFFF',
   btnHoverBackground: '#2B78EF',
+  // кнопки datePicker
+  btnCalendarArrowEnabled: '#FFFFFF',
+  btnCalendarArrowDisabled: '#DCE3E5CC',
+  // колір тексту на 404
+  apologizeTextColor: 'rgba(17, 17, 17, 0.698)',
 });
 
 export const darkTheme = Object.freeze({
@@ -161,4 +175,9 @@ export const darkTheme = Object.freeze({
   btnBackgroundColor: '#3E85F3',
   btnTextColor: '#FFFFFF',
   btnHoverBackground: '#2B78EF',
+  // кнопки datePicker
+  btnCalendarArrowEnabled: '#FFFFFF',
+  btnCalendarArrowDisabled: '#DCE3E5CC',
+  // колір тексту на 404
+  apologizeTextColor: '#FFFFFF',
 });
