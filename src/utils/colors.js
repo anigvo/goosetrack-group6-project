@@ -156,3 +156,13 @@ export const darkTheme = Object.freeze({
   btnTextColor: '#FFFFFF',
   btnHoverBackground: '#2B78EF',
 });
+export const mainPageColors = Object.freeze({
+  mainBackground: '#3E85F3',
+  secondBackground: '#FFFFFF',
+  mainFontColor: '#FFFFFF',
+  secondFontColor: '#3E85F3',
+  accentBackground: '#DCEBF7'
+
+  
+});
+
