@@ -1,4 +1,9 @@
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
+import {ReactComponent as LogOutIcon} from '../../assets/icons/log-out.svg';
+import {ReactComponent as InvalidIcon} from '../../assets/icons/error.svg';
+import {ReactComponent as ValidIcon} from '../../assets/icons/done.svg';
+import { media } from 'utils/queries';
 
 export const RegisterContainer = styled.div`
   display: flex;
@@ -54,32 +59,38 @@ export const Input = styled.input`
   font-size: 14px;
   font-family: 'Inter', sans-serif;
   line-height: 1.28;
+
   ::placeholder {
     color:  #dce3e5;
     font-size: 14px;
     font-family: Inter;
     line-height: 1.28;
   }
+
   :hover,
   :focus {
     border: 1px solid #3e85f3;
   }
+
   &.is-valid {
     border: 1px solid green;
     background-color: rgba(15, 216, 102, 0.038);
   }
+
   &.is-invalid {
     border: 1px solid rgba(240, 8, 8, 0.6);
     background-color: rgba(240, 8, 8, 0.045);
   }
-};
+';
 
-// export const ValidIcon = styled(FiCheckCircle)`
+// export const validIconStyles = css`
 //   position: absolute;
 //   top: 41px;
 //   right: 15px;
-//   color: var(--green-color);
+//   color: green;
 // `;
+
+
 
 // export const InvalidIcon = styled(FiAlertCircle)`
 //   position: absolute;
@@ -87,6 +98,19 @@ export const Input = styled.input`
 //   right: 15px;
 //   color: var(--color-task-high);
 // `;
+
+export const ErrorMessageStyled = styled.div`
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 71px;
+  z-index: 10;    
+  color: var(--color-task-high);
+  font-family: Inter;
+  font-size: 11px;
+  font-weight: 200;
+  line-height: 1.28;
+`; 
 
 export const Togle = styled.span`
   position: absolute;
@@ -127,3 +151,27 @@ export const Button = styled.button`
     transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 `;
+
+
+const styledIcon = css`
+    width: 20px;
+    height: 20px;
+    ${media('desktop', '')`
+    width: 24px;
+    height: 24px;
+    `}
+`
+
+export const SingUpIcon = styled(LogOutIcon)`
+    ${styledIcon}
+    `; 
+
+    export const ValidIconStyled = styled(ValidIcon)`
+    ${styledIcon}
+`;
+
+export const InvalidIconStyled = styled(InvalidIcon)`
+    ${styledIcon}
+`;
+
+

@@ -13,13 +13,13 @@ export const RegisterPageContainer = styled.div`
 
   ${media('tablet', '')`
     gap: 24px;
-  `}
+   `}
 
   ${media('desktop', '')`
-    background-image: url('../asserts/images/loginpage-goose-form.png');
+    background-image: url('../../assets/images/loginpage-goose-form.png');
     background-repeat: no-repeat;
     background-position: 49px 100%;
-  `}
+    `}
   `;
 
 

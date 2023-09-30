@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
-// import logOutIcon from '../assets/icons/log-out.svg';
+// import {ReactComponent as LogOutIcon} from '../../assets/icons/log-out.svg';
+// import {ReactComponent as InvalidIcon} from '../../assets/icons/error.svg';
+// import {ReactComponent as ValidIcon} from '../../assets/icons/done.svg';
 import {
   RegisterContainer,
   Container,
@@ -9,11 +11,13 @@ import {
   StyledForm,
   Label,
   Input,
-//   ValidIcon,
-//   InvalidIcon,
+  InvalidIconStyled,
+  ValidIconStyled,
+  ErrorMessageStyled,
   Togle,
   ButtonContainer,
   Button,
+  SingUpIcon,
 } from './RegisterForm.styled';
 
 import { useDispatch } from 'react-redux';
@@ -47,7 +51,7 @@ const SignUpSchema = yup.object().shape({
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [passVisible, setPasswordVisible] = useState(false);
 
   const changeVisible = () => {
@@ -109,9 +113,9 @@ const RegisterForm = () => {
                     placeholder="Enter your name"
                     className={`${isValid('name')}`}
                   />
-                  {/* {isValid('name') === 'is-valid' && <ValidIcon />}
-                  {isValid('name') === 'is-invalid' && <InvalidIcon />} */}
-                  <ErrorMessage
+                  {isValid('name') === 'is-valid' && < ValidIconStyled />}
+                  {isValid('name') === 'is-invalid' && < InvalidIconStyled />}
+                  <ErrorMessageStyled
                     name="name"
                     component="div"
                     className="error_message"
@@ -126,9 +130,9 @@ const RegisterForm = () => {
                     placeholder="Enter email"
                     className={`${isValid('email')}`}
                   />
-                  {/* {isValid('email') === 'is-valid' && <ValidIcon />}
-                  {isValid('email') === 'is-invalid' && <InvalidIcon />} */}
-                  <ErrorMessage
+                  {isValid('email') === 'is-valid' && < ValidIconStyled />}
+                  {isValid('email') === 'is-invalid' && <InvalidIconStyled />}
+                  <ErrorMessageStyled
                     name="email"
                     component="div"
                     className="error_message"
@@ -147,9 +151,9 @@ const RegisterForm = () => {
                   <Togle onClick={changeVisible}>
                     {/* {passVisible ? <FiEye /> : <FiEyeOff />} */}
                   </Togle>
-                  {/* {isValid('password') === 'is-valid' && <ValidIcon />}
-                  {isValid('password') === 'is-invalid' && <InvalidIcon />} */}
-                  <ErrorMessage
+                  {isValid('password') === 'is-valid' && <InvalidIconStyled />}
+                  {isValid('password') === 'is-invalid' && < InvalidIconStyled />}
+                  <ErrorMessageStyled
                     name="password"
                     component="div"
                     className="error_message"
@@ -158,9 +162,7 @@ const RegisterForm = () => {
                 <ButtonContainer>
                   <Button type="submit">
                     Sign Up
-                    <svg className="icon">
-                      {/* <use href={icons + '#icon-log-out'}></use> */}
-                    </svg>
+                    <SingUpIcon/>
                   </Button>
                 </ButtonContainer>
               </StyledForm>
