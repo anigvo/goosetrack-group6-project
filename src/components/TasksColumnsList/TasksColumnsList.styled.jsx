@@ -8,7 +8,7 @@ export const ColumnList = styled.ul`
     flex-direction: row;
     padding-bottom: 34px;
     &::-webkit-scrollbar {
-        background-color: ${props => props.theme.taskScrollBarBackfround};
+        background-color: ${props => props.theme.taskScrollBarBackground};
         border-radius: 12px;
         height: 12px;
         ${media('tablet', '')`

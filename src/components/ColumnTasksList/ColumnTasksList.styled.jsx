@@ -25,7 +25,7 @@ export const TasksList = styled.ul`
     }};
     `}
     &::-webkit-scrollbar {
-        background-color: ${props => props.theme.taskScrollBarBackfround};
+        background-color: ${props => props.theme.taskScrollBarBackground};
         border-radius: 12px;
         width: 6px;
     }

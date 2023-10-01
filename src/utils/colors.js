@@ -55,7 +55,7 @@ export const lightTheme = Object.freeze({
     taskBorderColor: 'rgba(220, 227, 229, 0.8)',
     taskPriorityTextColor: '#F7F6F9',
     taskScrollbarColor: '#E7E5E5',
-    taskScrollBarBackfround: '#F2F2F2',
+    taskScrollBarBackground: '#F2F2F2',
     toolBorder: 'transparent',
     // пріорітетність тасків
     taskLowPriority: '#72C2F8',
