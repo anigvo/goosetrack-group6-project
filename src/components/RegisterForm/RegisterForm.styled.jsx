@@ -19,7 +19,7 @@ export const Title = styled.h1`
     font-size: 24px;
     font-style: normal;
     font-weight: 600;
-    line-height: 24px; /* 100% */
+    line-height: 24px; 
 `;
 
 export const Label = styled.label`
@@ -82,7 +82,6 @@ export const InputFormMargin0 = styled(InputForm)`
 
 export const Button = styled.button`
     margin-top: 48px;
-
     display: flex;
     width: 400px;
     padding: 16px 152px;
@@ -90,7 +89,6 @@ export const Button = styled.button`
     align-items: center;
     justify-content: center;
     gap: 11px;
-
     border: none;
     outline: none;
 
@@ -103,7 +101,7 @@ export const Button = styled.button`
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
-    line-height: 24px; /* 133.333% */
+    line-height: 24px; 
     letter-spacing: -0.36px;
 `;
 
@@ -118,7 +116,6 @@ export const Error = styled(ErrorMessage)`
     left: 0;
     margin-left: 18px;
     margin-top: 8px;
-
     color: #da1414;
     font-family: Inter;
     font-size: 12px;

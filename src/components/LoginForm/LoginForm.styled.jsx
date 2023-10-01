@@ -79,7 +79,7 @@ export const Input = styled.input`
     border: 1px solid rgba(240, 8, 8, 0.6);
     background-color: rgba(240, 8, 8, 0.045);
   }
-';
+`;
 
 // export const Togle = styled.span`
 //   position: absolute;

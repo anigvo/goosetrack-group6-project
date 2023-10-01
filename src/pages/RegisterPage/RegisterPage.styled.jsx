@@ -16,6 +16,7 @@ export const RegisterPageContainer = styled.div`
    `}
 
   ${media('desktop', '')`
+    position: absolute;
     background-image: url('../../assets/images/loginpage-goose-form.png');
     background-repeat: no-repeat;
     background-position: 49px 100%;
