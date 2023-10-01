@@ -4,21 +4,22 @@ export const exampleTasks = {
         text: 'Complete project report',
         priority: 'high'
     },
-    {
-        id: '2',
-        text: 'Organize team meeting',
-        priority: 'medium'
-    },
-    {
-        id: '3',
-        text: 'Respond to client emails',
-        priority: 'low'
-    },
-    {
-        id: '4',
-        text: 'Review and revise presentation slides because it is very important to make',
-        priority: 'medium'
-    }],
+    // {
+    //     id: '2',
+    //     text: 'Organize team meeting',
+    //     priority: 'medium'
+    // },
+    // {
+    //     id: '3',
+    //     text: 'Respond to client emails',
+    //     priority: 'low'
+    // },
+    // {
+    //     id: '4',
+    //     text: 'Review and revise presentation slides because it is very important to make',
+    //     priority: 'medium'
+    // }
+],
     inprogress: [{
         id: '5',
         text: 'Research new market trends',
@@ -38,7 +39,8 @@ export const exampleTasks = {
         id: '8',
         text: 'Organize office workspace',
         priority: 'low'
-    }],
+    }
+],
     done: [{
         id: '9',
         text: 'Attend training workshop',

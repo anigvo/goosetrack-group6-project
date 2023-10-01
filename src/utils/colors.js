@@ -56,6 +56,7 @@ export const lightTheme = Object.freeze({
     taskPriorityTextColor: '#F7F6F9',
     taskScrollbarColor: '#E7E5E5',
     taskScrollBarBackfround: '#F2F2F2',
+    toolBorder: 'transparent',
     // пріорітетність тасків
     taskLowPriority: '#72C2F8',
     taskMediumPriority: '#F3B249',
@@ -143,6 +144,7 @@ export const darkTheme = Object.freeze({
   taskPriorityTextColor: '#FFF',
   taskScrollBarBackground: '#171820',
   taskScrollbarColor: '#2D3037',
+  toolBorder: 'rgba(255, 255, 255, 0.15)',
   // пріорітетність тасків
   taskLowPriority: '#72C2F8',
   taskMediumPriority: '#F3B249',

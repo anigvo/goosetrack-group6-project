@@ -23,8 +23,11 @@ export const OtherOptions = styled(motion.div)`
     position: absolute;
     top: 26px;
     left: 50%;
+    z-index: 99;
     transform: translateX(-50%);
     min-width: 115px;
+    box-shadow: 0px 4px 16px 0px rgba(17, 17, 17, 0.10);
+    border: 1px solid ${props => props.theme.toolBorder};
 `;
 
 export const Options = styled.ul`
@@ -42,6 +45,7 @@ display: flex;
 flex-direction: row;
 align-items: center;
 justify-content: space-between;
+cursor: pointer;
 `;
 
 

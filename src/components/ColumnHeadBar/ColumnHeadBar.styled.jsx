@@ -10,7 +10,7 @@ export const IconTaskAdd = styled.button`
 `
 
 export const CircleIcon = styled(Circle)`
-    stroke: ${props => props.theme.taskIconColor};
+    stroke: ${props => props.theme.mainFont};
     width: 22px;
     height: 22px;
     cursor: pointer;

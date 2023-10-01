@@ -9,6 +9,7 @@ export const Column = styled.div`
     padding: 18px;
     border: 1px solid ${props => props.theme.calendarBorderColor};
     border-radius: 8px;
+    height: fit-content;
     ${media('tablet', '')`
         min-width: calc(50% - 8px);
     `}

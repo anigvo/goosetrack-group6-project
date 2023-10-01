@@ -10,12 +10,18 @@ export const ColumnList = styled.ul`
     &::-webkit-scrollbar {
         background-color: ${props => props.theme.taskScrollBarBackfround};
         border-radius: 12px;
-        width: 12px;
+        height: 12px;
+        ${media('tablet', '')`
+            height: 14px;
+        `}
     }
     &::-webkit-scrollbar-thumb {
         background-color: ${props => props.theme.taskScrollbarColor};
-        width: 12px;
+        height: 12px;
         border-radius: 12px;
+        ${media('tablet', '')`
+            height: 14px;
+        `}
     }
     ${media('desktop', '')`
         gap: 27px;
