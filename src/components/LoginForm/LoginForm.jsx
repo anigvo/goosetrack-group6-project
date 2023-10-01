@@ -1,94 +1,100 @@
-/** @jsxImportSource @emotion/react */
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useFormik } from 'formik';
+import React from 'react';
+import { Formik, Form } from 'formik';
 import * as yup from 'yup';
-import { logIn } from 'redux/auth/operations';
-import { useNavigate } from 'react-router-dom';
-import {
-  LoginContainer,
-  Container,
-  Title,
-  StyledForm,
-  Label,
-  Input,
-  ErrorMessage,
-  ButtonContainer,
-  Button,
-} from './LoginForm.styled';
 
-const LoginSchema = yup.object().shape({
-  email: yup
-    .string()
-    .email('Invalid email address')
-    .required('Email is required'),
-  password: yup.string().required('Password is required'),
+import {
+    ContainerForm,
+    Title,
+    Span,
+    InputForm,
+    Button,
+    InputFormMargin0,
+    Error,
+    Label,
+} from '../RegisterForm/RegisterForm.styled';
+
+import { Svg } from '../RegisterForm/RegisterForm.styled';
+
+import icons from '../../assets/icons/icons.svg';
+
+import { useDispatch } from 'react-redux';
+import { logIn } from 'redux/auth/operations';
+
+const emailRegexp = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+
+const schema = yup.object().shape({
+    email: yup
+        .string()
+        .email()
+        .matches(emailRegexp, 'email invalid')
+        .required(),
+    password: yup.string().min(6).required(),
 });
 
 const LoginForm = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [serverError, setServerError] = useState('');
+    const dispatch = useDispatch();
 
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-    validationSchema: LoginSchema,
-    onSubmit: async (values) => {
-      try {
-        const { email, password } = values;
-        const response = await dispatch(logIn({ email, password }));
-        if (response.error) {
-          setServerError('Invalid email or password'); // Handle server error message
-        } else {
-          navigate('/calendar/month'); // Redirect on success
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    },
-  });
+        const initialValues = {
+        email: '',
+        password: '',
+    };
 
-  return (
-    <LoginContainer>
-      <Container>
-        <Title>Log In</Title>
-        <StyledForm onSubmit={formik.handleSubmit}>
-          <Label htmlFor="email">
-            Email
-            <Input
-              type="text"
-              id="email"
-              name="email"
-              placeholder="Enter email"
-              {...formik.getFieldProps('email')}
-            />
-            <ErrorMessage name="email" component="div" />
-          </Label>
-          <Label htmlFor="password">
-            Password
-            <Input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Enter password"
-              {...formik.getFieldProps('password')}
-            />
-            <ErrorMessage name="password" component="div" />
-          </Label>
-          {serverError && <div>{serverError}</div>}
-          <ButtonContainer>
-            <Button type="submit">Log In</Button>
-          </ButtonContainer>
-        </StyledForm>
-      </Container>
-    </LoginContainer>
-  );
+    const handlerSubmit = (values, actions) => {
+        dispatch(logIn(values));
+        actions.resetForm();
+    };
+
+    return (
+        <ContainerForm>
+            <Formik
+                initialValues={initialValues}
+                validationSchema={schema}
+                onSubmit={handlerSubmit}
+            >
+                <Form>
+                    <Title>Log In</Title>
+
+                    <div>
+                        <Label htmlFor="">
+                            <Span>Email</Span>
+                            <InputForm
+                                type="email"
+                                name="email"
+                                placeholder="example@gmail.com"
+                            />
+                            <Error component="div" name="email" />
+                        </Label>
+                    </div>
+
+                    <div>
+                        <Label htmlFor="">
+                            <Span>Password</Span>
+                            <InputFormMargin0
+                                type="password"
+                                name="password"
+                                placeholder="*******"
+                            />
+                            <Error component="div" name="password" />
+                        </Label>
+                    </div>
+
+                    <Button type="submit">
+                        Log In
+                        <Svg width="20" height="20">
+                            <use href={`${icons}#log-in`} />
+                        </Svg>
+                    </Button>
+                </Form>
+            </Formik>
+        </ContainerForm>
+    );
 };
 
 export default LoginForm;
+
+
+
+
 
 
 
@@ -149,26 +155,7 @@ export default LoginForm;
 //     }
 //   };
 
-//   const handleSubmit = async (values) => {
-//     const { email, password } = values;
-//     if (password || email) {
-//       const { payload } = await dispatch(logIn({ email, password }));
-//       if (
-//         payload === 'Request failed with status code 400' ||
-//         payload === 'Request failed with status code 401' ||
-//         payload === 'Request failed with status code 403' ||
-//         payload === 'Request failed with status code 500' ||
-//         payload === 'Request failed with status code 409'
-//       ) {
-//         return;
-//       } else {
-//         // navigate(ROUTES.HOME);
-//         localStorage.setItem('firstLoad', 'true');
-//       }
-//     }
-//   };
-
-//   return (
+//   //   return (
 //     <LoginContainer>
 //       <Container>
 //         <Title>Log In</Title>
