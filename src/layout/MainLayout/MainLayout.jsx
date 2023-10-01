@@ -2,11 +2,11 @@ import { Header } from "layout/Header/Header";
 import { SideBar } from "layout/SideBar/SideBar";
 import { Suspense, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { LayoutWrapper, MainContent } from "./MainLayout.styled";
+import { LayoutWrapper, MainContent, OutletWrapper } from "./MainLayout.styled";
 import { useMediaQuery } from "hooks/useMediaQuery";
 import { AnimatePresence } from "framer-motion";
 
-const MainLayout = ({pageName}) => {
+const MainLayout = ({ pageName }) => {
     const [isOpenSidebar, setIsOpenSidebar] = useState(false);
     const isNotDesktop = useMediaQuery("(max-width: 1439px)");
 
@@ -28,10 +28,12 @@ const MainLayout = ({pageName}) => {
                 {isOpenSidebar && <SideBar closeMethod={closeSidebar} />}
             </AnimatePresence>
             <MainContent>
-                <Header openMethod={openSidebar} title={pageName}/>
-                <Suspense fallback={<></>}>
-                    <Outlet />
-                </Suspense>
+                <Header openMethod={openSidebar} title={pageName} />
+                <OutletWrapper>
+                    <Suspense fallback={<></>}>
+                        <Outlet />
+                    </Suspense>
+                </OutletWrapper>
             </MainContent>
         </LayoutWrapper>
     )
