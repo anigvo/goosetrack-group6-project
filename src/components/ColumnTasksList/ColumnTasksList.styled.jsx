@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { media } from 'utils/queries';
+// import { media } from 'utils/queries';
 
 export const TasksList = styled.ul`
   display: flex;

@@ -65,7 +65,7 @@ class TaskForm extends Component {
       return;
     }
 
-    const { title, start, end, priority, date, category } = this.state;
+    // const { title, start, end, priority, date, category } = this.state;
 
     if (this.state.isEditing) {
 
