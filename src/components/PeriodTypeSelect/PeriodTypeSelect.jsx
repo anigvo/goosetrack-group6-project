@@ -4,10 +4,10 @@ import { PeriodBtnWrapper, PeriodBtn } from './PeriodTypeSelect.styled';
 export const PeriodTypeSelect = () => {
   return (
     <PeriodBtnWrapper>
-      <PeriodBtn direction={'left'} type="button" onClick={1}>
+      <PeriodBtn direction={'left'} to="month/:currentDate">
         Month
       </PeriodBtn>
-      <PeriodBtn direction={'right'} type="button" onClick={1}>
+      <PeriodBtn direction={'right'} to="day/:currentDay">
         Day
       </PeriodBtn>
     </PeriodBtnWrapper>

@@ -68,7 +68,7 @@ function TaskForm({ taskToEdit, closeModal }) {
       return;
     }
 
-    const { title, start, end, priority, date, category } = formData;
+    // const { title, start, end, priority, date, category } = formData;
 
     if (formData.isEditing) {
     } else {
