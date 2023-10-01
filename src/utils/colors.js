@@ -1,3 +1,11 @@
+export const mainPageColors = Object.freeze({
+  mainBackground: '#3E85F3',
+  secondBackground: '#FFFFFF',
+  mainFontColor: '#FFFFFF',
+  secondFontColor: '#3E85F3',
+  accentBackground: '#DCEBF7',
+});
+
 export const lightTheme = Object.freeze({
     mainFont: '#111111',
     mainBackground: '#F7F6F9',
@@ -75,7 +83,12 @@ export const lightTheme = Object.freeze({
     // кольори кнопок (однакові на темній та світлій темах)
     btnBackgroundColor: '#3E85F3',
     btnTextColor: '#FFFFFF',
-    btnHoverBackground: '#2B78EF'
+    btnHoverBackground: '#2B78EF',
+      // кнопки datePicker
+    btnCalendarArrowEnabled: '#FFFFFF',
+    btnCalendarArrowDisabled: '#DCE3E5CC',
+    // колір тексту на 404
+    apologizeTextColor: 'rgba(17, 17, 17, 0.698)',
 });
 
 export const darkTheme = Object.freeze({
@@ -90,12 +103,15 @@ export const darkTheme = Object.freeze({
   // фон для всіх сторінок з mainlayout
   oddBackground: '#21222C',
   // кольори сторінки юзера
+  userAvatarBackground: '#21222C',
   userAvatarBorder: '#3E85F3',
   userAvatarInsideBackground: '#171820',
   userNameTextColor: '#FFFFFF',
   userInputLabelColor: 'rgba(250, 250, 250, 0.3)',
   userInputBorderColor: 'rgba(255, 255, 255, 0.15)',
   userInputTextColor: '#FFFFFF',
+  userFillCollor: '#FFFFFF',
+  userInputBorderHoverColor: '#FFFFFF',
   // кольори хедера
   headerUsernameText: '#FFFFFF',
   themeTogglerIcon: '#3E85F3',
@@ -125,7 +141,7 @@ export const darkTheme = Object.freeze({
   taskBackground: '#17182',
   taskBorderColor: 'rgba(255, 255, 255, 0.15)',
   taskPriorityTextColor: '#FFF',
-  taskScrollBarBackfround: '#171820',
+  taskScrollBarBackground: '#171820',
   taskScrollbarColor: '#2D3037',
   // пріорітетність тасків
   taskLowPriority: '#72C2F8',
@@ -155,4 +171,9 @@ export const darkTheme = Object.freeze({
   btnBackgroundColor: '#3E85F3',
   btnTextColor: '#FFFFFF',
   btnHoverBackground: '#2B78EF',
+  // кнопки datePicker
+  btnCalendarArrowEnabled: '#FFFFFF',
+  btnCalendarArrowDisabled: '#DCE3E5CC',
+  // колір тексту на 404
+  apologizeTextColor: '#FFFFFF',
 });
