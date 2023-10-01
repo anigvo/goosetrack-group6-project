@@ -1,16 +1,20 @@
 import styled from '@emotion/styled';
 import { media } from 'utils/queries';
+import { NavLink } from 'react-router-dom';
 
 export const PeriodBtnWrapper = styled.div`
   display: flex;
   
 `;
-export const PeriodBtn = styled.button`
+export const PeriodBtn = styled(NavLink)`
   &:hover,
   &:focus {
     background-color: ${props => props.theme.periodTypeBackgroundOutline};
     color: ${props => props.theme.periodTypeTextOutline};
   }
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 76px;
   height: 34px;
   cursor: pointer;
