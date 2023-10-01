@@ -21,7 +21,7 @@ const ChoosedMonth = lazy(() => import('../layout/ChoosedMonth/ChoosedMonth'));
 
 export const App = () => {
   const [pageName, setPageName] = useState(null);
-  const isLoggedIn = false;
+  const isLoggedIn = true;
   const theme = useSelector(selectTheme);
 
   const updatePageName = name => {

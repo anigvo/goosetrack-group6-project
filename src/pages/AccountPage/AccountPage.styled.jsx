@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { media } from 'utils/queries';
 
 export const BoxUserProfile = styled.div` 
-display: flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
     max-width: 335px;    
@@ -10,10 +10,9 @@ display: flex;
     background-color: ${props => props.theme.userAvatarBackground};
     border: 1px solid #111;
     border-radius: 16px;
-    position: fixed;
     gap: 40px;
     width: 100%;
-    margin: 95px auto;
+    margin: 31px auto 0;
      
     ${media('tablet', '')`
         max-width: 704px;
