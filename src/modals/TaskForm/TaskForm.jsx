@@ -1,24 +1,21 @@
-import React, { Component } from 'react';
-import { TaskFormWrapper, TimeDiv } from "./TaskForm.styled";
+import React, { useState, useEffect } from 'react';
+import { TaskFormWrapper, TimeDiv } from './TaskForm.styled';
 
-class TaskForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: '',
-      start: '09:00', 
-      end: '14:00', 
-      priority: [],
-      date: '',
-      category: 'to-do',
-      isEditing: false,
-    };
-  }
+function TaskForm({ taskToEdit, closeModal }) {
+  const [formData, setFormData] = useState({
+    title: '',
+    start: '09:00',
+    end: '14:00',
+    priority: [],
+    date: '',
+    category: 'to-do',
+    isEditing: false,
+  });
 
-  componentDidMount() {
-    if (this.props.taskToEdit) {
-      const { title, start, end, priority, date, category } = this.props.taskToEdit;
-      this.setState({
+  useEffect(() => {
+    if (taskToEdit) {
+      const { title, start, end, priority, date, category } = taskToEdit;
+      setFormData({
         title,
         start,
         end,
@@ -28,54 +25,58 @@ class TaskForm extends Component {
         isEditing: true,
       });
     }
-  }
+  }, [taskToEdit]);
 
-  handleChange = (event) => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
-  
-    if (name === 'end' && value < this.state.start) {
+
+    if (name === 'end' && value < formData.start) {
       alert('Час "end" не може бути менше за час "start"');
       return;
     }
-  
-    this.setState({ [name]: value });
-  
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+
     if (name === 'start') {
-      this.updateEndTime(value);
+      updateEndTime(value);
     }
   };
 
-  updateEndTime = (selectedStartTime) => {
+  const updateEndTime = (selectedStartTime) => {
     const [startHour, startMinute] = selectedStartTime.split(':').map(Number);
-    
+
     let endHour = startHour + 1;
     if (endHour > 23) {
-      endHour = 23; 
+      endHour = 23;
     }
-    
+
     const formattedEndTime = `${endHour.toString().padStart(2, '0')}:${startMinute.toString().padStart(2, '0')}`;
-    
-    this.setState({ end: formattedEndTime });
+
+    setFormData((prevData) => ({
+      ...prevData,
+      end: formattedEndTime,
+    }));
   };
 
-  handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!this.validateForm()) {
+    if (!validateForm()) {
       return;
     }
 
-    // const { title, start, end, priority, date, category } = this.state;
+    // const { title, start, end, priority, date, category } = formData;
 
-    if (this.state.isEditing) {
-
+    if (formData.isEditing) {
     } else {
-
     }
   };
 
-  validateForm() {
-    const { title, start, end, priority, date, category } = this.state;
+  const validateForm = () => {
+    const { title, start, end, priority, date, category } = formData;
 
     if (!title || title.length > 250) {
       alert('Назва завдання має бути від 1 до 250 символів');
@@ -105,114 +106,109 @@ class TaskForm extends Component {
     }
 
     return true;
-  }
+  };
 
-  togglePriority = (value) => {
-    const { priority } = this.state;
+  const togglePriority = (value) => {
+    const { priority } = formData;
 
     if (priority.includes(value)) {
-      this.setState({
-        priority: priority.filter((item) => item !== value),
-      });
+      setFormData((prevData) => ({
+        ...prevData,
+        priority: prevData.priority.filter((item) => item !== value),
+      }));
     } else {
-      this.setState({
-        priority: [...priority, value],
-      });
+      setFormData((prevData) => ({
+        ...prevData,
+        priority: [...prevData.priority, value],
+      }));
     }
   };
 
-  render() {
-    return (
-      <TaskFormWrapper>
-        <form onSubmit={this.handleSubmit}>
+  return (
+    <TaskFormWrapper>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Title</label>
+          <input
+            placeholder="Enter text"
+            type="text"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            required
+            maxLength="250"
+          />
+        </div>
+        <TimeDiv>
           <div>
-            <label>Title</label>
-            <input
-              placeholder="Enter text"
-              type="text"
-              name="title"
-              value={this.state.title}
-              onChange={this.handleChange}
-              required
-              maxLength="250"
-            />
+            <label>Start</label>
+            <select name="start" value={formData.start} onChange={handleChange} required>
+              {Array.from({ length: 24 }, (_, i) => (
+                <option key={i} value={`${i.toString().padStart(2, '0')}:00`}>
+                  {`${i.toString().padStart(2, '0')}:00`}
+                </option>
+              ))}
+            </select>
           </div>
-          <TimeDiv>
-            <div>
-              <label>Start</label>
-              <select
-                name="start"
-                value={this.state.start}
-                onChange={this.handleChange}
-                required
-              >
-                {Array.from({ length: 24 }, (_, i) => (
-                  <option key={i} value={`${i.toString().padStart(2, '0')}:00`}>
-                    {`${i.toString().padStart(2, '0')}:00`}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label>End</label>
-              <select
-                name="end"
-                value={this.state.end}
-                onChange={this.handleChange}
-                required
-              >
-                {Array.from({ length: 24 }, (_, i) => (
-                  <option key={i} value={`${i.toString().padStart(2, '0')}:00`}>
-                    {`${i.toString().padStart(2, '0')}:00`}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </TimeDiv>
           <div>
-            <div style = {{display: 'flex', alignItems: 'center', gap: '17px' }}>
-              <label>
-                <input className='lowCheck'
-                  type="checkbox"
-                  name="priority"
-                  value="low"
-                  checked={this.state.priority === 'low'}
-                  onChange={() => this.setState({ priority: 'low' })}
-                  style = {{backgroundColor: '#72C2F8' }}
-                />
-                <span className='Check'>Low</span>
-              </label>
-              <label>
-                <input className='midCheck'
-                  type="checkbox"
-                  name="priority"
-                  value="medium"
-                  checked={this.state.priority === 'medium'}
-                  onChange={() => this.setState({ priority: 'medium' })}
-                />
-                <span className='Check'>Medium</span>
-              </label>
-              <label>
-                <input className='highCheck'
-                  type="checkbox"
-                  name="priority"
-                  value="high"
-                  checked={this.state.priority === 'high'}
-                  onChange={() => this.setState({ priority: 'high' })}
-                />
-                <span className='Check'>High</span>
-              </label>
-            </div>
+            <label>End</label>
+            <select name="end" value={formData.end} onChange={handleChange} required>
+              {Array.from({ length: 24 }, (_, i) => (
+                <option key={i} value={`${i.toString().padStart(2, '0')}:00`}>
+                  {`${i.toString().padStart(2, '0')}:00`}
+                </option>
+              ))}
+            </select>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '15px', marginTop: '10px' }}>
-            <button className='addBtn' type="submit">{this.state.isEditing ? 'Edit' : '+ Add'}</button>
-            <button style={{ backgroundColor: '#E5EDFA', color: '#343434'}} type="button" onClick={this.props.closeModal}>Cancel</button>
+        </TimeDiv>
+        <div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '17px' }}>
+            <label>
+              <input
+                className="lowCheck"
+                type="checkbox"
+                name="priority"
+                value="low"
+                checked={formData.priority === 'low'}
+                onChange={() => handleChange({ target: { name: 'priority', value: 'low' } })}
+              />
+              <span className="Check">Low</span>
+            </label>
+            <label>
+              <input
+                className="midCheck"
+                type="checkbox"
+                name="priority"
+                value="medium"
+                checked={formData.priority === 'medium'}
+                onChange={() => handleChange({ target: { name: 'priority', value: 'medium' } })}
+              />
+              <span className="Check">Medium</span>
+            </label>
+            <label>
+              <input
+                className="highCheck"
+                type="checkbox"
+                name="priority"
+                value="high"
+                checked={formData.priority === 'high'}
+                onChange={() => handleChange({ target: { name: 'priority', value: 'high' } })}
+              />
+              <span className="Check">High</span>
+            </label>
           </div>
-        </form>
-      </TaskFormWrapper>
-    );
-  }
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', gap: '15px', marginTop: '10px' }}>
+          <button className="addBtn" type="submit">
+            {formData.isEditing ? 'Edit' : '+ Add'}
+          </button>
+          <button className="cancelBtn" type="button" onClick={closeModal}>
+            Cancel
+          </button>
+        </div>
+      </form>
+    </TaskFormWrapper>
+  );
 }
 
 export default TaskForm;
- 

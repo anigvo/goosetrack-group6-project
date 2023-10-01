@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 const TaskFormWrapper = styled.div`
   font-family: Inter, sans-serif;
   width: 267px;
   max-height: 200px;
-  background-color: #fff;
+  background-color: ${props => props.theme.modalEditActiveIconColor}; 
   margin-top: 10px;
 
   form {
@@ -14,7 +14,7 @@ const TaskFormWrapper = styled.div`
 
     label {
       font-size: 12px;
-      color: #343434;
+      color: ${props => props.theme.userNameTextColor}; 
       font-weight: 500;
       
     }
@@ -27,11 +27,11 @@ const TaskFormWrapper = styled.div`
       padding-top: 10px;
       padding-bottom: 10px;
       padding-left: 10px;
-      border: 1px solid #F6F6F6;
+      border: 1px solid ${props => props.theme.modalInputBackground}; 
       border-radius: 4px;
       font-size: 14px;
-      color: #343434;
-      background-color: #F6F6F6; 
+      color: ${props => props.theme.userNameTextColor}; 
+      background-color: ${props => props.theme.modalInputBackground};  
       font-weight: 600;
       -webkit-appearance: none; 
       -moz-appearance: none;
@@ -61,8 +61,8 @@ const TaskFormWrapper = styled.div`
       height: 42px;
       padding: 15px auto;
       border-radius: 8px;
-      background-color: #007bff;
-      color: #fff;
+      background-color: ${props => props.theme.btnBackgroundColor};
+      color: ${props => props.theme.modalEditActiveIconColor}; 
       border: none;
       cursor: pointer;
       font-size: 14px;
@@ -77,8 +77,8 @@ const TaskFormWrapper = styled.div`
     height: 42px;
     padding: 15px auto;
     border-radius: 8px;
-    background-color: #007bff;
-    color: #fff;
+    background-color: ${props => props.theme.btnBackgroundColor};
+    color: ${props => props.theme.modalEditActiveIconColor}; 
     border: none;
     cursor: pointer;
     font-size: 14px;
@@ -99,6 +99,11 @@ const TaskFormWrapper = styled.div`
     }
   }
 
+  button[type="button"].cancelBtn{
+    background-color: ${props => props.theme.modalCancelBtnFeedbackBackground}; 
+    color: ${props => props.theme.userNameTextColor}; 
+    }
+
   input[type="checkbox"] {
     display: none;
   }
@@ -110,7 +115,7 @@ const TaskFormWrapper = styled.div`
     height: 18px;
     border-radius: 50%;
     border: 2px solid #000; 
-    background-color: #fff; 
+    background-color: ${props => props.theme.modalEditActiveIconColor}; 
     margin-right: 10px; 
 
   }
@@ -129,16 +134,16 @@ const TaskFormWrapper = styled.div`
 
 
   input.lowCheck + span::before {
-    border: 2px solid #72C2F8; 
-    background-color: #72C2F8; 
+    border: 2px solid ${props => props.theme.taskLowPriority}; 
+    background-color: ${props => props.theme.taskLowPriority}; 
   }
   input.midCheck + span::before {
-    border: 2px solid #F3B249; 
-    background-color: #F3B249; 
+    border: 2px solid ${props => props.theme.taskMediumPriority}; 
+    background-color: ${props => props.theme.taskMediumPriority};  
   }
   input.highCheck + span::before {
-    border: 2px solid #EA3D65; 
-    background-color: #EA3D65; 
+    border: 2px solid ${props => props.theme.taskHighPriority};   
+    background-color: ${props => props.theme.taskHighPriority}; 
     
   }
 

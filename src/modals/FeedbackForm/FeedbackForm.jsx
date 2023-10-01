@@ -46,7 +46,7 @@ const FeedbackForm = ({ onSave, onCancel, initialRating = 0, initialReview = '' 
       </div>
       <div style={{ display: 'flex', gap: '10px'}}>
         <button type="button" onClick={handleSubmit}>Save</button> 
-        <button type="button" style={{ backgroundColor: '#E5EDFA', color: '#343434'}} onClick={onCancel}>Cancel</button>
+        <button className='BtnCancel' type="button" onClick={onCancel}>Cancel</button>
       </div>
     </FeedbackFormWrapper>
   );
