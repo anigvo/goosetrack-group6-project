@@ -5,12 +5,12 @@ export const TasksList = styled.ul`
   display: flex;
   flex-direction: column;
   row-gap: 14px;
-  overflow-y: ${props => props.tasksLength > 1 && 'auto'};
+  overflow-y: ${props => props.tasksLength > 2 && 'auto'};
 
   height: ${props =>
     props.tasksLength > 2
       ? window.innerWidth > 767
-        ? '60vh'
+        ? '40vh'
         : '30vh'
       : 'fit-content'};
   margin-bottom: 10px;

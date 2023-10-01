@@ -52,6 +52,7 @@ text-shadow: 0px 9.399999618530273px 57.6875px rgba(0, 0, 0, 0.04), 0px 47px 355
 font-size: 16px;
 font-weight: 700;
 line-height: 1.5;
+display: flex;
 ${media('desktop', '')`
     font-size: 24px;
     line-height: normal;
@@ -62,7 +63,9 @@ ${media('desktop', '')`
 export const TitleOutline = styled.span`
 font-style: italic;
 transform: translateX(-1px);
-display: inline-block;
+${media('desktop', '')`
+    transform: translateX(-2px);
+`}
 `;
 
 
