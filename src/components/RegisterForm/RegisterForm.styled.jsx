@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import {ReactComponent as LogOutIcon} from '../../assets/icons/log-out.svg';
-import {ReactComponent as InvalidIcon} from '../../assets/icons/error.svg';
-import {ReactComponent as ValidIcon} from '../../assets/icons/done.svg';
+import {ReactComponent as LoginIcon} from '../../assets/icons/login-icon.svg';
+import {ReactComponent as Error} from '../../assets/icons/error.svg';
+import {ReactComponent as Done} from '../../assets/icons/done.svg';
 import { media } from 'utils/queries';
 
 export const RegisterContainer = styled.div`
@@ -99,7 +99,7 @@ export const Input = styled.input`
 //   color: var(--color-task-high);
 // `;
 
-export const ErrorMessageStyled = styled.div`
+export const ErrorMessage = styled.div`
   position: absolute;
   margin: 0;
   padding: 0;
@@ -162,15 +162,15 @@ const styledIcon = css`
     `}
 `
 
-export const SingUpIcon = styled(LogOutIcon)`
+export const SingUpIcon = styled(LoginIcon)`
     ${styledIcon}
     `; 
 
-    export const ValidIconStyled = styled(ValidIcon)`
+    export const ValidIconStyled = styled(Done)`
     ${styledIcon}
 `;
 
-export const InvalidIconStyled = styled(InvalidIcon)`
+export const InvalidIconStyled = styled(Error)`
     ${styledIcon}
 `;
 

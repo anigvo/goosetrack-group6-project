@@ -81,43 +81,25 @@ export const Input = styled.input`
   }
 ';
 
-// export const Input = styled.input`
-//   height: 46px;
-//   padding: 0 14px;
-//   border-radius: 8px;
-//   border: 1px solid rgba(220, 227, 229, 0.6);
-//   background-color: #ffffff;
-//   color:#13151a;
-//   font-size: 14px;
-//   line-height: 1.28;
-//   &::placeholder {
-//     color:  #dce3e5;
-//     font-size: 14px;
-//     line-height: 1.28;
-//   }
-//   &:hover,
-//   &:focus {
-//     border: 1px solid var(--color-blue);
-//   }
-// //   ${({ type }) =>
-// //     type === 'password' &&
-//     `
-//     font-size: 16px;
-//     line-height: 1.12;
-//     padding: 0 18px;
-//     height: 54px;
-//     &::placeholder {
-//       font-size: 16px;
-//       line-height: 1.12;
-//     }
-//   `}
+// export const Togle = styled.span`
+//   position: absolute;
+//   top: 41px;
+//   right: 34px;
+//   cursor: pointer;
 // `;
 
-export const Togle = styled.span`
+export const ErrorMessage = styled.div`
   position: absolute;
-  top: 41px;
-  right: 34px;
-  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  top: 72px;
+  z-index: 10;    
+  color:  rgba(234, 61, 101, 1);
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 200;
+  line-height: 1.28;
+} 
 `;
 
 export const ButtonContainer = styled.div`
