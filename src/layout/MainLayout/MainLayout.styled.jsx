@@ -27,3 +27,13 @@ export const MainContent = styled.div`
         padding-right: 32px;
     `}
 `;
+
+export const OutletWrapper = styled.div`
+    padding-top: 64px;
+    padding-bottom: 40px;
+    ${media('desktop', '')`
+        padding-top: 32px;
+        padding-bottom: 32px;
+    `}
+`;
+

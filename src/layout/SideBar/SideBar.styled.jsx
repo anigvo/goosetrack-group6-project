@@ -14,6 +14,7 @@ ${media('', 'tabletMax')`
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 999;
 `}
 height: 100vh;
 ${media('tablet', 'tabletMax')`
@@ -57,9 +58,11 @@ ${media('desktop', '')`
 `}
 `;
 
+
 export const TitleOutline = styled.span`
 font-style: italic;
-letter-spacing: normal;
+transform: translateX(-1px);
+display: inline-block;
 `;
 
 
