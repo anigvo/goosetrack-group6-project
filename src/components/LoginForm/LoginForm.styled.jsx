@@ -180,7 +180,6 @@ export const ButtonSubmit = styled.button`
 export const IconButtonSubmitSpan = styled.span`
  display:flex;
  align-items: center;
-  }
 `;
 export const IconButtonSubmit = styled.svg`
 stroke: white;

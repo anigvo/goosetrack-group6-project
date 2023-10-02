@@ -108,21 +108,21 @@ function TaskForm({ taskToEdit, closeModal }) {
     return true;
   };
 
-  const togglePriority = (value) => {
-    const { priority } = formData;
+  // const togglePriority = (value) => {
+  //   const { priority } = formData;
 
-    if (priority.includes(value)) {
-      setFormData((prevData) => ({
-        ...prevData,
-        priority: prevData.priority.filter((item) => item !== value),
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        priority: [...prevData.priority, value],
-      }));
-    }
-  };
+  //   if (priority.includes(value)) {
+  //     setFormData((prevData) => ({
+  //       ...prevData,
+  //       priority: prevData.priority.filter((item) => item !== value),
+  //     }));
+  //   } else {
+  //     setFormData((prevData) => ({
+  //       ...prevData,
+  //       priority: [...prevData.priority, value],
+  //     }));
+  //   }
+  // };
 
   return (
     <TaskFormWrapper>
