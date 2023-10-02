@@ -24,7 +24,7 @@ import {
   IconButtonSubmitSpan,
 } from './LoginForm.styled';
 
-import { logIn } from 'redux/auth/operations';
+import { logInUser } from 'redux/auth/operations';
 import icons from '../../assets/icons/icons.svg';
 
 const userShema = object({
@@ -43,7 +43,7 @@ const LoginForm = () => {
   
 
   const handleSubmit = (values, { resetForm }) => {
-    dispatch(logIn(values));
+    dispatch(logInUser(values));
     resetForm();
   };
 
