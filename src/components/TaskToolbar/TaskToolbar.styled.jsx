@@ -4,6 +4,7 @@ import { ReactComponent as Trash } from '../../assets/icons/trash.svg';
 import { ReactComponent as Pencil } from '../../assets/icons/pencil.svg';
 import { ReactComponent as Arrow } from '../../assets/icons/arrow.svg';
 import { motion } from 'framer-motion';
+import { media } from 'utils/queries';
 
 export const ToolList = styled.ul`
 display: flex;
@@ -28,6 +29,10 @@ export const OtherOptions = styled(motion.div)`
     min-width: 115px;
     box-shadow: 0px 4px 16px 0px rgba(17, 17, 17, 0.10);
     border: 1px solid ${props => props.theme.toolBorder};
+    ${media('tablet', '')`
+        padding: 20px 24px;
+        min-width: 147px;
+    `}
 `;
 
 export const Options = styled.ul`

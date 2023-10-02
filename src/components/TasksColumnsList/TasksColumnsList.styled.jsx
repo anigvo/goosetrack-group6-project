@@ -26,5 +26,6 @@ export const ColumnList = styled.ul`
     ${media('desktop', '')`
         gap: 27px;
         overflow: auto;
+        padding-bottom: 0px;
     `}
 `
