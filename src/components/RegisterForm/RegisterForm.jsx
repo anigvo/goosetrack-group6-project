@@ -1,253 +1,220 @@
-import React from 'react';
-import { Formik, Form } from 'formik';
-import * as yup from 'yup';
+import { Formik, Form, ErrorMessage } from 'formik';
+import { object, string } from 'yup';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import {
-    ContainerForm,
-    Title,
-    Span,
-    InputForm,
-    Button,
-    InputFormMargin0,
-    Error,
-    Label,
-    Svg,
+  MainContainer,
+  FormContainer,
+  Title,
+  LabelInput,
+  SpanInputLogin,
+  SpanInputEmail,
+  SpanInputPass,
+  LoginInput,
+  EmailInput,
+  ButtonSubmit,
+  ButtonSignup,
+  SignupContainer,
+  ErrorMsg,
+  CorrectMsg,
+  PasswordInput,
+  GusContainer,
+  IconButtonSubmit,
+  Iconinput,
+  IconButtonSubmitSpan,
+  SubContainer,
 } from './RegisterForm.styled';
 
 import icons from '../../assets/icons/icons.svg';
-
-import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operations';
-// import Notiflix from 'notiflix';
-import { useNavigate } from 'react-router-dom';
 
-const emailRegexp = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
-const schema = yup.object().shape({
-    name: yup.string().required(),
-    email: yup
-        .string()
-        .email()
-        .matches(emailRegexp, 'email invalid')
-        .required(),
-    password: yup.string().min(6).required(),
+const userShema = object({
+  name: string().min(3).required(),
+  email: string().email('This is an ERROR email').required(),
+  password: string().min(6).max(16).required(),
 });
 
+const initialValues = {
+  name: '',
+  email: '',
+  password: '',
+};
+
 const RegisterForm = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+ 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
+   const handleSubmit = (values, { resetForm }) => {
+    dispatch(register(values));
+    resetForm();
+  };
 
-    const initialValues = {
-        name: '',
-        email: '',
-        password: '',
-    };
-
-    const handlerSubmit = (values, actions) => {
-        dispatch(register(values));
-        // Notiflix.Notify.success('You register');
-        navigate('/user');
-        // console.log(values);
-        actions.resetForm();
-    };
-
+  const FormError = ({ name }) => {
     return (
-        <ContainerForm>
-            <Formik
-                initialValues={initialValues}
-                validationSchema={schema}
-                onSubmit={handlerSubmit}
-            >
-                <Form>
-                    <Title>Sign Up</Title>
-                    <div>
-                        <Label htmlFor="">
-                            <Span>Name</Span>
-                            <InputForm
-                                type="text"
-                                name="name"
-                                placeholder="Enter your name"
-                            />
-                            <Error component="div" name="name" />
-                        </Label>
-                    </div>
-
-                    <div>
-                        <Label htmlFor="">
-                            <Span>Email</Span>
-                            <InputForm
-                                type="email"
-                                name="email"
-                                placeholder="Enter email"
-                            />
-                            <Error component="div" name="email" />
-                        </Label>
-                    </div>
-
-                    <div>
-                        <Label htmlFor="">
-                            <Span>Password</Span>
-                            <InputFormMargin0
-                                type="password"
-                                name="password"
-                                placeholder="Enter password"
-                            />
-                            <Error component="div" name="password" />
-                        </Label>
-                    </div>
-
-                    <Button type="submit">
-                        Sign Up
-                        <Svg width="20" height="20">
-                            <use href={`${icons}#log-in`} />
-                        </Svg>
-                    </Button>
-                </Form>
-            </Formik>
-        </ContainerForm>
+      <ErrorMessage name={name} render={msg => <ErrorMsg>{msg}</ErrorMsg>} />
     );
+  };
+
+  return (
+    <MainContainer>
+      <SubContainer>
+        <FormContainer>
+          <Title>Sign Up</Title>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={userShema}
+            onSubmit={handleSubmit}
+          >
+            {({ errors, touched }) => (
+              <Form>
+                <LabelInput htmlFor="name">
+                  <SpanInputLogin
+                    $errLogin={
+                      errors.name && touched.name
+                        ? '#E74A3B'
+                        : touched.name
+                        ? '#3CBC81'
+                        : '#111'
+                    }
+                  >
+                    Name
+                  </SpanInputLogin>
+
+                  <LoginInput
+                    autoComplete="off"
+                    type="text"
+                    name="name"
+                    placeholder="Enter your name"
+                    $errLogin={
+                      errors.name && touched.name
+                        ? ' 1px solid #E74A3B'
+                        : touched.name
+                        ? '1px solid #3CBC81'
+                        : '1px solid rgba(220, 227, 229, 0.6)'
+                    }
+                  />
+                  {errors.name && touched.name ? (
+                    <Iconinput>
+                     <use href={`${icons}#error`} />
+                    </Iconinput>
+                  ) : touched.name ? (
+                    <Iconinput>
+                     <use href={`${icons}#done`} />
+                    </Iconinput>
+                  ) : null}
+                  <FormError name="name" />
+                </LabelInput>
+
+                <LabelInput htmlFor="email">
+                  <SpanInputEmail
+                    $errEmail={
+                      errors.email && touched.email
+                        ? '#E74A3B'
+                        : touched.email
+                        ? '#3CBC81'
+                        : '#111'
+                    }
+                  >
+                    Email
+                  </SpanInputEmail>
+
+                  <EmailInput
+                    autoComplete="off"
+                    type="email"
+                    name="email"
+                    placeholder="Enter email"
+                    $errEmail={
+                      errors.email && touched.email
+                        ? ' 1px solid #E74A3B'
+                        : touched.email
+                        ? '1px solid #3CBC81'
+                        : '1px solid rgba(220, 227, 229, 0.6)'
+                    }
+                  />
+                  {errors.email && touched.email ? (
+                    <Iconinput>
+                       <use href={`${icons}#error`} />
+                    </Iconinput>
+                  ) : touched.email ? (
+                    <Iconinput>
+                     <use href={`${icons}#done`} />
+                    </Iconinput>
+                  ) : null}
+
+                  {errors.email && touched.email ? (
+                    <FormError name="email" />
+                  ) : touched.email ? (
+                    <CorrectMsg>This is an CORRECT email</CorrectMsg>
+                  ) : null}
+                </LabelInput>
+                <LabelInput htmlFor="password">
+                  <SpanInputPass
+                    $errPass={
+                      errors.password && touched.password
+                        ? '#E74A3B'
+                        : touched.password
+                        ? '#3CBC81'
+                        : '#111'
+                    }
+                  >
+                    Password
+                  </SpanInputPass>
+                  <PasswordInput
+                    autoComplete="off"
+                    type="password"
+                    name="password"
+                    placeholder="Enter password"
+                    $errPass={
+                      errors.password && touched.password
+                        ? ' 1px solid #E74A3B'
+                        : touched.password
+                        ? '1px solid #3CBC81'
+                        : '1px solid rgba(220, 227, 229, 0.6)'
+                    }
+                  />
+                  {errors.password && touched.password ? (
+                    <Iconinput>
+                      <use href={`${icons}#error`} />
+                    </Iconinput>
+                  ) : touched.password ? (
+                    <Iconinput>
+                       <use href={`${icons}#done`} />
+                    </Iconinput>
+                  ) : null}
+                  <FormError name="password" />
+                </LabelInput>
+                <ButtonSubmit type="submit">
+                  <span> Sign Up </span>
+                  <IconButtonSubmitSpan>
+                    <IconButtonSubmit>
+                        <use href={`${icons}#log-in`} />
+                    </IconButtonSubmit>
+                  </IconButtonSubmitSpan>
+                </ButtonSubmit>
+              </Form>
+            )}
+          </Formik>
+        </FormContainer>
+
+        <SignupContainer>
+          <ButtonSignup type="button" onClick={() => navigate('/login')}>
+            Log In
+          </ButtonSignup>
+        </SignupContainer>
+      </SubContainer>
+              <GusContainer>
+          <img
+            src={require('../../assets/images/loginpage-goose-form.png')}
+            alt="rocket-gus"
+            height={416}
+            width={400}
+          />
+        </GusContainer>
+      </MainContainer>
+  );
 };
 
 export default RegisterForm;
-
-// /** @jsxImportSource @emotion/react */
-// import { useState } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { useFormik } from 'formik';
-// import * as yup from 'yup';
-// import {
-//   RegisterContainer,
-//   Container,
-//   Title,
-//   StyledForm,
-//   Label,
-//   Input,
-//   ButtonContainer,
-//   Button,
-//   ErrorMessage,
-// } from './RegisterForm.styled';
-// import { register } from 'redux/auth/operations';
-// import { useNavigate } from 'react-router-dom';
-
-// const RegisterForm = () => {
-//   const dispatch = useDispatch();
-//   const navigate = useNavigate();
-//   const [serverError, setServerError] = useState('');
-
-//   const RegisterSchema = yup.object().shape({
-//     name: yup.string().required('Name is required'),
-//     email: yup
-//       .string()
-//       .email('Invalid email address')
-//       .required('Email is required'),
-//     password: yup
-//       .string()
-//       .min(6, 'Password must be at least 6 characters')
-//       .required('Password is required'),
-//   });
-
-//   const formik = useFormik({
-//     initialValues: {
-//       name: '',
-//       email: '',
-//       password: '',
-//     },
-//     validationSchema: RegisterSchema,
-//     onSubmit: async (values) => {
-//       try {
-//         const response = await dispatch(register(values));
-//         if (response.meta.requestStatus === 'fulfilled') {
-//           navigate('/calendar/month');
-//         } else {
-//           setServerError('Registration failed. Please try again.');
-//         }
-//       } catch (error) {
-//         setServerError('Registration failed. Please try again.');
-//       }
-//     },
-//   });
-
-//   return (
-//     <RegisterContainer>
-//       <Container>
-//         <Title>Sign Up</Title>
-//         <StyledForm onSubmit={formik.handleSubmit}>
-//           <Label htmlFor="name">
-//             Name
-//             <Input
-//               type="text"
-//               id="name"
-//               name="name"
-//               placeholder="Enter your name"
-//               value={formik.values.name}
-//               onChange={formik.handleChange}
-//               onBlur={formik.handleBlur}
-//               className={formik.touched.name && formik.errors.name ? 'is-invalid' : ''}
-//             />
-//             <ErrorMessage name="name" component="div" />
-//           </Label>
-//           <Label htmlFor="email">
-//             Email
-//             <Input
-//               type="email"
-//               id="email"
-//               name="email"
-//               placeholder="Enter your email"
-//               value={formik.values.email}
-//               onChange={formik.handleChange}
-//               onBlur={formik.handleBlur}
-//               className={formik.touched.email && formik.errors.email ? 'is-invalid' : ''}
-//             />
-//             <ErrorMessage name="email" component="div"  />
-//           </Label>
-//           <Label htmlFor="password">
-//             Password
-//             <Input
-//               type="password"
-//               id="password"
-//               name="password"
-//               placeholder="Enter your password"
-//               value={formik.values.password}
-//               onChange={formik.handleChange}
-//               onBlur={formik.handleBlur}
-//               className={formik.touched.password && formik.errors.password ? 'is-invalid' : ''}
-//             />
-//             <ErrorMessage name="password" component="div" />
-//           </Label>
-//           {serverError && <div className="error_message">{serverError}</div>}
-//           <ButtonContainer>
-//             <Button type="submit">Sign Up</Button>
-//           </ButtonContainer>
-//         </StyledForm>
-//       </Container>
-//     </RegisterContainer>
-//   );
-// };
-
-// export default RegisterForm;
-
-
-
-
-// import React, { useState } from 'react';
-// import { Formik, Form, Field, ErrorMessage } from 'formik';
-// import * as yup from 'yup';
-// // import {ReactComponent as LogOutIcon} from '../../assets/icons/log-out.svg';
-// // import {ReactComponent as InvalidIcon} from '../../assets/icons/error.svg';
-// // import {ReactComponent as ValidIcon} from '../../assets/icons/done.svg';
-// import {
-//   RegisterContainer,
-//   Container,
-//   Title,
-//   StyledForm,
-//   Label,
-//   Input,
-//   InvalidIconStyled,
-//   ValidIconStyled,
-//   ErrorMessageStyled,
-//   Togle,
-//   ButtonContainer,
-//   Button,
-//   SingUpIcon,
-// } from './RegisterForm.styled';
-

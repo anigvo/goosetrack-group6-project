@@ -4,7 +4,6 @@ import { media } from 'utils/queries';
 
 const StyledAuthNavigate = styled(NavLink)`
   color: #3e85f3;
-  font-family: Inter;
   font-size: 12px;
   font-weight: 600;
   line-height: 1.16;
