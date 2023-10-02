@@ -37,7 +37,7 @@ const FeedbackFormWrapper = styled.div`
     font: Inter;
     width: 295px;
     height: 130px;
-    border: 1px solid ${props => props.theme.modalInputBackground};  
+    border: 1px solid ${props => props.theme.userInputBorderColor};  
     resize: vertical;
     background-color: ${props => props.theme.modalInputBackground};  
     resize: none;

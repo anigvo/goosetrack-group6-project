@@ -1,21 +1,27 @@
 import React from "react";
 import Modal from "react-modal";
+import { useSelector } from 'react-redux'; 
+import { selectTheme } from 'redux/selectors';
 
-Modal.setAppElement("#root");
+Modal.setAppElement('#root');
 
 const CustomModal = ({ isOpen, onClose, children, customStyles }) => {
+  const currentTheme = useSelector(state => selectTheme(state)); 
+
+  const backgroundColor = currentTheme === 'light' ? '#FFFFFF' : '#171820';
+
   const defaultStyles = {
     content: {
-      border: "1px solid #DCE3E5CC",
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      backgroundColor: "rgba(255, 255, 255)",
-      overflow: "hidden",
+      border: `1px solid #DCE3E5CC`,
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      backgroundColor,
+      overflow: 'hidden',
     },
     overlay: {
-      backgroundColor: "rgba(0, 0, 0, 0)",
+      backgroundColor: 'rgba(0, 0, 0, 0)',
     },
   };
 
@@ -44,7 +50,6 @@ const CustomModal = ({ isOpen, onClose, children, customStyles }) => {
     );
   }
   
-
   return (
     <Modal
       isOpen={isOpen}

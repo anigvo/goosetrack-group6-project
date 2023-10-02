@@ -4,7 +4,7 @@ const TaskFormWrapper = styled.div`
   font-family: Inter, sans-serif;
   width: 267px;
   max-height: 200px;
-  background-color: ${props => props.theme.modalEditActiveIconColor}; 
+  background-color: ${props => props.theme.modalBackground}; 
   margin-top: 10px;
 
   form {
@@ -27,7 +27,7 @@ const TaskFormWrapper = styled.div`
       padding-top: 10px;
       padding-bottom: 10px;
       padding-left: 10px;
-      border: 1px solid ${props => props.theme.modalInputBackground}; 
+      border: 1px solid ${props => props.theme.userInputBorderColor}; 
       border-radius: 4px;
       font-size: 14px;
       color: ${props => props.theme.userNameTextColor}; 
@@ -100,8 +100,8 @@ const TaskFormWrapper = styled.div`
   }
 
   button[type="button"].cancelBtn{
-    background-color: ${props => props.theme.modalCancelBtnFeedbackBackground}; 
-    color: ${props => props.theme.userNameTextColor}; 
+    background-color: ${props => props.theme.modalCancelBtnTaskBackground}; 
+    color: #111111; 
     }
 
   input[type="checkbox"] {
