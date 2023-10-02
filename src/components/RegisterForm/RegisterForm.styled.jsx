@@ -11,7 +11,7 @@ export const MainContainer = styled.div`
 export const SubContainer = styled.div` 
 `;
 export const FormContainer = styled.div`
-  max-width: 287px;
+  max-width: 335px;
   border-radius: 8px;
   background: #fff;
   padding: 40px 24px;
@@ -19,7 +19,7 @@ export const FormContainer = styled.div`
   margin-left: auto;
   margin-bottom: 18px;
   @media (min-width: 768px) {
-    max-width: 400px;
+    max-width: 480px;
     padding: 40px;
     margin-bottom: 24px;
   }
@@ -254,12 +254,19 @@ export const ButtonSignup = styled.button`
   font-size: 12px;
   font-weight: 600;
   line-height: 14px;
-  text-decoration-line: underline;
   border: none;
   background: #dcebf7;
   margin-right: auto;
   margin-left: auto;
   cursor: pointer;
+
+  background-image: linear-gradient(to right, currentColor 100%, currentColor 100%);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 1px;
+  color: #3e85f3;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
   &:hover {
     color: #2b78ef;
   }

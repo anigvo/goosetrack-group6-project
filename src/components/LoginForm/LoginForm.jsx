@@ -125,7 +125,7 @@ const LoginForm = () => {
                     autoComplete="off"
                     type="password"
                     name="password"
-                    placeholder="******"
+                    placeholder="*******"
                     $errPass={
                       errors.password && touched.password
                         ? ' 1px solid #E74A3B'
