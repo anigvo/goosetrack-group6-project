@@ -166,6 +166,7 @@ export const ButtonSubmit = styled.button`
   align-items: center;
   gap: 11px;
   cursor: pointer;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
     background: #2b78ef;
   }
@@ -215,6 +216,7 @@ export const ButtonSignup = styled.button`
   margin-right: auto;
   margin-left: auto;
   cursor: pointer;
+  
 
   background-image: linear-gradient(to right, currentColor 100%, currentColor 100%);
   background-repeat: no-repeat;
@@ -222,7 +224,7 @@ export const ButtonSignup = styled.button`
   background-size: 100% 1px;
   color: #3e85f3;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-
+  
   &:hover {
     color: #2b78ef;
   }
