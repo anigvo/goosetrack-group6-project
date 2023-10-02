@@ -1,7 +1,7 @@
 import { Formik, Form, ErrorMessage } from 'formik';
 import { object, string } from 'yup';
 import { useDispatch } from 'react-redux';
-import { useMediaQuery } from 'hooks/useMediaQuery';
+// import { useMediaQuery } from 'hooks/useMediaQuery';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -24,7 +24,7 @@ import {
   IconButtonSubmitSpan,
 } from './LoginForm.styled';
 
-import { logIn } from 'redux/auth/operations';
+import { logInUser } from 'redux/auth/operations';
 import icons from '../../assets/icons/icons.svg';
 
 const userShema = object({
@@ -43,7 +43,7 @@ const LoginForm = () => {
   
 
   const handleSubmit = (values, { resetForm }) => {
-    dispatch(logIn(values));
+    dispatch(logInUser(values));
     resetForm();
   };
 

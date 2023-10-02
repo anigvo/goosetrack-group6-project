@@ -27,7 +27,7 @@ import {
 } from './RegisterForm.styled';
 
 import icons from '../../assets/icons/icons.svg';
-import { register } from 'redux/auth/operations';
+import { registerUser } from 'redux/auth/operations';
 
 
 const userShema = object({
@@ -48,7 +48,7 @@ const RegisterForm = () => {
   const dispatch = useDispatch();
   
    const handleSubmit = (values, { resetForm }) => {
-    dispatch(register(values));
+    dispatch(registerUser(values));
     resetForm();
   };
 
