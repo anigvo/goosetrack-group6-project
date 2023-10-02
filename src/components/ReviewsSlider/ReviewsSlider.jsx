@@ -46,9 +46,9 @@ const ReviewSlider = () => {
         }}
       >
       <SwiperSlide><ReviewItem name="Olena Doe" comment="Wow, the developer of this page is incredibly good, and the reviews change so beautifully and smoothly, he must also be very handsome" rate={5} /></SwiperSlide>
-      <SwiperSlide><ReviewItem name="Olena Doe" comment="GooseTrack is impressive, the calendar view and filter options make it easy to stay organized and focused. Highly recommended." rate={5} /></SwiperSlide>
-      <SwiperSlide><ReviewItem name="Olena Doe" comment="Wow, the developer of this page is incredibly good, and the reviews change so beautifully and smoothly, he must also be very handsome" rate={5} /></SwiperSlide>
-      <SwiperSlide><ReviewItem name="Olena Doe" comment="GooseTrack is impressive, the calendar view and filter options make it easy to stay organized and focused. Highly recommended." rate={5} /></SwiperSlide>
+      <SwiperSlide><ReviewItem name="Olena Doe" comment="GooseTrack is impressive, the calendar view and filter options make it easy to stay organized and focused. Highly recommended." rate={4} /></SwiperSlide>
+      <SwiperSlide><ReviewItem name="Olena Doe" comment="Wow, the developer of this page is incredibly good, and the reviews change so beautifully and smoothly, he must also be very handsome" rate={3} /></SwiperSlide>
+      <SwiperSlide><ReviewItem name="Olena Doe" comment="GooseTrack is impressive, the calendar view and filter options make it easy to stay organized and focused. Highly recommended." rate={2} /></SwiperSlide>
     </Swiper>
       
     <div>
