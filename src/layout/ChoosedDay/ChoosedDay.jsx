@@ -8,7 +8,9 @@ const ChoosedDay = () => {
   useEffect(() => {
     setPeriodType('day');
   }, [setPeriodType]);
-
+  console.log(startOfWeekDate);
+  console.log(daysToAdd);
+  console.log(today);
   return (
     <>
       <TasksColumnsList />
