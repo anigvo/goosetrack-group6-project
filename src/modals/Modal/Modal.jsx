@@ -3,10 +3,22 @@ import Modal from "react-modal";
 import { useSelector } from 'react-redux'; 
 import { selectTheme } from 'redux/selectors';
 
-Modal.setAppElement('#root');
+Modal.setAppElement('#modal-root');
+
+function SVGIcon({ currentTheme }) {
+  const strokeColor = currentTheme === 'light' ? '#111111' : '#FFFFFF';
+
+  return (
+    <svg fill="none" viewBox="0 0 24 24" width="24" height="24" stroke={strokeColor}>
+      <g strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
+        <path d="M18 6 6 18M6 6l12 12" />
+      </g>
+    </svg>
+  );
+}
 
 const CustomModal = ({ isOpen, onClose, children, customStyles }) => {
-  const currentTheme = useSelector(state => selectTheme(state)); 
+  const currentTheme = useSelector((state) => selectTheme(state));
 
   const backgroundColor = currentTheme === 'light' ? '#FFFFFF' : '#171820';
 
@@ -28,37 +40,22 @@ const CustomModal = ({ isOpen, onClose, children, customStyles }) => {
   const modalStyles = {
     ...defaultStyles,
     content: {
-      ...defaultStyles.content, 
+      ...defaultStyles.content,
       ...customStyles,
     },
   };
 
   const closeButtonStyles = {
-    position: "absolute",
-    top: "14px",
-    right: "14px",
-    cursor: "pointer",
+    position: 'absolute',
+    top: '14px',
+    right: '14px',
+    cursor: 'pointer',
   };
 
-  function SVGIcon() {
-    return (
-      <svg fill="#111111" viewBox="0 0 24 24" width="24" height="24">
-        <g strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
-          <path d="M18 6 6 18M6 6l12 12" />
-        </g>
-      </svg>
-    );
-  }
-  
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onClose}
-      contentLabel="Modal"
-      style={modalStyles}
-    >
+    <Modal isOpen={isOpen} onRequestClose={onClose} contentLabel="Modal" style={modalStyles}>
       <div style={closeButtonStyles} onClick={onClose}>
-        <SVGIcon />
+        <SVGIcon currentTheme={currentTheme} />
       </div>
 
       {children}
@@ -67,3 +64,4 @@ const CustomModal = ({ isOpen, onClose, children, customStyles }) => {
 };
 
 export default CustomModal;
+

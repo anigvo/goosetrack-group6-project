@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CustomModal from "../Modal/Modal";
 import TaskForm from "../TaskForm/TaskForm";
+import ReactDOM from "react-dom";
 
 const TaskModal = ({ isOpen, onClose }) => {
   const [modalStyles, setModalStyles] = useState({
@@ -40,14 +41,13 @@ const TaskModal = ({ isOpen, onClose }) => {
     };
   }, []);
   
-    return (
-      <CustomModal customStyles={modalStyles} isOpen={isOpen} onClose={onClose}>
-        
-          <TaskForm onCancel={onClose} />
-        
-      </CustomModal>
-    );
-  };
+  return isOpen && ReactDOM.createPortal(
+    <CustomModal customStyles={modalStyles} isOpen={isOpen} onClose={onClose}>
+      <TaskForm onCancel={onClose} />
+    </CustomModal>,
+    document.getElementById('modal-root')
+  );
+};
   
 
 export default TaskModal;
