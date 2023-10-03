@@ -9,6 +9,7 @@ export const CalendarToolbar = ({
   currentDateMonth,
   periodType,
 }) => {
+
   return (
     <CalendarToolbarContainer>
       <PeriodPaginator

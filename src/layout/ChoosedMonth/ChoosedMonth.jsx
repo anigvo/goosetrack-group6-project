@@ -9,6 +9,7 @@ const ChoosedMonth = () => {
   useEffect(() => {
     setPeriodType('month');
   }, [setPeriodType]);
+  
   return (
     <ChoosedMonthContainer>
       <MonthCalendarHead />

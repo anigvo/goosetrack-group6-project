@@ -1,22 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import '../../utils/datePicker.css';
+import React, { useState } from 'react';
+import { DatePickerCustom } from '../DatePickerCustom/DatePickerCustom';
 import { ReactComponent as ArrowLeft } from '../../assets/icons/chevron-left.svg';
 import { ReactComponent as ArrowRight } from '../../assets/icons/chevron-right.svg';
 import {
   PaginatorBtn,
   PeriodPaginatorContainer,
-  CalendarBtn,
   PaginatorBtnWrapper,
-  DatePickerCustomHeader,
-  DatePickerCustomHeaderTitle,
-  DatePickerButton,
 } from './PeriodPaginator.styled';
-import { registerLocale } from 'react-datepicker';
-import enGB from 'date-fns/locale/en-GB';
-
-registerLocale('en-GB', enGB);
 
 export const PeriodPaginator = ({
   prevHandler,
@@ -24,44 +14,14 @@ export const PeriodPaginator = ({
   today,
   periodType,
 }) => {
-  console.log(today);
-  const [selectedDate, setSelectedDate] = useState(new Date(today));
 
+  const [selectedDate, setSelectedDate] = useState(new Date(today));
+  const [filterDay, setFilterDay] = useState(selectedDate.getDay());
   const [filterMonth, setFilterMonth] = useState(selectedDate.getMonth());
   const [filterYear, setFilterYear] = useState(selectedDate.getFullYear());
-  const [selectedHeaderDate, setSelectedHeaderDate] = useState(selectedDate);
-
+  const currentDay = new Date().getDay();
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
-
-  useEffect(() => {
-    setSelectedHeaderDate(selectedDate);
-  }, [selectedDate]);
-
-  const handleDateChange = date => {
-    setSelectedDate(date);
-  };
-
-  const filterDate = date => {
-    const selectedMonth = filterMonth;
-    const selectedYear = filterYear;
-
-    const month = date.getMonth();
-    const year = date.getFullYear();
-    if (periodType === 'month') {
-      return month === selectedMonth && year === selectedYear;
-    }
-  };
-
-  const handleMonthChange = date => {
-    const selectedMonth = date.getMonth();
-    const selectedYear = date.getFullYear();
-    if (selectedMonth !== filterMonth || selectedYear !== filterYear) {
-      setFilterMonth(selectedMonth);
-      setFilterYear(selectedYear);
-      setSelectedHeaderDate(date);
-    }
-  };
 
   const handlePrevMonth = () => {
     const prevMonthDate = new Date(selectedDate);
@@ -81,93 +41,85 @@ export const PeriodPaginator = ({
     nextHandler();
   };
 
-  const customHeader = ({ date, decreaseMonth, increaseMonth }) => {
-    const currentMonth = new Date().getMonth();
-    const selectedMonth = date.getMonth();
-    const currentYear = new Date().getFullYear();
-    const selectedYear = date.getFullYear();
-
-    const decrease = () => {
-      decreaseMonth();
-
-      handlePrevMonth();
-    };
-
-    const increase = () => {
-      increaseMonth();
-
-      handleNextMonth();
-    };
-
-    return (
-      <DatePickerCustomHeader>
-        <DatePickerButton
-          onClick={decrease}
-          disabled={
-            selectedMonth === currentMonth && selectedYear === currentYear
-          }
-          disabledStyle={
-            selectedMonth === currentMonth && selectedYear === currentYear
-              ? true
-              : false
-          }
-        >
-          <ArrowLeft />
-        </DatePickerButton>
-
-        <DatePickerCustomHeaderTitle>
-          {selectedHeaderDate.toLocaleDateString('en-US', {
-            month: 'long',
-            year: 'numeric',
-          })}
-        </DatePickerCustomHeaderTitle>
-        <DatePickerButton onClick={increase}>
-          <ArrowRight />
-        </DatePickerButton>
-      </DatePickerCustomHeader>
-    );
+  const handlePrevDay = () => {
+    const prevDayDate = new Date(selectedDate);
+    prevDayDate.setDate(prevDayDate.getDate() - 1);
+    setSelectedDate(prevDayDate);
+    setFilterMonth(prevDayDate.getMonth());
+    prevHandler();
+  };
+  const handleNextDay = () => {
+    const nextDayDate = new Date(selectedDate);
+    nextDayDate.setDate(nextDayDate.getDate() + 1);
+    setSelectedDate(nextDayDate);
+    setFilterMonth(nextDayDate.getMonth());
+    nextHandler();
   };
 
   return (
     <PeriodPaginatorContainer>
-      <DatePicker
-        selected={selectedHeaderDate}
-        onChange={handleDateChange}
-        onMonthChange={handleMonthChange}
-        locale="en-GB"
-        customInput={
-          <CalendarBtn type="button">
-            {selectedHeaderDate.toLocaleDateString('en-GB', {
-              month: 'long',
-              year: 'numeric',
-            })}
-          </CalendarBtn>
-        }
-        filterDate={filterDate}
-        renderCustomHeader={customHeader}
+      <DatePickerCustom
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+        filterMonth={filterMonth}
+        setFilterMonth={setFilterMonth}
+        filterYear={filterYear}
+        setFilterYear={setFilterYear}
+        handlePrevMonth={handlePrevMonth}
+        handleNextMonth={handleNextMonth}
+        filterDay={filterDay}
+        setFilterDay={setFilterDay}
+        currentDay={currentDay}
+        handlePrevDay={handlePrevDay}
+        handleNextDay={handleNextDay}
+        periodType={periodType}
       />
 
       <PaginatorBtnWrapper>
-        <PaginatorBtn
-          direction={'left'}
-          type="button"
-          onClick={handlePrevMonth}
-          disabled={filterMonth === currentMonth && filterYear === currentYear}
-          disabledStyle={
-            filterMonth === currentMonth && filterYear === currentYear
-              ? true
-              : false
-          }
-        >
-          <ArrowLeft />
-        </PaginatorBtn>
-        <PaginatorBtn
-          direction={'right'}
-          type="button"
-          onClick={handleNextMonth}
-        >
-          <ArrowRight />
-        </PaginatorBtn>
+        {periodType === 'month' ? (
+          <PaginatorBtn
+            direction={'left'}
+            type="button"
+            onClick={handlePrevMonth}
+            disabled={
+              filterMonth === currentMonth && filterYear === currentYear
+            }
+            disabledStyle={
+              filterMonth === currentMonth && filterYear === currentYear
+                ? true
+                : false
+            }
+          >
+            <ArrowLeft />
+          </PaginatorBtn>
+        ) : (
+          <PaginatorBtn
+            direction={'left'}
+            type="button"
+            onClick={handlePrevDay}
+            disabled={filterDay === currentDay}
+            disabledStyle={filterDay === currentDay ? true : false}
+          >
+            <ArrowLeft />
+          </PaginatorBtn>
+        )}
+        {periodType === 'month' ? (
+          <PaginatorBtn
+            direction={'right'}
+            type="button"
+            onClick={handleNextMonth}
+          >
+            <ArrowRight />
+          </PaginatorBtn>
+        ) : (
+          <PaginatorBtn
+            direction={'right'}
+            type="button"
+            onClick={handleNextDay}
+          >
+            <ArrowRight />
+          </PaginatorBtn>
+        )}
       </PaginatorBtnWrapper>
     </PeriodPaginatorContainer>
   );
