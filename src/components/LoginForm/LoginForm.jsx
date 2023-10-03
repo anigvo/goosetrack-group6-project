@@ -3,8 +3,8 @@ import { object, string } from 'yup';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { authReducer } from '../../redux/auth/authSlice';
-import { ToastContainer, toast } from 'react-hot-toast';
-import { useEffect } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+
 
 
 import {
@@ -45,26 +45,20 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   
 
-  const handleSubmit = (values, { resetForm }) => {
-    dispatch(logInUser(values));
-    resetForm();
+ const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    try {
+      const user = await dispatch(logInUser(values)); 
+      dispatch(authReducer(user)); 
+      navigate('/calendar/month');
+    } catch (error) {
+       toast.error('Not valid email or password'); 
+    } finally {
+      resetForm();
+      setSubmitting(false);
+    }
   };
-
-  // const handleSubmit = async (values, { setSubmitting }) => {
-  //   try {
-  //     const user = await dispatch(logInUser(values)); 
-  //     dispatch(authReducer(user)); 
-  //     navigate('/calendar/month');
-  //   } catch (error) {
-  //     console.error('Помилка входу:', error);
-  //     toast.error('Not valid email or password'); 
-  //   } finally {
-  //     setSubmitting(false);
-  //   }
-  // };
    
-
-  const FormError = ({ name }) => {
+   const FormError = ({ name }) => {
     return (
       <ErrorMessage name={name} render={msg => <ErrorMsg>{msg}</ErrorMsg>} />
     );
@@ -73,6 +67,7 @@ const LoginForm = () => {
   return (
     <MainContainer>
       <div>
+      <Toaster />
         <FormContainer>
           <Title>Log In</Title>
           <Formik
