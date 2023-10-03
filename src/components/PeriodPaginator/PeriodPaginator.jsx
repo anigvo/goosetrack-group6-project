@@ -13,20 +13,30 @@ import {
   DatePickerCustomHeaderTitle,
   DatePickerButton,
 } from './PeriodPaginator.styled';
+import { registerLocale } from 'react-datepicker';
+import enGB from 'date-fns/locale/en-GB';
 
-export const PeriodPaginator = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+registerLocale('en-GB', enGB);
+
+export const PeriodPaginator = ({
+  prevHandler,
+  nextHandler,
+  today,
+  periodType,
+}) => {
+  console.log(today);
+  const [selectedDate, setSelectedDate] = useState(new Date(today));
+
   const [filterMonth, setFilterMonth] = useState(selectedDate.getMonth());
   const [filterYear, setFilterYear] = useState(selectedDate.getFullYear());
   const [selectedHeaderDate, setSelectedHeaderDate] = useState(selectedDate);
+
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
-  
+
   useEffect(() => {
     setSelectedHeaderDate(selectedDate);
   }, [selectedDate]);
-
-
 
   const handleDateChange = date => {
     setSelectedDate(date);
@@ -35,9 +45,12 @@ export const PeriodPaginator = () => {
   const filterDate = date => {
     const selectedMonth = filterMonth;
     const selectedYear = filterYear;
-    const year = date.getFullYear();
+
     const month = date.getMonth();
-    return month === selectedMonth && year === selectedYear;
+    const year = date.getFullYear();
+    if (periodType === 'month') {
+      return month === selectedMonth && year === selectedYear;
+    }
   };
 
   const handleMonthChange = date => {
@@ -56,6 +69,7 @@ export const PeriodPaginator = () => {
     setSelectedDate(prevMonthDate);
     setFilterMonth(prevMonthDate.getMonth());
     setFilterYear(prevMonthDate.getFullYear());
+    prevHandler();
   };
 
   const handleNextMonth = () => {
@@ -64,6 +78,7 @@ export const PeriodPaginator = () => {
     setSelectedDate(nextMonthDate);
     setFilterMonth(nextMonthDate.getMonth());
     setFilterYear(nextMonthDate.getFullYear());
+    nextHandler();
   };
 
   const customHeader = ({ date, decreaseMonth, increaseMonth }) => {
@@ -72,10 +87,22 @@ export const PeriodPaginator = () => {
     const currentYear = new Date().getFullYear();
     const selectedYear = date.getFullYear();
 
+    const decrease = () => {
+      decreaseMonth();
+
+      handlePrevMonth();
+    };
+
+    const increase = () => {
+      increaseMonth();
+
+      handleNextMonth();
+    };
+
     return (
       <DatePickerCustomHeader>
         <DatePickerButton
-          onClick={decreaseMonth}
+          onClick={decrease}
           disabled={
             selectedMonth === currentMonth && selectedYear === currentYear
           }
@@ -94,7 +121,7 @@ export const PeriodPaginator = () => {
             year: 'numeric',
           })}
         </DatePickerCustomHeaderTitle>
-        <DatePickerButton onClick={increaseMonth}>
+        <DatePickerButton onClick={increase}>
           <ArrowRight />
         </DatePickerButton>
       </DatePickerCustomHeader>
@@ -107,9 +134,10 @@ export const PeriodPaginator = () => {
         selected={selectedHeaderDate}
         onChange={handleDateChange}
         onMonthChange={handleMonthChange}
+        locale="en-GB"
         customInput={
           <CalendarBtn type="button">
-            {selectedHeaderDate.toLocaleDateString('en-US', {
+            {selectedHeaderDate.toLocaleDateString('en-GB', {
               month: 'long',
               year: 'numeric',
             })}

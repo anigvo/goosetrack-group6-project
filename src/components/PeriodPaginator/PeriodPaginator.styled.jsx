@@ -15,6 +15,7 @@ export const CalendarBtn = styled.button`
   &:focus {
     background-color: ${props => props.theme.btnHoverBackground};
   }
+  text-transform: uppercase;
   width: 148px;
   height: 30px;
   background-color: ${props => props.theme.btnBackgroundColor};
