@@ -4,7 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../../utils/datePicker.css';
 import { ReactComponent as ArrowLeft } from '../../assets/icons/chevron-left.svg';
 import { ReactComponent as ArrowRight } from '../../assets/icons/chevron-right.svg';
-import { 
+import {
   PaginatorBtn,
   PeriodPaginatorContainer,
   CalendarBtn,
@@ -19,9 +19,14 @@ export const PeriodPaginator = () => {
   const [filterMonth, setFilterMonth] = useState(selectedDate.getMonth());
   const [filterYear, setFilterYear] = useState(selectedDate.getFullYear());
   const [selectedHeaderDate, setSelectedHeaderDate] = useState(selectedDate);
-
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
+  
+  useEffect(() => {
+    setSelectedHeaderDate(selectedDate);
+  }, [selectedDate]);
+
+
 
   const handleDateChange = date => {
     setSelectedDate(date);
@@ -44,10 +49,6 @@ export const PeriodPaginator = () => {
       setSelectedHeaderDate(date);
     }
   };
-
-  useEffect(() => {
-    setSelectedHeaderDate(selectedDate);
-  }, [selectedDate]);
 
   const handlePrevMonth = () => {
     const prevMonthDate = new Date(selectedDate);

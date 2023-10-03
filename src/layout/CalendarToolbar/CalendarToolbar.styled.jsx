@@ -10,6 +10,6 @@ margin-bottom: 24px;
         align-items: center;
         font-size: 16px;
         line-height: 1.12;
-        margin-bottom: 18px;
+        margin-bottom: 32px;
     `}
 `;
