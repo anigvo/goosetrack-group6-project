@@ -1,8 +1,11 @@
 import { Formik, Form, ErrorMessage } from 'formik';
 import { object, string } from 'yup';
 import { useDispatch } from 'react-redux';
-// import { useMediaQuery } from 'hooks/useMediaQuery';
 import { useNavigate } from 'react-router-dom';
+import { authReducer } from '../../redux/auth/authSlice';
+import { ToastContainer, toast } from 'react-hot-toast';
+import { useEffect } from 'react';
+
 
 import {
   MainContainer,
@@ -46,6 +49,20 @@ const LoginForm = () => {
     dispatch(logInUser(values));
     resetForm();
   };
+
+  // const handleSubmit = async (values, { setSubmitting }) => {
+  //   try {
+  //     const user = await dispatch(logInUser(values)); 
+  //     dispatch(authReducer(user)); 
+  //     navigate('/calendar/month');
+  //   } catch (error) {
+  //     console.error('Помилка входу:', error);
+  //     toast.error('Not valid email or password'); 
+  //   } finally {
+  //     setSubmitting(false);
+  //   }
+  // };
+   
 
   const FormError = ({ name }) => {
     return (

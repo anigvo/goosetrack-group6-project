@@ -1,19 +1,20 @@
 import styled from 'styled-components';
 import { Field } from 'formik';
+import { registerPageColors } from 'utils/colors';
 
 export const MainContainer = styled.div`
   display: flex;
   height: 100vh;
   flex-direction: column;
   justify-content: center;
-  background: #dcebf7; 
+  background: ${registerPageColors.mainBackground};
 `;
 export const SubContainer = styled.div` 
 `;
 export const FormContainer = styled.div`
   max-width: 335px;
   border-radius: 8px;
-  background: #fff;
+  background: ${registerPageColors.formColor};
   padding: 40px 24px;
   margin-right: auto;
   margin-left: auto;
@@ -25,7 +26,7 @@ export const FormContainer = styled.div`
   }
 `;
 export const Title = styled.h1`
-  color: #3e85f3;
+  color: ${registerPageColors.buttonColor};
   text-shadow: 0px 9.399999618530273px 57.6875px rgba(0, 0, 0, 0.04),
     0px 47px 355px rgba(0, 0, 0, 0.07);
   font-size: 18px;
@@ -85,7 +86,7 @@ export const SpanInputPass = styled.span`
 export const LoginInput = styled(Field)`
   border-radius: 8px;
   border: ${props => props.$errLogin};
-  background: #fff;
+  background: ${registerPageColors.formColor};
   max-width: 287px;
   height: 46px;
   padding: 0;
@@ -95,13 +96,13 @@ export const LoginInput = styled(Field)`
   line-height: 18px;
 
   ::placeholder {
-    color: #dce3e5;
+    color:  ${registerPageColors.placeholderColor};
       font-size: 14px;
       font-weight: 400;
-    line-height: 18px; /* 128.571% */
+    line-height: 18px; 
   }
   &:hover {
-    border-color: #111111;
+    border-color: ${registerPageColors.borderHoverColor};
   }
   @media (min-width: 768px) {
     max-width: 400px;
@@ -116,7 +117,7 @@ export const LoginInput = styled(Field)`
 export const EmailInput = styled(Field)`
   border-radius: 8px;
   border: ${props => props.$errEmail};
-  background: #fff;
+  background: ${registerPageColors.formColor};
   max-width: 287px;
   height: 46px;
   padding: 0;
@@ -126,13 +127,13 @@ export const EmailInput = styled(Field)`
   line-height: 18px;
 
   ::placeholder {
-    color: #dce3e5;
+    color: ${registerPageColors.placeholderColor};
       font-size: 14px;
       font-weight: 400;
-    line-height: 18px; /* 128.571% */
+    line-height: 18px; 
   }
   &:hover {
-    border-color: #111111;
+    border-color:${registerPageColors.borderHoverColor};
   }
   @media (min-width: 768px) {
     max-width: 400px;
@@ -147,20 +148,20 @@ export const EmailInput = styled(Field)`
 export const PasswordInput = styled(Field)`
   border-radius: 8px;
   border: ${props => props.$errPass};
-  background: #fff;
+  background: ${registerPageColors.formColor};
   max-width: 287px;
   height: 46px;
   padding: 0;
   padding-left: 8px;
 
   ::placeholder {
-    color: #dce3e5;
+    color: ${registerPageColors.placeholderColor};
       font-size: 14px;
       font-weight: 400;
-    line-height: 18px; /* 128.571% */
+    line-height: 18px; 
   }
   &:hover {
-    border-color: #111111;
+    border-color: ${registerPageColors.borderHoverColor};
   }
 
   @media (min-width: 768px) {
@@ -174,7 +175,7 @@ export const PasswordInput = styled(Field)`
   }
 `;
 export const ErrorMsg = styled.p`
-  color: #da1414;
+  color: ${registerPageColors.errorMessage};
   font-size: 12px;
   font-weight: 400;
   line-height: 14px;
@@ -183,7 +184,7 @@ export const ErrorMsg = styled.p`
   padding-left: 12px;
 `;
 export const CorrectMsg = styled.p`
-  color: #3cbc81;
+  color: ${registerPageColors.correctMessage};
   font-size: 12px;
   font-weight: 400;
   line-height: 14px;
@@ -199,7 +200,7 @@ export const ButtonSubmit = styled.button`
   height: 46px;
   margin-top: 32px;
   border: none;
-  color: #ffffff;
+  color: ${registerPageColors.formColor};
   font-size: 14px;
   font-weight: 600;
   line-height: 18px;
@@ -211,7 +212,7 @@ export const ButtonSubmit = styled.button`
   cursor: pointer;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
-    background: #2b78ef;
+    background: ${registerPageColors.buttonHoverColor};
   }
   @media (min-width: 768px) {
     width: 100%;
@@ -228,8 +229,8 @@ export const IconButtonSubmitSpan = styled.span`
   }
 `;
 export const IconButtonSubmit = styled.svg`
-stroke: white;
-fill: #3e85f3;
+stroke: ${registerPageColors.formColor};
+fill: ${registerPageColors.buttonColor};
   width: 18px;
   height: 18px;
   @media (min-width: 768px) {
@@ -249,14 +250,14 @@ export const Iconinput = styled.svg`
 `;
 
 export const ButtonSignup = styled.button`
-  color: #3e85f3;
+  color:${registerPageColors.buttonColor};
   text-shadow: 0px 9.399999618530273px 57.6875px rgba(0, 0, 0, 0.04),
     0px 47px 355px rgba(0, 0, 0, 0.07);
   font-size: 12px;
   font-weight: 600;
   line-height: 14px;
   border: none;
-  background: #dcebf7;
+  background: ${registerPageColors.mainBackground};
   margin-right: auto;
   margin-left: auto;
   cursor: pointer;
@@ -265,11 +266,11 @@ export const ButtonSignup = styled.button`
   background-repeat: no-repeat;
   background-position: 0 100%;
   background-size: 100% 1px;
-  color: #3e85f3;
+  color:${registerPageColors.buttonColor};
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
-    color: #2b78ef;
+    color: ${registerPageColors.buttonHoverColor};
   }
   @media (min-width: 768px) {
     font-size: 18px;
