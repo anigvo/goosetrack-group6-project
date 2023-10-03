@@ -2,27 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 import { editUser, logInUser, logOutUser, refreshUser, registerUser } from './operations';
-
-const handleRejected = (state, action) => {
-  state.error = action.payload;
-}
-
-const userInitialState = {
-  name: null,
-  email: null,
-  birthday: null,
-  phone: null,
-  skype: null,
-  avatarURL: null,
-}
-
-const initialState = {
-  user: userInitialState,
-  token: null,
-  isLoggedIn: false,
-  isRefreshing: false,
-  error: null,
-};
+import { userInitialState, initialState, handleRejected } from './constants';
 
 const handleFulfilled = (state, action) => {
   state.token = action.payload.token;
@@ -38,7 +18,10 @@ const authSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
-      .addCase(registerUser.fulfilled, handleFulfilled)
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.user.email = action.payload.user.email;
+        state.user.name = action.payload.user.name;
+      })
       .addCase(registerUser.rejected, handleRejected)
       .addCase(logInUser.fulfilled, handleFulfilled)
       .addCase(logInUser.rejected, handleRejected)
@@ -53,18 +36,14 @@ const authSlice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
-        // state.user.email = action.payload.email;
-        // state.user.name = action.payload.name;
-        // state.user.skype = action.payload.skype;
-        // state.user.birthday = action.payload.birthday;
-        // state.user.phone = action.payload.phone;
-        // state.user.avatarURL = action.payload.avatarURL;
         state.user = action.payload;
         state.isLoggedIn = true;
         state.isRefreshing = false;
         state.error = null;
       })
-      .addCase(refreshUser.rejected, handleRejected)
+      .addCase(refreshUser.rejected, state => {
+        state.isRefreshing = false;
+      })
       .addCase(editUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
       })
