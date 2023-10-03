@@ -2,11 +2,23 @@ import React from 'react';
 import { PeriodPaginator } from 'components/PeriodPaginator/PeriodPaginator';
 import { PeriodTypeSelect } from 'components/PeriodTypeSelect/PeriodTypeSelect';
 import { CalendarToolbarContainer } from './CalendarToolbar.styled';
-export const CalendarToolbar = () => {
+export const CalendarToolbar = ({
+  prevHandler,
+  nextHandler,
+  today,
+  currentDateMonth,
+  periodType,
+}) => {
+
   return (
     <CalendarToolbarContainer>
-      <PeriodPaginator />
-      <PeriodTypeSelect />
+      <PeriodPaginator
+        prevHandler={prevHandler}
+        nextHandler={nextHandler}
+        today={today}
+        periodType={periodType}
+      />
+      <PeriodTypeSelect currentDateMonth={currentDateMonth} />
     </CalendarToolbarContainer>
   );
 };
