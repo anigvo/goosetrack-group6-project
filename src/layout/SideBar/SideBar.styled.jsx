@@ -10,19 +10,23 @@ padding-right: 24px;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
+height: 100vh;
 ${media('', 'tabletMax')`
     position: absolute;
     top: 0;
     left: 0;
     z-index: 999;
 `}
-height: 100vh;
 ${media('tablet', 'tabletMax')`
     padding-left: 32px;
     padding-right: 32px;
 `}
 ${media('desktop', '')`
     width: 290px;
+    position: sticky;
+    top: 0;
+    bottom: 0;
+    left: 0;
 `}
 `
 
