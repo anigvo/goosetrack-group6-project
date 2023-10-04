@@ -47,6 +47,8 @@ export const LabelInput = styled.label`
 `;
 export const SpanInputEmail = styled.span`
   color: ${props => props.$errEmail};
+  font-family: 'Inter', sans-serif;
+  font-family: $form-font;
   font-size: 12px;
   font-weight: 600;
   line-height: normal;

@@ -32,7 +32,6 @@ export const CalendarDayWrapper = styled.div`
 
 export const CalendarDay = styled.div`
   display: ${props => (props.isCurrentDayMonth ? 'flex' : 'none')};
-  /* display: flex; */
   align-items: center;
   justify-content: center;
   background-color: ${props =>

@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const MainPageWrapper = styled.div`
+  background-color: white;
+  & p{
+    color:#111111E5;
+  }
+`
+
 export const MainPageContainer = styled.div`
   padding: 0px 20px;
   margin: auto;

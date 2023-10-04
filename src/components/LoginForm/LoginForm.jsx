@@ -1,11 +1,8 @@
 import { Formik, Form, ErrorMessage } from 'formik';
 import { object, string } from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+// import { useMediaQuery } from 'hooks/useMediaQuery';
 import { useNavigate } from 'react-router-dom';
-import { authReducer } from '../../redux/auth/authSlice';
-import toast, { Toaster } from 'react-hot-toast';
-
-
 
 import {
   MainContainer,
@@ -29,6 +26,9 @@ import {
 
 import { logInUser } from 'redux/auth/operations';
 import icons from '../../assets/icons/icons.svg';
+import { selectError } from 'redux/selectors';
+import toast from 'react-hot-toast';
+import { nanoid } from '@reduxjs/toolkit';
 
 const userShema = object({
   email: string().email('This is an ERROR email').required(),
@@ -43,22 +43,31 @@ const initialValues = {
 const LoginForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+  const error = useSelector(selectError);
+  const passwdid = nanoid();
+  const emailid = nanoid();
 
- const handleSubmit = async (values, { setSubmitting, resetForm }) => {
-    try {
-      const user = await dispatch(logInUser(values)); 
-      dispatch(authReducer(user)); 
-      navigate('/calendar/month');
-    } catch (error) {
-       toast.error('Not valid email or password'); 
-    } finally {
-      resetForm();
-      setSubmitting(false);
-    }
+  const handleSubmit = (values, { resetForm }) => {
+    dispatch(logInUser(values))
+      .then(data => {
+        if (data.error) {
+          throw new Error();
+        }
+      })
+      .catch(_ => {
+        if (error !== null) {
+          if (error.includes('401')) {
+            toast.error('Not valid email or password');
+          } else {
+            toast.error('Something went wrong.');
+          }
+          return;
+        }
+      });
+    resetForm();
   };
-   
-   const FormError = ({ name }) => {
+
+  const FormError = ({ name }) => {
     return (
       <ErrorMessage name={name} render={msg => <ErrorMsg>{msg}</ErrorMsg>} />
     );
@@ -67,7 +76,6 @@ const LoginForm = () => {
   return (
     <MainContainer>
       <div>
-      <Toaster />
         <FormContainer>
           <Title>Log In</Title>
           <Formik
@@ -77,7 +85,7 @@ const LoginForm = () => {
           >
             {({ errors, touched }) => (
               <Form>
-                <LabelInput htmlFor="email">
+                <LabelInput htmlFor={emailid}>
                   <SpanInputEmail
                     $errEmail={
                       errors.email && touched.email
@@ -94,6 +102,7 @@ const LoginForm = () => {
                     autoComplete="off"
                     type="email"
                     name="email"
+                    id={emailid}
                     placeholder="Enter email"
                     $errEmail={
                       errors.email && touched.email
@@ -109,7 +118,7 @@ const LoginForm = () => {
                     </Iconinput>
                   ) : touched.email ? (
                     <Iconinput>
-                     <use href={`${icons}#done`} />
+                      <use href={`${icons}#done`} />
                     </Iconinput>
                   ) : null}
 
@@ -120,7 +129,7 @@ const LoginForm = () => {
                   ) : null}
                 </LabelInput>
 
-                <LabelInput htmlFor="password">
+                <LabelInput htmlFor={passwdid}>
                   <SpanInputPass
                     $errPass={
                       errors.password && touched.password
@@ -137,7 +146,8 @@ const LoginForm = () => {
                     autoComplete="off"
                     type="password"
                     name="password"
-                    placeholder="*******"
+                    id={passwdid}
+                    placeholder="******"
                     $errPass={
                       errors.password && touched.password
                         ? ' 1px solid #E74A3B'
@@ -162,7 +172,7 @@ const LoginForm = () => {
                   <span> Log In</span>
                   <IconButtonSubmitSpan>
                     <IconButtonSubmit>
-                    <use href={`${icons}#log-in`} />
+                      <use href={`${icons}#log-in`} />
                     </IconButtonSubmit>
                   </IconButtonSubmitSpan>
                 </ButtonSubmit>
@@ -177,16 +187,16 @@ const LoginForm = () => {
           </ButtonSignup>
         </SignupContainer>
       </div>
-     
-        <GusContainer>
-          <img
-            src={require('../../assets/images/loginpage-goose-rocket.png')}
-            alt="rocket-gus"
-            height={521}
-            width={368}
-          />
-        </GusContainer>
-      </MainContainer>
+
+      <GusContainer>
+        <img
+          src={require('../../assets/images/loginpage-goose-rocket.png')}
+          alt="rocket-gus"
+          height={521}
+          width={368}
+        />
+      </GusContainer>
+    </MainContainer>
   );
 };
 

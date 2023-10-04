@@ -22,15 +22,29 @@ line-height: 1.28;
     `}
 `;
 
-export const UserPhoto = styled.img`
+export const UserPhotoWrapper = styled.div`
 border: 1.8px solid ${props => props.theme.userAvatarBorder};
 border-radius: 50%;
 width: 32px;
 height: 32px;
-object-fit: cover;
+overflow: hidden;
+display: flex;
+align-items: center;
+justify-content: center;
     ${media('tablet', '')`
     width: 44px;
     height: 44px;
     `}
 `;
 
+export const UserPhoto = styled.img`
+object-fit: cover;
+width: 100%;
+height: 100%;
+display: block;
+`
+
+export const UserL = styled.p`
+    text-transform: uppercase;
+    font-size: 18px;
+`
