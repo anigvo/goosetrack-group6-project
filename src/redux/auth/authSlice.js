@@ -8,6 +8,7 @@ const handleFulfilled = (state, action) => {
   state.token = action.payload.token;
   state.user.email = action.payload.user.email;
   state.user.name = action.payload.user.name;
+  state.user.avatarURL = action.payload.user.avatarURL;
   state.isLoggedIn = true;
   state.isRefreshing = false;
   state.error = null;
