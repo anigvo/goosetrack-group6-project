@@ -2,7 +2,7 @@ import { Formik, Form, ErrorMessage } from 'formik';
 import { object, string } from 'yup';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
+import toast, { Toaster } from 'react-hot-toast';
 import {
   MainContainer,
   FormContainer,
@@ -28,7 +28,7 @@ import {
 
 import icons from '../../assets/icons/icons.svg';
 import { registerUser } from 'redux/auth/operations';
-
+import { authReducer } from '../../redux/auth/authSlice';
 
 const userShema = object({
   name: string().min(3).required(),
@@ -47,11 +47,19 @@ const RegisterForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
-   const handleSubmit = (values, { resetForm }) => {
-    dispatch(registerUser(values));
-    resetForm();
-  };
-
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    try {
+      const user = await dispatch(registerUser(values)); 
+      dispatch(authReducer(user)); 
+      navigate('/calendar/month');
+    } catch (error) {
+       toast.error('Not valid email or password'); 
+    } finally {
+      resetForm();
+      setSubmitting(false);
+    }
+  }; 
+  
   const FormError = ({ name }) => {
     return (
       <ErrorMessage name={name} render={msg => <ErrorMsg>{msg}</ErrorMsg>} />
@@ -61,6 +69,7 @@ const RegisterForm = () => {
   return (
     <MainContainer>
       <SubContainer>
+      <Toaster />
         <FormContainer>
           <Title>Sign Up</Title>
           <Formik
