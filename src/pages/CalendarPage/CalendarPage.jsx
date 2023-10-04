@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Suspense, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { CalendarToolbar } from 'layout/CalendarToolbar/CalendarToolbar';
@@ -13,10 +13,11 @@ import {
   endOfMonth,
   setMonth,
   getDaysInMonth,
+  addDays,
 } from 'date-fns';
 import { useSelector } from 'react-redux';
 import { selectDay, selectMonth } from 'redux/selectors';
-
+import { Loader } from 'components/Loader/Loader';
 const CalendarPage = ({ updatePageName }) => {
   const navigate = useNavigate();
   const month = useSelector(selectMonth);
@@ -26,16 +27,16 @@ const CalendarPage = ({ updatePageName }) => {
     updatePageName('Calendar');
   }, [updatePageName]);
 
-  const { currentDate } = useParams();
   const [periodType, setPeriodType] = useState('month');
-  const [currentDateMonth] = useState(currentDate);
+  const [currentDateMonth] = useState(month);
+  const [currentDateDay] = useState(day);
   const [today, setToday] = useState(setMonth(new Date(), month));
 
   useEffect(() => {
     if (periodType === 'month') {
       navigate(`/calendar/month/${month}`);
     } else if (periodType === 'day') {
-      navigate(`/calendar/day/${day}`)
+      navigate(`/calendar/day/${day}`);
     }
   }, [navigate, month, day, periodType]);
 
@@ -80,24 +81,42 @@ const CalendarPage = ({ updatePageName }) => {
   const { startOfWeekDate, daysToAdd } = chooseDay();
 
   const prevHandler = () => {
-    setToday(prev => addMonths(prev, -1));
+    if (periodType === 'month') {
+      return setToday(prev => addMonths(prev, -1));
+    }
+    return setToday(prev => addDays(prev, -1));
   };
 
   const nextHandler = () => {
-    setToday(prev => addMonths(prev, 1));
+    if (periodType === 'month') {
+      return setToday(prev => addMonths(prev, 1));
+    }
+    return setToday(prev => addDays(prev, 1));
   };
+
+  const pickHandler = (date) => { 
+    return setToday(date);
+  }
 
   return (
     <>
       <CalendarToolbar
         prevHandler={prevHandler}
         nextHandler={nextHandler}
+        pickHandler={pickHandler}
         today={today}
         currentDateMonth={currentDateMonth}
+        currentDateDay={currentDateDay}
         periodType={periodType}
         changePeriod={setPeriodType}
       />
-      <Suspense>
+      <Suspense
+        fallback={
+          <>
+            <Loader />
+          </>
+        }
+      >
         <Outlet context={[startOfWeekDate, daysToAdd, today, setPeriodType]} />
       </Suspense>
     </>
