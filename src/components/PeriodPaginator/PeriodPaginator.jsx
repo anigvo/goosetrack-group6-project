@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DatePickerCustom } from '../DatePickerCustom/DatePickerCustom';
 import { ReactComponent as ArrowLeft } from '../../assets/icons/chevron-left.svg';
 import { ReactComponent as ArrowRight } from '../../assets/icons/chevron-right.svg';
@@ -6,6 +6,7 @@ import {
   PaginatorBtn,
   PeriodPaginatorContainer,
   PaginatorBtnWrapper,
+  DayTitle,
 } from './PeriodPaginator.styled';
 import { useDispatch } from 'react-redux';
 import { setCurrentDay, setCurrentMonth } from 'redux/tasks/tasksSlice';
@@ -13,17 +14,28 @@ import { setCurrentDay, setCurrentMonth } from 'redux/tasks/tasksSlice';
 export const PeriodPaginator = ({
   prevHandler,
   nextHandler,
+  pickHandler,
   today,
   periodType,
+  currentDateDay,
+  currentDateMonth,
+  changePeriod,
 }) => {
   const dispatch = useDispatch();
   const [selectedDate, setSelectedDate] = useState(new Date(today));
-  const [filterDay, setFilterDay] = useState(selectedDate.getDate());
   const [filterMonth, setFilterMonth] = useState(selectedDate.getMonth());
   const [filterYear, setFilterYear] = useState(selectedDate.getFullYear());
-  const currentDay = new Date().getDate();
-  const currentMonth = new Date().getMonth();
+  const [lastDayOfMonth, setLastDayOfMonth] = useState(
+    new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, 0)
+  );
+  const currentDay = currentDateDay;
+  const currentMonth = currentDateMonth;
   const currentYear = new Date().getFullYear();
+
+  useEffect(() => {
+    console.log(selectedDate);
+    console.log(periodType);
+  });
 
   const handlePrevMonth = () => {
     const prevMonthDate = new Date(selectedDate);
@@ -31,8 +43,8 @@ export const PeriodPaginator = ({
     setSelectedDate(prevMonthDate);
     setFilterMonth(prevMonthDate.getMonth());
     setFilterYear(prevMonthDate.getFullYear());
+    dispatch(setCurrentMonth(prevMonthDate.getMonth()));
     prevHandler();
-    dispatch(setCurrentMonth(prevMonthDate.getMonth()))
   };
 
   const handleNextMonth = () => {
@@ -41,48 +53,62 @@ export const PeriodPaginator = ({
     setSelectedDate(nextMonthDate);
     setFilterMonth(nextMonthDate.getMonth());
     setFilterYear(nextMonthDate.getFullYear());
+    dispatch(setCurrentMonth(nextMonthDate.getMonth()));
     nextHandler();
-    dispatch(setCurrentMonth(nextMonthDate.getMonth()))
   };
 
   const handlePrevDay = () => {
     const prevDayDate = new Date(selectedDate);
     prevDayDate.setDate(prevDayDate.getDate() - 1);
     setSelectedDate(prevDayDate);
+
     setFilterMonth(prevDayDate.getMonth());
-    // setFilterDay(prevDayDate.getDate());
+
+    setLastDayOfMonth(
+      new Date(prevDayDate.getFullYear(), prevDayDate.getMonth() + 1, 0)
+    );
     dispatch(setCurrentDay(prevDayDate.getDate()));
     prevHandler();
   };
+
   const handleNextDay = () => {
     const nextDayDate = new Date(selectedDate);
     nextDayDate.setDate(nextDayDate.getDate() + 1);
     setSelectedDate(nextDayDate);
+
     setFilterMonth(nextDayDate.getMonth());
-    // setFilterDay(nextDayDate.getDate())
-    nextHandler();
+    setLastDayOfMonth(
+      new Date(nextDayDate.getFullYear(), nextDayDate.getMonth() + 1, 0)
+    );
     dispatch(setCurrentDay(nextDayDate.getDate()));
+    nextHandler();
   };
 
   return (
     <PeriodPaginatorContainer>
-      <DatePickerCustom
-        selectedDate={selectedDate}
-        setSelectedDate={setSelectedDate}
-        filterMonth={filterMonth}
-        setFilterMonth={setFilterMonth}
-        filterYear={filterYear}
-        setFilterYear={setFilterYear}
-        handlePrevMonth={handlePrevMonth}
-        handleNextMonth={handleNextMonth}
-        filterDay={filterDay}
-        setFilterDay={setFilterDay}
-        currentDay={currentDay}
-        handlePrevDay={handlePrevDay}
-        handleNextDay={handleNextDay}
-        periodType={periodType}
-      />
-
+      {periodType === 'month' ? (
+        <DatePickerCustom
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+          filterMonth={filterMonth}
+          setFilterMonth={setFilterMonth}
+          filterYear={filterYear}
+          setFilterYear={setFilterYear}
+          handlePrevMonth={handlePrevMonth}
+          handleNextMonth={handleNextMonth}
+          changePeriod={changePeriod}
+          currentDay={currentDay}
+          pickHandler={pickHandler}
+        />
+      ) : (
+        <DayTitle>
+          {selectedDate.toLocaleDateString('en-GB', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric',
+          })}
+        </DayTitle>
+      )}
       <PaginatorBtnWrapper>
         {periodType === 'month' ? (
           <PaginatorBtn
@@ -105,8 +131,8 @@ export const PeriodPaginator = ({
             direction={'left'}
             type="button"
             onClick={handlePrevDay}
-            disabled={filterDay === currentDay}
-            disabledStyle={filterDay === currentDay ? true : false}
+            disabled={1 === selectedDate.getDate()}
+            disabledStyle={1 === selectedDate.getDate() ? true : false}
           >
             <ArrowLeft />
           </PaginatorBtn>
@@ -124,6 +150,10 @@ export const PeriodPaginator = ({
             direction={'right'}
             type="button"
             onClick={handleNextDay}
+            disabled={lastDayOfMonth.getDate() === selectedDate.getDate()}
+            disabledStyle={
+              lastDayOfMonth.getDate() === selectedDate.getDate() ? true : false
+            }
           >
             <ArrowRight />
           </PaginatorBtn>
