@@ -4,7 +4,18 @@ export const mainPageColors = Object.freeze({
   mainFontColor: '#FFFFFF',
   secondFontColor: '#3E85F3',
   accentBackground: '#DCEBF7',
-});
+  });
+// кольори сторінки реєстрації і логіну
+export const registerPageColors = Object.freeze({
+  mainBackground: '#dcebf7',
+  formColor: '#FFFFFF',
+  buttonColor: '#3e85f3', 
+  buttonHoverColor: '#2b78ef',
+  borderHoverColor: '#111111',
+  correctMessage: '#3cbc81',
+  errorMessage: ' #da1414;',
+  placeholderColor: '#dce3e5;'
+  });
 
 export const lightTheme = Object.freeze({
   mainFont: '#111111',

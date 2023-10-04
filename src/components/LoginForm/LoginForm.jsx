@@ -49,20 +49,21 @@ const LoginForm = () => {
 
   const handleSubmit = (values, { resetForm }) => {
     dispatch(logInUser(values))
-    .then(data => {
-      if (data.error) {
-        throw new Error();
-      };
-    }).catch(_ => {
-      if (error !== null) {
-        if (error.includes('401')) {
-          toast.error('User doesn`t exist.')
-        } else {
-          toast.error('Something went wrong.')
+      .then(data => {
+        if (data.error) {
+          throw new Error();
         }
-        return;
-      }
-    })
+      })
+      .catch(_ => {
+        if (error !== null) {
+          if (error.includes('401')) {
+            toast.error('Not valid email or password');
+          } else {
+            toast.error('Something went wrong.');
+          }
+          return;
+        }
+      });
     resetForm();
   };
 
@@ -90,8 +91,8 @@ const LoginForm = () => {
                       errors.email && touched.email
                         ? '#E74A3B'
                         : touched.email
-                          ? '#3CBC81'
-                          : '#111'
+                        ? '#3CBC81'
+                        : '#111'
                     }
                   >
                     Email
@@ -107,8 +108,8 @@ const LoginForm = () => {
                       errors.email && touched.email
                         ? ' 1px solid #E74A3B'
                         : touched.email
-                          ? '1px solid #3CBC81'
-                          : '1px solid rgba(220, 227, 229, 0.6)'
+                        ? '1px solid #3CBC81'
+                        : '1px solid rgba(220, 227, 229, 0.6)'
                     }
                   />
                   {errors.email && touched.email ? (
@@ -134,8 +135,8 @@ const LoginForm = () => {
                       errors.password && touched.password
                         ? '#E74A3B'
                         : touched.password
-                          ? '#3CBC81'
-                          : '#111'
+                        ? '#3CBC81'
+                        : '#111'
                     }
                   >
                     Password
@@ -151,8 +152,8 @@ const LoginForm = () => {
                       errors.password && touched.password
                         ? ' 1px solid #E74A3B'
                         : touched.password
-                          ? '1px solid #3CBC81'
-                          : '1px solid rgba(220, 227, 229, 0.6)'
+                        ? '1px solid #3CBC81'
+                        : '1px solid rgba(220, 227, 229, 0.6)'
                     }
                   />
                   {errors.password && touched.password ? (

@@ -54,18 +54,20 @@ const RegisterForm = () => {
     try {
       const res = await dispatch(registerUser(values));
       if (registerUser.fulfilled.match(res)) {
-        await dispatch(logInUser({
-          email: values.email,
-          password: values.password
-        }))
+        await dispatch(
+          logInUser({
+            email: values.email,
+            password: values.password,
+          })
+        );
       }
       resetForm();
     } catch (_) {
       if (error !== null) {
         if (error.includes('409')) {
-          toast.error('Email is already in use.')
+          toast.error('Email is already in use.');
         } else {
-          toast.error('Something went wrong.')
+          toast.error('Something went wrong.');
         }
         return;
       }
@@ -96,8 +98,8 @@ const RegisterForm = () => {
                       errors.name && touched.name
                         ? '#E74A3B'
                         : touched.name
-                          ? '#3CBC81'
-                          : '#111'
+                        ? '#3CBC81'
+                        : '#111'
                     }
                   >
                     Name
@@ -113,8 +115,8 @@ const RegisterForm = () => {
                       errors.name && touched.name
                         ? ' 1px solid #E74A3B'
                         : touched.name
-                          ? '1px solid #3CBC81'
-                          : '1px solid rgba(220, 227, 229, 0.6)'
+                        ? '1px solid #3CBC81'
+                        : '1px solid rgba(220, 227, 229, 0.6)'
                     }
                   />
                   {errors.name && touched.name ? (
@@ -135,8 +137,8 @@ const RegisterForm = () => {
                       errors.email && touched.email
                         ? '#E74A3B'
                         : touched.email
-                          ? '#3CBC81'
-                          : '#111'
+                        ? '#3CBC81'
+                        : '#111'
                     }
                   >
                     Email
@@ -152,8 +154,8 @@ const RegisterForm = () => {
                       errors.email && touched.email
                         ? ' 1px solid #E74A3B'
                         : touched.email
-                          ? '1px solid #3CBC81'
-                          : '1px solid rgba(220, 227, 229, 0.6)'
+                        ? '1px solid #3CBC81'
+                        : '1px solid rgba(220, 227, 229, 0.6)'
                     }
                   />
                   {errors.email && touched.email ? (
@@ -178,8 +180,8 @@ const RegisterForm = () => {
                       errors.password && touched.password
                         ? '#E74A3B'
                         : touched.password
-                          ? '#3CBC81'
-                          : '#111'
+                        ? '#3CBC81'
+                        : '#111'
                     }
                   >
                     Password
@@ -194,8 +196,8 @@ const RegisterForm = () => {
                       errors.password && touched.password
                         ? ' 1px solid #E74A3B'
                         : touched.password
-                          ? '1px solid #3CBC81'
-                          : '1px solid rgba(220, 227, 229, 0.6)'
+                        ? '1px solid #3CBC81'
+                        : '1px solid rgba(220, 227, 229, 0.6)'
                     }
                   />
                   {errors.password && touched.password ? (
