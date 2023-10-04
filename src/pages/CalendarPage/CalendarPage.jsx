@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Suspense, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { CalendarToolbar } from 'layout/CalendarToolbar/CalendarToolbar';
@@ -14,8 +14,15 @@ import {
   setMonth,
   getDaysInMonth,
 } from 'date-fns';
+import { useSelector } from 'react-redux';
+import { selectDay, selectMonth } from 'redux/selectors';
+import { Loader } from 'components/Loader/Loader';
 
 const CalendarPage = ({ updatePageName }) => {
+  const navigate = useNavigate();
+  const month = useSelector(selectMonth);
+  const day = useSelector(selectDay);
+
   useEffect(() => {
     updatePageName('Calendar');
   }, [updatePageName]);
@@ -23,8 +30,16 @@ const CalendarPage = ({ updatePageName }) => {
   const { currentDate } = useParams();
   const [periodType, setPeriodType] = useState('month');
   const [currentDateMonth] = useState(currentDate);
-  const [today, setToday] = useState(setMonth(new Date(), currentDateMonth));
-  console.log(today);
+  const [today, setToday] = useState(setMonth(new Date(), month));
+
+  useEffect(() => {
+    if (periodType === 'month') {
+      navigate(`/calendar/month/${month}`);
+    } else if (periodType === 'day') {
+      navigate(`/calendar/day/${day}`)
+    }
+  }, [navigate, month, day, periodType]);
+
   const chooseDay = () => {
     let startOfMonthDate = startOfMonth(today);
     let endOfMonthDate = endOfMonth(today);
@@ -81,8 +96,9 @@ const CalendarPage = ({ updatePageName }) => {
         today={today}
         currentDateMonth={currentDateMonth}
         periodType={periodType}
+        changePeriod={setPeriodType}
       />
-      <Suspense>
+      <Suspense fallback={<><Loader/></>}>
         <Outlet context={[startOfWeekDate, daysToAdd, today, setPeriodType]} />
       </Suspense>
     </>

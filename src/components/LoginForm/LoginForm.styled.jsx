@@ -22,7 +22,7 @@ export const FormContainer = styled.div`
     max-width: 480px;
     padding: 40px;
     margin-bottom: 24px;
-   }
+  }
 `;
 export const Title = styled.h1`
   color: ${registerPageColors.buttonColor};
@@ -48,6 +48,8 @@ export const LabelInput = styled.label`
 `;
 export const SpanInputEmail = styled.span`
   color: ${props => props.$errEmail};
+  font-family: 'Inter', sans-serif;
+  font-family: $form-font;
   font-size: 12px;
   font-weight: 600;
   line-height: normal;
@@ -83,13 +85,13 @@ export const EmailInput = styled(Field)`
   line-height: 18px;
 
   ::placeholder {
-    color:  ${registerPageColors.placeholderColor};
+    color: ${registerPageColors.placeholderColor};
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
   }
   &:hover {
-    border-color:${registerPageColors.borderHoverColor};
+    border-color: ${registerPageColors.borderHoverColor};
   }
   @media (min-width: 768px) {
     max-width: 400px;
@@ -99,7 +101,7 @@ export const EmailInput = styled(Field)`
     ::placeholder {
       font-size: 16px;
     }
-  
+  }
 `;
 export const PasswordInput = styled(Field)`
   border-radius: 8px;
@@ -111,10 +113,10 @@ export const PasswordInput = styled(Field)`
   padding-left: 8px;
 
   ::placeholder {
-    color:  ${registerPageColors.placeholderColor};
+    color: ${registerPageColors.placeholderColor};
     font-size: 14px;
     font-weight: 400;
-    line-height: 18px; 
+    line-height: 18px;
   }
   &:hover {
     border-color: ${registerPageColors.borderHoverColor};
@@ -127,10 +129,11 @@ export const PasswordInput = styled(Field)`
     font-size: 16px;
     ::placeholder {
       font-size: 16px;
-    }  
+    }
+  }
 `;
 export const ErrorMsg = styled.p`
-  color:${registerPageColors.errorMessage};
+  color: ${registerPageColors.errorMessage};
   font-size: 12px;
   font-weight: 400;
   line-height: 14px;
@@ -178,12 +181,12 @@ export const ButtonSubmit = styled.button`
   }
 `;
 export const IconButtonSubmitSpan = styled.span`
- display:flex;
- align-items: center;
+  display: flex;
+  align-items: center;
 `;
 export const IconButtonSubmit = styled.svg`
-stroke:  ${registerPageColors.formColor};
-fill: ${registerPageColors.buttonColor};
+  stroke: ${registerPageColors.formColor};
+  fill: ${registerPageColors.buttonColor};
   width: 18px;
   height: 18px;
   @media (min-width: 768px) {
@@ -203,30 +206,34 @@ export const Iconinput = styled.svg`
   }
 `;
 export const ButtonSignup = styled.button`
-  color:${registerPageColors.buttonColor};
+  color: ${registerPageColors.buttonColor};
   text-shadow: 0px 9.399999618530273px 57.6875px rgba(0, 0, 0, 0.04),
     0px 47px 355px rgba(0, 0, 0, 0.07);
   font-size: 12px;
   font-weight: 600;
   line-height: 14px;
   border: none;
-  background:  ${registerPageColors.mainBackground};
+  background: ${registerPageColors.mainBackground};
   margin-right: auto;
   margin-left: auto;
   cursor: pointer;
-  
-  background-image: linear-gradient(to right, currentColor 100%, currentColor 100%);
+
+  background-image: linear-gradient(
+    to right,
+    currentColor 100%,
+    currentColor 100%
+  );
   background-repeat: no-repeat;
   background-position: 0 100%;
   background-size: 100% 1px;
   color: ${registerPageColors.buttonColor};
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  
+
   &:hover {
-    color:${registerPageColors.buttonHoverColor};
+    color: ${registerPageColors.buttonHoverColor};
   }
 
-    @media (min-width: 768px) {
+  @media (min-width: 768px) {
     font-size: 18px;
     line-height: 24px;
   }
@@ -243,5 +250,3 @@ export const GusContainer = styled.div`
     visibility: visible;
   }
 `;
-
-

@@ -8,7 +8,8 @@ export const PeriodBtnWrapper = styled.div`
 `;
 export const PeriodBtn = styled(NavLink)`
   &:hover,
-  &:focus {
+  &:focus,
+  &.active {
     background-color: ${props => props.theme.periodTypeBackgroundOutline};
     color: ${props => props.theme.periodTypeTextOutline};
   }

@@ -6,6 +6,7 @@ padding-left: 20px;
 padding-right: 20px;
 max-width: 375px;
 margin: 0 auto;
+height: 100%;
 ${media('tablet', '')`
     max-width: 768px;
     padding-left: 32px;
