@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { ReactComponent as Plus } from '../../assets/icons/plus.svg';
 
 const TaskFormWrapper = styled.div`
   font-family: Inter, sans-serif;
@@ -170,6 +171,14 @@ span.Check {
 }
 
 
+span.button-content {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  gap: 4px;
+  }
+
+
 
 
 `;
@@ -181,5 +190,12 @@ const TimeDiv = styled.div`
   gap: 15px;
 
 `;
+
+
+export const AddIcon = styled(Plus)`
+stroke: ${props => props.theme.btnTextColor};
+width: 20px;
+height: 20px;
+` 
 
 export { TaskFormWrapper, TimeDiv };
