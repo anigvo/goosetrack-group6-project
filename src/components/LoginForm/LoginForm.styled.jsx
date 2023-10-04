@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Field } from 'formik';
 import { registerPageColors } from 'utils/colors';
+// import { NavLink } from 'react-router-dom';
 
 export const MainContainer = styled.div`
   display: flex;
@@ -201,7 +202,6 @@ export const Iconinput = styled.svg`
     height: 32px;
   }
 `;
-
 export const ButtonSignup = styled.button`
   color:${registerPageColors.buttonColor};
   text-shadow: 0px 9.399999618530273px 57.6875px rgba(0, 0, 0, 0.04),
@@ -215,7 +215,6 @@ export const ButtonSignup = styled.button`
   margin-left: auto;
   cursor: pointer;
   
-
   background-image: linear-gradient(to right, currentColor 100%, currentColor 100%);
   background-repeat: no-repeat;
   background-position: 0 100%;
