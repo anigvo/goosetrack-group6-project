@@ -18,10 +18,10 @@ export const initialState = {
 
 export const handleRejected = (state, action) => {
     state.error = action.payload;
-    state.isLoading = false;
+    state.isLoadingAuth = false;
 }
 
 
-export const handlePending = (state, action) => {
+export const handlePending = state => {
     state.isLoadingAuth = true;
 }

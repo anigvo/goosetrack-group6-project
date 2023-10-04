@@ -18,7 +18,6 @@ import {
 import { useSelector } from 'react-redux';
 import { selectDay, selectMonth } from 'redux/selectors';
 import { Loader } from 'components/Loader/Loader';
-
 const CalendarPage = ({ updatePageName }) => {
   const navigate = useNavigate();
   const month = useSelector(selectMonth);
