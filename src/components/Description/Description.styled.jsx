@@ -54,6 +54,7 @@ export const FeatureTitle = styled.h2`
   margin-bottom: 14px;
   line-height: 1.25;
   text-transform: uppercase;
+  color: #171820;
 
   @media screen and (min-width: 375px) {
     font-size: 32px;
