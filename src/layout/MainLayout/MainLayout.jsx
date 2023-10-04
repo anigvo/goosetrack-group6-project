@@ -5,6 +5,7 @@ import { Outlet } from "react-router-dom";
 import { LayoutWrapper, MainContent, OutletWrapper } from "./MainLayout.styled";
 import { useMediaQuery } from "hooks/useMediaQuery";
 import { AnimatePresence } from "framer-motion";
+import { Loader } from "components/Loader/Loader";
 
 const MainLayout = ({ pageName }) => {
     const [isOpenSidebar, setIsOpenSidebar] = useState(false);
@@ -30,7 +31,7 @@ const MainLayout = ({ pageName }) => {
             <MainContent>
                 <Header openMethod={openSidebar} title={pageName} />
                 <OutletWrapper>
-                    <Suspense fallback={<></>}>
+                    <Suspense fallback={<><Loader/></>}>
                         <Outlet />
                     </Suspense>
                 </OutletWrapper>

@@ -18,7 +18,7 @@ position: relative;
 `;
 
 export const OtherOptions = styled(motion.div)`
-    background-color: ${props => props.theme.calendarBackground};
+    background-color: ${props => props.theme.taskBackground};
     border-radius: 8px;
     padding: 14px;
     position: absolute;

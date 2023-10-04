@@ -10,6 +10,7 @@ import {
 } from 'redux-persist';
 import { authReducer } from './auth/authSlice';
 import { themeReducer } from './theme/slice';
+import { tasksReducer } from './tasks/tasksSlice';
 
 const middlewares = {
   serializableCheck: {
@@ -20,6 +21,7 @@ const middlewares = {
 const reducers = combineReducers({
   theme: themeReducer,
   auth: authReducer,
+  tasks: tasksReducer
 });
 
 export const store = configureStore({

@@ -8,6 +8,7 @@ export const CalendarToolbar = ({
   today,
   currentDateMonth,
   periodType,
+  changePeriod
 }) => {
 
   return (
@@ -18,7 +19,7 @@ export const CalendarToolbar = ({
         today={today}
         periodType={periodType}
       />
-      <PeriodTypeSelect currentDateMonth={currentDateMonth} />
+      <PeriodTypeSelect currentDateMonth={currentDateMonth} changePeriod={changePeriod}/>
     </CalendarToolbarContainer>
   );
 };

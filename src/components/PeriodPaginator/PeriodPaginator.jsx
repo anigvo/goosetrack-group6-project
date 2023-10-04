@@ -7,6 +7,8 @@ import {
   PeriodPaginatorContainer,
   PaginatorBtnWrapper,
 } from './PeriodPaginator.styled';
+import { useDispatch } from 'react-redux';
+import { setCurrentDay, setCurrentMonth } from 'redux/tasks/tasksSlice';
 
 export const PeriodPaginator = ({
   prevHandler,
@@ -14,12 +16,12 @@ export const PeriodPaginator = ({
   today,
   periodType,
 }) => {
-
+  const dispatch = useDispatch();
   const [selectedDate, setSelectedDate] = useState(new Date(today));
-  const [filterDay, setFilterDay] = useState(selectedDate.getDay());
+  const [filterDay, setFilterDay] = useState(selectedDate.getDate());
   const [filterMonth, setFilterMonth] = useState(selectedDate.getMonth());
   const [filterYear, setFilterYear] = useState(selectedDate.getFullYear());
-  const currentDay = new Date().getDay();
+  const currentDay = new Date().getDate();
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
 
@@ -30,6 +32,7 @@ export const PeriodPaginator = ({
     setFilterMonth(prevMonthDate.getMonth());
     setFilterYear(prevMonthDate.getFullYear());
     prevHandler();
+    dispatch(setCurrentMonth(prevMonthDate.getMonth()))
   };
 
   const handleNextMonth = () => {
@@ -39,6 +42,7 @@ export const PeriodPaginator = ({
     setFilterMonth(nextMonthDate.getMonth());
     setFilterYear(nextMonthDate.getFullYear());
     nextHandler();
+    dispatch(setCurrentMonth(nextMonthDate.getMonth()))
   };
 
   const handlePrevDay = () => {
@@ -46,6 +50,8 @@ export const PeriodPaginator = ({
     prevDayDate.setDate(prevDayDate.getDate() - 1);
     setSelectedDate(prevDayDate);
     setFilterMonth(prevDayDate.getMonth());
+    // setFilterDay(prevDayDate.getDate());
+    dispatch(setCurrentDay(prevDayDate.getDate()));
     prevHandler();
   };
   const handleNextDay = () => {
@@ -53,7 +59,9 @@ export const PeriodPaginator = ({
     nextDayDate.setDate(nextDayDate.getDate() + 1);
     setSelectedDate(nextDayDate);
     setFilterMonth(nextDayDate.getMonth());
+    // setFilterDay(nextDayDate.getDate())
     nextHandler();
+    dispatch(setCurrentDay(nextDayDate.getDate()));
   };
 
   return (
