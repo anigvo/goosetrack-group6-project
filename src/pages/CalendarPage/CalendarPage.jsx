@@ -16,6 +16,7 @@ import {
 } from 'date-fns';
 import { useSelector } from 'react-redux';
 import { selectDay, selectMonth } from 'redux/selectors';
+import { Loader } from 'components/Loader/Loader';
 
 const CalendarPage = ({ updatePageName }) => {
   const navigate = useNavigate();
@@ -97,7 +98,7 @@ const CalendarPage = ({ updatePageName }) => {
         periodType={periodType}
         changePeriod={setPeriodType}
       />
-      <Suspense>
+      <Suspense fallback={<><Loader/></>}>
         <Outlet context={[startOfWeekDate, daysToAdd, today, setPeriodType]} />
       </Suspense>
     </>

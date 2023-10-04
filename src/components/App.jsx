@@ -15,6 +15,7 @@ import { PublicRoute } from './Routes/PublicRoute';
 import { PrivateRoute } from './Routes/PrivateRoute';
 import { Toaster } from 'react-hot-toast';
 import { refreshUser } from 'redux/auth/operations';
+import { Loader } from './Loader/Loader';
 
 const AccountPage = lazy(() => import('../pages/AccountPage/AccountPage'));
 const CalendarPage = lazy(() => import('../pages/CalendarPage/CalendarPage'));
@@ -26,7 +27,7 @@ const ChoosedMonth = lazy(() => import('../layout/ChoosedMonth/ChoosedMonth'));
 
 export const App = () => {
   const [pageName, setPageName] = useState(null);
-  const { isRefreshing } = useAuth();
+  const { isRefreshing, isLoadingAuth } = useAuth();
   const dispatch = useDispatch();
   const theme = useSelector(selectTheme);
 
@@ -40,7 +41,7 @@ export const App = () => {
 
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-      {isRefreshing ? <p>Loading...</p> :
+      {isRefreshing || isLoadingAuth ? <Loader/> :
         (<Routes>
           <Route path='/'>
             <Route

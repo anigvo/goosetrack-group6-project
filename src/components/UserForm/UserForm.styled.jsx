@@ -248,7 +248,7 @@ export const Button = styled.button`
     ${media('tablet', '')`
         width: 262px;
         height: 48px; 
-    `}
+    `};
     
     :hover,
     :focus {

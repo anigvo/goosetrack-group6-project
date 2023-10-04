@@ -18,6 +18,7 @@ export const lightTheme = Object.freeze({
   // фон для всіх сторінок з mainlayout
   oddBackground: '#FFFFFF',
   // кольори сторінки юзера
+  userAvatarBackground: '#FFFFFF',
   userAvatarBorder: '#3E85F3',
   userAvatarInsideBackground: '#F8F8F8',
   userNameTextColor: '#343434',
@@ -144,7 +145,7 @@ export const darkTheme = Object.freeze({
   periodTypeBackgroundOutline: '#3E85F3',
   periodTypeBorderline: '#3E85F333',
   // сторінка calendar/day
-  taskBackground: '#17182',
+  taskBackground: '#171820',
   taskBorderColor: 'rgba(255, 255, 255, 0.15)',
   taskPriorityTextColor: '#FFF',
   taskScrollBarBackground: '#171820',

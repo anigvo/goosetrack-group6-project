@@ -8,7 +8,6 @@ export const BoxUserProfile = styled.div`
     max-width: 335px;    
     padding: 59px 18px 40px 18px;    
     background-color: ${props => props.theme.userAvatarBackground};
-    border: 1px solid #111;
     border-radius: 16px;
     gap: 40px;
     width: 100%;
