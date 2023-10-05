@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import CustomModal from "../Modal/Modal";
 import FeedbackForm from "../FeedbackForm/FeedbackForm";
 import ReactDOM from "react-dom";
@@ -15,7 +15,7 @@ const AddFeedbackModal = ({ isOpen, onClose }) => {
   const [userHasReview, setUserHasReview] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleUpdateStyles = (editing) => {
+  const handleUpdateStyles = useCallback((editing) => {
     setModalStyles((prevStyles) => {
       if (editing) {
         return {
@@ -34,7 +34,7 @@ const AddFeedbackModal = ({ isOpen, onClose }) => {
         };
       }
     });
-  };
+  }, [userHasReview]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -66,7 +66,7 @@ const AddFeedbackModal = ({ isOpen, onClose }) => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [userHasReview, isEditing]);
+  }, [userHasReview, isEditing, handleUpdateStyles]);
 
   const handleUserReviewStatus = (hasReview) => {
     setUserHasReview(hasReview);
