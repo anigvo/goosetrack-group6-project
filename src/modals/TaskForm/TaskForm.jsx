@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TaskFormWrapper, TimeDiv } from './TaskForm.styled';
+import { TaskFormWrapper, TimeDiv, AddIcon } from './TaskForm.styled';
 
 function TaskForm({ taskToEdit, closeModal }) {
   const [formData, setFormData] = useState({
@@ -108,21 +108,21 @@ function TaskForm({ taskToEdit, closeModal }) {
     return true;
   };
 
-  const togglePriority = (value) => {
-    const { priority } = formData;
+  // const togglePriority = (value) => {
+  //   const { priority } = formData;
 
-    if (priority.includes(value)) {
-      setFormData((prevData) => ({
-        ...prevData,
-        priority: prevData.priority.filter((item) => item !== value),
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        priority: [...prevData.priority, value],
-      }));
-    }
-  };
+  //   if (priority.includes(value)) {
+  //     setFormData((prevData) => ({
+  //       ...prevData,
+  //       priority: prevData.priority.filter((item) => item !== value),
+  //     }));
+  //   } else {
+  //     setFormData((prevData) => ({
+  //       ...prevData,
+  //       priority: [...prevData.priority, value],
+  //     }));
+  //   }
+  // };
 
   return (
     <TaskFormWrapper>
@@ -200,7 +200,7 @@ function TaskForm({ taskToEdit, closeModal }) {
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', gap: '15px', marginTop: '10px' }}>
           <button className="addBtn" type="submit">
-            {formData.isEditing ? 'Edit' : '+ Add'}
+            {formData.isEditing ? 'Edit' : <span className="button-content"><AddIcon /> Add</span>}
           </button>
           <button className="cancelBtn" type="button" onClick={closeModal}>
             Cancel

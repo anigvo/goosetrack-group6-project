@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CustomModal from "../Modal/Modal";
 import FeedbackForm from "../FeedbackForm/FeedbackForm";
+import ReactDOM from "react-dom";
 
 const AddFeedbackModal = ({ isOpen, onClose }) => {
   const [modalStyles, setModalStyles] = useState({
@@ -40,10 +41,11 @@ const AddFeedbackModal = ({ isOpen, onClose }) => {
     };
   }, []);
 
-  return (
+  return isOpen && ReactDOM.createPortal(
     <CustomModal customStyles={modalStyles} isOpen={isOpen} onClose={onClose}>
       <FeedbackForm onCancel={onClose} />
-    </CustomModal>
+    </CustomModal>,
+    document.getElementById('modal-root')
   );
 };
 

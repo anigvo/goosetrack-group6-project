@@ -93,6 +93,9 @@ export const SignupLink = styled(NavLink)`
   background-size: 100% 1px;
   color: ${mainPageColors.mainFontColor};
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  @media screen and (min-width: 768px) {
+    font-size: 14px;
+  }
   &:hover{
       box-shadow: 4px 2px 16px 0px #88A5BF7A;
   }

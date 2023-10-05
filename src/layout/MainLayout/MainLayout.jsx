@@ -30,7 +30,7 @@ const MainLayout = ({ pageName }) => {
             <MainContent>
                 <Header openMethod={openSidebar} title={pageName} />
                 <OutletWrapper>
-                    <Suspense fallback={<></>}>
+                    <Suspense>
                         <Outlet />
                     </Suspense>
                 </OutletWrapper>

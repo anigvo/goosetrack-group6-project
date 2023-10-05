@@ -29,7 +29,7 @@ const Description = () => {
             </div>
             <FeatureImg>
               <source
-                  srcset={`${image1} 375w,
+                  srcSet={`${image1} 375w,
                           ${image1Tablet} 768w,
                           ${image1Desktop} 1440w`}
                   sizes="(max-width: 768px) 375px,
@@ -52,7 +52,7 @@ const Description = () => {
             </div>
             <FeatureImg>
               <source
-                  srcset={`${image2} 375w,
+                  srcSet={`${image2} 375w,
                           ${image2Tablet} 768w,
                           ${image2Desktop} 1440w`}
                   sizes="(max-width: 768px) 375px,
@@ -77,7 +77,7 @@ const Description = () => {
             </div>
             <FeatureImg>
               <source
-                  srcset={`${image3} 375w,
+                  srcSet={`${image3} 375w,
                           ${image3Tablet} 768w,
                           ${image3Desktop} 1440w`}
                   sizes="(max-width: 768px) 375px,
