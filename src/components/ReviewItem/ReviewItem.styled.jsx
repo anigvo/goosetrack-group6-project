@@ -5,6 +5,7 @@ export const ReviewItemStyled = styled.div`
   border: 1px solid #1111111A;
   border-radius: 8px;
   display: inline-block;
+  width: 100%;
   max-width: 580px;
 `;
 

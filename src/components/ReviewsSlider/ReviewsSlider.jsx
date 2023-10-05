@@ -2,60 +2,78 @@ import ReviewItem from 'components/ReviewItem/ReviewItem';
 import { NextIconArrow, PrevIconArrow, ReviewSection, ReviewSectionHeader } from './ReviewsSlider.styled';
 import { Navigation, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useEffect, useRef, useState } from 'react';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import './swiper.css';
+import { getAll } from 'api/reviews';
+
 
 const ReviewSlider = () => { 
+
+  const [reviews, setreviews] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+          const data = await getAll();
+          setreviews(data);
+        }
+       catch (e){
+        console.log(e);
+      }
+    })();
+  }, [])
   
-  let swiperInstance;
+  const swiperInstance = useRef(null);
 
   const slidePrev = () => {
-    if (swiperInstance) {
-      swiperInstance.slidePrev();
+    if (swiperInstance.current) {
+      swiperInstance.current.slidePrev();
     }
   };
 
   const slideNext = () => {
-    if (swiperInstance) {
-      swiperInstance.slideNext();
+    if (swiperInstance.current) {
+      swiperInstance.current.slideNext();
     }
   };
+
 
   return (
     <ReviewSection>
       <ReviewSectionHeader>Reviews</ReviewSectionHeader>
-      <Swiper
-        modules={[Navigation, Autoplay]}
-        spaceBetween={24}
-        slidesPerView={1}
-        loop={true}
-        speed={1000}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
-        breakpoints={{
-          1440: {
-            slidesPerView: 2,
-          },
-        }}
-        onSwiper={(swiper) => {
-          swiperInstance = swiper;
-        }}
-      >
-      <SwiperSlide><ReviewItem name="Olena Doe" comment="Wow, the developer of this page is incredibly good, and the reviews change so beautifully and smoothly, he must also be very handsome" rate={5} /></SwiperSlide>
-      <SwiperSlide><ReviewItem name="Olena Doe" comment="GooseTrack is impressive, the calendar view and filter options make it easy to stay organized and focused. Highly recommended." rate={4} /></SwiperSlide>
-      <SwiperSlide><ReviewItem name="Olena Doe" comment="Wow, the developer of this page is incredibly good, and the reviews change so beautifully and smoothly, he must also be very handsome" rate={3} /></SwiperSlide>
-      <SwiperSlide><ReviewItem name="Olena Doe" comment="GooseTrack is impressive, the calendar view and filter options make it easy to stay organized and focused. Highly recommended." rate={2} /></SwiperSlide>
-    </Swiper>
+      {reviews.length && <>
+        <Swiper
+          modules={[Navigation, Autoplay]}
+          spaceBetween={24}
+          slidesPerView={1}
+          loop={true}
+          speed={1000}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          breakpoints={{
+            1440: {
+              slidesPerView: 2,
+            },
+          }}
+          onSwiper={(swiper) => {
+            swiperInstance.current = swiper;
+          }}
+        >
+          {reviews.map(review => <SwiperSlide key={review.avatarURL}><ReviewItem name={review.name} comment={review.comment} rate={review.rating} avatar={review.avatarURL} /></SwiperSlide>)}
+        
+        </Swiper>
       
-    <div>
-        <PrevIconArrow onClick={slidePrev} alt="previous slide" />
-        <NextIconArrow onClick={slideNext} alt="next slide" />
-    </div>
-      
+        <div>
+          <PrevIconArrow onClick={slidePrev} alt="previous slide" />
+          <NextIconArrow onClick={slideNext} alt="next slide" />
+        </div>
+      </> 
+      }
     </ReviewSection>
   )
 }
