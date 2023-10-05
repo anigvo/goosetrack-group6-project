@@ -249,6 +249,19 @@ export const Iconinput = styled.svg`
     height: 32px;
 `;
 
+export const PasswordVisibilityIcon = styled.span`
+  position: absolute;
+  top: 75%;
+  right: 60px;
+  transform: translateY(-50%);
+  cursor: pointer;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+`;
+
 export const ButtonSignup = styled.button`
   color:${registerPageColors.buttonColor};
   text-shadow: 0px 9.399999618530273px 57.6875px rgba(0, 0, 0, 0.04),
