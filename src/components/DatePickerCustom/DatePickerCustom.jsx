@@ -111,7 +111,10 @@ export const DatePickerCustom = ({
       onChange={handleDateChange}
       onMonthChange={handleMonthChange}
       onSelect={handleDateClick}
+      closeOnScroll={true}
       locale="en-GB"
+      filterDate={filterDate}
+      renderCustomHeader={customHeader}
       customInput={
         <CalendarBtn type="button">
           {selectedDate.toLocaleDateString('en-GB', {
@@ -120,8 +123,6 @@ export const DatePickerCustom = ({
           })}
         </CalendarBtn>
       }
-      filterDate={filterDate}
-      renderCustomHeader={customHeader}
     />
   );
 };
