@@ -33,9 +33,8 @@ export const PeriodPaginator = ({
   const currentYear = new Date().getFullYear();
 
   useEffect(() => {
-    console.log(selectedDate);
-    console.log(periodType);
-  });
+    setSelectedDate(today);
+  }, [today]);
 
   const handlePrevMonth = () => {
     const prevMonthDate = new Date(selectedDate);
@@ -61,9 +60,7 @@ export const PeriodPaginator = ({
     const prevDayDate = new Date(selectedDate);
     prevDayDate.setDate(prevDayDate.getDate() - 1);
     setSelectedDate(prevDayDate);
-
     setFilterMonth(prevDayDate.getMonth());
-
     setLastDayOfMonth(
       new Date(prevDayDate.getFullYear(), prevDayDate.getMonth() + 1, 0)
     );
@@ -75,7 +72,6 @@ export const PeriodPaginator = ({
     const nextDayDate = new Date(selectedDate);
     nextDayDate.setDate(nextDayDate.getDate() + 1);
     setSelectedDate(nextDayDate);
-
     setFilterMonth(nextDayDate.getMonth());
     setLastDayOfMonth(
       new Date(nextDayDate.getFullYear(), nextDayDate.getMonth() + 1, 0)

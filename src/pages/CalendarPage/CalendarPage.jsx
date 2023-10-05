@@ -38,7 +38,7 @@ const CalendarPage = ({ updatePageName }) => {
     } else if (periodType === 'day') {
       navigate(`/calendar/day/${day}`);
     }
-  }, [navigate, month, day, periodType]);
+  }, [navigate, periodType, day, month]);
 
   const chooseDay = () => {
     let startOfMonthDate = startOfMonth(today);
@@ -82,21 +82,23 @@ const CalendarPage = ({ updatePageName }) => {
 
   const prevHandler = () => {
     if (periodType === 'month') {
-      return setToday(prev => addMonths(prev, -1));
+      setToday(prev => addMonths(prev, -1));
+    } else {
+      setToday(prev => addDays(prev, -1));
     }
-    return setToday(prev => addDays(prev, -1));
   };
 
   const nextHandler = () => {
     if (periodType === 'month') {
-      return setToday(prev => addMonths(prev, 1));
+      setToday(prev => addMonths(prev, 1));
+    } else {
+      setToday(prev => addDays(prev, 1));
     }
-    return setToday(prev => addDays(prev, 1));
   };
 
-  const pickHandler = (date) => { 
-    return setToday(date);
-  }
+  const pickHandler = date => {
+    setToday(date);
+  };
 
   return (
     <>
@@ -117,7 +119,15 @@ const CalendarPage = ({ updatePageName }) => {
           </>
         }
       >
-        <Outlet context={[startOfWeekDate, daysToAdd, today, setPeriodType]} />
+        <Outlet
+          context={[
+            startOfWeekDate,
+            daysToAdd,
+            today,
+            setPeriodType,
+            pickHandler,
+          ]}
+        />
       </Suspense>
     </>
   );
