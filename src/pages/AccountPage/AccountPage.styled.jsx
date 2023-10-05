@@ -8,7 +8,6 @@ export const BoxUserProfile = styled.div`
     max-width: 335px;    
     padding: 59px 18px 40px 18px;    
     background-color: ${props => props.theme.userAvatarBackground};
-    border: 1px solid #111;
     border-radius: 16px;
     gap: 40px;
     width: 100%;
@@ -21,7 +20,7 @@ export const BoxUserProfile = styled.div`
     `}
     ${media('desktop', '')`        
         max-width: 1087px;
-        max-hight: 752px;
+        max-height: 752px;
         
         gap: 44px;
         padding: 60px 165px;
