@@ -20,7 +20,7 @@ export const BoxUserProfile = styled.div`
     `}
     ${media('desktop', '')`        
         max-width: 1087px;
-        max-hight: 752px;
+        max-height: 752px;
         
         gap: 44px;
         padding: 60px 165px;
