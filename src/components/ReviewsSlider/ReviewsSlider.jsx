@@ -1,5 +1,5 @@
 import ReviewItem from 'components/ReviewItem/ReviewItem';
-import { NextIconArrow, PrevIconArrow, ReviewSection, ReviewSectionHeader } from './ReviewsSlider.styled';
+import { MissedReviewsMessage, NextIconArrow, PrevIconArrow, ReviewSection, ReviewSectionHeader } from './ReviewsSlider.styled';
 import { Navigation, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useEffect, useRef, useState } from 'react';
@@ -18,6 +18,7 @@ const ReviewSlider = () => {
     (async () => {
       try {
           const data = await getAll();
+          console.log(data)
           setreviews(data);
         }
        catch (e){
@@ -44,7 +45,7 @@ const ReviewSlider = () => {
   return (
     <ReviewSection>
       <ReviewSectionHeader>Reviews</ReviewSectionHeader>
-      {reviews.length && <>
+      {reviews.length ? <>
         <Swiper
           modules={[Navigation, Autoplay]}
           spaceBetween={24}
@@ -72,7 +73,7 @@ const ReviewSlider = () => {
           <PrevIconArrow onClick={slidePrev} alt="previous slide" />
           <NextIconArrow onClick={slideNext} alt="next slide" />
         </div>
-      </> 
+      </> : <MissedReviewsMessage>Here can be your review, just sign up and express your thoughts about our service ;)</MissedReviewsMessage>
       }
     </ReviewSection>
   )
