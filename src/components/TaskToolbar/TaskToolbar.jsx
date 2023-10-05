@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ArrowIcon, Option, Options, OtherOptions, PencilIcon, Tool, ToolList, TrashIcon } from "./TaskToolbar.styled";
 import { nanoid } from "@reduxjs/toolkit";
 import { AnimatePresence } from "framer-motion";
+import TaskModal from "modals/TaskModal/TaskModal";
 
 const toolVar = {
     initial: { opacity: 0 },
@@ -9,8 +10,9 @@ const toolVar = {
     exit: { opacity: 0 }
 }
 
-export const TaskToolbar = ({ currentGroup }) => {
+export const TaskToolbar = ({ currentGroup, id }) => {
     const [isOpenOptions, setIsOpenOptions] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const allGroups = ['To do', 'In progress', 'Done'];
     const indexOfCurrentGroup = allGroups.indexOf(currentGroup)
@@ -18,6 +20,8 @@ export const TaskToolbar = ({ currentGroup }) => {
 
     const toggleOptions = () => setIsOpenOptions(prevState => !prevState);
 
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
     return (<ToolList>
         <Tool key={'change priority'} onClick={toggleOptions}>
             <ArrowIcon />
@@ -35,11 +39,13 @@ export const TaskToolbar = ({ currentGroup }) => {
                     </OtherOptions>}
             </AnimatePresence>
         </Tool>
-        <Tool key={'edit'}>
+        <Tool key={'edit'} onClick={openModal}>
             <PencilIcon />
         </Tool>
         <Tool key={'delete'}>
             <TrashIcon />
         </Tool>
+        {/* додала в пропси айді щоб можна було усередині робити фетч */}
+        {isModalOpen && <TaskModal isOpen={isModalOpen} onClose={closeModal} id={id}/>}
     </ToolList>)
 };
