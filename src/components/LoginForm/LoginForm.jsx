@@ -1,9 +1,8 @@
 import { Formik, Form, ErrorMessage } from 'formik';
 import { object, string } from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-// import { useMediaQuery } from 'hooks/useMediaQuery';
 import { useNavigate } from 'react-router-dom';
-
+// import { FiEye, FiEyeOff } from 'react-icons/fi';
 import {
   MainContainer,
   FormContainer,
@@ -147,7 +146,7 @@ const LoginForm = () => {
                     type="password"
                     name="password"
                     id={passwdid}
-                    placeholder="******"
+                    placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                     $errPass={
                       errors.password && touched.password
                         ? ' 1px solid #E74A3B'

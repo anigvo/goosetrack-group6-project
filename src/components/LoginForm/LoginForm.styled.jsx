@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Field } from 'formik';
 import { registerPageColors } from 'utils/colors';
-// import { NavLink } from 'react-router-dom';
+
 
 export const MainContainer = styled.div`
   display: flex;
