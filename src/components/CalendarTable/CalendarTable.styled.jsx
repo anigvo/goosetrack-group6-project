@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-
+import { media } from 'utils/queries';
 export const СalendarGrid = styled.ul`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -10,16 +10,24 @@ export const СalendarGrid = styled.ul`
 `;
 
 export const CalendarItem = styled.li`
-  min-width: 150px;
-  min-height: 125px;
   background-color: ${props => props.theme.calendarBackground};
   list-style: none;
   color: ${props => props.theme.calendarTextColor};
+  padding: 4px 8px;
+  font-size: 12px;
+  line-height: 1.16;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  height: 83px;
+  ${media('tablet', '')`
+height: 130px;
   padding: 14px;
   font-size: 16px;
   line-height: 1.15;
-  font-weight: 700;
-  font-family: 'Inter', sans-serif;
+    `}
+  ${media('desktop', '')`
+height: 112px;
+    `}
 `;
 export const CalendarTask = styled.div`
   justify-content: flex-start;
@@ -38,12 +46,18 @@ export const CalendarDay = styled.div`
     props.isCurrentDay
       ? props.theme.btnBackgroundColor
       : props.theme.calendarBackground};
-  width: 27px;
-  height: 26px;
-  border-radius: 8px;
-  padding: 4px 8px;
+  width: 20px;
+  height: 22px;
+  border-radius: 6px;
+  padding: 4px 6px;
   color: ${props =>
     props.isCurrentDay
       ? props.theme.btnTextColor
       : props.theme.calendarTextColor};
+  ${media('desktop', '')`
+  width: 27px;
+  height: 26px;
+  padding: 4px 8px;
+    border-radius: 8px;
+    `}
 `;
