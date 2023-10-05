@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { TaskFormWrapper, TimeDiv, AddIcon } from './TaskForm.styled';
+import { createTask, updateTask } from '../../api/tasks';
 
-function TaskForm({ taskToEdit, closeModal }) {
+function TaskForm({ taskToEdit, onCancel }) {
   const [formData, setFormData] = useState({
     title: '',
     start: '09:00',
@@ -11,6 +12,24 @@ function TaskForm({ taskToEdit, closeModal }) {
     category: 'to-do',
     isEditing: false,
   });
+
+
+  const fetchCurrentDate = () => {
+    fetch('http://worldclockapi.com/api/json/utc/now')
+      .then((response) => response.json())
+      .then((data) => {
+        const currentDate = new Date(data.currentDateTime);
+        const formattedDate = currentDate.toISOString().split('T')[0];
+        setFormData((prevData) => ({
+          ...prevData,
+          date: formattedDate,
+        }));
+      })
+      .catch((error) => {
+        console.error('Error fetching current date:', error);
+      });
+  };
+
 
   useEffect(() => {
     if (taskToEdit) {
@@ -25,6 +44,9 @@ function TaskForm({ taskToEdit, closeModal }) {
         isEditing: true,
       });
     }
+
+    fetchCurrentDate();
+
   }, [taskToEdit]);
 
   const handleChange = (event) => {
@@ -61,20 +83,40 @@ function TaskForm({ taskToEdit, closeModal }) {
     }));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  
 
-    if (!validateForm()) {
-      return;
-    }
+ const handleSubmit = async (event) => {
+  event.preventDefault();
 
-    // const { title, start, end, priority, date, category } = formData;
+  if (!validateForm()) {
+    return;
+  }
 
-    if (formData.isEditing) {
-    } else {
-    }
+  const taskData = {
+    title: formData.title,
+    start: formData.start,
+    end: formData.end,
+    priority: formData.priority,
+    date: formData.date, 
+    category: formData.category,
   };
 
+  if (formData.isEditing) {
+    try {
+      await updateTask(taskData, taskToEdit.id);
+      onCancel();
+    } catch (error) {
+      console.error('Error updating task:', error);
+    }
+  } else {
+    try {
+      await createTask(taskData);
+      onCancel();
+    } catch (error) {
+      console.error('Error creating task:', error);
+    }
+  }
+};
   const validateForm = () => {
     const { title, start, end, priority, date, category } = formData;
 
@@ -95,6 +137,7 @@ function TaskForm({ taskToEdit, closeModal }) {
     }
 
     const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+
     if (!date.match(dateRegex)) {
       alert('Некоректний формат дати');
       return false;
@@ -107,22 +150,6 @@ function TaskForm({ taskToEdit, closeModal }) {
 
     return true;
   };
-
-  // const togglePriority = (value) => {
-  //   const { priority } = formData;
-
-  //   if (priority.includes(value)) {
-  //     setFormData((prevData) => ({
-  //       ...prevData,
-  //       priority: prevData.priority.filter((item) => item !== value),
-  //     }));
-  //   } else {
-  //     setFormData((prevData) => ({
-  //       ...prevData,
-  //       priority: [...prevData.priority, value],
-  //     }));
-  //   }
-  // };
 
   return (
     <TaskFormWrapper>
@@ -202,7 +229,7 @@ function TaskForm({ taskToEdit, closeModal }) {
           <button className="addBtn" type="submit">
             {formData.isEditing ? 'Edit' : <span className="button-content"><AddIcon /> Add</span>}
           </button>
-          <button className="cancelBtn" type="button" onClick={closeModal}>
+          <button className="cancelBtn" type="button" onClick={onCancel}>
             Cancel
           </button>
         </div>

@@ -48,6 +48,7 @@ const FeedbackFormWrapper = styled.div`
     font-size: 14px;
     color: ${props => props.theme.userNameTextColor}; 
     font-weight: 600;
+    outline: none;
 
     @media (min-width: 767px) {
       width: 404px;

@@ -43,20 +43,20 @@ const AddFeedbackModal = ({ isOpen, onClose }) => {
         const newModalStyles = {
           maxWidth: "468px",
           minWidth: "468px",
+          maxHeight: isEditing ? "350px" : (userHasReview ? "294px" : "340px"),
+          minHeight: isEditing ? "350px" : (userHasReview ? "294px" : "340px"),
           padding: "30px",
         };
-        
-        if (isEditing) {
-          newModalStyles.maxHeight = "350px";
-          newModalStyles.minHeight = "350px";
-        } else {
-          newModalStyles.maxHeight = userHasReview ? "294px" : "340px";
-          newModalStyles.minHeight = userHasReview ? "294px" : "340px";
-        }
-  
         setModalStyles(newModalStyles);
       } else {
-        handleUpdateStyles(false);
+        const newModalStyles = {
+          maxWidth: "335px",
+          minWidth: "335px",
+          maxHeight: isEditing ? "350px" : (userHasReview ? "294px" : "340px"),
+          minHeight: isEditing ? "350px" : (userHasReview ? "294px" : "340px"),
+          padding: "28px 20px 28px 20px",
+        };
+        setModalStyles(newModalStyles);
       }
     };
   
