@@ -64,6 +64,7 @@ export const SpanInputEmail = styled.span`
   line-height: normal;
   margin-bottom: 8px;
   margin-top: 24px;
+  
 
   @media (min-width: 768px) {
     font-size: 14px;
@@ -94,6 +95,7 @@ export const LoginInput = styled(Field)`
   font-size: 14px;
   font-weight: 400;
   line-height: 18px;
+  outline: none;
 
   ::placeholder {
     color:  ${registerPageColors.placeholderColor};
@@ -125,6 +127,7 @@ export const EmailInput = styled(Field)`
   font-size: 14px;
   font-weight: 400;
   line-height: 18px;
+  outline: none;
 
   ::placeholder {
     color: ${registerPageColors.placeholderColor};
@@ -153,6 +156,7 @@ export const PasswordInput = styled(Field)`
   height: 46px;
   padding: 0;
   padding-left: 8px;
+  outline: none;
 
   ::placeholder {
     color: ${registerPageColors.placeholderColor};

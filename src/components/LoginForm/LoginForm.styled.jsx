@@ -83,6 +83,7 @@ export const EmailInput = styled(Field)`
   font-size: 14px;
   font-weight: 400;
   line-height: 18px;
+  outline: none;
 
   ::placeholder {
     color: ${registerPageColors.placeholderColor};
@@ -111,6 +112,7 @@ export const PasswordInput = styled(Field)`
   height: 46px;
   padding: 0;
   padding-left: 8px;
+  outline: none;
   
   ::placeholder {
     color: ${registerPageColors.placeholderColor};
