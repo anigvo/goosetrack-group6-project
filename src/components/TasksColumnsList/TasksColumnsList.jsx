@@ -7,9 +7,9 @@ export const TasksColumnsList = () => {
     const {todo, inProgress, done} = useSelector(selectCategoryTasks);
     return (
         <ColumnList>
-            <TasksColumn tasks={todo} groupName={'To do'} key={'to do'}/>
-            <TasksColumn tasks={inProgress} groupName={'In progress'} key={'in progress'}/>
-            <TasksColumn tasks={done} groupName={'Done'} key={'done'}/>
+            <TasksColumn tasks={todo} groupName={'To do'} category={'to-do'} key={'to do'}/>
+            <TasksColumn tasks={inProgress} groupName={'In progress'} category={'in-progress'} key={'in progress'}/>
+            <TasksColumn tasks={done} groupName={'Done'} category={'done'} key={'done'}/>
         </ColumnList>
     )
 };

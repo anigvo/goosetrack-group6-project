@@ -23,7 +23,9 @@ export const TaskToolbar = ({ currentGroup, id }) => {
 
     const toggleOptions = () => setIsOpenOptions(prevState => !prevState);
 
-    const openModal = () => setIsModalOpen(true);
+    const openEditModal = () => {
+        setIsModalOpen(true);
+      };
     const closeModal = () => setIsModalOpen(false);
     const deleteTask = () => { dispatch(deleteUserTask(id)) };
 
@@ -44,7 +46,7 @@ export const TaskToolbar = ({ currentGroup, id }) => {
                     </OtherOptions>}
             </AnimatePresence>
         </Tool>
-        <Tool key={'edit'} onClick={openModal}>
+        <Tool key={'edit'} onClick={openEditModal}>
             <PencilIcon />
         </Tool>
         <Tool key={'delete'} onClick={deleteTask}>
@@ -52,5 +54,5 @@ export const TaskToolbar = ({ currentGroup, id }) => {
         </Tool>
         {/* додала в пропси айді щоб можна було усередині робити фетч */}
         {isModalOpen && <TaskModal isOpen={isModalOpen} onClose={closeModal} id={id} />}
-    </ToolList>)
+    </ToolList>) 
 };

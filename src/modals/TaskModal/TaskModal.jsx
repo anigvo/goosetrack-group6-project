@@ -3,7 +3,7 @@ import CustomModal from "../Modal/Modal";
 import TaskForm from "../TaskForm/TaskForm";
 import ReactDOM from "react-dom";
 
-const TaskModal = ({ isOpen, onClose }) => {
+const TaskModal = ({ isOpen, onClose, category, id }) => {
   const [modalStyles, setModalStyles] = useState({
     maxWidth: "303px",
     maxHeight: "336px",
@@ -43,7 +43,7 @@ const TaskModal = ({ isOpen, onClose }) => {
   
   return isOpen && ReactDOM.createPortal(
     <CustomModal customStyles={modalStyles} isOpen={isOpen} onClose={onClose}>
-      <TaskForm onCancel={onClose} />
+      <TaskForm onCancel={onClose} category={category} id={id} />
     </CustomModal>,
     document.getElementById('modal-root')
   );
