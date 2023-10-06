@@ -1,5 +1,4 @@
 import { Task, TaskFeatures, TaskOwner, TaskPriority, TaskSettings, TaskTitle } from "./TaskColumnCard.styled";
-import logo from '../../assets/images/logo.png';
 import { TaskToolbar } from "components/TaskToolbar/TaskToolbar";
 import { useSelector } from "react-redux";
 import { selectAvatar } from "redux/selectors";
