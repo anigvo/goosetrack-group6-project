@@ -30,7 +30,8 @@ const tasksSlice = createSlice({
             state.items.push(payload);
         })
         .addCase(updateUserTask.fulfilled, (state, {payload}) => {
-
+            const oldItemIndex = state.items.findIndex(task => task._id === payload._id);
+            state.items.splice(oldItemIndex, 1, payload);
         })
         .addCase(deleteUserTask.fulfilled, (state, {payload}) => {
             state.items = state.items.filter(task => task._id !== payload);

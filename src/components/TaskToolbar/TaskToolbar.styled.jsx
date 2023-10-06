@@ -6,16 +6,26 @@ import { ReactComponent as Arrow } from '../../assets/icons/arrow.svg';
 import { motion } from 'framer-motion';
 import { media } from 'utils/queries';
 
+
+export const Wrapper = styled.div`
+    position: relative;
+`
 export const ToolList = styled.ul`
 display: flex;
 flex-direction: row;
 align-items: end;
 gap: 10px;
-`;
-
-export const Tool = styled.li`
 position: relative;
 `;
+
+export const ClosableBcg = styled.div`
+    background-color: transparent;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+`
 
 export const OtherOptions = styled(motion.div)`
     background-color: ${props => props.theme.taskBackground};
@@ -51,6 +61,13 @@ flex-direction: row;
 align-items: center;
 justify-content: space-between;
 cursor: pointer;
+transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+&:hover, &:focus, &:active {
+    color: ${props => props.theme.btnBackgroundColor};
+    & > svg {
+        stroke: ${props => props.theme.btnBackgroundColor};
+    }
+}
 `;
 
 
@@ -60,9 +77,6 @@ cursor: pointer;
 stroke: ${theme.mainFont};
 width: 16px;
 height: 16px;
-&:hover, &:focus, &:active {
-    stroke: ${theme.btnBackgroundColor};
-}
 `
 
 export const TrashIcon = styled(Trash)`
