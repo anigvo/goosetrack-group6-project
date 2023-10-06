@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { TaskFormWrapper, TimeDiv, AddIcon } from './TaskForm.styled';
-import { createTask, updateTask } from '../../api/tasks'; 
+import { createTask, updateTask } from '../../api/tasks';
 import { isSameDay } from 'date-fns';
 
-function TaskForm({ id, onCancel, category }) {
+function TaskForm({ taskToEdit, onCancel, id, category }) {
   const [formData, setFormData] = useState({
     title: '',
     start: '09:00',
@@ -11,14 +11,28 @@ function TaskForm({ id, onCancel, category }) {
     priority: [],
     date: '',
     category: category,
-    isEditing: false,
+    isEditing: !!id,
   });
 
-  const isCurrentDay = (day) => isSameDay(day, new Date());
+  useEffect(() => {
+    if (taskToEdit) {
+      const { title, start, end, priority, date, category } = taskToEdit;
+      setFormData({
+        title,
+        start,
+        end,
+        priority,
+        date,
+        category,
+        isEditing: true,
+      });
+    }
+  }, [taskToEdit, id]);
+  const isCurrentDay = (day) => isSameDay(day, new Date()); 
+
 
   useEffect(() => {
-
-
+  
     if (!formData.date || !isCurrentDay(new Date(formData.date))) {
       const currentDate = new Date();
       const formattedDate = currentDate.toISOString().split('T')[0];
@@ -27,7 +41,7 @@ function TaskForm({ id, onCancel, category }) {
         date: formattedDate,
       }));
     }
-  }, [id, formData.date, formData, category]);
+  }, [taskToEdit, formData.date]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -63,39 +77,40 @@ function TaskForm({ id, onCancel, category }) {
     }));
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  
 
-    if (!validateForm()) {
-      return;
-    }
+ const handleSubmit = async (event) => {
+  event.preventDefault();
 
-    const taskData = {
-      title: formData.title,
-      start: formData.start,
-      end: formData.end,
-      priority: formData.priority,
-      date: formData.date,
-      category: formData.category,
-    };
+  if (!validateForm()) {
+    return;
+  }
 
-    if (formData.isEditing) {
-      try {
-        await updateTask(taskData, id);
-        onCancel();
-      } catch (error) {
-        console.error('Error updating task:', error);
-      }
-    } else {
-      try {
-        await createTask(taskData);
-        onCancel();
-      } catch (error) {
-        console.error('Error creating task:', error);
-      }
-    }
+  const taskData = {
+    title: formData.title,
+    start: formData.start,
+    end: formData.end,
+    priority: formData.priority,
+    date: formData.date, 
+    category: formData.category,
   };
 
+  if (formData.isEditing) {
+    try {
+      await updateTask(taskData, taskToEdit.id);
+      onCancel();
+    } catch (error) {
+      console.error('Error updating task:', error);
+    }
+  } else {
+    try {
+      await createTask(taskData);
+      onCancel();
+    } catch (error) {
+      console.error('Error creating task:', error);
+    }
+  }
+};
   const validateForm = () => {
     const { title, start, end, priority, date, category } = formData;
 
@@ -217,4 +232,4 @@ function TaskForm({ id, onCancel, category }) {
   );
 }
 
-export default TaskForm;  
+export default TaskForm;

@@ -23,9 +23,7 @@ export const TaskToolbar = ({ currentGroup, id }) => {
 
     const toggleOptions = () => setIsOpenOptions(prevState => !prevState);
 
-    const openEditModal = () => {
-        setIsModalOpen(true);
-      };
+    const openEditModal = () => {setIsModalOpen(true);};
     const closeModal = () => setIsModalOpen(false);
     const deleteTask = () => { dispatch(deleteUserTask(id)) };
 
