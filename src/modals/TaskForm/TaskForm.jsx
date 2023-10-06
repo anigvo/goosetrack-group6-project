@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { TaskFormWrapper, TimeDiv, AddIcon } from './TaskForm.styled';
 import { createTask, updateTask } from '../../api/tasks';
+import { isSameDay } from 'date-fns'; 
 
 function TaskForm({ taskToEdit, onCancel }) {
   const [formData, setFormData] = useState({
@@ -14,21 +15,7 @@ function TaskForm({ taskToEdit, onCancel }) {
   });
 
 
-  const fetchCurrentDate = () => {
-    fetch('http://worldclockapi.com/api/json/utc/now')
-      .then((response) => response.json())
-      .then((data) => {
-        const currentDate = new Date(data.currentDateTime);
-        const formattedDate = currentDate.toISOString().split('T')[0];
-        setFormData((prevData) => ({
-          ...prevData,
-          date: formattedDate,
-        }));
-      })
-      .catch((error) => {
-        console.error('Error fetching current date:', error);
-      });
-  };
+  const isCurrentDay = (day) => isSameDay(day, new Date()); 
 
 
   useEffect(() => {
@@ -44,10 +31,16 @@ function TaskForm({ taskToEdit, onCancel }) {
         isEditing: true,
       });
     }
-
-    fetchCurrentDate();
-
-  }, [taskToEdit]);
+  
+    if (!formData.date || !isCurrentDay(new Date(formData.date))) {
+      const currentDate = new Date();
+      const formattedDate = currentDate.toISOString().split('T')[0];
+      setFormData((prevData) => ({
+        ...prevData,
+        date: formattedDate,
+      }));
+    }
+  }, [taskToEdit, formData.date]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
