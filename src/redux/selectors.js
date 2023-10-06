@@ -16,4 +16,5 @@ export const selectMonth = state => state.tasks.month;
 
 export const selectDay = state => state.tasks.day;
 
-export const selectIsLoadingAuth = state => state.auth.isLoadingAuth
+export const selectIsLoadingAuth = state => state.auth.isLoadingAuth;
+
