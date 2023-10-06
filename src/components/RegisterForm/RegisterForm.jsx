@@ -2,6 +2,8 @@ import { Formik, Form, ErrorMessage } from 'formik';
 import { object, string } from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
+import { useState } from 'react';
 import {
   MainContainer,
   FormContainer,
@@ -21,6 +23,7 @@ import {
   GusContainer,
   IconButtonSubmit,
   Iconinput,
+  PasswordVisibilityIcon,
   IconButtonSubmitSpan,
   SubContainer,
 } from './RegisterForm.styled';
@@ -49,6 +52,12 @@ const RegisterForm = () => {
   const nameid = nanoid();
   const emailid = nanoid();
   const passwdid = nanoid();
+
+  const [showPassword, setShowPassword] = useState(false); 
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
@@ -188,7 +197,7 @@ const RegisterForm = () => {
                   </SpanInputPass>
                   <PasswordInput
                     autoComplete="off"
-                    type="password"
+                    type={showPassword ? 'text' : 'password'} 
                     name="password"
                     id={passwdid}
                     placeholder="Enter password"
@@ -200,6 +209,15 @@ const RegisterForm = () => {
                         : '1px solid rgba(220, 227, 229, 0.6)'
                     }
                   />
+                   {showPassword ? (
+    <PasswordVisibilityIcon onClick={toggleShowPassword}>
+      <FiEye />
+    </PasswordVisibilityIcon>
+  ) : (
+    <PasswordVisibilityIcon onClick={toggleShowPassword}>
+      <FiEyeOff />
+    </PasswordVisibilityIcon>
+  )}
                   {errors.password && touched.password ? (
                     <Iconinput>
                       <use href={`${icons}#error`} />
