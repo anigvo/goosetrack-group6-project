@@ -21,5 +21,4 @@ export const updateTask = async (task, id) => {
 
 export const deleteTask = async id => {
     await instance.delete(`/tasks/${id}`);
-    return id;
 }

@@ -33,7 +33,7 @@ const tasksSlice = createSlice({
 
         })
         .addCase(deleteUserTask.fulfilled, (state, {payload}) => {
-            state.items.filter(task => task.id !== payload.id);
+            state.items = state.items.filter(task => task._id !== payload);
         })
     }
 })

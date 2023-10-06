@@ -3,6 +3,8 @@ import { ArrowIcon, Option, Options, OtherOptions, PencilIcon, Tool, ToolList, T
 import { nanoid } from "@reduxjs/toolkit";
 import { AnimatePresence } from "framer-motion";
 import TaskModal from "modals/TaskModal/TaskModal";
+import { useDispatch } from "react-redux";
+import { deleteUserTask } from "redux/tasks/operations";
 
 const toolVar = {
     initial: { opacity: 0 },
@@ -11,6 +13,7 @@ const toolVar = {
 }
 
 export const TaskToolbar = ({ currentGroup, id }) => {
+    const dispatch = useDispatch();
     const [isOpenOptions, setIsOpenOptions] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -22,6 +25,8 @@ export const TaskToolbar = ({ currentGroup, id }) => {
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
+    const deleteTask = () => { dispatch(deleteUserTask(id)) };
+
     return (<ToolList>
         <Tool key={'change priority'} onClick={toggleOptions}>
             <ArrowIcon />
@@ -42,10 +47,10 @@ export const TaskToolbar = ({ currentGroup, id }) => {
         <Tool key={'edit'} onClick={openModal}>
             <PencilIcon />
         </Tool>
-        <Tool key={'delete'}>
+        <Tool key={'delete'} onClick={deleteTask}>
             <TrashIcon />
         </Tool>
         {/* додала в пропси айді щоб можна було усередині робити фетч */}
-        {isModalOpen && <TaskModal isOpen={isModalOpen} onClose={closeModal} id={id}/>}
+        {isModalOpen && <TaskModal isOpen={isModalOpen} onClose={closeModal} id={id} />}
     </ToolList>)
 };
