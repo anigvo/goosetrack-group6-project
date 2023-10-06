@@ -6,7 +6,7 @@ import { Column } from "./TasksColumn.styled";
 export const TasksColumn = ({groupName, tasks}) => {
     return (<Column>
     <ColumnHeadBar groupName={groupName}/>
-    {tasks &&<ColumnTasksList tasks={tasks} groupName={groupName}/>}
+    {tasks.length > 0 && <ColumnTasksList tasks={tasks} groupName={groupName}/>}
     <AddTaskButton/>
     </Column>)
 };
