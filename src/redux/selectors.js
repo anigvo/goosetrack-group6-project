@@ -37,3 +37,5 @@ export const selectCategoryTasks = createSelector([selectTasks], (items) => {
         { todo: [], inProgress: [], done: [] }
     )
 })
+
+export const selectIsLoadingTasks = state => state.tasks.isLoadingTasks;
