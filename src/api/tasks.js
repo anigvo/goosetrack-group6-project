@@ -1,8 +1,11 @@
 import { instance } from "./instance";
 
-
-export const getTasks = async () => {
-    const {data} = await instance.get('/tasks');
+export const getTasks = async (period = 'month', date) => {
+    const searchParams = new URLSearchParams({
+        period: period,
+        date: date
+    })
+    const {data} = await instance.get(`/tasks?${searchParams}`);
     return data;
 }
 
@@ -18,4 +21,5 @@ export const updateTask = async (task, id) => {
 
 export const deleteTask = async id => {
     await instance.delete(`/tasks/${id}`);
+    return id;
 }

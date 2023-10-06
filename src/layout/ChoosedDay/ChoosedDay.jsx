@@ -3,13 +3,19 @@ import { useOutletContext } from 'react-router-dom';
 import { TasksColumnsList } from 'components/TasksColumnsList/TasksColumnsList';
 import { DayCalendarHead } from 'components/DayCalendarHead/DayCalendarHead';
 import { ChoosedDayContainer } from './ChoosedDay.styled';
+import { useDispatch} from 'react-redux';
+import { getUserTasks } from 'redux/tasks/operations';
 
 const ChoosedDay = () => {
   const [startOfWeekDate, daysToAdd, today, setPeriodType, pickHandler] =
     useOutletContext();
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setPeriodType('day');
-  }, [setPeriodType]);
+    dispatch(getUserTasks('day'))
+  }, [setPeriodType, dispatch]);
+
 
   return (
     <ChoosedDayContainer>

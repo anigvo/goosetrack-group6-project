@@ -3,6 +3,12 @@ import { TasksList } from "./ColumnTasksList.styled";
 
 export const ColumnTasksList = ({tasks, groupName}) => {
     return (<TasksList tasksLength={tasks.length}>
-        {tasks.map(task => <TaskColumnCard key={task.id} currentGroup={groupName} priority={task.priority} text={task.text}/>)}
+        {tasks.map(task => 
+        <TaskColumnCard 
+        key={task._id} 
+        id={task._id} 
+        currentGroup={groupName} 
+        priority={task.priority} 
+        text={task.title}/>)}
     </TasksList>)
 };
