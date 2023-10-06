@@ -10,7 +10,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { setCurrentDay } from 'redux/tasks/tasksSlice';
 import { useDispatch } from 'react-redux';
-export const DayCalendarHead = ({ today, changePeriod, pickHandler }) => {
+export const DayCalendarHead = ({ today, pickHandler }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isCurrentDay = day => isSameDay(day, today);
