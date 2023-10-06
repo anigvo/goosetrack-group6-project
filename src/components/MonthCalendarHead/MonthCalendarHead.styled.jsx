@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { media } from 'utils/queries';
 
 export const DaysOfWeekList = styled.ul`
   display: grid;
@@ -19,7 +20,14 @@ export const DaysOfWeekList = styled.ul`
   font-family: 'Inter', sans-serif;
   font-size: 16px;
   line-height: 1.12;
+  margin-bottom: 14px;
+
+  ${media('tablet', '')`
+  margin-bottom: 18px;
+    `}
+  ${media('desktop', '')`
   margin-bottom: 15px;
+    `}
 `;
 
 export const DayOfWeek = styled.li`

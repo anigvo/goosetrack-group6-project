@@ -8,6 +8,12 @@ const TaskFormWrapper = styled.div`
   background-color: ${props => props.theme.modalBackground}; 
   margin-top: 10px;
 
+
+
+  input{
+    outline: none;
+  }
+
   form {
     display: flex;
     flex-direction: column;
@@ -40,6 +46,7 @@ const TaskFormWrapper = styled.div`
       background-repeat: no-repeat;
       background-position: right center;
       padding-right: 70px; 
+      outline: none;
 
     }
 

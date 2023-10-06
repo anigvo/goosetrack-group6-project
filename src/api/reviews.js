@@ -7,7 +7,7 @@ export const getAll = async () => {
 }
 
 export const getReview = async () => {
-    const {data} = await instance.get('/review/own');
+    const {data} = await instance.get('/reviews/own');
     return data;
 };
 
