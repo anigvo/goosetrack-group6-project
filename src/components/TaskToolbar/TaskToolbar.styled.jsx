@@ -77,6 +77,9 @@ cursor: pointer;
 stroke: ${theme.mainFont};
 width: 16px;
 height: 16px;
+&:hover, &:focus, &:active {
+    stroke: ${theme.btnBackgroundColor};
+}
 `
 
 export const TrashIcon = styled(Trash)`

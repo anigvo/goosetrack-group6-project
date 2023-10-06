@@ -3,7 +3,7 @@ import { useOutletContext } from 'react-router-dom';
 import { TasksColumnsList } from 'components/TasksColumnsList/TasksColumnsList';
 import { DayCalendarHead } from 'components/DayCalendarHead/DayCalendarHead';
 import { ChoosedDayContainer } from './ChoosedDay.styled';
-import { useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getUserTasks } from 'redux/tasks/operations';
 import { selectDay } from 'redux/selectors';
 
