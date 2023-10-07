@@ -13,6 +13,12 @@ import {
 import { registerLocale } from 'react-datepicker';
 import enGB from 'date-fns/locale/en-GB';
 import { useNavigate } from 'react-router-dom';
+import {
+  setCurrentDay,
+  setCurrentMonth,
+  setCurrentYear,
+} from 'redux/tasks/tasksSlice';
+import { useDispatch } from 'react-redux';
 
 registerLocale('en-GB', enGB);
 
@@ -29,7 +35,7 @@ export const DatePickerCustom = ({
   pickHandler,
 }) => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleDateChange = date => {
     setSelectedDate(date);
   };
@@ -53,13 +59,13 @@ export const DatePickerCustom = ({
   };
 
   const handleDateClick = date => {
-    handleDateChange(date);
-    const pickDate = date;
-    const day = pickDate.getDate();
-    navigate(`/calendar/day/${day}`);
-    setSelectedDate(pickDate);
+    const day = date.getDate();
     changePeriod('day');
-    pickHandler(pickDate);
+    navigate(`/calendar/day/${day}`);
+    dispatch(setCurrentDay(date.getDate()));
+    dispatch(setCurrentMonth(date.getMonth()));
+    dispatch(setCurrentYear(date.getFullYear()));
+    pickHandler(date);
   };
 
   const customHeader = ({ date, decreaseMonth, increaseMonth }) => {
@@ -111,7 +117,10 @@ export const DatePickerCustom = ({
       onChange={handleDateChange}
       onMonthChange={handleMonthChange}
       onSelect={handleDateClick}
+      closeOnScroll={true}
       locale="en-GB"
+      filterDate={filterDate}
+      renderCustomHeader={customHeader}
       customInput={
         <CalendarBtn type="button">
           {selectedDate.toLocaleDateString('en-GB', {
@@ -120,8 +129,6 @@ export const DatePickerCustom = ({
           })}
         </CalendarBtn>
       }
-      filterDate={filterDate}
-      renderCustomHeader={customHeader}
     />
   );
 };

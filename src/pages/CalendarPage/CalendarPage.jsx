@@ -11,17 +11,17 @@ import {
   isMonday,
   isTuesday,
   endOfMonth,
-  setMonth,
   getDaysInMonth,
   addDays,
 } from 'date-fns';
 import { useSelector } from 'react-redux';
-import { selectDay, selectMonth } from 'redux/selectors';
+import { selectDay, selectMonth, selectYear } from 'redux/selectors';
 import { Loader } from 'components/Loader/Loader';
 const CalendarPage = ({ updatePageName }) => {
   const navigate = useNavigate();
   const month = useSelector(selectMonth);
   const day = useSelector(selectDay);
+  const year = useSelector(selectYear);
 
   useEffect(() => {
     updatePageName('Calendar');
@@ -30,7 +30,8 @@ const CalendarPage = ({ updatePageName }) => {
   const [periodType, setPeriodType] = useState('month');
   const [currentDateMonth] = useState(month);
   const [currentDateDay] = useState(day);
-  const [today, setToday] = useState(setMonth(new Date(), month));
+  const [currentDateYear] = useState(year);
+  const [today, setToday] = useState(new Date(year, month, day));
 
   useEffect(() => {
     if (periodType === 'month') {
@@ -38,7 +39,7 @@ const CalendarPage = ({ updatePageName }) => {
     } else if (periodType === 'day') {
       navigate(`/calendar/day/${day}`);
     }
-  }, [navigate, month, day, periodType]);
+  }, [navigate, periodType, day, month]);
 
   const chooseDay = () => {
     let startOfMonthDate = startOfMonth(today);
@@ -82,21 +83,38 @@ const CalendarPage = ({ updatePageName }) => {
 
   const prevHandler = () => {
     if (periodType === 'month') {
-      return setToday(prev => addMonths(prev, -1));
+      setToday(prev => addMonths(prev, -1));
+    } else {
+      setToday(prev => addDays(prev, -1));
     }
-    return setToday(prev => addDays(prev, -1));
   };
 
   const nextHandler = () => {
     if (periodType === 'month') {
-      return setToday(prev => addMonths(prev, 1));
+      setToday(prev => addMonths(prev, 1));
+    } else {
+      setToday(prev => addDays(prev, 1));
     }
-    return setToday(prev => addDays(prev, 1));
   };
 
-  const pickHandler = (date) => { 
-    return setToday(date);
-  }
+  const pickHandler = date => {
+    setToday(date);
+  };
+
+  const checkDate = (data, checkType) => {
+    const currentDate = new Date(currentDateYear, currentDateMonth, 1);
+    if (checkType === 'button') {
+      if (data > currentDate) {
+        return false;
+      }
+      return true;
+    } else {
+      if (data >= currentDate) {
+        return false;
+      }
+      return true;
+    }
+  };
 
   return (
     <>
@@ -109,15 +127,19 @@ const CalendarPage = ({ updatePageName }) => {
         currentDateDay={currentDateDay}
         periodType={periodType}
         changePeriod={setPeriodType}
+        checkDate={checkDate}
       />
-      <Suspense
-        fallback={
-          <>
-            <Loader />
-          </>
-        }
-      >
-        <Outlet context={[startOfWeekDate, daysToAdd, today, setPeriodType]} />
+      <Suspense fallback={<Loader type={'suspense'} />}>
+        <Outlet
+          context={[
+            startOfWeekDate,
+            daysToAdd,
+            today,
+            setPeriodType,
+            pickHandler,
+            checkDate,
+          ]}
+        />
       </Suspense>
     </>
   );

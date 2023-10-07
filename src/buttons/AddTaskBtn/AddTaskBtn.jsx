@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { AddIcon, Button } from "./AddTaskBtn.styled"
 import TaskModal from "../../modals/TaskModal/TaskModal";
 
-export const AddTaskButton = () => {
+export const AddTaskButton = ({ category, today }) => {
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -15,9 +16,17 @@ export const AddTaskButton = () => {
 
   return (
     <>
-      <Button onClick={openModal}><AddIcon/>Add task</Button>
+      <Button onClick={openModal}>
+        <AddIcon />
+        Add task
+      </Button>
       {isModalOpen && (
-        <TaskModal isOpen={isModalOpen} onClose={closeModal} />
+        <TaskModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          category={category}
+          today={today}
+        />
       )}
     </>
   );

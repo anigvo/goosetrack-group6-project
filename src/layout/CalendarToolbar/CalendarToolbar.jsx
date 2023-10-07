@@ -11,6 +11,7 @@ export const CalendarToolbar = ({
   periodType,
   changePeriod,
   currentDateDay,
+  checkDate,
 }) => {
   return (
     <CalendarToolbarContainer>
@@ -23,6 +24,7 @@ export const CalendarToolbar = ({
         changePeriod={changePeriod}
         currentDateDay={currentDateDay}
         currentDateMonth={currentDateMonth}
+        checkDate={checkDate}
       />
       <PeriodTypeSelect
         currentDateMonth={currentDateMonth}

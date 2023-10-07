@@ -9,7 +9,11 @@ import {
   DayTitle,
 } from './PeriodPaginator.styled';
 import { useDispatch } from 'react-redux';
-import { setCurrentDay, setCurrentMonth } from 'redux/tasks/tasksSlice';
+import {
+  setCurrentDay,
+  setCurrentMonth,
+  setCurrentYear,
+} from 'redux/tasks/tasksSlice';
 
 export const PeriodPaginator = ({
   prevHandler,
@@ -20,22 +24,19 @@ export const PeriodPaginator = ({
   currentDateDay,
   currentDateMonth,
   changePeriod,
+  checkDate,
 }) => {
   const dispatch = useDispatch();
   const [selectedDate, setSelectedDate] = useState(new Date(today));
   const [filterMonth, setFilterMonth] = useState(selectedDate.getMonth());
   const [filterYear, setFilterYear] = useState(selectedDate.getFullYear());
-  const [lastDayOfMonth, setLastDayOfMonth] = useState(
-    new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, 0)
-  );
   const currentDay = currentDateDay;
   const currentMonth = currentDateMonth;
   const currentYear = new Date().getFullYear();
 
   useEffect(() => {
-    console.log(selectedDate);
-    console.log(periodType);
-  });
+    setSelectedDate(today);
+  }, [today]);
 
   const handlePrevMonth = () => {
     const prevMonthDate = new Date(selectedDate);
@@ -44,6 +45,7 @@ export const PeriodPaginator = ({
     setFilterMonth(prevMonthDate.getMonth());
     setFilterYear(prevMonthDate.getFullYear());
     dispatch(setCurrentMonth(prevMonthDate.getMonth()));
+    dispatch(setCurrentYear(prevMonthDate.getFullYear()));
     prevHandler();
   };
 
@@ -54,6 +56,7 @@ export const PeriodPaginator = ({
     setFilterMonth(nextMonthDate.getMonth());
     setFilterYear(nextMonthDate.getFullYear());
     dispatch(setCurrentMonth(nextMonthDate.getMonth()));
+    dispatch(setCurrentYear(nextMonthDate.getFullYear()));
     nextHandler();
   };
 
@@ -61,13 +64,11 @@ export const PeriodPaginator = ({
     const prevDayDate = new Date(selectedDate);
     prevDayDate.setDate(prevDayDate.getDate() - 1);
     setSelectedDate(prevDayDate);
-
     setFilterMonth(prevDayDate.getMonth());
-
-    setLastDayOfMonth(
-      new Date(prevDayDate.getFullYear(), prevDayDate.getMonth() + 1, 0)
-    );
     dispatch(setCurrentDay(prevDayDate.getDate()));
+    dispatch(setCurrentMonth(prevDayDate.getMonth()));
+    dispatch(setCurrentYear(prevDayDate.getFullYear()));
+    checkDate(prevDayDate);
     prevHandler();
   };
 
@@ -75,12 +76,11 @@ export const PeriodPaginator = ({
     const nextDayDate = new Date(selectedDate);
     nextDayDate.setDate(nextDayDate.getDate() + 1);
     setSelectedDate(nextDayDate);
-
     setFilterMonth(nextDayDate.getMonth());
-    setLastDayOfMonth(
-      new Date(nextDayDate.getFullYear(), nextDayDate.getMonth() + 1, 0)
-    );
     dispatch(setCurrentDay(nextDayDate.getDate()));
+    dispatch(setCurrentMonth(nextDayDate.getMonth()));
+    dispatch(setCurrentYear(nextDayDate.getFullYear()));
+    checkDate(nextDayDate);
     nextHandler();
   };
 
@@ -131,8 +131,8 @@ export const PeriodPaginator = ({
             direction={'left'}
             type="button"
             onClick={handlePrevDay}
-            disabled={1 === selectedDate.getDate()}
-            disabledStyle={1 === selectedDate.getDate() ? true : false}
+            disabled={checkDate(selectedDate, 'button')}
+            disabledStyle={checkDate(selectedDate, 'button')}
           >
             <ArrowLeft />
           </PaginatorBtn>
@@ -150,10 +150,6 @@ export const PeriodPaginator = ({
             direction={'right'}
             type="button"
             onClick={handleNextDay}
-            disabled={lastDayOfMonth.getDate() === selectedDate.getDate()}
-            disabledStyle={
-              lastDayOfMonth.getDate() === selectedDate.getDate() ? true : false
-            }
           >
             <ArrowRight />
           </PaginatorBtn>
