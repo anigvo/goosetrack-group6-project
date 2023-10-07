@@ -14,7 +14,14 @@ import {
   setCurrentYear,
 } from 'redux/tasks/tasksSlice';
 import { useDispatch } from 'react-redux';
-export const DayCalendarHead = ({ today, pickHandler }) => {
+
+export const DayCalendarHead = ({
+  today,
+  pickHandler,
+  currentDateMonth,
+  currentDateDay,
+  currentDateYear,
+}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isCurrentDay = day => isSameDay(day, today);
@@ -32,6 +39,8 @@ export const DayCalendarHead = ({ today, pickHandler }) => {
   });
 
   const handleDateClick = data => {
+    console.log(data);
+    console.log(today);
     const pickDate = new Date(data);
     const pickDay = pickDate.getDate();
     navigate(`/calendar/day/${pickDay}`);
@@ -40,9 +49,18 @@ export const DayCalendarHead = ({ today, pickHandler }) => {
       setCurrentMonth(pickDate.getMonth()),
       setCurrentDay(pickDate.getDate())
     );
-    console.log(pickDate);
+    checkDate(data);
     pickHandler(pickDate);
   };
+
+  const checkDate = data => {
+    const currentDate = new Date(currentDateYear, currentDateMonth, 1);
+    if (data >= currentDate) {
+      return false;
+    }
+    return true;
+  };
+
   return (
     <DayCalendarHeadContainer>
       <DaysOfWeekList>
@@ -56,11 +74,13 @@ export const DayCalendarHead = ({ today, pickHandler }) => {
       </DaysOfWeekList>
       <DaysOfWeekList>
         {daysArray.map(dayItem => (
-          <DayNumberOfWeekWrapper
-            key={format(dayItem, 'ddMMyyyy')}
-            onClick={() => handleDateClick(dayItem)}
-          >
-            <DayNumberOfWeek isCurrentDay={isCurrentDay(dayItem)}>
+          <DayNumberOfWeekWrapper key={format(dayItem, 'ddMMyyyy')}>
+            <DayNumberOfWeek
+              isCurrentDay={isCurrentDay(dayItem)}
+              onClick={() => handleDateClick(dayItem)}
+              disabled={checkDate(dayItem)}
+              disabledStyled={checkDate(dayItem)}
+            >
               {format(dayItem, 'd')}
             </DayNumberOfWeek>
           </DayNumberOfWeekWrapper>

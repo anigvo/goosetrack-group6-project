@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { media } from 'utils/queries';
 
-export const DayCalendarHeadContainer = styled.div`
+export const DayCalendarHeadContainer = styled.li`
   text-align: center;
   padding-top: 14px;
   padding-bottom: 14px;
@@ -43,7 +43,8 @@ export const DayOfWeek = styled.li`
   line-height: 1.28;
     `}
 `;
-export const DayNumberOfWeek = styled.li`
+export const DayNumberOfWeek = styled.button`
+  border: none;
   font-weight: 700;
   font-family: 'Inter', sans-serif;
   font-size: 12px;
@@ -53,7 +54,9 @@ export const DayNumberOfWeek = styled.li`
       ? props.theme.btnBackgroundColor
       : props.theme.calendarBackground};
   color: ${props =>
-    props.isCurrentDay
+    props.disabledStyled
+      ? props.theme.calendarBorder
+      : props.isCurrentDay
       ? props.theme.btnTextColor
       : props.theme.calendarTextColor};
   padding: 4px 6px;
@@ -62,7 +65,9 @@ export const DayNumberOfWeek = styled.li`
   &:hover,
   &:focus {
     background-color: ${props =>
-      props.isCurrentDay
+      props.disabledStyled
+        ? 'none'
+        : props.isCurrentDay
         ? props.theme.btnBackgroundColor
         : props.theme.calendarBorder};
   }

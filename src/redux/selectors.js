@@ -18,6 +18,8 @@ export const selectMonth = state => state.tasks.month;
 
 export const selectDay = state => state.tasks.day;
 
+export const selectYear = state => state.tasks.year;
+
 export const selectIsLoadingAuth = state => state.auth.isLoadingAuth;
 
 export const selectTasks = state => state.tasks.items;
