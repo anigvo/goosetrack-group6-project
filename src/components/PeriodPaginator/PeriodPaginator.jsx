@@ -9,7 +9,11 @@ import {
   DayTitle,
 } from './PeriodPaginator.styled';
 import { useDispatch } from 'react-redux';
-import { setCurrentDay, setCurrentMonth } from 'redux/tasks/tasksSlice';
+import {
+  setCurrentDay,
+  setCurrentMonth,
+  setCurrentYear,
+} from 'redux/tasks/tasksSlice';
 
 export const PeriodPaginator = ({
   prevHandler,
@@ -42,7 +46,10 @@ export const PeriodPaginator = ({
     setSelectedDate(prevMonthDate);
     setFilterMonth(prevMonthDate.getMonth());
     setFilterYear(prevMonthDate.getFullYear());
-    dispatch(setCurrentMonth(prevMonthDate.getMonth()));
+    dispatch(
+      setCurrentMonth(prevMonthDate.getMonth()),
+      setCurrentYear(prevMonthDate.getFullYear())
+    );
     prevHandler();
   };
 
@@ -52,7 +59,10 @@ export const PeriodPaginator = ({
     setSelectedDate(nextMonthDate);
     setFilterMonth(nextMonthDate.getMonth());
     setFilterYear(nextMonthDate.getFullYear());
-    dispatch(setCurrentMonth(nextMonthDate.getMonth()));
+    dispatch(
+      setCurrentMonth(nextMonthDate.getMonth()),
+      setCurrentYear(nextMonthDate.getFullYear())
+    );
     nextHandler();
   };
 
@@ -64,7 +74,11 @@ export const PeriodPaginator = ({
     setLastDayOfMonth(
       new Date(prevDayDate.getFullYear(), prevDayDate.getMonth() + 1, 0)
     );
-    dispatch(setCurrentDay(prevDayDate.getDate()));
+    dispatch(
+      setCurrentDay(prevDayDate.getDate()),
+      setCurrentMonth(prevDayDate.getMonth()),
+      setCurrentYear(prevDayDate.getFullYear())
+    );
     prevHandler();
   };
 
@@ -76,7 +90,11 @@ export const PeriodPaginator = ({
     setLastDayOfMonth(
       new Date(nextDayDate.getFullYear(), nextDayDate.getMonth() + 1, 0)
     );
-    dispatch(setCurrentDay(nextDayDate.getDate()));
+    dispatch(
+      setCurrentDay(nextDayDate.getDate()),
+      setCurrentMonth(nextDayDate.getMonth()),
+      setCurrentYear(nextDayDate.getFullYear())
+    );
     nextHandler();
   };
 

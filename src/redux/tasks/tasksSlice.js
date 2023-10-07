@@ -39,6 +39,6 @@ const tasksSlice = createSlice({
     }
 })
 
-export const {setCurrentDay, setCurrentMonth} = tasksSlice.actions;
+export const { setCurrentDay, setCurrentMonth, setCurrentYear } = tasksSlice.actions;
 
 export const tasksReducer = tasksSlice.reducer;

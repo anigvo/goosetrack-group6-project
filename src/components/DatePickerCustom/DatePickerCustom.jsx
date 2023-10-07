@@ -13,7 +13,11 @@ import {
 import { registerLocale } from 'react-datepicker';
 import enGB from 'date-fns/locale/en-GB';
 import { useNavigate } from 'react-router-dom';
-import { setCurrentDay } from 'redux/tasks/tasksSlice';
+import {
+  setCurrentDay,
+  setCurrentMonth,
+  setCurrentYear,
+} from 'redux/tasks/tasksSlice';
 import { useDispatch } from 'react-redux';
 
 registerLocale('en-GB', enGB);
@@ -61,7 +65,11 @@ export const DatePickerCustom = ({
     navigate(`/calendar/day/${day}`);
     setSelectedDate(pickDate);
     changePeriod('day');
-    dispatch(setCurrentDay(pickDate.getDate()));
+    dispatch(
+      setCurrentYear(pickDate.getFullYear()),
+      setCurrentMonth(pickDate.getMonth()),
+      setCurrentDay(pickDate.getDate())
+    );
     pickHandler(pickDate);
   };
 

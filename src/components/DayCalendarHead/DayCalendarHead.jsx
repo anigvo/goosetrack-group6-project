@@ -8,7 +8,11 @@ import {
   DayNumberOfWeekWrapper,
 } from './DayCalendarHead.styled';
 import { useNavigate } from 'react-router-dom';
-import { setCurrentDay } from 'redux/tasks/tasksSlice';
+import {
+  setCurrentDay,
+  setCurrentMonth,
+  setCurrentYear,
+} from 'redux/tasks/tasksSlice';
 import { useDispatch } from 'react-redux';
 export const DayCalendarHead = ({ today, pickHandler }) => {
   const navigate = useNavigate();
@@ -27,12 +31,16 @@ export const DayCalendarHead = ({ today, pickHandler }) => {
     return currentDay;
   });
 
-  const handleDateClick = event => {
-    const pickDay = Number(event.target.textContent);
-    const pickDate = new Date();
-    pickDate.setDate(pickDay);
+  const handleDateClick = data => {
+    const pickDate = new Date(data);
+    const pickDay = pickDate.getDate();
     navigate(`/calendar/day/${pickDay}`);
-    dispatch(setCurrentDay(pickDate.getDate()));
+    dispatch(
+      setCurrentYear(pickDate.getFullYear()),
+      setCurrentMonth(pickDate.getMonth()),
+      setCurrentDay(pickDate.getDate())
+    );
+    console.log(pickDate);
     pickHandler(pickDate);
   };
   return (
@@ -50,7 +58,7 @@ export const DayCalendarHead = ({ today, pickHandler }) => {
         {daysArray.map(dayItem => (
           <DayNumberOfWeekWrapper
             key={format(dayItem, 'ddMMyyyy')}
-            onClick={handleDateClick}
+            onClick={() => handleDateClick(dayItem)}
           >
             <DayNumberOfWeek isCurrentDay={isCurrentDay(dayItem)}>
               {format(dayItem, 'd')}
