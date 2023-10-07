@@ -59,11 +59,9 @@ export const DatePickerCustom = ({
   };
 
   const handleDateClick = date => {
-    handleDateChange(date);
     const day = date.getDate();
-    navigate(`/calendar/day/${day}`);
-    setSelectedDate(date);
     changePeriod('day');
+    navigate(`/calendar/day/${day}`);
     dispatch(setCurrentDay(date.getDate()));
     dispatch(setCurrentMonth(date.getMonth()));
     dispatch(setCurrentYear(date.getFullYear()));

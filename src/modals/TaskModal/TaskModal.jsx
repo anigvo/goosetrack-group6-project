@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import CustomModal from "../Modal/Modal";
-import TaskForm from "../TaskForm/TaskForm";
-import ReactDOM from "react-dom";
+import React, { useEffect, useState } from 'react';
+import CustomModal from '../Modal/Modal';
+import TaskForm from '../TaskForm/TaskForm';
+import ReactDOM from 'react-dom';
 
-const TaskModal = ({ isOpen, onClose, category, id }) => {
+const TaskModal = ({ isOpen, onClose, category, id, today }) => {
   const [modalStyles, setModalStyles] = useState({
-    maxWidth: "303px",
-    maxHeight: "336px",
-    minWidth: "303px",
-    minHeight: "336px",
-    padding: "28px 15px 28px 15px",
+    maxWidth: '303px',
+    maxHeight: '336px',
+    minWidth: '303px',
+    minHeight: '336px',
+    padding: '28px 15px 28px 15px',
   });
 
   useEffect(() => {
@@ -17,37 +17,44 @@ const TaskModal = ({ isOpen, onClose, category, id }) => {
       const isLargeScreen = window.innerWidth > 767;
       if (isLargeScreen) {
         setModalStyles({
-          maxWidth: "396px",
-          maxHeight: "360px",
-          minWidth: "396px",
-          minHeight: "360px",
-          padding: "40px 25px",
+          maxWidth: '396px',
+          maxHeight: '360px',
+          minWidth: '396px',
+          minHeight: '360px',
+          padding: '40px 25px',
         });
       } else {
         setModalStyles({
-          maxWidth: "303px",
-          maxHeight: "336px", 
-          minWidth: "303px",
-          minHeight: "336px",
-          padding: "28px 15px 28px 15px",
+          maxWidth: '303px',
+          maxHeight: '336px',
+          minWidth: '303px',
+          minHeight: '336px',
+          padding: '28px 15px 28px 15px',
         });
       }
     };
 
-    window.addEventListener("resize", handleResize);
-    handleResize(); 
+    window.addEventListener('resize', handleResize);
+    handleResize();
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
-  
-  return isOpen && ReactDOM.createPortal(
-    <CustomModal customStyles={modalStyles} isOpen={isOpen} onClose={onClose}>
-      <TaskForm onCancel={onClose} category={category} id={id} />
-    </CustomModal>,
-    document.getElementById('modal-root')
+
+  return (
+    isOpen &&
+    ReactDOM.createPortal(
+      <CustomModal customStyles={modalStyles} isOpen={isOpen} onClose={onClose}>
+        <TaskForm
+          onCancel={onClose}
+          category={category}
+          id={id}
+          today={today}
+        />
+      </CustomModal>,
+      document.getElementById('modal-root')
+    )
   );
 };
-  
 
 export default TaskModal;
