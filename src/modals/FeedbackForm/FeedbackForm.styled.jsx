@@ -169,4 +169,11 @@ export const PencilIcon = styled(Pencil)`
     ${styledIconPen}
 `;
 
-export { FeedbackFormWrapper, StyledRatingContainer };
+const LoaderCont = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  height: 30vh; 
+`;
+
+export { FeedbackFormWrapper, StyledRatingContainer, LoaderCont };

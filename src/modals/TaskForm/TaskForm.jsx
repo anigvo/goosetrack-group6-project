@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { TaskFormWrapper, TimeDiv, AddIcon } from './TaskForm.styled';
 import { createTask, updateTask, getTasks } from '../../api/tasks';
 import { isSameDay } from 'date-fns';
+import { toast } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { getUserTasks } from 'redux/tasks/operations';
-
 function TaskForm({ taskToEdit, onCancel, id, category, today }) {
   const dispatch = useDispatch();
-
   const [formData, setFormData] = useState({
     title: '',
     start: '09:00',
@@ -134,6 +133,7 @@ function TaskForm({ taskToEdit, onCancel, id, category, today }) {
     if (formData.isEditing) {
       try {
         await updateTask(taskData, id);
+        toast.success('Task updated successfully');
         onCancel();
         dispatch(getUserTasks('day'));
       } catch (error) {
@@ -142,6 +142,7 @@ function TaskForm({ taskToEdit, onCancel, id, category, today }) {
     } else {
       try {
         await createTask(taskData);
+        toast.success('Task created successfully');
         onCancel();
         dispatch(getUserTasks('day'));
       } catch (error) {
