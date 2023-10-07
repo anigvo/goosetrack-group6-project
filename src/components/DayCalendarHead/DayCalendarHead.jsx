@@ -33,17 +33,13 @@ export const DayCalendarHead = ({ today, pickHandler, checkDate }) => {
   });
 
   const handleDateClick = data => {
-    console.log(data);
-    console.log(today);
     const pickDate = new Date(data);
     const pickDay = pickDate.getDate();
     navigate(`/calendar/day/${pickDay}`);
-    dispatch(
-      setCurrentYear(pickDate.getFullYear()),
-      setCurrentMonth(pickDate.getMonth()),
-      setCurrentDay(pickDate.getDate())
-    );
-    checkDate(data);
+    dispatch(setCurrentDay(pickDate.getDate()));
+    dispatch(setCurrentMonth(pickDate.getMonth()));
+    dispatch(setCurrentYear(pickDate.getFullYear()));
+    checkDate(pickDate);
     pickHandler(pickDate);
   };
 

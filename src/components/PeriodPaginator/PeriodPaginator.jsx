@@ -44,10 +44,8 @@ export const PeriodPaginator = ({
     setSelectedDate(prevMonthDate);
     setFilterMonth(prevMonthDate.getMonth());
     setFilterYear(prevMonthDate.getFullYear());
-    dispatch(
-      setCurrentMonth(prevMonthDate.getMonth()),
-      setCurrentYear(prevMonthDate.getFullYear())
-    );
+    dispatch(setCurrentMonth(prevMonthDate.getMonth()));
+    dispatch(setCurrentYear(prevMonthDate.getFullYear()));
     prevHandler();
   };
 
@@ -57,10 +55,8 @@ export const PeriodPaginator = ({
     setSelectedDate(nextMonthDate);
     setFilterMonth(nextMonthDate.getMonth());
     setFilterYear(nextMonthDate.getFullYear());
-    dispatch(
-      setCurrentMonth(nextMonthDate.getMonth()),
-      setCurrentYear(nextMonthDate.getFullYear())
-    );
+    dispatch(setCurrentMonth(nextMonthDate.getMonth()));
+    dispatch(setCurrentYear(nextMonthDate.getFullYear()));
     nextHandler();
   };
 
@@ -69,11 +65,9 @@ export const PeriodPaginator = ({
     prevDayDate.setDate(prevDayDate.getDate() - 1);
     setSelectedDate(prevDayDate);
     setFilterMonth(prevDayDate.getMonth());
-    dispatch(
-      setCurrentDay(prevDayDate.getDate()),
-      setCurrentMonth(prevDayDate.getMonth()),
-      setCurrentYear(prevDayDate.getFullYear())
-    );
+    dispatch(setCurrentDay(prevDayDate.getDate()));
+    dispatch(setCurrentMonth(prevDayDate.getMonth()));
+    dispatch(setCurrentYear(prevDayDate.getFullYear()));
     checkDate(prevDayDate);
     prevHandler();
   };
@@ -83,11 +77,9 @@ export const PeriodPaginator = ({
     nextDayDate.setDate(nextDayDate.getDate() + 1);
     setSelectedDate(nextDayDate);
     setFilterMonth(nextDayDate.getMonth());
-    dispatch(
-      setCurrentDay(nextDayDate.getDate()),
-      setCurrentMonth(nextDayDate.getMonth()),
-      setCurrentYear(nextDayDate.getFullYear())
-    );
+    dispatch(setCurrentDay(nextDayDate.getDate()));
+    dispatch(setCurrentMonth(nextDayDate.getMonth()));
+    dispatch(setCurrentYear(nextDayDate.getFullYear()));
     checkDate(nextDayDate);
     nextHandler();
   };

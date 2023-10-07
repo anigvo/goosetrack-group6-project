@@ -60,17 +60,14 @@ export const DatePickerCustom = ({
 
   const handleDateClick = date => {
     handleDateChange(date);
-    const pickDate = date;
-    const day = pickDate.getDate();
+    const day = date.getDate();
     navigate(`/calendar/day/${day}`);
-    setSelectedDate(pickDate);
+    setSelectedDate(date);
     changePeriod('day');
-    dispatch(
-      setCurrentYear(pickDate.getFullYear()),
-      setCurrentMonth(pickDate.getMonth()),
-      setCurrentDay(pickDate.getDate())
-    );
-    pickHandler(pickDate);
+    dispatch(setCurrentDay(date.getDate()));
+    dispatch(setCurrentMonth(date.getMonth()));
+    dispatch(setCurrentYear(date.getFullYear()));
+    pickHandler(date);
   };
 
   const customHeader = ({ date, decreaseMonth, increaseMonth }) => {
