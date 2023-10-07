@@ -34,9 +34,9 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
 
 
   useEffect(() => {
-  
     if (!formData.date || !isCurrentDay(new Date(formData.date))) {
       const currentDate = new Date();
+      currentDate.setMonth(currentDate.getMonth() - 1);
       const formattedDate = currentDate.toISOString().split('T')[0];
       setFormData((prevData) => ({
         ...prevData,
