@@ -53,7 +53,6 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
           const taskToPopulate = tasks.find((task) => task._id === id);
   
           if (taskToPopulate) {
-            console.log(taskToPopulate);
   
             const dateParts = taskToPopulate.date.split('T')[0].split('-');
             const formattedDate = `${dateParts[0]}-${dateParts[1]}-${dateParts[2]}`;
@@ -129,8 +128,6 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
       date: formData.date,
       category: formData.category,
     };
-
-    console.log(taskData)
 
     if (formData.isEditing) {
       try {
