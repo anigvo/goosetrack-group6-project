@@ -1,6 +1,6 @@
 import { Formik, Form, ErrorMessage } from 'formik';
 import { object, string } from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useState } from 'react';
@@ -29,8 +29,6 @@ import {
 } from './RegisterForm.styled';
 import icons from '../../assets/icons/icons.svg';
 import { logInUser, registerUser } from 'redux/auth/operations';
-import { selectError } from 'redux/selectors';
-import toast from 'react-hot-toast';
 import { nanoid } from '@reduxjs/toolkit';
 
 const userShema = object({
@@ -48,40 +46,28 @@ const initialValues = {
 const RegisterForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const error = useSelector(selectError);
   const nameid = nanoid();
   const emailid = nanoid();
   const passwdid = nanoid();
 
-  const [showPassword, setShowPassword] = useState(false); 
+  const [showPassword, setShowPassword] = useState(false);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
   const handleSubmit = async (values, { resetForm }) => {
-    try {
-      const res = await dispatch(registerUser(values));
-      if (registerUser.fulfilled.match(res)) {
-        await dispatch(
-          logInUser({
-            email: values.email,
-            password: values.password,
-          })
-        );
-      }
+    const res = await dispatch(registerUser(values));
+    if (registerUser.fulfilled.match(res)) {
+      await dispatch(
+        logInUser({
+          email: values.email,
+          password: values.password,
+        })
+      );
       resetForm();
-    } catch (_) {
-      if (error !== null) {
-        if (error.includes('409')) {
-          toast.error('Email is already in use.');
-        } else {
-          toast.error('Something went wrong.');
-        }
-        return;
-      }
     }
-  };
+  }
 
   const FormError = ({ name }) => {
     return (
@@ -107,8 +93,8 @@ const RegisterForm = () => {
                       errors.name && touched.name
                         ? '#E74A3B'
                         : touched.name
-                        ? '#3CBC81'
-                        : '#111'
+                          ? '#3CBC81'
+                          : '#111'
                     }
                   >
                     Name
@@ -124,8 +110,8 @@ const RegisterForm = () => {
                       errors.name && touched.name
                         ? ' 1px solid #E74A3B'
                         : touched.name
-                        ? '1px solid #3CBC81'
-                        : '1px solid rgba(220, 227, 229, 0.6)'
+                          ? '1px solid #3CBC81'
+                          : '1px solid rgba(220, 227, 229, 0.6)'
                     }
                   />
                   {errors.name && touched.name ? (
@@ -146,8 +132,8 @@ const RegisterForm = () => {
                       errors.email && touched.email
                         ? '#E74A3B'
                         : touched.email
-                        ? '#3CBC81'
-                        : '#111'
+                          ? '#3CBC81'
+                          : '#111'
                     }
                   >
                     Email
@@ -163,8 +149,8 @@ const RegisterForm = () => {
                       errors.email && touched.email
                         ? ' 1px solid #E74A3B'
                         : touched.email
-                        ? '1px solid #3CBC81'
-                        : '1px solid rgba(220, 227, 229, 0.6)'
+                          ? '1px solid #3CBC81'
+                          : '1px solid rgba(220, 227, 229, 0.6)'
                     }
                   />
                   {errors.email && touched.email ? (
@@ -189,15 +175,15 @@ const RegisterForm = () => {
                       errors.password && touched.password
                         ? '#E74A3B'
                         : touched.password
-                        ? '#3CBC81'
-                        : '#111'
+                          ? '#3CBC81'
+                          : '#111'
                     }
                   >
                     Password
                   </SpanInputPass>
                   <PasswordInput
                     autoComplete="off"
-                    type={showPassword ? 'text' : 'password'} 
+                    type={showPassword ? 'text' : 'password'}
                     name="password"
                     id={passwdid}
                     placeholder="Enter password"
@@ -205,19 +191,19 @@ const RegisterForm = () => {
                       errors.password && touched.password
                         ? ' 1px solid #E74A3B'
                         : touched.password
-                        ? '1px solid #3CBC81'
-                        : '1px solid rgba(220, 227, 229, 0.6)'
+                          ? '1px solid #3CBC81'
+                          : '1px solid rgba(220, 227, 229, 0.6)'
                     }
                   />
-                   {showPassword ? (
-    <PasswordVisibilityIcon onClick={toggleShowPassword}>
-      <FiEye />
-    </PasswordVisibilityIcon>
-  ) : (
-    <PasswordVisibilityIcon onClick={toggleShowPassword}>
-      <FiEyeOff />
-    </PasswordVisibilityIcon>
-  )}
+                  {showPassword ? (
+                    <PasswordVisibilityIcon onClick={toggleShowPassword}>
+                      <FiEye />
+                    </PasswordVisibilityIcon>
+                  ) : (
+                    <PasswordVisibilityIcon onClick={toggleShowPassword}>
+                      <FiEyeOff />
+                    </PasswordVisibilityIcon>
+                  )}
                   {errors.password && touched.password ? (
                     <Iconinput>
                       <use href={`${icons}#error`} />
