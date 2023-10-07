@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TaskFormWrapper, TimeDiv, AddIcon } from './TaskForm.styled';
 import { createTask, updateTask, getTasks  } from '../../api/tasks';
 import { isSameDay } from 'date-fns';
+import { toast } from 'react-hot-toast';
 
 function TaskForm({ taskToEdit, onCancel, id, category }) {
   const [formData, setFormData] = useState({
@@ -132,6 +133,7 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
     if (formData.isEditing) {
       try {
         await updateTask(taskData, id);
+        toast.success('Task updated successfully');
         onCancel();
       } catch (error) {
         console.error('Error updating task:', error);
@@ -139,6 +141,7 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
     } else {
       try {
         await createTask(taskData); 
+        toast.success('Task created successfully');
         onCancel();
       } catch (error) {
         console.error('Error creating task:', error);

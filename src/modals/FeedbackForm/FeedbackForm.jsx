@@ -1,13 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import StarRatings from 'react-star-ratings';
-import { FeedbackFormWrapper, StyledRatingContainer, PencilIcon, TrashIcon } from './FeedbackForm.styled';
+import { FeedbackFormWrapper, StyledRatingContainer, PencilIcon, TrashIcon, LoaderCont } from './FeedbackForm.styled';
 import { createReview, getReview, updateReview, deleteReview } from '../../api/reviews'; 
+import { toast } from 'react-hot-toast';
 
-const FeedbackForm = ({ onCancel, onReviewStatusChange, onUpdateStyles, onEditStatusChange  }) => {
+function SVGIcon({ currentTheme }) {
+  const strokeColor = currentTheme === 'light' ? '#111111' : '#3E85F3';
+
+  return (
+<svg fill="none" viewBox="0 0 24 24" width="24" height="24" stroke={strokeColor}>
+  <g strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
+    <path d="M18 6 6 18M6 6l12 12" />
+  </g>
+</svg>
+  );
+}
+
+const FeedbackForm = ({ onCancel, onReviewStatusChange, onUpdateStyles, onEditStatusChange }) => {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
   const [userHasComment, setUserHasComment] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchUserReview() {
@@ -26,6 +40,8 @@ const FeedbackForm = ({ onCancel, onReviewStatusChange, onUpdateStyles, onEditSt
         }
       } catch (error) {
         console.error('Error fetching user review:', error);
+      } finally {
+        setIsLoading(false); 
       }
     }
 
@@ -52,119 +68,129 @@ const FeedbackForm = ({ onCancel, onReviewStatusChange, onUpdateStyles, onEditSt
   };
 
   const handleDeleteClick = async () => {
-    if (window.confirm('Are you sure you want to delete this comment?')) {
-      try {
-        await deleteReview();
-        alert('Comment deleted successfully');
-        setUserHasComment(false); 
-        setReview(''); 
-        setRating(0); 
+    try {
+      await deleteReview();
+      toast.success('Comment deleted successfully');
+      setUserHasComment(false); 
+      setReview(''); 
+      setRating(0); 
 
-        if (onReviewStatusChange) {
-          onReviewStatusChange(false);
-        }
-      } catch (error) {
-        console.error('Error deleting review:', error);
-        alert('An error occurred while deleting the comment');
+      if (onReviewStatusChange) {
+        onReviewStatusChange(false);
       }
+    } catch (error) {
+      console.error('Error deleting review:', error);
+      toast.error('An error occurred while deleting the comment');
+    }
+    if (onCancel) {
+      onCancel();
     }
   };
 
   const handleSubmit = async () => {
     if (review.trim() === '') {
-      alert('Please enter a comment before submitting.');
+      toast.error('Please enter a comment before submitting.');
       return;
     }
-
+  
     const feedbackData = {
       rating: rating,
       comment: review,
     };
-
+  
     try {
       if (userHasComment && isEditing) {
         await updateReview(feedbackData);
-        alert('Review updated successfully');
+        toast.success('Review updated successfully');
         if (onEditStatusChange) {
           onEditStatusChange(false);
         }
       } else {
         await createReview(feedbackData);
-        alert('Review posted successfully');
+        toast.success('Review posted successfully');
       }
       setUserHasComment(true);
       setIsEditing(false);
-
+  
       if (onUpdateStyles) {
         onUpdateStyles();
       }
+  
+      if (onCancel) {
+        onCancel();
+      }
     } catch (error) {
+      toast.error('An error occurred while processing your request');
     }
   };
   
   return (
-    <FeedbackFormWrapper>
-      <div>
-        <StyledRatingContainer>
-          <label>Rating</label>
-          <StarRatings
-            rating={rating}
-            starRatedColor="#FFAC33"
-            starEmptyColor="#ccc"
-            changeRating={handleRatingChange}
-            numberOfStars={5}
-            name="rating"
-            starDimension="24px"
-            starSpacing="1px"
-            readOnly={userHasComment && !isEditing}
-          />
-        </StyledRatingContainer>
-      </div>
-      <div>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px' }}>
-          <label style={{ margin: '0' }}>Review</label>
+    <FeedbackFormWrapper >
+      {isLoading ? (
+        <LoaderCont><SVGIcon/></LoaderCont>
+      ) : (
+        <div>
+          <StyledRatingContainer>
+            <label>Rating</label>
+            <StarRatings
+              rating={rating}
+              starRatedColor="#FFAC33"
+              starEmptyColor="#ccc"
+              changeRating={handleRatingChange}
+              numberOfStars={5}
+              name="rating"
+              starDimension="24px"
+              starSpacing="1px"
+              readOnly={userHasComment && !isEditing}
+            />
+          </StyledRatingContainer>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px' }}>
+              <label style={{ margin: '0' }}>Review</label>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                {userHasComment && (
+                  <button className="fakeIcon" type="button" onClick={handleEditClick}>
+                    <PencilIcon />
+                  </button>
+                )}
+                {userHasComment && (
+                  <button className="fakeDelIcon" type="button" onClick={handleDeleteClick}>
+                    <TrashIcon />
+                  </button>
+                )}
+              </div>
+            </div>
+            <textarea
+              placeholder="Enter text"
+              value={review}
+              onChange={handleReviewChange}
+              rows={4}
+              cols={50}
+              readOnly={userHasComment && !isEditing}
+            />
+          </div>
           <div style={{ display: 'flex', gap: '10px' }}>
-            {userHasComment && (
-              <button className="fakeIcon" type="button" onClick={handleEditClick}>
-                <PencilIcon />
+            {!userHasComment && !isEditing && (
+              <button className="BtnSave" type="button" onClick={handleSubmit}>
+                Save
               </button>
             )}
-            {userHasComment && (
-              <button className="fakeDelIcon" type="button" onClick={handleDeleteClick}>
-                <TrashIcon />
+            {!userHasComment && !isEditing && (
+              <button className="BtnCancel" type="button" onClick={onCancel}>
+                Cancel
               </button>
             )}
           </div>
-        </div>
-        <textarea
-          placeholder="Enter text"
-          value={review}
-          onChange={handleReviewChange}
-          rows={4}
-          cols={50}
-          readOnly={userHasComment && !isEditing}
-        />
-      </div>
-      <div style={{ display: 'flex', gap: '10px' }}>
-        {!userHasComment && !isEditing && (
-          <button className="BtnSave" type="button" onClick={handleSubmit}>
-            Save
-          </button>
-        )}
-        {!userHasComment && !isEditing && (
-          <button className="BtnCancel" type="button" onClick={onCancel}>
-            Cancel
-          </button>
-        )}
-      </div>
-      {isEditing && (
-        <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
-          <button className="BtnSave" type="button" onClick={handleSubmit}>
-            Edit
-          </button>
-          <button className="BtnCancel" type="button" onClick={onCancel}>
-            Cancel
-          </button>
+          {isEditing && (
+            <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+              <button className="BtnSave" type="button" onClick={handleSubmit}>
+                Edit
+              </button>
+              <button className="BtnCancel" type="button" onClick={onCancel}>
+                Cancel
+              </button>
+            </div>
+          )}
         </div>
       )}
     </FeedbackFormWrapper>
