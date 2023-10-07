@@ -190,7 +190,7 @@ export const Label = styled.label`
        
     `}
 `;
-export const BoxInput = styled.div`
+export const BoxInput = styled.label`
   //   position:;
 `;
 
@@ -253,14 +253,14 @@ export const Feedback = styled.div`
 `;
 
 export const ValidFeedback = styled.div`
-  color: ${props => props.theme.correctMessage};
+  color: #3cbc81;
   font-size: 12px;
 `;
 export const IconDown = styled(ChevronDown)`
   stroke: ${props => props.theme.userShevronDovn};
 `;
 export const InvalidFeedback = styled(ErrorMessage)`
-  color: ${props => props.theme.errorMessage};
+  color: #da1414;
   font-size: 12px;
 `;
 

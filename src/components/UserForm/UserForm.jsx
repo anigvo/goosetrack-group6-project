@@ -32,7 +32,7 @@ import { userFormValidation } from '../../utils/constans/userFormValidation';
 import { useState } from 'react';
 import { SaveChangesBtn } from '../../buttons/SaveChangesBtn/SaveChangesBtn';
 import { CustomFormInput } from '../../utils/constans/CustomFormInput';
-import '../../utils/datePicker.css';
+import '../../utils/datePickerUser.css';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../redux/selectors';
