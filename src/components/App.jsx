@@ -27,7 +27,7 @@ const ChoosedMonth = lazy(() => import('../layout/ChoosedMonth/ChoosedMonth'));
 
 export const App = () => {
   const [pageName, setPageName] = useState(null);
-  const { isRefreshing, isLoadingAuth } = useAuth();
+  const { isRefreshing } = useAuth();
   const dispatch = useDispatch();
   const theme = useSelector(selectTheme);
 
@@ -41,7 +41,7 @@ export const App = () => {
 
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-      {isRefreshing || isLoadingAuth ? <Loader/> :
+      {isRefreshing ? <Loader /> :
         (<Routes>
           <Route path='/'>
             <Route

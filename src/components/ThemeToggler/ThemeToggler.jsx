@@ -16,7 +16,6 @@ export const ThemeToggler = () => {
     const currentTheme = useSelector(selectTheme);
 
     const changeTheme = () => {
-        console.log('work');
         currentTheme === THEME.LIGHT 
         ? dispatch(setTheme(THEME.DARK)) 
         : dispatch(setTheme(THEME.LIGHT))

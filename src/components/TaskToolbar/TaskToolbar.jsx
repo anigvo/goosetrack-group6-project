@@ -5,7 +5,6 @@ import { AnimatePresence } from "framer-motion";
 import TaskModal from "modals/TaskModal/TaskModal";
 import { useDispatch } from "react-redux";
 import { deleteUserTask, updateUserTask } from "redux/tasks/operations";
-import toast from "react-hot-toast";
 
 const toolVar = {
     initial: { opacity: 0 },
@@ -33,7 +32,6 @@ export const TaskToolbar = ({ currentGroup, id }) => {
     
     const deleteTask = () => {
         dispatch(deleteUserTask(id));
-        toast.success('Task deleted successfully')
     };
 
     const updateTaskCategory = group => {
