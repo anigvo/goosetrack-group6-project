@@ -101,6 +101,21 @@ const CalendarPage = ({ updatePageName }) => {
     setToday(date);
   };
 
+  const checkDate = (data, checkType) => {
+    const currentDate = new Date(currentDateYear, currentDateMonth, 1);
+    if (checkType === 'button') {
+      if (data > currentDate) {
+        return false;
+      }
+      return true;
+    } else {
+      if (data >= currentDate) {
+        return false;
+      }
+      return true;
+    }
+  };
+
   return (
     <>
       <CalendarToolbar
@@ -112,6 +127,7 @@ const CalendarPage = ({ updatePageName }) => {
         currentDateDay={currentDateDay}
         periodType={periodType}
         changePeriod={setPeriodType}
+        checkDate={checkDate}
       />
       <Suspense fallback={<Loader type={'suspense'} />}>
         <Outlet
@@ -121,9 +137,7 @@ const CalendarPage = ({ updatePageName }) => {
             today,
             setPeriodType,
             pickHandler,
-            currentDateMonth,
-            currentDateDay,
-            currentDateYear,
+            checkDate,
           ]}
         />
       </Suspense>

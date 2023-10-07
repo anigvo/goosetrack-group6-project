@@ -14,9 +14,7 @@ const ChoosedDay = () => {
     today,
     setPeriodType,
     pickHandler,
-    currentDateMonth,
-    currentDateDay,
-    currentDateYear,
+    checkDate,
   ] = useOutletContext();
   const dispatch = useDispatch();
   const day = useSelector(selectDay);
@@ -34,9 +32,7 @@ const ChoosedDay = () => {
         today={today}
         changePeriod={setPeriodType}
         pickHandler={pickHandler}
-        currentDateMonth={currentDateMonth}
-        currentDateDay={currentDateDay}
-        currentDateYear={currentDateYear}
+        checkDate={checkDate}
       />
       <TasksColumnsList />
     </ChoosedDayContainer>

@@ -15,13 +15,7 @@ import {
 } from 'redux/tasks/tasksSlice';
 import { useDispatch } from 'react-redux';
 
-export const DayCalendarHead = ({
-  today,
-  pickHandler,
-  currentDateMonth,
-  currentDateDay,
-  currentDateYear,
-}) => {
+export const DayCalendarHead = ({ today, pickHandler, checkDate }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isCurrentDay = day => isSameDay(day, today);
@@ -53,14 +47,6 @@ export const DayCalendarHead = ({
     pickHandler(pickDate);
   };
 
-  const checkDate = data => {
-    const currentDate = new Date(currentDateYear, currentDateMonth, 1);
-    if (data >= currentDate) {
-      return false;
-    }
-    return true;
-  };
-
   return (
     <DayCalendarHeadContainer>
       <DaysOfWeekList>
@@ -78,7 +64,7 @@ export const DayCalendarHead = ({
             <DayNumberOfWeek
               isCurrentDay={isCurrentDay(dayItem)}
               onClick={() => handleDateClick(dayItem)}
-              disabled={checkDate(dayItem)}
+              disabled={checkDate(dayItem, 'click')}
               disabledStyled={checkDate(dayItem)}
             >
               {format(dayItem, 'd')}
