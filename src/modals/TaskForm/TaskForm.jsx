@@ -5,8 +5,11 @@ import { isSameDay } from 'date-fns';
 import { toast } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { getUserTasks } from 'redux/tasks/operations';
+
 function TaskForm({ taskToEdit, onCancel, id, category, today }) {
+  
   const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     title: '',
     start: '09:00',
