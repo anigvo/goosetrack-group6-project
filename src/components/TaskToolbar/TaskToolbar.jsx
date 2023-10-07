@@ -27,9 +27,9 @@ export const TaskToolbar = ({ currentGroup, id }) => {
         if (e.target === e.currentTarget) setIsOpenOptions(false);
     }
 
-    const openModal = () => setIsModalOpen(true);
+    const openEditModal = () => { setIsModalOpen(true); };
     const closeModal = () => setIsModalOpen(false);
-    
+
     const deleteTask = () => {
         dispatch(deleteUserTask(id));
     };
@@ -46,7 +46,7 @@ export const TaskToolbar = ({ currentGroup, id }) => {
         <li key={'change priority'} onClick={toggleOptions}>
             <ArrowIcon />
         </li>
-        <li key={'edit'} onClick={openModal}>
+        <li key={'edit'} onClick={openEditModal}>
             <PencilIcon />
         </li>
         <li key={'delete'} onClick={deleteTask}>
@@ -57,7 +57,7 @@ export const TaskToolbar = ({ currentGroup, id }) => {
     </ToolList>
         <AnimatePresence>
             {isOpenOptions &&
-                <><ClosableBcg onClick={closeOptions} />
+                (<><ClosableBcg onClick={closeOptions} />
                     <OtherOptions
                         initial={"initial"}
                         animate={"isOn"}
@@ -67,7 +67,7 @@ export const TaskToolbar = ({ currentGroup, id }) => {
                             {allGroups.map(group =>
                                 <Option key={nanoid()} onClick={() => updateTaskCategory(group)}>{group}<ArrowIcon /></Option>)}
                         </Options>
-                    </OtherOptions></>}
+                    </OtherOptions></>)}
         </AnimatePresence>
     </Wrapper>)
 };

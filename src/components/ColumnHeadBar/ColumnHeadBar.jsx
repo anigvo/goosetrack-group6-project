@@ -1,8 +1,8 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { CircleIcon, ColumnHeader, GroupName, IconTaskAdd } from "./ColumnHeadBar.styled";
-import TaskModal from "modals/TaskModal/TaskModal";
+import TaskModal from "../../modals/TaskModal/TaskModal";
 
-export const ColumnHeadBar = ({ groupName }) => {
+export const ColumnHeadBar = ({ groupName, category}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => setIsModalOpen(true);
@@ -13,6 +13,11 @@ export const ColumnHeadBar = ({ groupName }) => {
         <IconTaskAdd onClick={openModal}>
             <CircleIcon />
         </IconTaskAdd>
-        {isModalOpen && <TaskModal isOpen={isModalOpen} onClose={closeModal}/>}
+        {isModalOpen && (
+        <TaskModal isOpen={isModalOpen} onClose={closeModal} category={category} />
+      )}
     </ColumnHeader>)
 };
+
+
+
