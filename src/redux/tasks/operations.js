@@ -6,7 +6,7 @@ export const getUserTasks = createAsyncThunk(
     async (credentials, thunkAPI) => {
         const {tasks: {day, month, year}} = thunkAPI.getState();
         try {
-            const tasks = await getTasks(credentials, `${year}-${month+1}-${day}`);
+            const tasks = await getTasks(credentials, `${year}-${month}-${day}`);
             return tasks;
         } catch (error) {
             thunkAPI.rejectWithValue(error.message);
@@ -29,11 +29,10 @@ export const createUserTasks = createAsyncThunk(
 export const updateUserTask = createAsyncThunk(
     'tasks/update',
     async (credentials, thunkAPI) => {
-        const {task, id} = credentials;
+        const {task, id} = credentials;        
         try {
-            await updateTask(task, id);
-            return {task, id};
-            // here problem
+            const updatedTask = await updateTask(task, id);
+            return updatedTask;
         } catch (error) {
             thunkAPI.rejectWithValue(error.message);
         }

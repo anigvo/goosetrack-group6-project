@@ -1,9 +1,10 @@
+
 import { Formik, Form, ErrorMessage } from 'formik';
 import { object, string } from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
-// import { useMediaQuery } from 'hooks/useMediaQuery';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
+import { FiEye, FiEyeOff } from 'react-icons/fi';
+import { useState } from 'react';
 import {
   MainContainer,
   FormContainer,
@@ -18,6 +19,7 @@ import {
   ErrorMsg,
   CorrectMsg,
   PasswordInput,
+  PasswordVisibilityIcon,
   GusContainer,
   IconButtonSubmit,
   Iconinput,
@@ -26,8 +28,6 @@ import {
 
 import { logInUser } from 'redux/auth/operations';
 import icons from '../../assets/icons/icons.svg';
-import { selectError } from 'redux/selectors';
-import toast from 'react-hot-toast';
 import { nanoid } from '@reduxjs/toolkit';
 
 const userShema = object({
@@ -43,9 +43,14 @@ const initialValues = {
 const LoginForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const error = useSelector(selectError);
   const passwdid = nanoid();
   const emailid = nanoid();
+
+  const [showPassword, setShowPassword] = useState(false); // Додати стан для відображення пароля
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleSubmit = (values, { resetForm }) => {
     dispatch(logInUser(values))
@@ -53,18 +58,8 @@ const LoginForm = () => {
         if (data.error) {
           throw new Error();
         }
+        resetForm();
       })
-      .catch(_ => {
-        if (error !== null) {
-          if (error.includes('401')) {
-            toast.error('Not valid email or password');
-          } else {
-            toast.error('Something went wrong.');
-          }
-          return;
-        }
-      });
-    resetForm();
   };
 
   const FormError = ({ name }) => {
@@ -91,8 +86,8 @@ const LoginForm = () => {
                       errors.email && touched.email
                         ? '#E74A3B'
                         : touched.email
-                        ? '#3CBC81'
-                        : '#111'
+                          ? '#3CBC81'
+                          : '#111'
                     }
                   >
                     Email
@@ -108,8 +103,8 @@ const LoginForm = () => {
                       errors.email && touched.email
                         ? ' 1px solid #E74A3B'
                         : touched.email
-                        ? '1px solid #3CBC81'
-                        : '1px solid rgba(220, 227, 229, 0.6)'
+                          ? '1px solid #3CBC81'
+                          : '1px solid rgba(220, 227, 229, 0.6)'
                     }
                   />
                   {errors.email && touched.email ? (
@@ -135,8 +130,8 @@ const LoginForm = () => {
                       errors.password && touched.password
                         ? '#E74A3B'
                         : touched.password
-                        ? '#3CBC81'
-                        : '#111'
+                          ? '#3CBC81'
+                          : '#111'
                     }
                   >
                     Password
@@ -144,18 +139,28 @@ const LoginForm = () => {
 
                   <PasswordInput
                     autoComplete="off"
-                    type="password"
+                    type={showPassword ? 'text' : 'password'} // Встановити тип в залежності від стану showPassword
                     name="password"
                     id={passwdid}
-                    placeholder="******"
+                    placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                     $errPass={
                       errors.password && touched.password
                         ? ' 1px solid #E74A3B'
                         : touched.password
-                        ? '1px solid #3CBC81'
-                        : '1px solid rgba(220, 227, 229, 0.6)'
+                          ? '1px solid #3CBC81'
+                          : '1px solid rgba(220, 227, 229, 0.6)'
                     }
                   />
+                  {showPassword ? (
+                    <PasswordVisibilityIcon onClick={toggleShowPassword}>
+                      <FiEye />
+                    </PasswordVisibilityIcon>
+                  ) : (
+                    <PasswordVisibilityIcon onClick={toggleShowPassword}>
+                      <FiEyeOff />
+                    </PasswordVisibilityIcon>
+                  )}
+
                   {errors.password && touched.password ? (
                     <Iconinput>
                       <use href={`${icons}#error`} />

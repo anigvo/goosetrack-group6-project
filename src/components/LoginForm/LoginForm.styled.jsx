@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Field } from 'formik';
 import { registerPageColors } from 'utils/colors';
 
+
 export const MainContainer = styled.div`
   display: flex;
   height: 100vh;
@@ -82,6 +83,7 @@ export const EmailInput = styled(Field)`
   font-size: 14px;
   font-weight: 400;
   line-height: 18px;
+  outline: none;
 
   ::placeholder {
     color: ${registerPageColors.placeholderColor};
@@ -110,7 +112,8 @@ export const PasswordInput = styled(Field)`
   height: 46px;
   padding: 0;
   padding-left: 8px;
-
+  outline: none;
+  
   ::placeholder {
     color: ${registerPageColors.placeholderColor};
     font-size: 14px;
@@ -131,6 +134,20 @@ export const PasswordInput = styled(Field)`
     }
   }
 `;
+
+export const PasswordVisibilityIcon = styled.span`
+  position: absolute;
+  top: 75%;
+  right: 60px;
+  transform: translateY(-50%);
+  cursor: pointer;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+`;
+
 export const ErrorMsg = styled.p`
   color: ${registerPageColors.errorMessage};
   font-size: 12px;
@@ -204,7 +221,6 @@ export const Iconinput = styled.svg`
     height: 32px;
   }
 `;
-
 export const ButtonSignup = styled.button`
   color: ${registerPageColors.buttonColor};
   text-shadow: 0px 9.399999618530273px 57.6875px rgba(0, 0, 0, 0.04),

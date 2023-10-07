@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { ArrowIcon, Option, Options, OtherOptions, PencilIcon, Tool, ToolList, TrashIcon } from "./TaskToolbar.styled";
+import { ArrowIcon, ToolList, ClosableBcg, Option, Options, OtherOptions, PencilIcon, TrashIcon, Wrapper } from "./TaskToolbar.styled";
 import { nanoid } from "@reduxjs/toolkit";
 import { AnimatePresence } from "framer-motion";
 import TaskModal from "modals/TaskModal/TaskModal";
 import { useDispatch } from "react-redux";
-import { deleteUserTask } from "redux/tasks/operations";
+import { deleteUserTask, updateUserTask } from "redux/tasks/operations";
 
 const toolVar = {
     initial: { opacity: 0 },
@@ -23,15 +23,41 @@ export const TaskToolbar = ({ currentGroup, id }) => {
 
     const toggleOptions = () => setIsOpenOptions(prevState => !prevState);
 
-    const openEditModal = () => {setIsModalOpen(true);};
-    const closeModal = () => setIsModalOpen(false);
-    const deleteTask = () => { dispatch(deleteUserTask(id)) };
+    const closeOptions = e => {
+        if (e.target === e.currentTarget) setIsOpenOptions(false);
+    }
 
-    return (<ToolList>
-        <Tool key={'change priority'} onClick={toggleOptions}>
+    const openEditModal = () => { setIsModalOpen(true); };
+    const closeModal = () => setIsModalOpen(false);
+
+    const deleteTask = () => {
+        dispatch(deleteUserTask(id));
+    };
+
+    const updateTaskCategory = group => {
+        const category = group.split(" ").join("-").toLowerCase();
+        const task = {
+            category: category
+        }
+        dispatch(updateUserTask({ task, id }));
+    }
+
+    return (<Wrapper><ToolList>
+        <li key={'change priority'} onClick={toggleOptions}>
             <ArrowIcon />
-            <AnimatePresence>
-                {isOpenOptions &&
+        </li>
+        <li key={'edit'} onClick={openEditModal}>
+            <PencilIcon />
+        </li>
+        <li key={'delete'} onClick={deleteTask}>
+            <TrashIcon />
+        </li>
+        {/* додала в пропси айді щоб можна було усередині робити фетч */}
+        {isModalOpen && <TaskModal isOpen={isModalOpen} onClose={closeModal} id={id} />}
+    </ToolList>
+        <AnimatePresence>
+            {isOpenOptions &&
+                (<><ClosableBcg onClick={closeOptions} />
                     <OtherOptions
                         initial={"initial"}
                         animate={"isOn"}
@@ -39,18 +65,9 @@ export const TaskToolbar = ({ currentGroup, id }) => {
                         variants={toolVar}>
                         <Options>
                             {allGroups.map(group =>
-                                <Option key={nanoid()}>{group}<ArrowIcon /></Option>)}
+                                <Option key={nanoid()} onClick={() => updateTaskCategory(group)}>{group}<ArrowIcon /></Option>)}
                         </Options>
-                    </OtherOptions>}
-            </AnimatePresence>
-        </Tool>
-        <Tool key={'edit'} onClick={openEditModal}>
-            <PencilIcon />
-        </Tool>
-        <Tool key={'delete'} onClick={deleteTask}>
-            <TrashIcon />
-        </Tool>
-        {/* додала в пропси айді щоб можна було усередині робити фетч */}
-        {isModalOpen && <TaskModal isOpen={isModalOpen} onClose={closeModal} id={id} />}
-    </ToolList>) 
+                    </OtherOptions></>)}
+        </AnimatePresence>
+    </Wrapper>)
 };

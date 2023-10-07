@@ -113,12 +113,7 @@ const CalendarPage = ({ updatePageName }) => {
         changePeriod={setPeriodType}
       />
       <Suspense
-        fallback={
-          <>
-            <Loader />
-          </>
-        }
-      >
+        fallback={<Loader type={'suspense'} /> }>
         <Outlet
           context={[
             startOfWeekDate,
