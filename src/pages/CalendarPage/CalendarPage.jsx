@@ -11,17 +11,17 @@ import {
   isMonday,
   isTuesday,
   endOfMonth,
-  setMonth,
   getDaysInMonth,
   addDays,
 } from 'date-fns';
 import { useSelector } from 'react-redux';
-import { selectDay, selectMonth } from 'redux/selectors';
+import { selectDay, selectMonth, selectYear } from 'redux/selectors';
 import { Loader } from 'components/Loader/Loader';
 const CalendarPage = ({ updatePageName }) => {
   const navigate = useNavigate();
   const month = useSelector(selectMonth);
   const day = useSelector(selectDay);
+  const year = useSelector(selectYear);
 
   useEffect(() => {
     updatePageName('Calendar');
@@ -30,7 +30,8 @@ const CalendarPage = ({ updatePageName }) => {
   const [periodType, setPeriodType] = useState('month');
   const [currentDateMonth] = useState(month);
   const [currentDateDay] = useState(day);
-  const [today, setToday] = useState(setMonth(new Date(), month));
+  const [currentDateYear] = useState(year);
+  const [today, setToday] = useState(new Date(year, month, day));
 
   useEffect(() => {
     if (periodType === 'month') {
@@ -100,6 +101,21 @@ const CalendarPage = ({ updatePageName }) => {
     setToday(date);
   };
 
+  const checkDate = (data, checkType) => {
+    const currentDate = new Date(currentDateYear, currentDateMonth, 1);
+    if (checkType === 'button') {
+      if (data > currentDate) {
+        return false;
+      }
+      return true;
+    } else {
+      if (data >= currentDate) {
+        return false;
+      }
+      return true;
+    }
+  };
+
   return (
     <>
       <CalendarToolbar
@@ -111,9 +127,9 @@ const CalendarPage = ({ updatePageName }) => {
         currentDateDay={currentDateDay}
         periodType={periodType}
         changePeriod={setPeriodType}
+        checkDate={checkDate}
       />
-      <Suspense
-        fallback={<Loader type={'suspense'} /> }>
+      <Suspense fallback={<Loader type={'suspense'} />}>
         <Outlet
           context={[
             startOfWeekDate,
@@ -121,6 +137,7 @@ const CalendarPage = ({ updatePageName }) => {
             today,
             setPeriodType,
             pickHandler,
+            checkDate,
           ]}
         />
       </Suspense>

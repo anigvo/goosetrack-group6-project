@@ -13,7 +13,11 @@ import {
 import { registerLocale } from 'react-datepicker';
 import enGB from 'date-fns/locale/en-GB';
 import { useNavigate } from 'react-router-dom';
-import { setCurrentDay } from 'redux/tasks/tasksSlice';
+import {
+  setCurrentDay,
+  setCurrentMonth,
+  setCurrentYear,
+} from 'redux/tasks/tasksSlice';
 import { useDispatch } from 'react-redux';
 
 registerLocale('en-GB', enGB);
@@ -55,14 +59,13 @@ export const DatePickerCustom = ({
   };
 
   const handleDateClick = date => {
-    handleDateChange(date);
-    const pickDate = date;
-    const day = pickDate.getDate();
-    navigate(`/calendar/day/${day}`);
-    setSelectedDate(pickDate);
+    const day = date.getDate();
     changePeriod('day');
-    dispatch(setCurrentDay(pickDate.getDate()));
-    pickHandler(pickDate);
+    navigate(`/calendar/day/${day}`);
+    dispatch(setCurrentDay(date.getDate()));
+    dispatch(setCurrentMonth(date.getMonth()));
+    dispatch(setCurrentYear(date.getFullYear()));
+    pickHandler(date);
   };
 
   const customHeader = ({ date, decreaseMonth, increaseMonth }) => {

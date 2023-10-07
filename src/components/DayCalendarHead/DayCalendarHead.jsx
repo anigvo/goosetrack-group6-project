@@ -8,9 +8,14 @@ import {
   DayNumberOfWeekWrapper,
 } from './DayCalendarHead.styled';
 import { useNavigate } from 'react-router-dom';
-import { setCurrentDay } from 'redux/tasks/tasksSlice';
+import {
+  setCurrentDay,
+  setCurrentMonth,
+  setCurrentYear,
+} from 'redux/tasks/tasksSlice';
 import { useDispatch } from 'react-redux';
-export const DayCalendarHead = ({ today, pickHandler }) => {
+
+export const DayCalendarHead = ({ today, pickHandler, checkDate }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isCurrentDay = day => isSameDay(day, today);
@@ -27,14 +32,17 @@ export const DayCalendarHead = ({ today, pickHandler }) => {
     return currentDay;
   });
 
-  const handleDateClick = event => {
-    const pickDay = Number(event.target.textContent);
-    const pickDate = new Date();
-    pickDate.setDate(pickDay);
+  const handleDateClick = data => {
+    const pickDate = new Date(data);
+    const pickDay = pickDate.getDate();
     navigate(`/calendar/day/${pickDay}`);
     dispatch(setCurrentDay(pickDate.getDate()));
+    dispatch(setCurrentMonth(pickDate.getMonth()));
+    dispatch(setCurrentYear(pickDate.getFullYear()));
+    checkDate(pickDate);
     pickHandler(pickDate);
   };
+
   return (
     <DayCalendarHeadContainer>
       <DaysOfWeekList>
@@ -48,11 +56,13 @@ export const DayCalendarHead = ({ today, pickHandler }) => {
       </DaysOfWeekList>
       <DaysOfWeekList>
         {daysArray.map(dayItem => (
-          <DayNumberOfWeekWrapper
-            key={format(dayItem, 'ddMMyyyy')}
-            onClick={handleDateClick}
-          >
-            <DayNumberOfWeek isCurrentDay={isCurrentDay(dayItem)}>
+          <DayNumberOfWeekWrapper key={format(dayItem, 'ddMMyyyy')}>
+            <DayNumberOfWeek
+              isCurrentDay={isCurrentDay(dayItem)}
+              onClick={() => handleDateClick(dayItem)}
+              disabled={checkDate(dayItem, 'click')}
+              disabledStyled={checkDate(dayItem)}
+            >
               {format(dayItem, 'd')}
             </DayNumberOfWeek>
           </DayNumberOfWeekWrapper>
