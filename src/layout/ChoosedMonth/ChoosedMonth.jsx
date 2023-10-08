@@ -5,19 +5,15 @@ import { CalendarTable } from '../../components/CalendarTable/CalendarTable';
 import { ChoosedMonthContainer } from './ChoosedMonth.styled';
 
 const ChoosedMonth = () => {
-  const [startOfWeekDate, daysToAdd, today, setPeriodType] = useOutletContext();
+  const [setPeriodType] = useOutletContext();
   useEffect(() => {
     setPeriodType('month');
   }, [setPeriodType]);
-  
+
   return (
     <ChoosedMonthContainer>
       <MonthCalendarHead />
-      <CalendarTable
-        startOfWeekDate={startOfWeekDate}
-        daysToAdd={daysToAdd}
-        today={today}
-      />
+      <CalendarTable />
     </ChoosedMonthContainer>
   );
 };
