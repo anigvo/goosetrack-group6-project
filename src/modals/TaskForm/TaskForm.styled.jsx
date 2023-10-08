@@ -3,8 +3,6 @@ import { ReactComponent as Plus } from '../../assets/icons/plus.svg';
 
 const TaskFormWrapper = styled.div`
   font-family: Inter, sans-serif;
-  width: 267px;
-  max-height: 200px;
   background-color: ${props => props.theme.modalBackground}; 
   margin-top: 10px;
 
@@ -47,7 +45,10 @@ const TaskFormWrapper = styled.div`
     }
 
     input[type="text"] {
+      min-width: 267px;
+
     @media (min-width: 767px) {
+      padding-right: 10px;
       min-width: 340px;
       min-height: 46px;
     }}
@@ -199,6 +200,19 @@ export const AddIcon = styled(Plus)`
 stroke: ${props => props.theme.btnTextColor};
 width: 20px;
 height: 20px;
-` 
+`;
+const LoaderCont = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  height: 20vh; 
+`;
 
-export { TaskFormWrapper, TimeDiv };
+export const GooseImageForFeed = styled.img`
+  width: 81px;
+  height: 188px;
+  transform: translateY(10px) rotate(-31deg);
+
+`;
+
+export { TaskFormWrapper, TimeDiv, LoaderCont };
