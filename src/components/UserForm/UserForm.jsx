@@ -1,7 +1,6 @@
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Field, Form, Formik } from 'formik';
-
 import {
   UserSection,
   AvatarContainer,
@@ -35,17 +34,17 @@ import { CustomFormInput } from '../../utils/constans/CustomFormInput';
 import '../../utils/datePickerUser.css';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUser } from '../../redux/selectors';
-import { format } from 'date-fns';
+import { selectAvatar, selectUser } from '../../redux/selectors';
 import { editUser } from '../../redux/auth/operations';
 import { Notify } from 'notiflix';
 import { Avatar } from 'components/Avatar/Avatar';
 
 export const UserForm = () => {
   const userInfo = useSelector(selectUser);
-
   const [isFormChanged, setIsFormChanged] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
   const dispatch = useDispatch();
+  const photo = useSelector(selectAvatar);
 
   const initialValues = {
     name: userInfo.name || '',
@@ -56,16 +55,50 @@ export const UserForm = () => {
     avatarURL: userInfo.avatarURL || '',
   };
 
-  const handleSubmit = (values, { resetForm, setFieldValue }) => {
-    values.birthday = format(values.birthday, 'yyyy-MM-dd');
-
-    try {
-      dispatch(editUser(values));
-      setIsFormChanged(false);
-      resetForm();
-    } catch (error) {
-      console.error('Registration', error);
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const maxSizeInBytes = 600 * 1024;
+      if (file.size > maxSizeInBytes) {
+        Notify.failure(
+          'The uploaded file is too large. The maximum size is 600 KB.'
+        );
+        e.target.value = null;
+        return false;
+      }
     }
+    let reader = new FileReader();
+    reader.onloadend = function (e) {
+      setSelectedFile(reader.result)
+    }
+    reader.readAsDataURL(file)
+    return true;
+  }
+
+
+  const handleSubmit = (values, {resetForm}) => {
+    const formData = new FormData();
+    if (values.name) {
+      formData.append("name", values.name);
+    }
+    if (values.email) {
+      formData.append("email", values.email);
+    }
+    if (values.birthday) {
+      formData.append("birthday", values.birthday.toISOString().split('T')[0]);
+    }
+    if (values.skype) {
+      formData.append("skype", values.skype);
+    }
+    if (values.phone) {
+      formData.append("phone", values.phone);
+    }
+    if (values.avatarURL && selectedFile) {
+      formData.delete("avatarURL");
+      formData.append("image", values.avatarURL);
+    }
+    dispatch(editUser(formData))
+    setIsFormChanged(false);
   };
 
   return (
@@ -81,45 +114,18 @@ export const UserForm = () => {
               <ContainerForm>
                 <AvatarContainer>
                   <UserAvatar>
-                    <Avatar />
+                    <Avatar photo={selectedFile ? selectedFile : photo} />
                     <AvatarUploadContainer>
                       <Field
                         id="avatarUrl"
                         name="avatarUrl"
                         type="file"
                         accept="image/*,.jpeg,.jpg,.png"
-                        onChange={async e => {
-                          const file = e.target.files[0];
-
-                          if (file) {
-                            const maxSizeInBytes = 600 * 1024;
-                            if (file.size > maxSizeInBytes) {
-                              Notify.failure(
-                                'The uploaded file is too large. The maximum size is 600 KB.'
-                              );
-                              e.target.value = null;
-                              return;
-                            }
-                          }
-                          const formData = new FormData();
-                          formData.append('image', file);
-
-                          try {
-                           await dispatch(editUser(formData));
-                            setIsFormChanged(false);
-                          } catch (error) {
-                            setIsFormChanged(false);
-                          }
-                          //   const formData = new FormData();
-                          //   formData.append('avatar', file);
-
-                          //   try {
-                          //     dispatch(editUser({ avatarURL: formData }));
-                          //     setIsFormChanged(false);
-                          //   } catch (error) {
-                          //     setIsFormChanged(false);
-                          //   }
-                        }}
+                        onChange={(e) => {
+                          const isFile = handleFileChange(e);
+                          isFile && setFieldValue("avatarURL", e.target.files[0])
+                        }
+                        }
                         style={{ display: 'none' }}
                       />
 
@@ -143,8 +149,8 @@ export const UserForm = () => {
                               errors.name && touched.name
                                 ? 'error'
                                 : touched.name
-                                ? 'valid'
-                                : 'default'
+                                  ? 'valid'
+                                  : 'default'
                             }
                           >
                             User Name
@@ -158,8 +164,8 @@ export const UserForm = () => {
                               errors.name && touched.name
                                 ? 'error'
                                 : touched.name
-                                ? 'valid'
-                                : 'default'
+                                  ? 'valid'
+                                  : 'default'
                             }
                           />
                           {touched.name && (
@@ -243,8 +249,8 @@ export const UserForm = () => {
                               errors.email && touched.email
                                 ? 'error'
                                 : touched.email
-                                ? 'valid'
-                                : 'default'
+                                  ? 'valid'
+                                  : 'default'
                             }
                           >
                             Email
@@ -257,8 +263,8 @@ export const UserForm = () => {
                               errors.email && touched.email
                                 ? 'error'
                                 : touched.email
-                                ? 'valid'
-                                : 'default'
+                                  ? 'valid'
+                                  : 'default'
                             }
                           />
                           {touched.email && (
@@ -291,8 +297,8 @@ export const UserForm = () => {
                               errors.phone && touched.phone
                                 ? 'error'
                                 : touched.phone
-                                ? 'valid'
-                                : 'default'
+                                  ? 'valid'
+                                  : 'default'
                             }
                           >
                             Phone
@@ -307,8 +313,8 @@ export const UserForm = () => {
                               errors.phone && touched.phone
                                 ? 'error'
                                 : touched.phone
-                                ? 'valid'
-                                : 'default'
+                                  ? 'valid'
+                                  : 'default'
                             }
                           />
                           {touched.phone && (
@@ -338,8 +344,8 @@ export const UserForm = () => {
                               errors.skype && touched.skype
                                 ? 'error'
                                 : touched.skype
-                                ? 'valid'
-                                : 'default'
+                                  ? 'valid'
+                                  : 'default'
                             }
                           >
                             Skype
@@ -353,8 +359,8 @@ export const UserForm = () => {
                               errors.skype && touched.skype
                                 ? 'error'
                                 : touched.skype
-                                ? 'valid'
-                                : 'default'
+                                  ? 'valid'
+                                  : 'default'
                             }
                           />
                           {touched.skype && (
