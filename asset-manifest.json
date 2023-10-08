@@ -1,9 +1,9 @@
 {
   "files": {
     "main.css": "/goosetrack-group6-project/static/css/main.50125da7.css",
-    "main.js": "/goosetrack-group6-project/static/js/main.c2b37347.js",
+    "main.js": "/goosetrack-group6-project/static/js/main.4a2bf3de.js",
     "static/css/602.c49610f3.chunk.css": "/goosetrack-group6-project/static/css/602.c49610f3.chunk.css",
-    "static/js/602.4b00acf4.chunk.js": "/goosetrack-group6-project/static/js/602.4b00acf4.chunk.js",
+    "static/js/602.dcb1328a.chunk.js": "/goosetrack-group6-project/static/js/602.dcb1328a.chunk.js",
     "static/css/273.2964b553.chunk.css": "/goosetrack-group6-project/static/css/273.2964b553.chunk.css",
     "static/js/273.19fdb961.chunk.js": "/goosetrack-group6-project/static/js/273.19fdb961.chunk.js",
     "static/css/489.2964b553.chunk.css": "/goosetrack-group6-project/static/css/489.2964b553.chunk.css",
@@ -63,9 +63,9 @@
     "static/media/plus.svg": "/goosetrack-group6-project/static/media/plus.584b925e342ac1d2e0892d9aec12d76c.svg",
     "static/media/close.svg": "/goosetrack-group6-project/static/media/close.7241e85da3b30e42b36747dccef5f401.svg",
     "main.50125da7.css.map": "/goosetrack-group6-project/static/css/main.50125da7.css.map",
-    "main.c2b37347.js.map": "/goosetrack-group6-project/static/js/main.c2b37347.js.map",
+    "main.4a2bf3de.js.map": "/goosetrack-group6-project/static/js/main.4a2bf3de.js.map",
     "602.c49610f3.chunk.css.map": "/goosetrack-group6-project/static/css/602.c49610f3.chunk.css.map",
-    "602.4b00acf4.chunk.js.map": "/goosetrack-group6-project/static/js/602.4b00acf4.chunk.js.map",
+    "602.dcb1328a.chunk.js.map": "/goosetrack-group6-project/static/js/602.dcb1328a.chunk.js.map",
     "273.2964b553.chunk.css.map": "/goosetrack-group6-project/static/css/273.2964b553.chunk.css.map",
     "273.19fdb961.chunk.js.map": "/goosetrack-group6-project/static/js/273.19fdb961.chunk.js.map",
     "489.2964b553.chunk.css.map": "/goosetrack-group6-project/static/css/489.2964b553.chunk.css.map",
@@ -80,6 +80,6 @@
   },
   "entrypoints": [
     "static/css/main.50125da7.css",
-    "static/js/main.c2b37347.js"
+    "static/js/main.4a2bf3de.js"
   ]
 }
