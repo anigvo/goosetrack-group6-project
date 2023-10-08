@@ -42,13 +42,13 @@ import { Notify } from 'notiflix';
 import { Avatar } from 'components/Avatar/Avatar';
 
 export const UserForm = () => {
-  const dispatch = useDispatch();
   const userInfo = useSelector(selectUser);
 
   const [isFormChanged, setIsFormChanged] = useState(false);
+  const dispatch = useDispatch();
 
   const initialValues = {
-    userName: userInfo.userName || '',
+    name: userInfo.name || '',
     birthday: userInfo.birthday ? new Date(userInfo.birthday) : new Date(),
     phone: userInfo.phone || '',
     skype: userInfo.skype || '',
@@ -87,8 +87,8 @@ export const UserForm = () => {
                         id="avatarUrl"
                         name="avatarUrl"
                         type="file"
-                        accept="image/*,.png,.jpg,.gif"
-                        onChange={e => {
+                        accept="image/*,.jpeg,.jpg,.png"
+                        onChange={async e => {
                           const file = e.target.files[0];
 
                           if (file) {
@@ -102,10 +102,10 @@ export const UserForm = () => {
                             }
                           }
                           const formData = new FormData();
-                          formData.append('avatar', file);
+                          formData.append('image', file);
 
                           try {
-                            dispatch(editUser(formData)); // Передаємо просто formData, без обгортки в об'єкт
+                           await dispatch(editUser(formData));
                             setIsFormChanged(false);
                           } catch (error) {
                             setIsFormChanged(false);
@@ -129,7 +129,7 @@ export const UserForm = () => {
                     </AvatarUploadContainer>
                   </UserAvatar>
 
-                  <UserName>{userInfo.userName || 'User Name'}</UserName>
+                  <UserName>{userInfo.name || 'User Name'}</UserName>
                   <UserRole>User</UserRole>
                 </AvatarContainer>
 
@@ -137,12 +137,12 @@ export const UserForm = () => {
                   <BoxAllInputs>
                     <ContainerInputs>
                       <BoxInput>
-                        <Label htmlFor="userName">
+                        <Label htmlFor="name">
                           <LabelText
                             status={
-                              errors.userName && touched.userName
+                              errors.name && touched.name
                                 ? 'error'
-                                : touched.userName
+                                : touched.name
                                 ? 'valid'
                                 : 'default'
                             }
@@ -150,21 +150,21 @@ export const UserForm = () => {
                             User Name
                           </LabelText>
                           <FormInput
-                            id="userName"
+                            id="name"
                             type="text"
-                            name="userName"
+                            name="name"
                             placeholder="User name"
                             status={
-                              errors.userName && touched.userName
+                              errors.name && touched.name
                                 ? 'error'
-                                : touched.userName
+                                : touched.name
                                 ? 'valid'
                                 : 'default'
                             }
                           />
-                          {touched.userName && (
+                          {touched.name && (
                             <ValidationIcon>
-                              {errors.userName ? (
+                              {errors.name ? (
                                 <InvalidInputIcon />
                               ) : (
                                 <ValidInputIcon />
@@ -172,15 +172,12 @@ export const UserForm = () => {
                             </ValidationIcon>
                           )}
                           <Feedback>
-                            {touched.userName && !errors.userName ? (
+                            {touched.name && !errors.name ? (
                               <ValidFeedback>
                                 User name is correct
                               </ValidFeedback>
                             ) : (
-                              <InvalidFeedback
-                                name="userName"
-                                component="div"
-                              />
+                              <InvalidFeedback name="name" component="div" />
                             )}
                           </Feedback>
                         </Label>
