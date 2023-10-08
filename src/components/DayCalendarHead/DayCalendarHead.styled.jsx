@@ -62,6 +62,7 @@ export const DayNumberOfWeek = styled.button`
   padding: 4px 6px;
   border-radius: 8px;
   cursor: pointer;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover,
   &:focus {
     background-color: ${props =>
