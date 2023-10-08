@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { TaskFormWrapper, TimeDiv, AddIcon } from './TaskForm.styled';
+import { TaskFormWrapper, TimeDiv, AddIcon, LoaderCont, GooseImageForFeed } from './TaskForm.styled';
 import { createTask, updateTask, getTasks } from '../../api/tasks';
 import { isSameDay } from 'date-fns';
 import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserTasks } from 'redux/tasks/operations';
 import { selectFullDate } from 'redux/selectors';
+import Image from '../../assets/images/notfoundpage-goose-rocket.png';
 
 function TaskForm({ taskToEdit, onCancel, id, category }) {
   const currentDate = useSelector(selectFullDate);
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -73,6 +75,8 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
           }
         } catch (error) {
           console.error('Error fetching task by id:', error);
+        } finally {
+          setIsLoading(false); 
         }
       }
     }
@@ -84,7 +88,7 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
     const { name, value } = event.target;
 
     if (name === 'end' && value < formData.start) {
-      alert('Час "end" не може бути менше за час "start"');
+      toast.error('Incorrect time format or start greater than/equal to end');
       return;
     }
 
@@ -157,30 +161,30 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
     const { title, start, end, priority, date, category } = formData;
 
     if (!title || title.length > 250) {
-      alert('Назва завдання має бути від 1 до 250 символів');
+      toast.error('The name of the task must be between 1 and 250 characters');
       return false;
     }
 
     const timeRegex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
     if (!start.match(timeRegex) || !end.match(timeRegex) || start >= end) {
-      alert('Некоректний формат часу або початок більше або рівний кінцю');
+      toast.error('Incorrect time format or start greater than/equal to end');
       return false;
     }
 
     if (!['low', 'medium', 'high'].includes(priority)) {
-      alert('Некоректний пріоритет');
+      toast.error('Unspecified priority');
       return false;
     }
 
     const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
 
     if (!date.match(dateRegex)) {
-      alert('Некоректний формат дати');
+      toast.error('Incorrect date format');
       return false;
     }
 
     if (!['to-do', 'in-progress', 'done'].includes(category)) {
-      alert('Некоректна категорія');
+      toast.error('Incorrect category');
       return false;
     }
 
@@ -189,6 +193,9 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
 
   return (
     <TaskFormWrapper>
+       {isLoading && formData.isEditing ? (
+        <LoaderCont><GooseImageForFeed alt="goose" src={Image} /></LoaderCont>
+      ) : (
       <form onSubmit={handleSubmit}>
         <div>
           <label>Title</label>
@@ -301,6 +308,7 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
           </button>
         </div>
       </form>
+      )}
     </TaskFormWrapper>
   );
 }
