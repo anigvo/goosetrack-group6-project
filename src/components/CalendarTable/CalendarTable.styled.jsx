@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { media } from 'utils/queries';
+
 export const СalendarGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -20,7 +21,7 @@ export const CalendarItem = styled.button`
   line-height: 1.16;
   font-weight: 700;
   font-family: 'Inter', sans-serif;
-  height: 83px;
+  height: 98px;
   cursor: pointer;
   border: none;
   padding: 0;
@@ -34,22 +35,21 @@ export const CalendarItem = styled.button`
   }
 
   ${media('tablet', '')`
-height: 130px;
+height: 150px;
   font-size: 16px;
   line-height: 1.15;
     `}
   ${media('desktop', '')`
-height: 125px;
+height: 140px;
     `}
 `;
 export const CalendarDayWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   padding: 4px 8px;
   ${media('tablet', '')`
-    margin-bottom: 4px;
   padding: 14px;
     `}
 `;
@@ -92,8 +92,18 @@ export const CalendarTask = styled.div`
     `}
 `;
 
-export const CalendarTaskText = styled.p`
+export const CalendarTaskList = styled.ul`
+  text-align: start;
+  list-style: none;
+  width: 100%;
+`;
+
+export const CalendarTaskItem = styled.li`
+  &:not(:last-child) {
+    margin-bottom: 4px;
+  }
   max-width: 42px;
+  width: 42px;
   font-size: 10px;
   line-height: 1.4;
   overflow: hidden;
@@ -105,6 +115,7 @@ export const CalendarTaskText = styled.p`
   padding-left: 4px;
   ${media('tablet', '')`
   max-width: 90px;
+  width: 90px;
   font-size: 14px;
   line-height: 1.28;
   padding-top: 4px;
@@ -114,9 +125,33 @@ export const CalendarTaskText = styled.p`
     `}
   ${media('desktop', '')`
   max-width: 147px;
+  width: 147px;
   padding-top: 4px;
   padding-bottom: 4px;
   padding-right: 12px;
   padding-left: 12px;
+    `}
+  border-radius: 8px;
+  color: ${props =>
+    props.priority === 'low'
+      ? props.theme.calendarLowTaskText
+      : props.priority === 'medium'
+      ? props.theme.calendarMediumTaskText
+      : props.theme.calendarHighTaskText};
+  background-color: ${props =>
+    props.priority === 'low'
+      ? props.theme.calendarLowTaskBackground
+      : props.priority === 'medium'
+      ? props.theme.calendarMediumTaskBackground
+      : props.theme.calendarHighTaskBackground};
+`;
+
+export const TaskSpan = styled.span`
+  color: ${props => props.theme.calendarTextColor};
+  font-size: 10px;
+  line-height: 1.4;
+  ${media('tablet', '')`
+  font-size: 14px;
+  line-height: 1.28;
     `}
 `;

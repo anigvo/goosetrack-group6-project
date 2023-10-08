@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
-import {
-  СalendarGrid,
-  CalendarDay,
-  CalendarItem,
-  CalendarTask,
-  CalendarDayWrapper,
-  CalendarTaskText,
-} from './CalendarTable.styled';
-import { isSameDay, format, isSameMonth } from 'date-fns';
-import { selectFullDate } from 'redux/selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { selectFullDate, selectCategoryTasks } from 'redux/selectors';
+import {
+  setCurrentDay,
+  setCurrentMonth,
+  setCurrentYear,
+} from 'redux/tasks/tasksSlice';
 import {
   startOfMonth,
   startOfWeek,
@@ -19,15 +15,24 @@ import {
   isTuesday,
   endOfMonth,
   getDaysInMonth,
+  isSameDay,
+  format,
+  isSameMonth,
 } from 'date-fns';
 import {
-  setCurrentDay,
-  setCurrentMonth,
-  setCurrentYear,
-} from 'redux/tasks/tasksSlice';
+  СalendarGrid,
+  CalendarDay,
+  CalendarItem,
+  CalendarTask,
+  CalendarDayWrapper,
+  CalendarTaskList,
+  CalendarTaskItem,
+  TaskSpan,
+} from './CalendarTable.styled';
 export const CalendarTable = ({ changePeriod }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { todo } = useSelector(selectCategoryTasks);
   const reduxDate = useSelector(selectFullDate);
   const currentDate = new Date(reduxDate);
   const chooseDay = () => {
@@ -91,31 +96,75 @@ export const CalendarTable = ({ changePeriod }) => {
     dispatch(setCurrentMonth(date.getMonth()));
     dispatch(setCurrentYear(date.getFullYear()));
   };
+
+  const filterTasksByDate = (tasks, date) => {
+    return tasks.filter(task => {
+      const taskDate = new Date(task.date);
+      return isSameDay(taskDate, date);
+    });
+  };
+
   return (
     <СalendarGrid>
-      {daysArray.map(dayItem => (
-        <CalendarItem
-          key={format(dayItem, 'ddMMyyyy')}
-          onClick={() => handleDateClick(dayItem)}
-          disabled={!isSameMonth(dayItem, currentDate)}
-        >
-          <CalendarDayWrapper>
-            <CalendarDay
-              isCurrentDay={isCurrentDay(dayItem)}
-              isCurrentDayMonth={isSameMonth(dayItem, currentDate)}
-            >
-              {format(dayItem, 'd')}
-            </CalendarDay>
-          </CalendarDayWrapper>
-          <CalendarTask>
-            {isSameMonth(dayItem, currentDate) ? (
-              <CalendarTaskText>
-                TextTextTextTextTextTextTextText Text TextText
-              Text</CalendarTaskText>
-            ) : null}
-          </CalendarTask>
-        </CalendarItem>
-      ))}
+      {daysArray.map(dayItem => {
+        const tasksForDay = filterTasksByDate(todo, dayItem);
+        return (
+          <CalendarItem
+            key={format(dayItem, 'ddMMyyyy')}
+            onClick={() => handleDateClick(dayItem)}
+            disabled={!isSameMonth(dayItem, currentDate)}
+          >
+            <CalendarDayWrapper>
+              <CalendarDay
+                isCurrentDay={isCurrentDay(dayItem)}
+                isCurrentDayMonth={isSameMonth(dayItem, currentDate)}
+              >
+                {format(dayItem, 'd')}
+              </CalendarDay>
+            </CalendarDayWrapper>
+            <CalendarTask>
+              <CalendarTaskList>
+                {isSameMonth(dayItem, currentDate) ? (
+                  <>
+                    {window.innerWidth > 767
+                      ? tasksForDay.slice(0, 2).map((task, index) => (
+                          <CalendarTaskItem
+                            key={index}
+                            id={task._id}
+                            priority={task.priority}
+                            text={task.title}
+                            date={task.date}
+                          >
+                            {task.title}
+                          </CalendarTaskItem>
+                        ))
+                      : tasksForDay.slice(0, 1).map((task, index) => (
+                          <CalendarTaskItem
+                            key={index}
+                            id={task._id}
+                            priority={task.priority}
+                            text={task.title}
+                            date={task.date}
+                          >
+                            {task.title}
+                          </CalendarTaskItem>
+                        ))}
+                    {window.innerWidth > 767 ? (
+                      tasksForDay.length > 2 ? (
+                        <TaskSpan>
+                          ... and {tasksForDay.length - 2} more
+                        </TaskSpan>
+                      ) : null
+                    ) : tasksForDay.length > 1 ? (
+                      <TaskSpan>... and {tasksForDay.length - 1} more</TaskSpan>
+                    ) : null}
+                  </>
+                ) : null}
+              </CalendarTaskList>
+            </CalendarTask>
+          </CalendarItem>
+        );
+      })}
     </СalendarGrid>
   );
 };
