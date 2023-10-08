@@ -13,7 +13,7 @@ const ChoosedMonth = () => {
   return (
     <ChoosedMonthContainer>
       <MonthCalendarHead />
-      <CalendarTable />
+      <CalendarTable changePeriod={setPeriodType} />
     </ChoosedMonthContainer>
   );
 };

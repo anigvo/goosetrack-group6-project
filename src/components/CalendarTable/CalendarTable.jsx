@@ -5,10 +5,12 @@ import {
   CalendarItem,
   CalendarTask,
   CalendarDayWrapper,
+  CalendarTaskText,
 } from './CalendarTable.styled';
 import { isSameDay, format, isSameMonth } from 'date-fns';
 import { selectFullDate } from 'redux/selectors';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   startOfMonth,
   startOfWeek,
@@ -18,8 +20,14 @@ import {
   endOfMonth,
   getDaysInMonth,
 } from 'date-fns';
-
-export const CalendarTable = () => {
+import {
+  setCurrentDay,
+  setCurrentMonth,
+  setCurrentYear,
+} from 'redux/tasks/tasksSlice';
+export const CalendarTable = ({ changePeriod }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const reduxDate = useSelector(selectFullDate);
   const currentDate = new Date(reduxDate);
   const chooseDay = () => {
@@ -75,10 +83,22 @@ export const CalendarTable = () => {
 
   const isCurrentDay = day => isSameDay(day, fixedDate);
 
+  const handleDateClick = date => {
+    const day = date.getDate();
+    changePeriod('day');
+    navigate(`/calendar/day/${day}`);
+    dispatch(setCurrentDay(date.getDate()));
+    dispatch(setCurrentMonth(date.getMonth()));
+    dispatch(setCurrentYear(date.getFullYear()));
+  };
   return (
     <СalendarGrid>
       {daysArray.map(dayItem => (
-        <CalendarItem key={format(dayItem, 'ddMMyyyy')}>
+        <CalendarItem
+          key={format(dayItem, 'ddMMyyyy')}
+          onClick={() => handleDateClick(dayItem)}
+          disabled={!isSameMonth(dayItem, currentDate)}
+        >
           <CalendarDayWrapper>
             <CalendarDay
               isCurrentDay={isCurrentDay(dayItem)}
@@ -87,7 +107,13 @@ export const CalendarTable = () => {
               {format(dayItem, 'd')}
             </CalendarDay>
           </CalendarDayWrapper>
-          <CalendarTask />
+          <CalendarTask>
+            {isSameMonth(dayItem, currentDate) ? (
+              <CalendarTaskText>
+                TextTextTextTextTextTextTextText Text TextText
+              Text</CalendarTaskText>
+            ) : null}
+          </CalendarTask>
         </CalendarItem>
       ))}
     </СalendarGrid>
