@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AddIcon, Button } from "./AddTaskBtn.styled"
 import TaskModal from "../../modals/TaskModal/TaskModal";
 
-export const AddTaskButton = ({ category, today }) => {
+export const AddTaskButton = ({ category}) => {
   
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -25,7 +25,6 @@ export const AddTaskButton = ({ category, today }) => {
           isOpen={isModalOpen}
           onClose={closeModal}
           category={category}
-          today={today}
         />
       )}
     </>

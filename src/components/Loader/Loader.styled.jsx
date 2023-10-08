@@ -13,7 +13,7 @@ export const LoaderPosition = styled.div`
 
 export const SuspenseLoader = styled.div`
 width: 100%;
-height: calc(100vh - 260px);
+height: calc(100vh - 360px);
 display: flex;
   align-items: center;
   justify-content: center;

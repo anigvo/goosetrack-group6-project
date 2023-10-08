@@ -21,6 +21,9 @@ export const MobileMenuBtn = styled.button`
     border: none;
     padding: 0;
     cursor: pointer;
+    &:disabled > svg {
+        stroke: ${props => props.theme.mainFont}; 
+    }
 `;
 
 export const BurgerIcon = styled(Burger)`

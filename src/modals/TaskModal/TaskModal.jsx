@@ -3,7 +3,7 @@ import CustomModal from '../Modal/Modal';
 import TaskForm from '../TaskForm/TaskForm';
 import ReactDOM from 'react-dom';
 
-const TaskModal = ({ isOpen, onClose, category, id, today }) => {
+const TaskModal = ({ isOpen, onClose, category, id}) => {
   const [modalStyles, setModalStyles] = useState({
     maxWidth: '303px',
     maxHeight: '336px',
@@ -49,7 +49,6 @@ const TaskModal = ({ isOpen, onClose, category, id, today }) => {
           onCancel={onClose}
           category={category}
           id={id}
-          today={today}
         />
       </CustomModal>,
       document.getElementById('modal-root')

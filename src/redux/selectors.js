@@ -41,3 +41,10 @@ export const selectCategoryTasks = createSelector([selectTasks], (items) => {
 })
 
 export const selectIsLoadingTasks = state => state.tasks.isLoadingTasks;
+
+export const selectFullDate = createSelector([selectDay, selectMonth, selectYear], (day, month, year) => {
+    const fullDay = day.toString().length === 1 ? day.toString().padStart(2, '0') : day;
+    const isoMonth = month + 1;
+    const fullMonth = isoMonth.toString().length === 1 ? isoMonth.toString().padStart(2, '0') : isoMonth;
+    return `${year}-${fullMonth}-${fullDay}`;
+})

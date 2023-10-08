@@ -1,20 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getDate, getYear } from 'date-fns';
 import {
   createUserTasks,
   deleteUserTask,
   getUserTasks,
   updateUserTask,
 } from './operations';
+import toast from "react-hot-toast";
+import { handlePending, handleRejected, initialState } from "./constants";
 
 const tasksSlice = createSlice({
   name: 'tasks',
-  initialState: {
-    month: new Date().getMonth(),
-    day: getDate(new Date()),
-    year: getYear(new Date()),
-    items: [],
-  },
+  initialState,
   reducers: {
     setCurrentDay(state, action) {
       state.day = action.payload;
@@ -28,24 +24,25 @@ const tasksSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(getUserTasks.fulfilled, (state, action) => {
+    .addCase(getUserTasks.pending, handlePending)
+    .addCase(getUserTasks.fulfilled, (state, action) => {
         state.items = action.payload;
-      })
-      .addCase(createUserTasks.fulfilled, (state, { payload }) => {
+        state.isLoadingTasks = false;
+    })
+    .addCase(getUserTasks.rejected, handleRejected)
+    .addCase(createUserTasks.fulfilled, (state, { payload }) => {
         state.items.push(payload);
-      })
-      .addCase(updateUserTask.fulfilled, (state, { payload }) => {
-        const oldItemIndex = state.items.findIndex(
-          task => task._id === payload._id
-        );
+    })
+    .addCase(updateUserTask.fulfilled, (state, { payload }) => {
+        const oldItemIndex = state.items.findIndex(task => task._id === payload._id);
         state.items.splice(oldItemIndex, 1, payload);
-      })
-      .addCase(deleteUserTask.fulfilled, (state, { payload }) => {
+    })
+    .addCase(deleteUserTask.fulfilled, (state, { payload }) => {
         state.items = state.items.filter(task => task._id !== payload);
-      });
-  },
-});
-
+        toast.success("Task was deleted successfully!")
+    })
+}
+})
 export const { setCurrentDay, setCurrentMonth, setCurrentYear } =
   tasksSlice.actions;
 

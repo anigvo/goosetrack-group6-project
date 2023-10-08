@@ -7,7 +7,7 @@ import {
 } from './ColumnHeadBar.styled';
 import TaskModal from '../../modals/TaskModal/TaskModal';
 
-export const ColumnHeadBar = ({ groupName, category, today }) => {
+export const ColumnHeadBar = ({ groupName, category}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
@@ -21,7 +21,6 @@ export const ColumnHeadBar = ({ groupName, category, today }) => {
       </IconTaskAdd>
       {isModalOpen && (
         <TaskModal
-          today={today}
           isOpen={isModalOpen}
           onClose={closeModal}
           category={category}

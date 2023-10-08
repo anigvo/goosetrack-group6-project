@@ -29,7 +29,7 @@ const MainLayout = ({ pageName }) => {
                 {isOpenSidebar && <SideBar closeMethod={closeSidebar} />}
             </AnimatePresence>
             <MainContent>
-                <Header openMethod={openSidebar} title={pageName} />
+                <Header openMethod={openSidebar} title={pageName} isOpenSidebar={isOpenSidebar}/>
                 <OutletWrapper>
                     <Suspense fallback={<Loader type={'suspense'}/>}>
                         <Outlet />

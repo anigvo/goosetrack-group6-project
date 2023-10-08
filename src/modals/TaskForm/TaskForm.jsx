@@ -3,11 +3,12 @@ import { TaskFormWrapper, TimeDiv, AddIcon } from './TaskForm.styled';
 import { createTask, updateTask, getTasks } from '../../api/tasks';
 import { isSameDay } from 'date-fns';
 import { toast } from 'react-hot-toast';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getUserTasks } from 'redux/tasks/operations';
+import { selectFullDate } from 'redux/selectors';
 
-function TaskForm({ taskToEdit, onCancel, id, category, today }) {
-  
+function TaskForm({ taskToEdit, onCancel, id, category }) {
+  const currentDate = useSelector(selectFullDate);
   const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
@@ -39,16 +40,14 @@ function TaskForm({ taskToEdit, onCancel, id, category, today }) {
 
   useEffect(() => {
     if (!formData.date || !isCurrentDay(new Date(formData.date))) {
-      const currentDate = new Date(today);
-      currentDate.setDate(currentDate.getDate() + 1);
-      currentDate.setMonth(currentDate.getMonth() - 1);
-      const formattedDate = currentDate.toISOString().split('T')[0];
+      const date = new Date(currentDate);
+      const formattedDate = date.toISOString().split('T')[0];
       setFormData(prevData => ({
         ...prevData,
         date: formattedDate,
       }));
     }
-  }, [taskToEdit, formData.date, today]);
+  }, [taskToEdit, formData.date, currentDate]);
 
   useEffect(() => {
     async function fetchTaskById() {
