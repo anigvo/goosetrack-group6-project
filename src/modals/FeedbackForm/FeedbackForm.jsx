@@ -1,20 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import StarRatings from 'react-star-ratings';
-import { FeedbackFormWrapper, StyledRatingContainer, PencilIcon, TrashIcon, LoaderCont } from './FeedbackForm.styled';
+import { FeedbackFormWrapper, StyledRatingContainer, PencilIcon, TrashIcon, LoaderCont, GooseImageForFeed } from './FeedbackForm.styled';
 import { createReview, getReview, updateReview, deleteReview } from '../../api/reviews'; 
 import { toast } from 'react-hot-toast';
-
-function SVGIcon({ currentTheme }) {
-  const strokeColor = currentTheme === 'light' ? '#111111' : '#3E85F3';
-
-  return (
-<svg fill="none" viewBox="0 0 24 24" width="24" height="24" stroke={strokeColor}>
-  <g strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
-    <path d="M18 6 6 18M6 6l12 12" />
-  </g>
-</svg>
-  );
-}
+import Image from '../../assets/images/notfoundpage-goose-rocket.png';
 
 const FeedbackForm = ({ onCancel, onReviewStatusChange, onUpdateStyles, onEditStatusChange }) => {
   const [rating, setRating] = useState(0);
@@ -127,7 +116,7 @@ const FeedbackForm = ({ onCancel, onReviewStatusChange, onUpdateStyles, onEditSt
   return (
     <FeedbackFormWrapper >
       {isLoading ? (
-        <LoaderCont><SVGIcon/></LoaderCont>
+        <LoaderCont><GooseImageForFeed alt="goose" src={Image} /></LoaderCont>
       ) : (
         <div>
           <StyledRatingContainer>

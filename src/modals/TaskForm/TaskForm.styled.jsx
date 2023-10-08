@@ -31,9 +31,7 @@ const TaskFormWrapper = styled.div`
       min-width: 126px;
       min-height: 42px;
       margin-top: 8px;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      padding-left: 10px;
+      padding: 10px;
       border: 1px solid ${props => props.theme.userInputBorderColor}; 
       border-radius: 4px;
       font-size: 14px;
@@ -45,9 +43,7 @@ const TaskFormWrapper = styled.div`
       appearance: none;
       background-repeat: no-repeat;
       background-position: right center;
-      padding-right: 70px; 
       outline: none;
-
     }
 
     input[type="text"] {
