@@ -29,19 +29,13 @@ const CalendarPage = ({ updatePageName }) => {
     }
   }, [navigate, periodType, day, month]);
 
-  const checkDate = (data, checkType) => {
-    const currentDate = new Date(currentDateYear, currentDateMonth, 1);
-    if (checkType === 'button') {
-      if (data > currentDate) {
-        return false;
-      }
-      return true;
-    } else {
-      if (data >= currentDate) {
-        return false;
-      }
-      return true;
+  const checkDate = data => {
+    const currentDate = new Date(currentDateYear, currentDateMonth, 2);
+    console.log(data);
+    if (data > currentDate) {
+      return false;
     }
+    return true;
   };
 
   return (

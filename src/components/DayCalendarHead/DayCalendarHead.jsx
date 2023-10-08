@@ -1,5 +1,5 @@
 import React from 'react';
-import { isSameDay, format, startOfWeek } from 'date-fns';
+import { isSameDay, format, startOfWeek, addDays } from 'date-fns';
 import {
   DaysOfWeekList,
   DayOfWeek,
@@ -59,8 +59,8 @@ export const DayCalendarHead = ({ checkDate }) => {
             <DayNumberOfWeek
               isCurrentDay={isCurrentDay(dayItem)}
               onClick={() => handleDateClick(dayItem)}
-              disabled={checkDate(dayItem, 'click')}
-              disabledStyled={checkDate(dayItem, 'click')}
+              disabled={checkDate(addDays(dayItem, 2))}
+              disabledStyled={checkDate(addDays(dayItem, 2))}
             >
               {format(dayItem, 'd')}
             </DayNumberOfWeek>

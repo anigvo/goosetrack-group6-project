@@ -54,7 +54,6 @@ export const PeriodPaginator = ({
     dispatch(setCurrentDay(prevDayDate.getDate()));
     dispatch(setCurrentMonth(prevDayDate.getMonth()));
     dispatch(setCurrentYear(prevDayDate.getFullYear()));
-    checkDate(prevDayDate);
   };
 
   const handleNextDay = () => {
@@ -64,7 +63,6 @@ export const PeriodPaginator = ({
     dispatch(setCurrentDay(nextDayDate.getDate()));
     dispatch(setCurrentMonth(nextDayDate.getMonth()));
     dispatch(setCurrentYear(nextDayDate.getFullYear()));
-    checkDate(nextDayDate);
   };
 
   return (
@@ -110,8 +108,8 @@ export const PeriodPaginator = ({
             direction={'left'}
             type="button"
             onClick={handlePrevDay}
-            disabled={checkDate(currentDate, 'button')}
-            disabledStyle={checkDate(currentDate, 'button')}
+            disabled={checkDate(currentDate)}
+            disabledStyle={checkDate(currentDate)}
           >
             <ArrowLeft />
           </PaginatorBtn>
