@@ -3,8 +3,7 @@ import { object, string, date } from 'yup';
 export const userFormValidation = object({
   userName: string()
     .min(3, 'Too short!')
-    .max(16, 'Too long!')
-    .required('Please enter your name'),
+    .max(16, 'Too long!'),
   birthday: date(),
   email: string()
     .matches(

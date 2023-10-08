@@ -3,6 +3,7 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 import { editUser, logInUser, logOutUser, refreshUser, registerUser } from './operations';
 import { userInitialState, initialState, handleRejected, handlePending } from './constants';
+import toast from 'react-hot-toast';
 
 const handleFulfilled = (state, action) => {
   state.token = action.payload.token;
@@ -55,6 +56,7 @@ const authSlice = createSlice({
       .addCase(editUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.isLoadingAuth = false;
+        toast.success('Profile was updated successfully');
       })
       .addCase(editUser.rejected, handleRejected)
   }

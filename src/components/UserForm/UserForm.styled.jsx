@@ -89,9 +89,12 @@ export const AvatarUploadBtn = styled.label`
   border-radius: 50%;
   width: 14px;
   height: 14px;
-
+  cursor: pointer;
   background-color: ${props => props.theme.userAvatarBorder};
-
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover, &:focus {
+    background-color: ${props => props.theme.btnHoverBackground};
+  }
   ${media('tablet', '')`
     width: 24px;
     height: 24px;
@@ -107,12 +110,11 @@ export const UpdateIcon = styled(UpdateAvatarIcon)`
     fill: ${props => props.theme.btnTextColor}; 
     cursor: pointer;
     stroke-width: 8px;
-    stroke-height: 8px;
-
-  }
+    width: 8px;
+    height: 8px;
   ${media('tablet', '')`
-    stroke-width: 18px;
-    stroke-height: 18px;
+    width: 18px;
+    height: 18px;
     bottom: 20px;
     left: 78px;
     `};
@@ -204,6 +206,7 @@ export const FormInput = styled(Field)`
   margin: 0px;
   padding-left: 14px;
   background-color: inherit;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   border: ${p => {
     switch (p.status) {
       case 'error':

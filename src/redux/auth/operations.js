@@ -55,7 +55,7 @@ export const editUser = createAsyncThunk(
   'auth/edit',
   async (credentials, thunkAPI) => {
     try {
-      const {data} = await edit(credentials);
+      const data = await edit(credentials);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
