@@ -51,7 +51,6 @@ export const refreshUser = createAsyncThunk(
   }
 );
 
-
 export const editUser = createAsyncThunk(
   'auth/edit',
   async (credentials, thunkAPI) => {

@@ -30,17 +30,18 @@ export const AvatarContainer = styled.div`
 `;
 
 export const UserAvatar = styled.div`
-  position: absolute;
-  top: 110px;
   width: 72px;
   height: 72px;
   border: 2px solid ${props => props.theme.userAvatarBorder};
   border-radius: 50%;
   background-color: ${props => props.theme.userAvatarInsideBackground};
+  margin-bottom: 18px;
+  position: absolute;
+  top: -36px;
 
   ${media('tablet', '')`
-        margin-bottom: 20px;
         position: static;
+        margin-bottom: 20px;
         width: 124px;
         height: 124px;
     `};
@@ -103,17 +104,15 @@ export const AvatarUploadBtn = styled.label`
 `;
 
 export const UpdateIcon = styled(UpdateAvatarIcon)`
-  fill: ${props => props.theme.btnTextColor}; 
-  width: 8px;
-  height: 8px;
-  
-  cursor: pointer;
-//   :hover {
-//     fill: #fff;
+    fill: ${props => props.theme.btnTextColor}; 
+    cursor: pointer;
+    stroke-width: 8px;
+    stroke-height: 8px;
+
   }
   ${media('tablet', '')`
-    width: 18px;
-    height: 18px;
+    stroke-width: 18px;
+    stroke-height: 18px;
     bottom: 20px;
     left: 78px;
     `};
@@ -238,7 +237,7 @@ export const DataIconWrap = styled.span`
   background-color: transparent;
   position: absolute;
   right: 10px;
-  top: 31px;
+  top: 32px;
   font-size: x-large;
 
   ${media('desktop', '')`
