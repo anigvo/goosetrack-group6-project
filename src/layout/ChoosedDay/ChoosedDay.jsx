@@ -34,7 +34,7 @@ const ChoosedDay = () => {
         pickHandler={pickHandler}
         checkDate={checkDate}
       />
-      <TasksColumnsList today={today} />
+      <TasksColumnsList/>
     </ChoosedDayContainer>
   );
 };

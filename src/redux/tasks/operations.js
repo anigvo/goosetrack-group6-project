@@ -6,7 +6,7 @@ export const getUserTasks = createAsyncThunk(
     async (credentials, thunkAPI) => {
         const {tasks: {day, month, year}} = thunkAPI.getState();
         try {
-            const tasks = await getTasks(credentials, `${year}-${month}-${day}`);
+            const tasks = await getTasks(credentials, `${year}-${month+1}-${day}`);
             return tasks;
         } catch (error) {
             thunkAPI.rejectWithValue(error.message);

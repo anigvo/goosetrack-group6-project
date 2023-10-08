@@ -22,7 +22,7 @@ const toolVar = {
   exit: { opacity: 0 },
 };
 
-export const TaskToolbar = ({ currentGroup, id, today }) => {
+export const TaskToolbar = ({ currentGroup, id}) => {
   const dispatch = useDispatch();
   const [isOpenOptions, setIsOpenOptions] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -66,13 +66,11 @@ export const TaskToolbar = ({ currentGroup, id, today }) => {
         <li key={'delete'} onClick={deleteTask}>
           <TrashIcon />
         </li>
-        {/* додала в пропси айді щоб можна було усередині робити фетч */}
         {isModalOpen && (
           <TaskModal
             isOpen={isModalOpen}
             onClose={closeModal}
             id={id}
-            today={today}
           />
         )}
       </ToolList>
