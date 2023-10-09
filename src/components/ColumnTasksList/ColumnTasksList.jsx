@@ -1,6 +1,6 @@
 import { TaskColumnCard } from "components/TaskColumnCard/TaskColumnCard";
 import { TasksList } from "./ColumnTasksList.styled";
-import { AnimatePresence } from "framer-motion";
+// import { AnimatePresence } from "framer-motion";
 
 const toolVar = {
   initial: { opacity: 0 },

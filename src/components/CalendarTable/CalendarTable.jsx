@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { selectFullDate, selectCategoryTasks } from 'redux/selectors';
+import {
+  selectFullDate,
+  selectCategoryTasks,
+  selectIsLoadingTasks,
+} from 'redux/selectors';
 import {
   setCurrentDay,
   setCurrentMonth,
@@ -29,7 +33,9 @@ import {
   CalendarTaskItem,
   TaskSpan,
 } from './CalendarTable.styled';
+import { Loader } from 'components/Loader/Loader';
 export const CalendarTable = ({ changePeriod }) => {
+  const isLoading = useSelector(selectIsLoadingTasks);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { todo } = useSelector(selectCategoryTasks);
@@ -105,66 +111,74 @@ export const CalendarTable = ({ changePeriod }) => {
   };
 
   return (
-    <СalendarGrid>
-      {daysArray.map(dayItem => {
-        const tasksForDay = filterTasksByDate(todo, dayItem);
-        return (
-          <CalendarItem
-            key={format(dayItem, 'ddMMyyyy')}
-            onClick={() => handleDateClick(dayItem)}
-            disabled={!isSameMonth(dayItem, currentDate)}
-          >
-            <CalendarDayWrapper>
-              <CalendarDay
-                isCurrentDay={isCurrentDay(dayItem)}
-                isCurrentDayMonth={isSameMonth(dayItem, currentDate)}
+    <>
+      {isLoading ? (
+        <Loader type={'suspense'} />
+      ) : (
+        <СalendarGrid>
+          {daysArray.map(dayItem => {
+            const tasksForDay = filterTasksByDate(todo, dayItem);
+            return (
+              <CalendarItem
+                key={format(dayItem, 'ddMMyyyy')}
+                onClick={() => handleDateClick(dayItem)}
+                disabled={!isSameMonth(dayItem, currentDate)}
               >
-                {format(dayItem, 'd')}
-              </CalendarDay>
-            </CalendarDayWrapper>
-            <CalendarTask>
-              <CalendarTaskList>
-                {isSameMonth(dayItem, currentDate) ? (
-                  <>
-                    {window.innerWidth > 767
-                      ? tasksForDay.slice(0, 2).map((task, index) => (
-                          <CalendarTaskItem
-                            key={index}
-                            id={task._id}
-                            priority={task.priority}
-                            text={task.title}
-                            date={task.date}
-                          >
-                            {task.title}
-                          </CalendarTaskItem>
-                        ))
-                      : tasksForDay.slice(0, 1).map((task, index) => (
-                          <CalendarTaskItem
-                            key={index}
-                            id={task._id}
-                            priority={task.priority}
-                            text={task.title}
-                            date={task.date}
-                          >
-                            {task.title}
-                          </CalendarTaskItem>
-                        ))}
-                    {window.innerWidth > 767 ? (
-                      tasksForDay.length > 2 ? (
-                        <TaskSpan>
-                          ... and {tasksForDay.length - 2} more
-                        </TaskSpan>
-                      ) : null
-                    ) : tasksForDay.length > 1 ? (
-                      <TaskSpan>... and {tasksForDay.length - 1} more</TaskSpan>
+                <CalendarDayWrapper>
+                  <CalendarDay
+                    isCurrentDay={isCurrentDay(dayItem)}
+                    isCurrentDayMonth={isSameMonth(dayItem, currentDate)}
+                  >
+                    {format(dayItem, 'd')}
+                  </CalendarDay>
+                </CalendarDayWrapper>
+                <CalendarTask>
+                  <CalendarTaskList>
+                    {isSameMonth(dayItem, currentDate) ? (
+                      <>
+                        {window.innerWidth > 767
+                          ? tasksForDay.slice(0, 2).map((task, index) => (
+                              <CalendarTaskItem
+                                key={index}
+                                id={task._id}
+                                priority={task.priority}
+                                text={task.title}
+                                date={task.date}
+                              >
+                                {task.title}
+                              </CalendarTaskItem>
+                            ))
+                          : tasksForDay.slice(0, 1).map((task, index) => (
+                              <CalendarTaskItem
+                                key={index}
+                                id={task._id}
+                                priority={task.priority}
+                                text={task.title}
+                                date={task.date}
+                              >
+                                {task.title}
+                              </CalendarTaskItem>
+                            ))}
+                        {window.innerWidth > 767 ? (
+                          tasksForDay.length > 2 ? (
+                            <TaskSpan>
+                              ... and {tasksForDay.length - 2} more
+                            </TaskSpan>
+                          ) : null
+                        ) : tasksForDay.length > 1 ? (
+                          <TaskSpan>
+                            ... and {tasksForDay.length - 1} more
+                          </TaskSpan>
+                        ) : null}
+                      </>
                     ) : null}
-                  </>
-                ) : null}
-              </CalendarTaskList>
-            </CalendarTask>
-          </CalendarItem>
-        );
-      })}
-    </СalendarGrid>
+                  </CalendarTaskList>
+                </CalendarTask>
+              </CalendarItem>
+            );
+          })}
+        </СalendarGrid>
+      )}
+    </>
   );
 };
