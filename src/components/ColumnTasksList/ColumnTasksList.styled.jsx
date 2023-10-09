@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-// import { media } from 'utils/queries';
+import { motion } from 'framer-motion';
 
-export const TasksList = styled.ul`
+export const TasksList = styled(motion.ul)`
   display: flex;
   flex-direction: column;
   row-gap: 14px;

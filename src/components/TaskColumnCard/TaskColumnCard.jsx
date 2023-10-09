@@ -5,7 +5,7 @@ import { selectAvatar } from "redux/selectors";
 
 const toolVar = {
   initial: { opacity: 0 },
-  isOn: { opacity: 1, transition: { type: 'spring', stiffness: 100 } },
+  isOn: { opacity: 1, transition: { type: 'spring', stiffness: 100, duration: 0.8 } },
   exit: { opacity: 0 },
 };
 
@@ -14,9 +14,6 @@ export const TaskColumnCard = ({id, text, priority, currentGroup}) => {
     const avatar = useSelector(selectAvatar);
     return (
       <Task
-      initial={'initial'}
-      animate={'isOn'}
-      exit={'exit'}
       variants={toolVar}>
         <TaskTitle>{text}</TaskTitle>
         <TaskFeatures>
