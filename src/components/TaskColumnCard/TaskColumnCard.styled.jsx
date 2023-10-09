@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-// import { media } from 'utils/queries';
+import { motion } from 'framer-motion';
 
-export const Task = styled.li`
+export const Task = styled(motion.li)`
     border-radius: 8px;
     padding: 14px 13px 18px;
     background-color: ${props => props.theme.taskBackground};

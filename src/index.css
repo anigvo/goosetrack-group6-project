@@ -1,6 +1,5 @@
 @import-normalize; /* bring in normalize.css styles */
 
-
 @font-face {
   font-family: 'Inter';
   src: url('./assets/fonts/Inter-400.woff2') format('woff2'),
@@ -62,7 +61,5 @@ img {
 ul {
   list-style: none;
   padding: 0;
-  margin: 0;  
+  margin: 0;
 }
-
-

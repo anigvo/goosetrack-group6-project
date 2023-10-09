@@ -31,7 +31,6 @@ const CalendarPage = ({ updatePageName }) => {
 
   const checkDate = data => {
     const currentDate = new Date(currentDateYear, currentDateMonth, 2);
-    console.log(data);
     if (data > currentDate) {
       return false;
     }

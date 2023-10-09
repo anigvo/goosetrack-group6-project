@@ -18,15 +18,6 @@ gap: 10px;
 position: relative;
 `;
 
-export const ClosableBcg = styled.div`
-    background-color: transparent;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-`
-
 export const OtherOptions = styled(motion.div)`
     background-color: ${props => props.theme.taskBackground};
     border-radius: 8px;
@@ -35,7 +26,7 @@ export const OtherOptions = styled(motion.div)`
     top: 26px;
     left: 50%;
     z-index: 99;
-    transform: translateX(-50%);
+    transform: translateX(-70%);
     min-width: 115px;
     box-shadow: 0px 4px 16px 0px rgba(17, 17, 17, 0.10);
     border: 1px solid ${props => props.theme.toolBorder};

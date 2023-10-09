@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   ArrowIcon,
   ToolList,
-  ClosableBcg,
   Option,
   Options,
   OtherOptions,
@@ -26,16 +25,14 @@ export const TaskToolbar = ({ currentGroup, id}) => {
   const dispatch = useDispatch();
   const [isOpenOptions, setIsOpenOptions] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const optionsRef = useRef(null);
+  const openOptionsRef = useRef(null);
 
   const allGroups = ['To do', 'In progress', 'Done'];
   const indexOfCurrentGroup = allGroups.indexOf(currentGroup);
   allGroups.splice(indexOfCurrentGroup, 1);
 
   const toggleOptions = () => setIsOpenOptions(prevState => !prevState);
-
-  const closeOptions = e => {
-    if (e.target === e.currentTarget) setIsOpenOptions(false);
-  };
 
   const openEditModal = () => {
     setIsModalOpen(true);
@@ -54,10 +51,20 @@ export const TaskToolbar = ({ currentGroup, id}) => {
     dispatch(updateUserTask({ task, id }));
   };
 
+  useEffect(() => {
+    const closeOutside = (event) => {
+      if (optionsRef.current && !optionsRef.current.contains(event.target) && !openOptionsRef.current.contains(event.target)) setIsOpenOptions(false);
+    };
+    if (optionsRef) {
+      window.addEventListener("click", closeOutside);
+      return () => window.removeEventListener("click", closeOutside)
+    }
+  }, [optionsRef]);
+
   return (
     <Wrapper>
       <ToolList>
-        <li key={'change priority'} onClick={toggleOptions}>
+        <li key={'change priority'} onClick={toggleOptions} ref={openOptionsRef}>
           <ArrowIcon />
         </li>
         <li key={'edit'} onClick={openEditModal}>
@@ -76,13 +83,12 @@ export const TaskToolbar = ({ currentGroup, id}) => {
       </ToolList>
       <AnimatePresence>
         {isOpenOptions && (
-          <>
-            <ClosableBcg onClick={closeOptions} />
             <OtherOptions
               initial={'initial'}
               animate={'isOn'}
               exit={'exit'}
               variants={toolVar}
+              ref={optionsRef}
             >
               <Options>
                 {allGroups.map(group => (
@@ -96,7 +102,6 @@ export const TaskToolbar = ({ currentGroup, id}) => {
                 ))}
               </Options>
             </OtherOptions>
-          </>
         )}
       </AnimatePresence>
     </Wrapper>
