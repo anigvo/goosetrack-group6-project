@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { TaskFormWrapper, TimeDiv, AddIcon, LoaderCont, GooseImageForFeed } from './TaskForm.styled';
-import { createTask, updateTask, getTasks } from '../../api/tasks';
+import { getTasks } from '../../api/tasks';
 import { isSameDay } from 'date-fns';
 import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserTasks } from 'redux/tasks/operations';
+import { createUserTasks, updateUserTask } from 'redux/tasks/operations';
 import { selectFullDate } from 'redux/selectors';
 import Image from '../../assets/images/notfoundpage-goose-rocket.png';
+import { FcHighPriority } from 'react-icons/fc';
+import { LuTimerOff } from 'react-icons/lu';
+import { BsDatabaseExclamation } from 'react-icons/bs'
+import { FaRegCalendarTimes } from 'react-icons/fa'
+import { BiTask } from 'react-icons/bi';
 
 function TaskForm({ taskToEdit, onCancel, id, category }) {
   const currentDate = useSelector(selectFullDate);
@@ -55,7 +60,7 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
     async function fetchTaskById() {
       if (id) {
         try {
-          const tasks = await getTasks('month', formData.date);
+          const tasks = await getTasks('day', formData.date);
           const taskToPopulate = tasks.find(task => task._id === id);
 
           if (taskToPopulate) {
@@ -76,7 +81,7 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
         } catch (error) {
           console.error('Error fetching task by id:', error);
         } finally {
-          setIsLoading(false); 
+          setIsLoading(false);
         }
       }
     }
@@ -88,7 +93,9 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
     const { name, value } = event.target;
 
     if (name === 'end' && value < formData.start) {
-      toast.error('Incorrect time format or start greater than/equal to end');
+      toast.error('Incorrect time format or start greater than/equal to end', {
+        icon: <LuTimerOff size={24} color='#EA3D65' />
+      });
       return;
     }
 
@@ -120,14 +127,14 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
     }));
   };
 
-  const handleSubmit = async event => {
+  const handleSubmit = event => {
     event.preventDefault();
 
     if (!validateForm()) {
       return;
     }
 
-    const taskData = {
+    const task = {
       title: formData.title,
       start: formData.start,
       end: formData.end,
@@ -138,21 +145,51 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
 
     if (formData.isEditing) {
       try {
-        await updateTask(taskData, id);
-        toast.success('Task updated successfully');
+        dispatch(updateUserTask({ task, id }));
+        toast.success('Task updated successfully', {
+          icon: <BiTask size={24} color='#3CBC81'/>,
+          style: {
+            padding: '20px',
+            fontSize: 18,
+            boxShadow: 'none',
+            border: '1px solid rgba(220, 227, 229, 0.80)'
+          }
+        });
         onCancel();
-        dispatch(getUserTasks('day'));
       } catch (error) {
-        console.error('Error updating task:', error);
+        toast.error('Error occurred while updating task', {
+          icon: <BsDatabaseExclamation size={24} color="#EA3D65" />,
+          style: {
+            padding: '20px',
+            fontSize: 18,
+            boxShadow: 'none',
+            border: '1px solid rgba(220, 227, 229, 0.80)'
+          }
+        })
       }
     } else {
       try {
-        await createTask(taskData);
-        toast.success('Task created successfully');
+        dispatch(createUserTasks(task));
+        toast.success('Task created successfully', {
+          icon: <BiTask size={24} color='#3CBC81'/>,
+          style: {
+            padding: '20px',
+            fontSize: 18,
+            boxShadow: 'none',
+            border: '1px solid rgba(220, 227, 229, 0.80)'
+          }
+        });
         onCancel();
-        dispatch(getUserTasks('day'));
       } catch (error) {
-        console.error('Error creating task:', error);
+        toast.error('Error occurred while creating task', {
+          icon: <BsDatabaseExclamation size={24} color="#EA3D65" />,
+          style: {
+            padding: '20px',
+            fontSize: 18,
+            boxShadow: 'none',
+            border: '1px solid rgba(220, 227, 229, 0.80)'
+          }
+        })
       }
     }
   };
@@ -167,19 +204,25 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
 
     const timeRegex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
     if (!start.match(timeRegex) || !end.match(timeRegex) || start >= end) {
-      toast.error('Incorrect time format or start greater than/equal to end');
+      toast.error('Incorrect time format or start greater than/equal to end', {
+        icon: <LuTimerOff size={24} color='#EA3D65' />
+      });
       return false;
     }
 
     if (!['low', 'medium', 'high'].includes(priority)) {
-      toast.error('Unspecified priority');
+      toast.error('Unspecified priority', {
+        icon: <FcHighPriority size={24} />
+      });
       return false;
     }
 
     const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
 
     if (!date.match(dateRegex)) {
-      toast.error('Incorrect date format');
+      toast.error('Incorrect date format', {
+        icon: <FaRegCalendarTimes size={24} color='#EA3D65' />
+      });
       return false;
     }
 
@@ -193,7 +236,7 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
 
   return (
     <TaskFormWrapper>
-       {isLoading && formData.isEditing ? (
+      {isLoading && formData.isEditing ? (
         <LoaderCont><GooseImageForFeed alt="goose" src={Image} /></LoaderCont>
       ) : (
       <form onSubmit={handleSubmit}>
