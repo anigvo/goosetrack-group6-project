@@ -93,7 +93,7 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
     const { name, value } = event.target;
 
     if (name === 'end' && value < formData.start) {
-      toast.error('Incorrect time format or start greater than/equal to end', {
+      toast.error('Incorrect time format or start >= end.', {
         icon: <LuTimerOff size={24} color='#EA3D65' />
       });
       return;
@@ -146,7 +146,7 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
     if (formData.isEditing) {
       try {
         dispatch(updateUserTask({ task, id }));
-        toast.success('Task updated successfully', {
+        toast.success('Task updated successfully!', {
           icon: <BiTask size={24} color='#3CBC81'/>,
           style: {
             padding: '20px',
@@ -157,7 +157,7 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
         });
         onCancel();
       } catch (error) {
-        toast.error('Error occurred while updating task', {
+        toast.error('Error occurred while updating task.', {
           icon: <BsDatabaseExclamation size={24} color="#EA3D65" />,
           style: {
             padding: '20px',
@@ -170,7 +170,7 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
     } else {
       try {
         dispatch(createUserTasks(task));
-        toast.success('Task created successfully', {
+        toast.success('Task created successfully!', {
           icon: <BiTask size={24} color='#3CBC81'/>,
           style: {
             padding: '20px',
@@ -181,7 +181,7 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
         });
         onCancel();
       } catch (error) {
-        toast.error('Error occurred while creating task', {
+        toast.error('Error occurred while creating task.', {
           icon: <BsDatabaseExclamation size={24} color="#EA3D65" />,
           style: {
             padding: '20px',
@@ -198,20 +198,20 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
     const { title, start, end, priority, date, category } = formData;
 
     if (!title || title.length > 250) {
-      toast.error('The name of the task must be between 1 and 250 characters');
+      toast.error('The name of the task must be between 1 and 250 characters.');
       return false;
     }
 
     const timeRegex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
     if (!start.match(timeRegex) || !end.match(timeRegex) || start >= end) {
-      toast.error('Incorrect time format or start greater than/equal to end', {
+      toast.error('Incorrect time format or start >= end.', {
         icon: <LuTimerOff size={24} color='#EA3D65' />
       });
       return false;
     }
 
     if (!['low', 'medium', 'high'].includes(priority)) {
-      toast.error('Unspecified priority', {
+      toast.error('Unspecified priority.', {
         icon: <FcHighPriority size={24} />
       });
       return false;
@@ -220,14 +220,14 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
     const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
 
     if (!date.match(dateRegex)) {
-      toast.error('Incorrect date format', {
+      toast.error('Incorrect date format.', {
         icon: <FaRegCalendarTimes size={24} color='#EA3D65' />
       });
       return false;
     }
 
     if (!['to-do', 'in-progress', 'done'].includes(category)) {
-      toast.error('Incorrect category');
+      toast.error('Incorrect category.');
       return false;
     }
 
