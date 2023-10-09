@@ -59,7 +59,7 @@ const FeedbackForm = ({ onCancel, onReviewStatusChange, onUpdateStyles, onEditSt
   const handleDeleteClick = async () => {
     try {
       await deleteReview();
-      toast.success('Comment deleted successfully');
+      toast.success('Comment deleted successfully!');
       setUserHasComment(false); 
       setReview(''); 
       setRating(0); 
@@ -69,7 +69,7 @@ const FeedbackForm = ({ onCancel, onReviewStatusChange, onUpdateStyles, onEditSt
       }
     } catch (error) {
       console.error('Error deleting review:', error);
-      toast.error('An error occurred while deleting the comment');
+      toast.error('An error occurred while deleting the comment.');
     }
     if (onCancel) {
       onCancel();
@@ -81,6 +81,12 @@ const FeedbackForm = ({ onCancel, onReviewStatusChange, onUpdateStyles, onEditSt
       toast.error('Please enter a comment before submitting.');
       return;
     }
+
+    
+    if (!rating) {
+      toast.error('Please select a rating before submitting.');
+      return;
+    }
   
     const feedbackData = {
       rating: rating,
@@ -90,13 +96,13 @@ const FeedbackForm = ({ onCancel, onReviewStatusChange, onUpdateStyles, onEditSt
     try {
       if (userHasComment && isEditing) {
         await updateReview(feedbackData);
-        toast.success('Review updated successfully');
+        toast.success('Review updated successfully!');
         if (onEditStatusChange) {
           onEditStatusChange(false);
         }
       } else {
         await createReview(feedbackData);
-        toast.success('Review posted successfully');
+        toast.success('Review posted successfully!');
       }
       setUserHasComment(true);
       setIsEditing(false);
@@ -109,7 +115,7 @@ const FeedbackForm = ({ onCancel, onReviewStatusChange, onUpdateStyles, onEditSt
         onCancel();
       }
     } catch (error) {
-      toast.error('An error occurred while processing your request');
+      toast.error('An error occurred while processing your request.');
     }
   };
   
