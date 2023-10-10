@@ -20,11 +20,11 @@ export const TaskColumnCard = ({ id, text, board, priority, currentGroup, curren
   const dragOverHandler = (e) => {
     e.preventDefault();
     if (e.target === cardRef.current) {
-      e.target.style.transform = 'scale(0.9)'
+      e.target.style.transform = 'scale(0.9)';
     }
   }
 
-  const dragLeaveHandler = (e, board, item) => {
+  const dragLeaveHandler = (e) => {
     e.target.style.transform = 'scale(1)'
   }
 
