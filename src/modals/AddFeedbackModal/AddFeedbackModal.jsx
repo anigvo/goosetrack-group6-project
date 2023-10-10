@@ -10,6 +10,7 @@ const AddFeedbackModal = ({ isOpen, onClose }) => {
     minWidth: "335px",
     minHeight: "331px",
     padding: "28px 20px 28px 20px",
+    transition: '0.4s',
   });
 
   const [userHasReview, setUserHasReview] = useState(false);
@@ -22,6 +23,7 @@ const AddFeedbackModal = ({ isOpen, onClose }) => {
           ...prevStyles,
           maxHeight: "350px",
           minHeight: "350px",
+          transition: '0.4s',
         };
       } else {
         return {
@@ -31,6 +33,7 @@ const AddFeedbackModal = ({ isOpen, onClose }) => {
           minWidth: "335px",
           minHeight: userHasReview ? "294px" : "331px",
           padding: "28px 20px 28px 20px",
+          transition: '0.4s',
         };
       }
     });
@@ -46,6 +49,7 @@ const AddFeedbackModal = ({ isOpen, onClose }) => {
           maxHeight: isEditing ? "350px" : (userHasReview ? "294px" : "340px"),
           minHeight: isEditing ? "350px" : (userHasReview ? "294px" : "340px"),
           padding: "30px",
+          transition: '0.4s',
         };
         setModalStyles(newModalStyles);
       } else {
@@ -55,6 +59,7 @@ const AddFeedbackModal = ({ isOpen, onClose }) => {
           maxHeight: isEditing ? "350px" : (userHasReview ? "294px" : "340px"),
           minHeight: isEditing ? "350px" : (userHasReview ? "294px" : "340px"),
           padding: "28px 20px 28px 20px",
+          transition: '0.4s',
         };
         setModalStyles(newModalStyles);
       }
