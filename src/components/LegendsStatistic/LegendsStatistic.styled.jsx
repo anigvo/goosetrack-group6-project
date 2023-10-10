@@ -3,14 +3,14 @@ import { media } from 'utils/queries';
 
 export const LegendsBox = styled.div`
   display: flex;
-gap: 20px;
+  ap: 20px;
 
   
 `;
 export const Legend = styled.div`
 
 
-display: flex;
+  display: flex;
   
   align-items: center;
 `;
