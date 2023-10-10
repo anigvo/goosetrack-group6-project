@@ -1,6 +1,39 @@
 import styled from 'styled-components';
 import { Field } from 'formik';
 import { registerPageColors } from 'utils/colors';
+// import { GoogleLogin } from '@react-oauth/google';
+
+export const GoogleButton = styled.button`
+border-radius: 16px;
+  background: #3e85f3;
+  box-shadow: 4px 2px 16px 0px rgba(136, 165, 191, 0.48);
+  width: 100%;
+  height: 46px;
+  margin-top: 32px;
+  border: none;
+  color: ${registerPageColors.formColor};
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: -0.28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 11px;
+  cursor: pointer;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover {
+    background: ${registerPageColors.buttonHoverColor};
+  }
+  @media (min-width: 768px) {
+    width: 100%;
+    height: 56px;
+    margin-top: 48px;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.36px;
+  }
+`;
 
 export const MainContainer = styled.div`
   display: flex;
