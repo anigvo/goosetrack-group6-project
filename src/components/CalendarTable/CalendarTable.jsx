@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
   selectFullDate,
-  selectCategoryTasks,
   selectIsLoadingTasks,
+  selectTodos,
 } from 'redux/selectors';
 import {
   setCurrentDay,
@@ -38,7 +38,7 @@ export const CalendarTable = ({ changePeriod }) => {
   const isLoading = useSelector(selectIsLoadingTasks);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { todo } = useSelector(selectCategoryTasks);
+  const todo = useSelector(selectTodos);
   const reduxDate = useSelector(selectFullDate);
   const currentDate = new Date(reduxDate);
   const chooseDay = () => {
