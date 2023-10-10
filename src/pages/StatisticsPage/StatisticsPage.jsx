@@ -45,18 +45,6 @@ const StatisticsPage = ({ updatePageName }) => {
         </BoxPeriodPaginator>
         <LegendsStatistic />
       </ConteinerData>
-      {/* <Suspense fallback={<Loader type={'suspense'} />}>
-        <Outlet
-          context={[
-            startOfWeekDate,
-            daysToAdd,
-            today,
-            setPeriodType,
-            pickHandler,
-            checkDate,
-          ]}
-        />
-      </Suspense> */}
       <StatisticsChart
       // todoByDay={todoByDay}
       // todoByMonth={todoByMonth}

@@ -11,7 +11,7 @@ export const CalendarToolbar = ({
   page,
 }) => {
   return (
-    <CalendarToolbarContainer>
+    <CalendarToolbarContainer page={page}>
       <PeriodPaginator
         currentDateMonth={currentDateMonth}
         currentDateYear={currentDateYear}
