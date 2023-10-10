@@ -7,20 +7,20 @@ export const BoxBar = styled.div`
     width: 100%;
     height: 100%;
     max-width: 307px;  
-    max-height: 413px; 
+    height: 413px; 
     
     
      
     ${media('tablet', '')`
         border-radius: 29px;
         max-width: 640px;
-        max-height: 424px;
+        height: 424px;
             
     `}
     ${media('desktop', '')`   
         padding: 20px;     
         max-width: 860px;
-        max-height: 440px;
+        height: 440px;
     `}
 `;
 
