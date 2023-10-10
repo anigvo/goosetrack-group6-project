@@ -1,5 +1,5 @@
 import React from 'react';
-import { isSameDay, format, startOfWeek } from 'date-fns';
+import { isSameDay, format, startOfWeek, addDays } from 'date-fns';
 import {
   DaysOfWeekList,
   DayOfWeek,
@@ -13,16 +13,18 @@ import {
   setCurrentMonth,
   setCurrentYear,
 } from 'redux/tasks/tasksSlice';
-import { useDispatch } from 'react-redux';
-
-export const DayCalendarHead = ({ today, pickHandler, checkDate }) => {
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFullDate } from 'redux/selectors';
+export const DayCalendarHead = ({ checkDate }) => {
+  const reduxDate = useSelector(selectFullDate);
+  const currentDate = new Date(reduxDate);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isCurrentDay = day => isSameDay(day, today);
+  const isCurrentDay = day => isSameDay(day, currentDate);
   const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   const daysOfWeekShort = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
-  const startOfWeekToday = startOfWeek(today, {
+  const startOfWeekToday = startOfWeek(currentDate, {
     weekStartsOn: 1,
     locale: 'en-US',
   });
@@ -33,14 +35,11 @@ export const DayCalendarHead = ({ today, pickHandler, checkDate }) => {
   });
 
   const handleDateClick = data => {
-    const pickDate = new Date(data);
-    const pickDay = pickDate.getDate();
+    const pickDay = data.getDate();
     navigate(`/calendar/day/${pickDay}`);
-    dispatch(setCurrentDay(pickDate.getDate()));
-    dispatch(setCurrentMonth(pickDate.getMonth()));
-    dispatch(setCurrentYear(pickDate.getFullYear()));
-    checkDate(pickDate);
-    pickHandler(pickDate);
+    dispatch(setCurrentDay(data.getDate()));
+    dispatch(setCurrentMonth(data.getMonth()));
+    dispatch(setCurrentYear(data.getFullYear()));
   };
 
   return (
@@ -60,8 +59,8 @@ export const DayCalendarHead = ({ today, pickHandler, checkDate }) => {
             <DayNumberOfWeek
               isCurrentDay={isCurrentDay(dayItem)}
               onClick={() => handleDateClick(dayItem)}
-              disabled={checkDate(dayItem, 'click')}
-              disabledStyled={checkDate(dayItem)}
+              disabled={checkDate(addDays(dayItem, 2))}
+              disabledStyled={checkDate(addDays(dayItem, 2))}
             >
               {format(dayItem, 'd')}
             </DayNumberOfWeek>

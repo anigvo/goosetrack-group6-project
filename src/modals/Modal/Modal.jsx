@@ -31,7 +31,8 @@ const CustomModal = ({ isOpen, onClose, children, customStyles }) => {
       transform: 'translate(-50%, -50%)',
       backgroundColor,
       overflow: 'hidden',
-    },
+      transition: '0.4s',
+    }, 
     overlay: {
       backgroundColor: 'rgba(0, 0, 0, 0)',
     },

@@ -49,7 +49,7 @@ export const UserForm = () => {
   const initialValues = {
     name: userInfo.name || '',
     birthday: userInfo.birthday ? new Date(userInfo.birthday) : new Date(),
-    phone: userInfo.phone || '',
+    phone: userInfo.phone || '38',
     skype: userInfo.skype || '',
     email: userInfo.email || '',
     avatarURL: userInfo.avatarURL || '',
@@ -79,7 +79,7 @@ export const UserForm = () => {
   const handleSubmit = (values, {resetForm}) => {
     const formData = new FormData();
     if (values.name) {
-      formData.append("name", values.name);
+      formData.append("name", values.name || ' ');
     }
     if (values.email) {
       formData.append("email", values.email);
@@ -91,7 +91,8 @@ export const UserForm = () => {
       formData.append("skype", values.skype);
     }
     if (values.phone) {
-      formData.append("phone", values.phone);
+      const phone = values.phone.replaceAll("-", " ").replace("+", "");
+      formData.append("phone", phone);
     }
     if (values.avatarURL && selectedFile) {
       formData.delete("avatarURL");

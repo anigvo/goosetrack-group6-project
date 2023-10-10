@@ -18,7 +18,6 @@ const ReviewSlider = () => {
     (async () => {
       try {
           const data = await getAll();
-          console.log(data)
           setreviews(data);
         }
        catch (e){

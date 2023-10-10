@@ -3,32 +3,22 @@ import { PeriodPaginator } from 'components/PeriodPaginator/PeriodPaginator';
 import { PeriodTypeSelect } from 'components/PeriodTypeSelect/PeriodTypeSelect';
 import { CalendarToolbarContainer } from './CalendarToolbar.styled';
 export const CalendarToolbar = ({
-  prevHandler,
-  nextHandler,
-  pickHandler,
-  today,
   currentDateMonth,
+  currentDateYear,
   periodType,
   changePeriod,
-  currentDateDay,
   checkDate,
 }) => {
   return (
     <CalendarToolbarContainer>
       <PeriodPaginator
-        prevHandler={prevHandler}
-        nextHandler={nextHandler}
-        pickHandler={pickHandler}
-        today={today}
+        currentDateMonth={currentDateMonth}
+        currentDateYear={currentDateYear}
         periodType={periodType}
         changePeriod={changePeriod}
-        currentDateDay={currentDateDay}
-        currentDateMonth={currentDateMonth}
         checkDate={checkDate}
       />
       <PeriodTypeSelect
-        currentDateMonth={currentDateMonth}
-        currentDateDay={currentDateDay}
         changePeriod={changePeriod}
       />
     </CalendarToolbarContainer>

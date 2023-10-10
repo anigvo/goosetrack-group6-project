@@ -18,13 +18,11 @@ import {
   setCurrentMonth,
   setCurrentYear,
 } from 'redux/tasks/tasksSlice';
-import { useDispatch } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFullDate } from 'redux/selectors';
 registerLocale('en-GB', enGB);
 
 export const DatePickerCustom = ({
-  selectedDate,
-  setSelectedDate,
   filterMonth,
   setFilterMonth,
   filterYear,
@@ -32,14 +30,11 @@ export const DatePickerCustom = ({
   handlePrevMonth,
   handleNextMonth,
   changePeriod,
-  pickHandler,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleDateChange = date => {
-    setSelectedDate(date);
-  };
-
+  const reduxDate = useSelector(selectFullDate);
+  const currentDate = new Date(reduxDate);
   const filterDate = date => {
     const selectedMonth = filterMonth;
     const selectedYear = filterYear;
@@ -54,7 +49,9 @@ export const DatePickerCustom = ({
     if (selectedMonth !== filterMonth || selectedYear !== filterYear) {
       setFilterMonth(selectedMonth);
       setFilterYear(selectedYear);
-      setSelectedDate(date);
+      dispatch(setCurrentDay(date.getDate()));
+      dispatch(setCurrentMonth(date.getMonth()));
+      dispatch(setCurrentYear(date.getFullYear()));
     }
   };
 
@@ -65,7 +62,6 @@ export const DatePickerCustom = ({
     dispatch(setCurrentDay(date.getDate()));
     dispatch(setCurrentMonth(date.getMonth()));
     dispatch(setCurrentYear(date.getFullYear()));
-    pickHandler(date);
   };
 
   const customHeader = ({ date, decreaseMonth, increaseMonth }) => {
@@ -99,7 +95,7 @@ export const DatePickerCustom = ({
         </DatePickerButton>
 
         <DatePickerCustomHeaderTitle>
-          {selectedDate.toLocaleDateString('en-GB', {
+          {currentDate.toLocaleDateString('en-GB', {
             month: 'long',
             year: 'numeric',
           })}
@@ -113,8 +109,7 @@ export const DatePickerCustom = ({
 
   return (
     <DatePicker
-      selected={selectedDate}
-      onChange={handleDateChange}
+      selected={currentDate}
       onMonthChange={handleMonthChange}
       onSelect={handleDateClick}
       closeOnScroll={true}
@@ -123,7 +118,7 @@ export const DatePickerCustom = ({
       renderCustomHeader={customHeader}
       customInput={
         <CalendarBtn type="button">
-          {selectedDate.toLocaleDateString('en-GB', {
+          {currentDate.toLocaleDateString('en-GB', {
             month: 'long',
             year: 'numeric',
           })}

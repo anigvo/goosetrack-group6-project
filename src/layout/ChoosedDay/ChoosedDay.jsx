@@ -8,14 +8,8 @@ import { getUserTasks } from 'redux/tasks/operations';
 import { selectDay } from 'redux/selectors';
 
 const ChoosedDay = () => {
-  const [
-    startOfWeekDate,
-    daysToAdd,
-    today,
-    setPeriodType,
-    pickHandler,
-    checkDate,
-  ] = useOutletContext();
+  const [setPeriodType, checkDate] =
+    useOutletContext();
   const dispatch = useDispatch();
   const day = useSelector(selectDay);
 
@@ -27,14 +21,10 @@ const ChoosedDay = () => {
   return (
     <ChoosedDayContainer>
       <DayCalendarHead
-        startOfWeekDate={startOfWeekDate}
-        daysToAdd={daysToAdd}
-        today={today}
         changePeriod={setPeriodType}
-        pickHandler={pickHandler}
         checkDate={checkDate}
       />
-      <TasksColumnsList/>
+      <TasksColumnsList />
     </ChoosedDayContainer>
   );
 };
