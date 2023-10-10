@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Suspense, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useState, Suspense, useEffect } from 'react';
+import { useNavigate, Outlet } from 'react-router-dom';
 import { CalendarToolbar } from 'layout/CalendarToolbar/CalendarToolbar';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectDay, selectMonth, selectYear } from 'redux/selectors';
@@ -49,6 +47,7 @@ const CalendarPage = ({ updatePageName }) => {
         periodType={periodType}
         changePeriod={setPeriodType}
         checkDate={checkDate}
+        page={'calendar'}
       />
       <Suspense fallback={<Loader type={'suspense'} />}>
         <Outlet context={[setPeriodType, checkDate]} />

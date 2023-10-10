@@ -18,6 +18,30 @@ export const BoxStatistics = styled.div`
         padding: 134px 114px 104px 114px;     
     `}
 `;
+export const ConteinerData = styled.div`
+  display: flex;
+  flex-direction: column;
 
+  padding: 0 40px 40px;
 
+  ${media('tablet', '')`
+        flex-direction: row;
+        justify-content: space-between;
+        
+        
+     `}
+  ${media('desktop', '')`        
+        
+        
+    `}
+`;
+export const BoxPeriodPaginator = styled.div`
+  ${media('tablet', '')`
+    
+    `}
+  ${media('desktop', '')`        
+        
+        
+    `}
+`;
 

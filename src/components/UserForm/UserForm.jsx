@@ -214,11 +214,14 @@ export const UserForm = () => {
                                 <DatePicker
                                   calendarStartDay={1}
                                   dropdownMode="select"
-                                  yearDropdownItemNumber={100}
                                   scrollableYearDropdown
+                                  defaultValue={null}
                                   selected={new Date(values.birthday)}
                                   dateFormat="yyyy-MM-dd"
-                                  maxDate={new Date()}
+                                  // maxDate={new Date()}
+                                  showYearDropdown // Відображення вибору року
+                                  yearDropdownItemNumber={100} // Кількість років, які відображаються в випадаючому списку року
+                                  showMonthDropdown // Відображення вибору місяця
                                   {...field}
                                   {...props}
                                 />
