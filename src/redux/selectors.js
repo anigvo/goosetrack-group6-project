@@ -36,8 +36,7 @@ export const selectCategoryTasks = createSelector([selectTasks], (items) => {
             }
             return allTasks;
         },
-        { todo: [], inProgress: [], done: [] }
-    )
+        { todo: [], inProgress: [], done: [] })
 })
 
 export const selectIsLoadingTasks = state => state.tasks.isLoadingTasks;
@@ -47,4 +46,14 @@ export const selectFullDate = createSelector([selectDay, selectMonth, selectYear
     const isoMonth = month + 1;
     const fullMonth = isoMonth.toString().length === 1 ? isoMonth.toString().padStart(2, '0') : isoMonth;
     return `${year}-${fullMonth}-${fullDay}`;
+})
+
+export const selectTodos = createSelector([selectTasks], (items) => {
+    return items.reduce(
+        (allTasks, task) => {
+            if (task.category === "to-do") {
+                allTasks.push(task);
+            }
+            return allTasks;
+        }, [])
 })
