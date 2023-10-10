@@ -15,8 +15,11 @@ const ChoosedDay = () => {
 
   useEffect(() => {
     setPeriodType('day');
+  }, [setPeriodType]);
+
+  useEffect(() => {
     dispatch(getUserTasks('day'));
-  }, [setPeriodType, dispatch, day]);
+  }, [dispatch, day])
 
   return (
     <ChoosedDayContainer>
