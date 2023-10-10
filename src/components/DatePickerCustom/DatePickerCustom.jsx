@@ -30,17 +30,18 @@ export const DatePickerCustom = ({
   handlePrevMonth,
   handleNextMonth,
   changePeriod,
+  periodType,
+  page,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const reduxDate = useSelector(selectFullDate);
   const currentDate = new Date(reduxDate);
+
   const filterDate = date => {
-    const selectedMonth = filterMonth;
-    const selectedYear = filterYear;
     const month = date.getMonth();
     const year = date.getFullYear();
-    return month === selectedMonth && year === selectedYear;
+    return month === filterMonth && year === filterYear;
   };
 
   const handleMonthChange = date => {
@@ -56,9 +57,12 @@ export const DatePickerCustom = ({
   };
 
   const handleDateClick = date => {
-    const day = date.getDate();
-    changePeriod('day');
-    navigate(`/calendar/day/${day}`);
+    if (page === 'calendar') {
+      const day = date.getDate();
+      changePeriod('day');
+      navigate(`/calendar/day/${day}`);
+    }
+
     dispatch(setCurrentDay(date.getDate()));
     dispatch(setCurrentMonth(date.getMonth()));
     dispatch(setCurrentYear(date.getFullYear()));
@@ -95,10 +99,16 @@ export const DatePickerCustom = ({
         </DatePickerButton>
 
         <DatePickerCustomHeaderTitle>
-          {currentDate.toLocaleDateString('en-GB', {
-            month: 'long',
-            year: 'numeric',
-          })}
+          {periodType === 'month'
+            ? currentDate.toLocaleDateString('en-GB', {
+                month: 'long',
+                year: 'numeric',
+              })
+            : currentDate.toLocaleDateString('en-GB', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric',
+              })}
         </DatePickerCustomHeaderTitle>
         <DatePickerButton onClick={increase}>
           <ArrowRight />
@@ -118,10 +128,16 @@ export const DatePickerCustom = ({
       renderCustomHeader={customHeader}
       customInput={
         <CalendarBtn type="button">
-          {currentDate.toLocaleDateString('en-GB', {
-            month: 'long',
-            year: 'numeric',
-          })}
+          {periodType === 'month'
+            ? currentDate.toLocaleDateString('en-GB', {
+                month: 'long',
+                year: 'numeric',
+              })
+            : currentDate.toLocaleDateString('en-GB', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric',
+              })}
         </CalendarBtn>
       }
     />

@@ -6,7 +6,6 @@ import {
   PaginatorBtn,
   PeriodPaginatorContainer,
   PaginatorBtnWrapper,
-  DayTitle,
 } from './PeriodPaginator.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -21,6 +20,7 @@ export const PeriodPaginator = ({
   periodType,
   changePeriod,
   checkDate,
+  page
 }) => {
   const reduxDate = useSelector(selectFullDate);
   const currentDate = new Date(reduxDate);
@@ -51,6 +51,7 @@ export const PeriodPaginator = ({
     const prevDayDate = new Date(currentDate);
     prevDayDate.setDate(prevDayDate.getDate() - 1);
     setFilterMonth(prevDayDate.getMonth());
+    setFilterYear(prevDayDate.getFullYear());
     dispatch(setCurrentDay(prevDayDate.getDate()));
     dispatch(setCurrentMonth(prevDayDate.getMonth()));
     dispatch(setCurrentYear(prevDayDate.getFullYear()));
@@ -60,6 +61,7 @@ export const PeriodPaginator = ({
     const nextDayDate = new Date(currentDate);
     nextDayDate.setDate(nextDayDate.getDate() + 1);
     setFilterMonth(nextDayDate.getMonth());
+    setFilterYear(nextDayDate.getFullYear());
     dispatch(setCurrentDay(nextDayDate.getDate()));
     dispatch(setCurrentMonth(nextDayDate.getMonth()));
     dispatch(setCurrentYear(nextDayDate.getFullYear()));
@@ -67,25 +69,17 @@ export const PeriodPaginator = ({
 
   return (
     <PeriodPaginatorContainer>
-      {periodType === 'month' ? (
-        <DatePickerCustom
-          filterMonth={filterMonth}
-          setFilterMonth={setFilterMonth}
-          filterYear={filterYear}
-          setFilterYear={setFilterYear}
-          handlePrevMonth={handlePrevMonth}
-          handleNextMonth={handleNextMonth}
-          changePeriod={changePeriod}
-        />
-      ) : (
-        <DayTitle>
-          {currentDate.toLocaleDateString('en-GB', {
-            day: 'numeric',
-            month: 'short',
-            year: 'numeric',
-          })}
-        </DayTitle>
-      )}
+      <DatePickerCustom
+        page={page}
+        filterMonth={filterMonth}
+        setFilterMonth={setFilterMonth}
+        filterYear={filterYear}
+        setFilterYear={setFilterYear}
+        handlePrevMonth={handlePrevMonth}
+        handleNextMonth={handleNextMonth}
+        changePeriod={changePeriod}
+        periodType={periodType}
+      />
       <PaginatorBtnWrapper>
         {periodType === 'month' ? (
           <PaginatorBtn

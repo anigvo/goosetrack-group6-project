@@ -8,6 +8,7 @@ export const CalendarToolbar = ({
   periodType,
   changePeriod,
   checkDate,
+  page,
 }) => {
   return (
     <CalendarToolbarContainer>
@@ -17,10 +18,9 @@ export const CalendarToolbar = ({
         periodType={periodType}
         changePeriod={changePeriod}
         checkDate={checkDate}
+        page={page}
       />
-      <PeriodTypeSelect
-        changePeriod={changePeriod}
-      />
+      <PeriodTypeSelect changePeriod={changePeriod} />
     </CalendarToolbarContainer>
   );
 };
