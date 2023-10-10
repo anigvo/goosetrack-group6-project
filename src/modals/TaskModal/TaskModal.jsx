@@ -10,7 +10,6 @@ const TaskModal = ({ isOpen, onClose, category, id}) => {
     minWidth: '303px',
     minHeight: '336px',
     padding: '28px 15px 28px 15px',
-    transition: '0.4s',
   });
 
   useEffect(() => {
@@ -23,7 +22,6 @@ const TaskModal = ({ isOpen, onClose, category, id}) => {
           minWidth: '396px',
           minHeight: '360px',
           padding: '40px 25px',
-          transition: '0.4s',
         });
       } else {
         setModalStyles({
@@ -32,7 +30,6 @@ const TaskModal = ({ isOpen, onClose, category, id}) => {
           minWidth: '303px',
           minHeight: '336px',
           padding: '28px 15px 28px 15px',
-          transition: '0.4s',
         });
       }
     };
