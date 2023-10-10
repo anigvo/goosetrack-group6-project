@@ -34,6 +34,7 @@ export const PeriodPaginator = ({
     prevMonthDate.setMonth(prevMonthDate.getMonth() - 1);
     setFilterMonth(prevMonthDate.getMonth());
     setFilterYear(prevMonthDate.getFullYear());
+    dispatch(setCurrentDay(prevMonthDate.getDate()));
     dispatch(setCurrentMonth(prevMonthDate.getMonth()));
     dispatch(setCurrentYear(prevMonthDate.getFullYear()));
   };
@@ -43,6 +44,7 @@ export const PeriodPaginator = ({
     nextMonthDate.setMonth(nextMonthDate.getMonth() + 1);
     setFilterMonth(nextMonthDate.getMonth());
     setFilterYear(nextMonthDate.getFullYear());
+    dispatch(setCurrentDay(nextMonthDate.getDate()));
     dispatch(setCurrentMonth(nextMonthDate.getMonth()));
     dispatch(setCurrentYear(nextMonthDate.getFullYear()));
   };

@@ -20,7 +20,11 @@ export const CalendarToolbar = ({
         checkDate={checkDate}
         page={page}
       />
-      <PeriodTypeSelect changePeriod={changePeriod} />
+      {page === 'calendar' ? (
+        <PeriodTypeSelect changePeriod={changePeriod} />
+      ) : (
+        <></>
+      )}
     </CalendarToolbarContainer>
   );
 };
