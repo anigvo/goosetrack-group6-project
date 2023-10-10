@@ -1,4 +1,3 @@
-
 // import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
@@ -16,91 +15,90 @@ import {
 import { getUserTasks } from 'redux/tasks/operations';
 import { useEffect } from 'react';
 
-
-
 Chart.register(...registerables);
 
 const StatisticsChart = () => {
-   const month = useSelector(selectMonth);
-   const day = useSelector(selectDay);
-   const year = useSelector(selectYear);
-   const tasks = useSelector(selectTasks);  
-  
- 
+  const month = useSelector(selectMonth);
+  const day = useSelector(selectDay);
+  const year = useSelector(selectYear);
+  const tasks = useSelector(selectTasks);
+
   // Використовуємо селектори для отримання необхідних даних
- 
-  
+
   // const categoryTasks = useSelector(selectCategoryTasks);
 
-const colorDay = '#FFD2DD';
-const colorMonth = '#3E85F3';
+  const colorDay = '#FFD2DD';
+  const colorMonth = '#3E85F3';
 
-const gradientMonth = context => {
-  const chart = context.chart;
-  const { ctx, chartArea } = chart;
-  if (!chartArea) {
-    return null;
-  }
+  const gradientMonth = context => {
+    const chart = context.chart;
+    const { ctx, chartArea } = chart;
+    if (!chartArea) {
+      return null;
+    }
 
-  // Створення градієнта замість кольорів
-  const gradient = ctx.createLinearGradient(
-    0,
-    chartArea.bottom,
-    0,
-    chartArea.top
-  );
-  gradient.addColorStop(0, colorMonth);
-  gradient.addColorStop(1, 'rgba(62, 133, 243, 0.00)');
+    // Створення градієнта замість кольорів
+    const gradient = ctx.createLinearGradient(
+      0,
+      chartArea.bottom,
+      0,
+      chartArea.top
+    );
+    gradient.addColorStop(0, colorMonth);
+    gradient.addColorStop(1, 'rgba(62, 133, 243, 0.00)');
 
-  return gradient;
-};
+    return gradient;
+  };
 
-const gradientDay = context => {
-  const chart = context.chart;
-  const { ctx, chartArea } = chart;
-  if (!chartArea) {
-    return null;
-  }
+  const gradientDay = context => {
+    const chart = context.chart;
+    const { ctx, chartArea } = chart;
+    if (!chartArea) {
+      return null;
+    }
 
-  // Створення градієнта замість кольорів
-  const gradient = ctx.createLinearGradient(
-    0,
-    chartArea.bottom,
-    0,
-    chartArea.top
-  );
-  gradient.addColorStop(0, colorDay);
-  gradient.addColorStop(0.9687, 'rgba(255, 210, 221, 0.00)');
+    // Створення градієнта замість кольорів
+    const gradient = ctx.createLinearGradient(
+      0,
+      chartArea.bottom,
+      0,
+      chartArea.top
+    );
+    gradient.addColorStop(0, colorDay);
+    gradient.addColorStop(0.9687, 'rgba(255, 210, 221, 0.00)');
 
-  return gradient;
-};
+    return gradient;
+  };
 
- const todoByDay = tasks.filter(
-   task =>
-     task.category === 'to-do' && task.date.startsWith(`${year}-${month + 1}-${day}`)
- ).length;
- const todoByMonth = tasks.filter(
-   task =>
-     task.category === 'to-do' && task.date.startsWith(`${year}-${month + 1}`)
- ).length;
- const inprogressByDay = tasks.filter(
-   task =>
-     task.category === 'in-progress' && task.date.startsWith(`${year}-${month + 1}-${day}`)
- ).length;
- const inprogressByMonth = tasks.filter(
-   task =>
-     task.category === 'in-progress' &&
-     task.date.startsWith(`${year}-${month + 1}`)
- ).length;
- const doneByDay = tasks.filter(
-   task =>
-     task.category === 'done' && task.date.startsWith(`${year}-${month + 1}-${day}`)
- ).length;
- const doneByMonth = tasks.filter(
-   task =>
-     task.category === 'done' && task.date.startsWith(`${year}-${month + 1}`)
- ).length;
- 
+  const todoByDay = tasks.filter(
+    task =>
+      task.category === 'to-do' &&
+      task.date.startsWith(`${year}-${month + 1}-${day}`)
+  ).length;
+  const todoByMonth = tasks.filter(
+    task =>
+      task.category === 'to-do' && task.date.startsWith(`${year}-${month + 1}`)
+  ).length;
+  const inprogressByDay = tasks.filter(
+    task =>
+      task.category === 'in-progress' &&
+      task.date.startsWith(`${year}-${month + 1}-${day}`)
+  ).length;
+  const inprogressByMonth = tasks.filter(
+    task =>
+      task.category === 'in-progress' &&
+      task.date.startsWith(`${year}-${month + 1}`)
+  ).length;
+  const doneByDay = tasks.filter(
+    task =>
+      task.category === 'done' &&
+      task.date.startsWith(`${year}-${month + 1}-${day}`)
+  ).length;
+  const doneByMonth = tasks.filter(
+    task =>
+      task.category === 'done' && task.date.startsWith(`${year}-${month + 1}`)
+  ).length;
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(
@@ -108,16 +106,19 @@ const gradientDay = context => {
     );
   }, [dispatch, year, month, day]);
 
-   const tasksByDay = [todoByDay, inprogressByDay, doneByDay];
-   const tasksByMonth = [todoByMonth, inprogressByMonth, doneByMonth];
+  const tasksByDay = [todoByDay, inprogressByDay, doneByDay];
+  const tasksByMonth = [todoByMonth, inprogressByMonth, doneByMonth];
 
-    const data = {
+  const data = {
     labels: ['To Do', 'In Progress', 'Done'],
     datasets: [
       {
         label: 'By Day',
-        data: tasksByDay.map(task => (task / tasksByDay.reduce((sum, value) => sum + value, 0)) * 100),
-        display: false,
+        data: tasksByDay.map(
+          task =>
+            (task / tasksByDay.reduce((sum, value) => sum + value, 0)) * 100
+        ),
+        display: true,
         backgroundColor: gradientDay,
         borderSkipped: false,
         maxBarThickness: 27,
@@ -128,8 +129,11 @@ const gradientDay = context => {
       },
       {
         label: 'By Month',
-        data: tasksByMonth.map(task => (task / tasksByMonth.reduce((sum, value) => sum + value, 0)) * 100),
-        display: false,
+        data: tasksByMonth.map(
+          task =>
+            (task / tasksByMonth.reduce((sum, value) => sum + value, 0)) * 100
+        ),
+        display: true,
         backgroundColor: gradientMonth,
         borderSkipped: false,
         maxBarThickness: 27,
@@ -142,9 +146,10 @@ const gradientDay = context => {
   };
 
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,
     categoryPercentage: 0.3,
     barPercentage: 0.9,
-    responsive: true,
     scales: {
       x: {
         ticks: {
@@ -191,6 +196,9 @@ const gradientDay = context => {
           font: {
             size: 14,
           },
+          // callback: function (value) {
+          //   return value + '%'; // Додаємо відсотковий підпис до значень
+          // },
         },
       },
     },
@@ -217,8 +225,6 @@ const gradientDay = context => {
 };
 
 export default StatisticsChart;
-
-
 
 // ___________________________________________________________________
 // import React, { useState } from 'react';
@@ -417,7 +423,6 @@ export default StatisticsChart;
 //   //   nextHandler();
 //   // };
 
-  
 //   const colorDay = '#FFD2DD';
 //   const colorMonth = '#3E85F3';
 
@@ -500,7 +505,6 @@ export default StatisticsChart;
 //       },
 //     ],
 //   };
-
 
 //    const options = {
 //      categoryPercentage: 0.3,
