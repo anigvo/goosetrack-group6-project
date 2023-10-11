@@ -1,6 +1,6 @@
 import { Bar } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
-
+import { Loader } from 'components/Loader/Loader';
 import 'react-datepicker/dist/react-datepicker.css';
 import { BoxBar } from './StatisticsChart.styled';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,13 +9,16 @@ import {
   selectDay,
   selectTasks,
   selectYear,
+  selectIsLoadingTasks,
 } from 'redux/selectors';
 import { getUserTasks } from 'redux/tasks/operations';
+
 import { useEffect } from 'react';
 
 Chart.register(...registerables);
 
 const StatisticsChart = () => {
+  const isLoading = useSelector(selectIsLoadingTasks);
   const month = useSelector(selectMonth);
   const day = useSelector(selectDay);
   const year = useSelector(selectYear);
@@ -233,9 +236,13 @@ const StatisticsChart = () => {
 
   return (
     <>
-      <BoxBar>
-        <Bar data={data} options={options} />
-      </BoxBar>
+      {isLoading ? (
+        <Loader type={'suspense'} />
+      ) : (
+        <BoxBar>
+          <Bar data={data} options={options} />
+        </BoxBar>
+      )}
     </>
   );
 };

@@ -35,8 +35,6 @@ const StatisticsPage = ({ updatePageName }) => {
       <ConteinerData>
         <BoxPeriodPaginator>
           <CalendarToolbar
-            currentDateMonth={currentDateMonth}
-            currentDateYear={currentDateYear}
             periodType={periodType}
             changePeriod={setPeriodType}
             checkDate={checkDate}
