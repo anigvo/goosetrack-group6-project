@@ -17,8 +17,6 @@ export const Header = forwardRef(({ openMethod, title, isOpenSidebar }, ref) => 
     const { pathname } = useLocation();
     const isDayPage = pathname.includes('/calendar/day') ? true : false;
     const isUndone = todo.length > 0 || inProgress.length > 0 ? true : false
-    
-    console.log(isDayPage && isUndone);
 
     return (
         <HeaderWrapper>

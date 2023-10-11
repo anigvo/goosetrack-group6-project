@@ -32,6 +32,7 @@ import {
 import icons from '../../assets/icons/icons.svg';
 import { logInUser, registerUser } from 'redux/auth/operations';
 import { nanoid } from '@reduxjs/toolkit';
+import { GoogleBtn } from 'buttons/GoogleBtn/GoogleBtn';
 
 const userShema = object({
   name: string().min(3).required(),
@@ -225,6 +226,7 @@ const RegisterForm = () => {
                     </IconButtonSubmit>
                   </IconButtonSubmitSpan>
                 </ButtonSubmit>
+                <GoogleBtn>Sign up with</GoogleBtn>
               </Form>
             )}
           </Formik>

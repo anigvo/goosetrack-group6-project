@@ -29,6 +29,7 @@ import {
 import { logInUser } from 'redux/auth/operations';
 import icons from '../../assets/icons/icons.svg';
 import { nanoid } from '@reduxjs/toolkit';
+import { GoogleBtn } from 'buttons/GoogleBtn/GoogleBtn';
 
 const userShema = object({
   email: string().email('This is an ERROR email').required(),
@@ -181,6 +182,7 @@ const LoginForm = () => {
                     </IconButtonSubmit>
                   </IconButtonSubmitSpan>
                 </ButtonSubmit>
+                <GoogleBtn>Log in with</GoogleBtn>
               </Form>
             )}
           </Formik>
