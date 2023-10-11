@@ -122,11 +122,11 @@ export const UserForm = () => {
                         name="avatarUrl"
                         type="file"
                         accept="image/*,.jpeg,.jpg,.png"
-                        onChange={(e) => {
+                        onChange={e => {
                           const isFile = handleFileChange(e);
-                          isFile && setFieldValue("avatarURL", e.target.files[0])
-                        }
-                        }
+                          isFile &&
+                            setFieldValue('avatarURL', e.target.files[0]);
+                        }}
                         style={{ display: 'none' }}
                       />
 
@@ -150,8 +150,8 @@ export const UserForm = () => {
                               errors.name && touched.name
                                 ? 'error'
                                 : touched.name
-                                  ? 'valid'
-                                  : 'default'
+                                ? 'valid'
+                                : 'default'
                             }
                           >
                             User Name
@@ -165,8 +165,8 @@ export const UserForm = () => {
                               errors.name && touched.name
                                 ? 'error'
                                 : touched.name
-                                  ? 'valid'
-                                  : 'default'
+                                ? 'valid'
+                                : 'default'
                             }
                           />
                           {touched.name && (
@@ -253,8 +253,8 @@ export const UserForm = () => {
                               errors.email && touched.email
                                 ? 'error'
                                 : touched.email
-                                  ? 'valid'
-                                  : 'default'
+                                ? 'valid'
+                                : 'default'
                             }
                           >
                             Email
@@ -267,8 +267,8 @@ export const UserForm = () => {
                               errors.email && touched.email
                                 ? 'error'
                                 : touched.email
-                                  ? 'valid'
-                                  : 'default'
+                                ? 'valid'
+                                : 'default'
                             }
                           />
                           {touched.email && (
@@ -301,15 +301,15 @@ export const UserForm = () => {
                               errors.phone && touched.phone
                                 ? 'error'
                                 : touched.phone
-                                  ? 'valid'
-                                  : 'default'
+                                ? 'valid'
+                                : 'default'
                             }
                           >
                             Phone
                           </LabelText>
                           <FormInput
                             id="phone"
-                            type="phone"
+                            type="tel"
                             name="phone"
                             placeholder="Enter your phone"
                             component={CustomFormInput}
@@ -317,8 +317,8 @@ export const UserForm = () => {
                               errors.phone && touched.phone
                                 ? 'error'
                                 : touched.phone
-                                  ? 'valid'
-                                  : 'default'
+                                ? 'valid'
+                                : 'default'
                             }
                           />
                           {touched.phone && (
@@ -348,8 +348,8 @@ export const UserForm = () => {
                               errors.skype && touched.skype
                                 ? 'error'
                                 : touched.skype
-                                  ? 'valid'
-                                  : 'default'
+                                ? 'valid'
+                                : 'default'
                             }
                           >
                             Skype
@@ -363,8 +363,8 @@ export const UserForm = () => {
                               errors.skype && touched.skype
                                 ? 'error'
                                 : touched.skype
-                                  ? 'valid'
-                                  : 'default'
+                                ? 'valid'
+                                : 'default'
                             }
                           />
                           {touched.skype && (
