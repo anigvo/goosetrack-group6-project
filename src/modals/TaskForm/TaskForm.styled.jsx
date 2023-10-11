@@ -210,7 +210,7 @@ const LoaderCont = styled.div`
 export const GooseImageForFeed = styled.img`
   width: 81px;
   height: 188px;
-  transform: translateY(10px) rotate(-31deg);
+  transform: translateY(10px) rotate(31deg);
 
 `;
 
