@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { TaskFormWrapper, TimeDiv, AddIcon, LoaderCont, GooseImageForFeed } from './TaskForm.styled';
+import { TaskFormWrapper, TimeDiv, AddIcon, LoaderCont } from './TaskForm.styled';
 import { getTasks } from '../../api/tasks';
 import { isSameDay } from 'date-fns';
 import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUserTasks, updateUserTask } from 'redux/tasks/operations';
 import { selectFullDate } from 'redux/selectors';
-import Image from '../../assets/images/notfoundpage-goose-rocket.png';
 import { FcHighPriority } from 'react-icons/fc';
 import { LuTimerOff } from 'react-icons/lu';
 import { BsDatabaseExclamation } from 'react-icons/bs'
@@ -237,7 +236,7 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
   return (
     <TaskFormWrapper>
       {isLoading && formData.isEditing ? (
-        <LoaderCont><GooseImageForFeed alt="goose" src={Image} /></LoaderCont>
+        <LoaderCont></LoaderCont>
       ) : (
       <form onSubmit={handleSubmit}>
         <div>

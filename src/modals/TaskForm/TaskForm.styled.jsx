@@ -207,11 +207,4 @@ const LoaderCont = styled.div`
   height: 20vh; 
 `;
 
-export const GooseImageForFeed = styled.img`
-  width: 81px;
-  height: 188px;
-  transform: translateY(10px) rotate(31deg);
-
-`;
-
 export { TaskFormWrapper, TimeDiv, LoaderCont };

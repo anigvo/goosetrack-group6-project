@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import StarRatings from 'react-star-ratings';
-import { FeedbackFormWrapper, StyledRatingContainer, PencilIcon, TrashIcon, LoaderCont, GooseImageForFeed } from './FeedbackForm.styled';
+import { FeedbackFormWrapper, StyledRatingContainer, PencilIcon, TrashIcon, LoaderCont } from './FeedbackForm.styled';
 import { createReview, getReview, updateReview, deleteReview } from '../../api/reviews'; 
 import { toast } from 'react-hot-toast';
-import Image from '../../assets/images/notfoundpage-goose-rocket.png';
 
 const FeedbackForm = ({ onCancel, onReviewStatusChange, onUpdateStyles, onEditStatusChange }) => {
   const [rating, setRating] = useState(0);
@@ -122,7 +121,7 @@ const FeedbackForm = ({ onCancel, onReviewStatusChange, onUpdateStyles, onEditSt
   return (
     <FeedbackFormWrapper >
       {isLoading ? (
-        <LoaderCont><GooseImageForFeed alt="goose" src={Image} /></LoaderCont>
+        <LoaderCont></LoaderCont>
       ) : (
         <div>
           <StyledRatingContainer>

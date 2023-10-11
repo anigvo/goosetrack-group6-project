@@ -41,6 +41,7 @@ export const lightTheme = Object.freeze({
   headerUsernameText: '#343434',
   themeTogglerIcon: '#3E85F3',
   // кольори сторінки статистики
+  
   byDayColor: '#FFD2DD',
   byMonthsColor: '#3E85F3',
   statisticsTextColor: '#343434',

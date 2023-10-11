@@ -15,20 +15,17 @@ import {
 } from 'redux/tasks/tasksSlice';
 import { selectFullDate } from 'redux/selectors';
 export const PeriodPaginator = ({
-  currentDateMonth,
-  currentDateYear,
   periodType,
   changePeriod,
   checkDate,
-  page
+  page,
 }) => {
   const reduxDate = useSelector(selectFullDate);
   const currentDate = new Date(reduxDate);
   const dispatch = useDispatch();
   const [filterMonth, setFilterMonth] = useState(currentDate.getMonth());
   const [filterYear, setFilterYear] = useState(currentDate.getFullYear());
-  const currentMonth = currentDateMonth;
-  const currentYear = currentDateYear;
+
   const handlePrevMonth = () => {
     const prevMonthDate = new Date(currentDate);
     prevMonthDate.setMonth(prevMonthDate.getMonth() - 1);
@@ -89,10 +86,12 @@ export const PeriodPaginator = ({
             type="button"
             onClick={handlePrevMonth}
             disabled={
-              filterMonth === currentMonth && filterYear === currentYear
+              new Date().getMonth() === filterMonth &&
+              new Date().getFullYear() === filterYear
             }
             disabledStyle={
-              filterMonth === currentMonth && filterYear === currentYear
+              new Date().getMonth() === filterMonth &&
+              new Date().getFullYear() === filterYear
                 ? true
                 : false
             }

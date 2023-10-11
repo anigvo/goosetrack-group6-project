@@ -1,5 +1,6 @@
 import { Bar } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
+
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 import { Loader } from 'components/Loader/Loader';
@@ -10,7 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   selectMonth,
   selectDay,
-  selectTasks, 
+  selectTasks,
   selectYear,
   selectIsLoadingTasks,
 } from 'redux/selectors';
@@ -223,8 +224,9 @@ const StatisticsChart = () => {
           tickColor: 'rgba(0, 0, 0, 0)',
           tickLength: 60,
           tickWidth: 60,
-
+          
           offsetGridLines: true,
+          
         },
         border: {
           display: false,

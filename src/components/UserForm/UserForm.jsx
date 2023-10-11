@@ -176,10 +176,11 @@ export const UserForm = () => {
                         name="avatarUrl"
                         type="file"
                         accept="image/*,.jpeg,.jpg,.png"
-                        onChange={(e) => {
+                        onChange={e => {
                           const isFile = handleFileChange(e);
                           isFile && setFieldValue("avatarURL", e.target.files[0])
-                        }}
+                        }
+                        }
                         style={{ display: 'none' }}
                       />
 
@@ -202,7 +203,7 @@ export const UserForm = () => {
                             status={
                               errors.name
                                 ? 'error'
-                                : 'default'
+                                  : 'default'
                             }
                           >
                             User Name
@@ -215,7 +216,8 @@ export const UserForm = () => {
                             status={
                               errors.name
                                 ? 'error'
-                                : 'default'}
+                                  : 'default'
+                            }
                           />
                           {touched.name && (
                             <ValidationIcon>
@@ -276,7 +278,7 @@ export const UserForm = () => {
                             status={
                               errors.email
                                 ? 'error'
-                                : 'default'
+                                  : 'default'
                             }
                           >
                             Email
@@ -288,7 +290,7 @@ export const UserForm = () => {
                             status={
                               errors.email
                                 ? 'error'
-                                : 'default'
+                                  : 'default'
                             }
                           />
                           {touched.email && (
@@ -316,21 +318,21 @@ export const UserForm = () => {
                             status={
                               errors.phone
                                 ? 'error'
-                                : 'default'
+                                  : 'default'
                             }
                           >
                             Phone
                           </LabelText>
                           <FormInput
                             id="phone"
-                            type="phone"
+                            type="tel"
                             name="phone"
                             placeholder="Enter your phone"
                             component={CustomFormInput}
                             status={
                               errors.phone
                                 ? 'error'
-                                : 'default'
+                                  : 'default'
                             }
                           />
                           {touched.phone && (
@@ -355,7 +357,7 @@ export const UserForm = () => {
                             status={
                               errors.skype && touched.skype
                                 ? 'error'
-                                : 'default'
+                                  : 'default'
                             }
                           >
                             Skype
@@ -368,7 +370,8 @@ export const UserForm = () => {
                             status={
                               errors.skype && touched.skype
                                 ? 'error'
-                                : 'default'
+
+                                  : 'default'
                             }
                           />
                           {touched.skype && (
