@@ -42,7 +42,12 @@ const ReviewSlider = () => {
 
 
   return (
-    <ReviewSection>
+    <ReviewSection
+      initial={{ opacity: 0, y: 100 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1.1 }}
+      viewport={{ once: true, amount: 0.1 }}
+    >
       <ReviewSectionHeader>Reviews</ReviewSectionHeader>
       {reviews.length ? <>
         <Swiper
@@ -50,7 +55,7 @@ const ReviewSlider = () => {
           spaceBetween={24}
           slidesPerView={1}
           loop={true}
-          speed={1000}
+          speed={1300}
           autoplay={{
             delay: 3000,
             disableOnInteraction: false,

@@ -14,6 +14,7 @@ export const AuthSectionStyled = styled.section`
 `;
 export const MainGoose = styled.img`
   width: 142px;
+  margin: auto;
   @media screen and (min-width: 768px) {
     width: 150px;
   }
