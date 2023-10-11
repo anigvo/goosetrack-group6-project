@@ -1,4 +1,5 @@
-
+import gooseRocket from '../../assets/images/loginpage-goose-rocket.png'
+import gooseRocketx2 from '../../assets/images/loginpage-goose-rocket@2x.png'
 import { Formik, Form, ErrorMessage } from 'formik';
 import { object, string } from 'yup';
 import { useDispatch } from 'react-redux';
@@ -204,7 +205,7 @@ const LoginForm = () => {
 
       <GusContainer>
         <img
-          src={require('../../assets/images/loginpage-goose-rocket.png')}
+          srcSet={`${gooseRocket} 1x, ${gooseRocketx2} 2x`}
           alt="rocket-gus"
           height={521}
           width={368}
