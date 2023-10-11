@@ -164,8 +164,6 @@ export const LabelText = styled.p`
     switch (status) {
       case 'error':
         return '#E74A3B';
-      case 'valid':
-        return '#3CBC81';
       default:
         return props => props.theme.userInputLabelColor;
     }
@@ -207,17 +205,18 @@ export const FormInput = styled(Field)`
   padding-left: 14px;
   background-color: inherit;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  border: ${p => {
-    switch (p.status) {
+  border-width: 1px;
+  border-style: solid;
+  border-color: ${props => {
+    switch (props.status) {
       case 'error':
-        return '1px solid #E74A3B';
-      case 'valid':
-        return '1px solid #3CBC81';
+        return '#E74A3B';
+      case 'default':
+        return props => props.theme.userInputBorderColor;
       default:
         return;
     }
   }};
-  border: 1px solid ${props => props.theme.userInputBorderColor};
   border-radius: 8px;
 
   outline: none;
@@ -235,19 +234,6 @@ export const FormInput = styled(Field)`
     `}
 `;
 
-export const DataIconWrap = styled.span`
-  border: none;
-  background-color: transparent;
-  position: absolute;
-  right: 10px;
-  top: 32px;
-  font-size: x-large;
-
-  ${media('desktop', '')`
-        right: 13px;
-    `}
-`;
-
 export const Feedback = styled.div`
   //   height: 25px;
   //   margin-top: 8px;
@@ -258,12 +244,11 @@ export const ValidFeedback = styled.div`
   color: #3cbc81;
   font-size: 12px;
 `;
-export const IconDown = styled(ChevronDown)`
-  stroke: ${props => props.theme.userShevronDovn};
-`;
+
 export const InvalidFeedback = styled(ErrorMessage)`
   color: #da1414;
   font-size: 12px;
+  margin-top: 5px;
 `;
 
 export const ValidationIcon = styled.span`

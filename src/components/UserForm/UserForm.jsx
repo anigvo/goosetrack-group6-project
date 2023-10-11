@@ -1,5 +1,3 @@
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import { Field, Form, Formik } from 'formik';
 import {
   UserSection,
@@ -17,27 +15,24 @@ import {
   UserFormWrap,
   UserName,
   UserRole,
-  ValidFeedback,
   ValidInputIcon,
   ValidationIcon,
-  DataIconWrap,
   BoxAllInputs,
   ContainerInputs,
   BoxInput,
-  IconDown,
   ContainerForm,
 } from './UserForm.styled';
-import { userFormValidation } from '../../utils/constans/userFormValidation';
 import { useState } from 'react';
 import { SaveChangesBtn } from '../../buttons/SaveChangesBtn/SaveChangesBtn';
 import { CustomFormInput } from '../../utils/constans/CustomFormInput';
 import '../../utils/datePickerUser.css';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAvatar, selectUser } from '../../redux/selectors';
 import { editUser } from '../../redux/auth/operations';
 import { Notify } from 'notiflix';
 import { Avatar } from 'components/Avatar/Avatar';
+import { DateInput } from 'utils/constans/DateInput';
+import { validateDate } from 'utils/constans/validateDate';
 
 export const UserForm = () => {
   const userInfo = useSelector(selectUser);
@@ -48,12 +43,15 @@ export const UserForm = () => {
 
   const initialValues = {
     name: userInfo.name || '',
-    birthday: userInfo.birthday ? new Date(userInfo.birthday) : new Date(),
-    phone: userInfo.phone || '38',
+    birthday: userInfo.birthday ? 
+    new Date(userInfo.birthday).toISOString().split('T')[0].replaceAll('-', '.') 
+    : '',
+    phone: userInfo.phone || '',
     skype: userInfo.skype || '',
     email: userInfo.email || '',
     avatarURL: userInfo.avatarURL || '',
   };
+  
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
@@ -75,41 +73,97 @@ export const UserForm = () => {
     return true;
   }
 
+  const cleanPhone = (phone) => {
+    const erase = phone.replaceAll("-", " ").replace("+", "");
+    if (erase.includes('_')) return true;
+    return false;
+  }
 
-  const handleSubmit = (values, {resetForm}) => {
+  const validateForm = (values) => {
+    const errors = {};
+    const { name, email, birthday, skype, phone } = values;
+    if (name !== userInfo.name) {
+      if (!name) {
+        errors.name = 'Name can`t be epmty.';
+      } else if (name.length > 16 || name.length < 3) {
+        errors.name = 'Name must contain from 3 and up to 16 characters.';
+      }
+    }
+    if (email !== userInfo.email) {
+      if (!email) {
+        errors.email = 'Email can`t be empty.';
+      } else if (!email.match(/^([a-z0-9_.-]+)@([a-z09_.-]+).([a-z]{2,6})$/)) {
+        errors.email = 'Email is invalid.'
+      } else if (typeof email !== 'string') {
+        errors.email = 'Invalid type of email';
+      }
+    }
+    if (birthday !== userInfo.birthday) {
+      if (!birthday) {
+        errors.birthday = 'Birthday can`t be empty';
+      }
+      const errorDate = validateDate(birthday);
+      if (errorDate) errors.birthday = errorDate;
+    }
+    if (skype !== userInfo.skype) {
+      if (skype.length > 16) {
+        errors.skype = 'Skype is too long';
+      }
+    }
+    if (phone !== userInfo.phone) {
+      if (!cleanPhone(phone) && !phone.match(/^\+?38\s\(\d{3}\)\s\d{3}[-\s]\d{2}[-\s]\d{2}/)) {
+        errors.phone = 'Phone must be format 38 (000) 000-00-00'
+      } else if (phone.length > 19) {
+        errors.phone = 'Mobile phone is too long';
+      }
+    }
+    return errors;
+  }
+
+  const handleSubmit = (values, {setValues}) => {
+    const { name, email, birthday, skype, avatarURL, phone } = values;
     const formData = new FormData();
-    if (values.name) {
-      formData.append("name", values.name || ' ');
+    if (name && name !== userInfo.name) {
+      formData.append("name", name);
     }
-    if (values.email) {
-      formData.append("email", values.email);
+    if (email && email !== userInfo.email) {
+      formData.append("email", email);
     }
-    if (values.birthday) {
-      formData.append("birthday", values.birthday.toISOString().split('T')[0]);
+    if (birthday && birthday !== new Date(userInfo.birthday).toISOString().split('T')[0].replaceAll('-', '.')) {
+      formData.append("birthday", birthday.replaceAll('.', '-'));
     }
-    if (values.skype) {
-      formData.append("skype", values.skype);
+    if (skype && skype !== userInfo.skype) {
+      formData.append("skype", skype);
     }
-    if (values.phone) {
-      const phone = values.phone.replaceAll("-", " ").replace("+", "");
-      formData.append("phone", phone);
+    if (!cleanPhone(phone) && phone && phone !== userInfo.phone) {
+      const newPhone = phone.replaceAll("-", " ").replace("+", "");
+      formData.append("phone", newPhone);
     }
-    if (values.avatarURL && selectedFile) {
+    if (avatarURL && selectedFile && avatarURL !== selectedFile) {
       formData.delete("avatarURL");
-      formData.append("image", values.avatarURL);
+      formData.append("image", avatarURL);
     }
-    dispatch(editUser(formData))
+    if (formData.entries().next().value) {
+      dispatch(editUser(formData))
+    }
     setIsFormChanged(false);
+    setSelectedFile(null);
+    setValues({
+      ...initialValues
+    })
   };
 
   return (
     <UserSection>
       <Formik
         initialValues={initialValues}
-        validationSchema={userFormValidation}
+        validate={validateForm}
         onSubmit={handleSubmit}
+        validateOnChange={false}
+        validateOnBlur={false}
+        enableReinitialize={true}
       >
-        {({ setFieldValue, errors, touched, values, dirty, setTouched }) => {
+        {({ setFieldValue, errors, touched, dirty, setTouched }) => {
           return (
             <Form autoComplete="off">
               <ContainerForm>
@@ -125,8 +179,7 @@ export const UserForm = () => {
                         onChange={(e) => {
                           const isFile = handleFileChange(e);
                           isFile && setFieldValue("avatarURL", e.target.files[0])
-                        }
-                        }
+                        }}
                         style={{ display: 'none' }}
                       />
 
@@ -147,11 +200,9 @@ export const UserForm = () => {
                         <Label htmlFor="name">
                           <LabelText
                             status={
-                              errors.name && touched.name
+                              errors.name
                                 ? 'error'
-                                : touched.name
-                                  ? 'valid'
-                                  : 'default'
+                                : 'default'
                             }
                           >
                             User Name
@@ -162,12 +213,9 @@ export const UserForm = () => {
                             name="name"
                             placeholder="User name"
                             status={
-                              errors.name && touched.name
+                              errors.name
                                 ? 'error'
-                                : touched.name
-                                  ? 'valid'
-                                  : 'default'
-                            }
+                                : 'default'}
                           />
                           {touched.name && (
                             <ValidationIcon>
@@ -179,11 +227,7 @@ export const UserForm = () => {
                             </ValidationIcon>
                           )}
                           <Feedback>
-                            {touched.name && !errors.name ? (
-                              <ValidFeedback>
-                                User name is correct
-                              </ValidFeedback>
-                            ) : (
+                            {errors.name && (
                               <InvalidFeedback name="name" component="div" />
                             )}
                           </Feedback>
@@ -192,7 +236,11 @@ export const UserForm = () => {
                       <BoxInput>
                         <Label htmlFor="birthday">
                           <LabelText
-                            style={touched.birthday && { color: '#3cbc81' }}
+                            status={
+                              errors.birthday
+                                ? 'error'
+                                : 'default'
+                            }
                           >
                             Birthday
                           </LabelText>
@@ -200,48 +248,24 @@ export const UserForm = () => {
                             id="birthday"
                             type="text"
                             name="birthday"
-                            style={
-                              touched.birthday && {
-                                border: '1px solid #3CBC81',
-                              }
+                            status={
+                              errors.birthday
+                                ? 'error'
+                                : 'default'
                             }
-                            onChange={e => {
-                              setFieldValue('birthday', e);
-                              setTouched({ ...touched, birthday: true });
-                            }}
-                            component={({ field, form, ...props }) => {
-                              return (
-                                <DatePicker
-                                  calendarStartDay={1}
-                                  dropdownMode="select"
-                                  scrollableYearDropdown
-                                  defaultValue={null}
-                                  selected={new Date(values.birthday)}
-                                  dateFormat="yyyy-MM-dd"
-                                  // maxDate={new Date()}
-                                  showYearDropdown // Відображення вибору року
-                                  yearDropdownItemNumber={100} // Кількість років, які відображаються в випадаючому списку року
-                                  showMonthDropdown // Відображення вибору місяця
-                                  {...field}
-                                  {...props}
-                                />
-                              );
-                            }}
+                            component={DateInput}
                           />
-                          {touched.birthday ? (
-                            <ValidationIcon>
-                              <ValidInputIcon />
-                            </ValidationIcon>
-                          ) : (
-                            <DataIconWrap>
-                              <IconDown />
-                            </DataIconWrap>
-                          )}
+                          {touched.birthday && (
+                            <ValidationIcon> 
+                              {errors.birthday ? (
+                                <InvalidInputIcon />
+                              ) : (
+                                <ValidInputIcon />
+                              )}
+                            </ValidationIcon>)}
                           <Feedback>
-                            {touched.birthday && (
-                              <ValidFeedback>
-                                User birthday is selected
-                              </ValidFeedback>
+                            {errors.birthday && (
+                              <InvalidFeedback name="birthday" component="div" />
                             )}
                           </Feedback>
                         </Label>
@@ -250,11 +274,9 @@ export const UserForm = () => {
                         <Label htmlFor="email">
                           <LabelText
                             status={
-                              errors.email && touched.email
+                              errors.email
                                 ? 'error'
-                                : touched.email
-                                  ? 'valid'
-                                  : 'default'
+                                : 'default'
                             }
                           >
                             Email
@@ -264,11 +286,9 @@ export const UserForm = () => {
                             name="email"
                             placeholder="Enter your email"
                             status={
-                              errors.email && touched.email
+                              errors.email
                                 ? 'error'
-                                : touched.email
-                                  ? 'valid'
-                                  : 'default'
+                                : 'default'
                             }
                           />
                           {touched.email && (
@@ -281,11 +301,7 @@ export const UserForm = () => {
                             </ValidationIcon>
                           )}
                           <Feedback>
-                            {touched.email && !errors.email ? (
-                              <ValidFeedback>
-                                User email is correct
-                              </ValidFeedback>
-                            ) : (
+                            {errors.email && (
                               <InvalidFeedback name="email" component="div" />
                             )}
                           </Feedback>
@@ -298,11 +314,9 @@ export const UserForm = () => {
                         <Label htmlFor="phone">
                           <LabelText
                             status={
-                              errors.phone && touched.phone
+                              errors.phone
                                 ? 'error'
-                                : touched.phone
-                                  ? 'valid'
-                                  : 'default'
+                                : 'default'
                             }
                           >
                             Phone
@@ -314,11 +328,9 @@ export const UserForm = () => {
                             placeholder="Enter your phone"
                             component={CustomFormInput}
                             status={
-                              errors.phone && touched.phone
+                              errors.phone
                                 ? 'error'
-                                : touched.phone
-                                  ? 'valid'
-                                  : 'default'
+                                : 'default'
                             }
                           />
                           {touched.phone && (
@@ -331,11 +343,7 @@ export const UserForm = () => {
                             </ValidationIcon>
                           )}
                           <Feedback>
-                            {touched.phone && !errors.phone ? (
-                              <ValidFeedback>
-                                User phone is correct
-                              </ValidFeedback>
-                            ) : (
+                            {errors.phone && (
                               <InvalidFeedback name="phone" component="div" />
                             )}
                           </Feedback>
@@ -347,9 +355,7 @@ export const UserForm = () => {
                             status={
                               errors.skype && touched.skype
                                 ? 'error'
-                                : touched.skype
-                                  ? 'valid'
-                                  : 'default'
+                                : 'default'
                             }
                           >
                             Skype
@@ -362,9 +368,7 @@ export const UserForm = () => {
                             status={
                               errors.skype && touched.skype
                                 ? 'error'
-                                : touched.skype
-                                  ? 'valid'
-                                  : 'default'
+                                : 'default'
                             }
                           />
                           {touched.skype && (
@@ -377,11 +381,7 @@ export const UserForm = () => {
                             </ValidationIcon>
                           )}
                           <Feedback>
-                            {touched.skype && !errors.skype ? (
-                              <ValidFeedback>
-                                User skype is correct
-                              </ValidFeedback>
-                            ) : (
+                            {errors.skype && (
                               <InvalidFeedback name="skype" component="div" />
                             )}
                           </Feedback>
