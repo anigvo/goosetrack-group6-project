@@ -49,7 +49,7 @@ export const UserForm = () => {
   const initialValues = {
     name: userInfo.name || '',
     birthday: userInfo.birthday ? new Date(userInfo.birthday) : new Date(),
-    phone: userInfo.phone || '',
+    phone: userInfo.phone || '38',
     skype: userInfo.skype || '',
     email: userInfo.email || '',
     avatarURL: userInfo.avatarURL || '',
@@ -81,9 +81,9 @@ export const UserForm = () => {
     if (values.name) {
       formData.append("name", values.name || ' ');
     }
-    // if (values.email) {
-    //   formData.append("email", values.email);
-    // }
+    if (values.email) {
+      formData.append("email", values.email);
+    }
     if (values.birthday) {
       formData.append("birthday", values.birthday.toISOString().split('T')[0]);
     }

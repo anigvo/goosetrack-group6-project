@@ -224,8 +224,9 @@ const StatisticsChart = () => {
           tickColor: 'rgba(0, 0, 0, 0)',
           tickLength: 60,
           tickWidth: 60,
-
+          
           offsetGridLines: true,
+          
         },
         border: {
           display: false,
