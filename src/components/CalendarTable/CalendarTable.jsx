@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   selectFullDate,
   selectIsLoadingTasks,
-  selectTodos,
+  selectTodosAndInProgress,
 } from 'redux/selectors';
 import {
   setCurrentDay,
@@ -38,7 +38,7 @@ export const CalendarTable = ({ changePeriod }) => {
   const isLoading = useSelector(selectIsLoadingTasks);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const todo = useSelector(selectTodos);
+  const tasks = useSelector(selectTodosAndInProgress);
   const reduxDate = useSelector(selectFullDate);
   const currentDate = new Date(reduxDate);
   const chooseDay = () => {
@@ -117,7 +117,7 @@ export const CalendarTable = ({ changePeriod }) => {
       ) : (
         <СalendarGrid>
           {daysArray.map(dayItem => {
-            const tasksForDay = filterTasksByDate(todo, dayItem);
+            const tasksForDay = filterTasksByDate(tasks, dayItem);
             return (
               <CalendarItem
                 key={format(dayItem, 'ddMMyyyy')}

@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useState } from 'react';
+import { useGoogleLogin } from '@react-oauth/google';
 import {
   MainContainer,
   FormContainer,
@@ -25,6 +26,7 @@ import {
   IconButtonSubmit,
   Iconinput,
   IconButtonSubmitSpan,
+  GoogleButton
 } from './LoginForm.styled';
 
 import { logInUser } from 'redux/auth/operations';
@@ -44,6 +46,10 @@ const initialValues = {
 const LoginForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const googleAuth = useGoogleLogin ({
+    onSuccess: codeResponse => console.log(codeResponse),
+    flow: 'auth-code',
+  });
   const passwdid = nanoid();
   const emailid = nanoid();
 
@@ -182,6 +188,9 @@ const LoginForm = () => {
                     </IconButtonSubmit>
                   </IconButtonSubmitSpan>
                 </ButtonSubmit>
+                <GoogleButton onClick={() => googleAuth()}>
+  Sign In with Google 🚀{' '}
+</GoogleButton>
               </Form>
             )}
           </Formik>
