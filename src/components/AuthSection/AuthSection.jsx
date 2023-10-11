@@ -1,9 +1,16 @@
 import image from '../../assets/images/main-page-goose.png'
+import { motion } from 'framer-motion';
 import { AuthSectionStyled, ItalicLeters, LinksList, LoginIcon, LoginLink, MainGoose, MainHeader, SignupLink } from './AuthSection.styled';
+import { GoogleBtn } from 'buttons/GoogleBtn/GoogleBtn';
 
 const AuthSection = () => {
-    return (
-      <AuthSectionStyled>
+  return (
+    <AuthSectionStyled>
+      <motion.div
+        initial={{ opacity: 0, y: -100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.15 }}
+      >
         <MainGoose src={image} alt="logo" />
         <MainHeader>G<ItalicLeters>oo</ItalicLeters>seTrack</MainHeader>
         <LinksList>
@@ -13,13 +20,18 @@ const AuthSection = () => {
             </LoginLink>
           </li>
           <li>
+            <GoogleBtn />
+          </li>
+          <li>
             <SignupLink to={'/register'}>
               Sign up
             </SignupLink>
           </li>
         </LinksList>
-      </AuthSectionStyled>
-    )
+      </motion.div>
+
+    </AuthSectionStyled>
+  )
 }
 
 export default AuthSection;

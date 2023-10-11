@@ -1,4 +1,5 @@
 import Image from '../../assets/images/notfoundpage-goose-rocket.png';
+import ImageX2 from '../../assets/images/notfoundpage-goose-rocket@2x.png';
 import {
   Box404,
   GooseImage,
@@ -15,7 +16,7 @@ const NotFound = () => {
       <Wrapper>
         <Box404>
           <Number>4</Number>
-          <GooseImage alt="goose" src={Image} />
+          <GooseImage alt="goose" srcSet={`${Image} 1x, ${ImageX2} 2x`} />
           <Number>4</Number>
         </Box404>
         <Apologize>

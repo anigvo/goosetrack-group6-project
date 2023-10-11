@@ -198,7 +198,7 @@ export const CorrectMsg = styled.p`
 `;
 export const ButtonSubmit = styled.button`
   border-radius: 16px;
-  background: #3e85f3;
+  background:  ${registerPageColors.buttonColor};
   box-shadow: 4px 2px 16px 0px rgba(136, 165, 191, 0.48);
   width: 100%;
   height: 46px;
@@ -230,8 +230,8 @@ export const ButtonSubmit = styled.button`
 export const IconButtonSubmitSpan = styled.span`
  display:flex;
  align-items: center;
-  }
 `;
+
 export const IconButtonSubmit = styled.svg`
 stroke: ${registerPageColors.formColor};
 fill: ${registerPageColors.buttonColor};
@@ -251,6 +251,7 @@ export const Iconinput = styled.svg`
   @media (min-width: 768px) {
     width: 32px;
     height: 32px;
+  }
 `;
 
 export const PasswordVisibilityIcon = styled.span`

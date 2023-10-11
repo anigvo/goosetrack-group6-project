@@ -48,11 +48,14 @@ export const selectFullDate = createSelector([selectDay, selectMonth, selectYear
     return `${year}-${fullMonth}-${fullDay}`;
 })
 
-export const selectTodos = createSelector([selectTasks], (items) => {
+export const selectTodosAndInProgress = createSelector([selectTasks], (items) => {
     return items.reduce(
         (allTasks, task) => {
             if (task.category === "to-do") {
                 allTasks.push(task);
+            }
+             else if (task.category === 'in-progress') {
+               allTasks.push(task);
             }
             return allTasks;
         }, [])

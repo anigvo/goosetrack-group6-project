@@ -5,10 +5,14 @@ import { Loader } from 'components/Loader/Loader';
 
 const RegisterPage = () => {
   const { isLoadingAuth } = useAuth();
-  return (<>
+  return (
+  <>
     {isLoadingAuth && <Loader />}
+    
     <RegisterForm />
+    
   </>
+  
   );
 };
 

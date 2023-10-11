@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import { mainPageColors } from 'utils/colors';
 import { ReactComponent as prevIcon} from "../../assets/icons/nextslide-icon.svg"
 import { ReactComponent as nextIcon} from "../../assets/icons/pevslide-icon.svg"
 
-export const ReviewSection = styled.section`
+export const ReviewSection = styled(motion.section)`
   display: flex;
   flex-direction: column;
   align-items: center;

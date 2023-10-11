@@ -1,3 +1,5 @@
+import goose from '../../assets/images/loginpage-goose-form.png'
+import goosex2 from '../../assets/images/loginpage-goose-form@2x.png'
 import { Formik, Form, ErrorMessage } from 'formik';
 import { object, string } from 'yup';
 import { useDispatch } from 'react-redux';
@@ -234,16 +236,18 @@ const RegisterForm = () => {
           </ButtonSignup>
         </SignupContainer>
       </SubContainer>
+      
       <GusContainer>
+
         <img
-          src={require('../../assets/images/loginpage-goose-form.png')}
+          srcSet={`${goose} 1x, ${goosex2} 2x`}
           alt="rocket-gus"
           height={416}
           width={400}
         />
       </GusContainer>
-    </MainContainer>
-  );
-};
+         </MainContainer>
+  )
+}
 
 export default RegisterForm;

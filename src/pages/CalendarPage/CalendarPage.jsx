@@ -42,8 +42,6 @@ const CalendarPage = ({ updatePageName }) => {
   return (
     <>
       <CalendarToolbar
-        currentDateMonth={currentDateMonth}
-        currentDateYear={currentDateYear}
         periodType={periodType}
         changePeriod={setPeriodType}
         checkDate={checkDate}

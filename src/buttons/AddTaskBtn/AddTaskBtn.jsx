@@ -11,7 +11,10 @@ export const AddTaskButton = ({ category}) => {
   };
 
   const closeModal = () => {
-    setIsModalOpen(false);
+    document.querySelector(".ReactModal__Overlay").classList.add("ReactModal__Overlay--before-close");
+      setTimeout(() => {
+      setIsModalOpen(false);
+    }, 400); 
   };
 
   return (
