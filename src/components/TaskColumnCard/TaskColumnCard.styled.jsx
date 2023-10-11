@@ -9,6 +9,7 @@ export const Task = styled(motion.li)`
     display: flex;
     flex-direction: column;
     gap: 28px;
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 `
 
 export const TaskTitle = styled.p`

@@ -8,19 +8,23 @@ export const CalendarToolbar = ({
   periodType,
   changePeriod,
   checkDate,
+  page,
 }) => {
   return (
-    <CalendarToolbarContainer>
+    <CalendarToolbarContainer page={page}>
       <PeriodPaginator
         currentDateMonth={currentDateMonth}
         currentDateYear={currentDateYear}
         periodType={periodType}
         changePeriod={changePeriod}
         checkDate={checkDate}
+        page={page}
       />
-      <PeriodTypeSelect
-        changePeriod={changePeriod}
-      />
+      {page === 'calendar' ? (
+        <PeriodTypeSelect changePeriod={changePeriod} />
+      ) : (
+        <></>
+      )}
     </CalendarToolbarContainer>
   );
 };

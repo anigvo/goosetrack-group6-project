@@ -1,6 +1,16 @@
 .react-datepicker-wrapper {
     display: block;
 }
+.react-datepicker__month-select, .react-datepicker__year-select{
+    background-color: #3e85f3;
+    color: #fff;
+    border-radius: 20px;
+    text-align: center;
+    width: 90px;
+    outline: none;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
 
 .react-datepicker__day {
     color: #fff;
@@ -34,6 +44,7 @@
 
 .react-datepicker__current-month {
     color: #fff;
+    font-size: 16px;
 }
 
 .react-datepicker__navigation {
