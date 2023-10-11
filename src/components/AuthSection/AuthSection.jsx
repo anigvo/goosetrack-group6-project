@@ -1,7 +1,6 @@
 import image from '../../assets/images/main-page-goose.png'
 import { motion } from 'framer-motion';
 import { AuthSectionStyled, ItalicLeters, LinksList, LoginIcon, LoginLink, MainGoose, MainHeader, SignupLink } from './AuthSection.styled';
-import { GoogleBtn } from 'buttons/GoogleBtn/GoogleBtn';
 
 const AuthSection = () => {
   return (
@@ -18,9 +17,6 @@ const AuthSection = () => {
             <LoginLink to={'/login'}>
               Log in <LoginIcon alt="login" />
             </LoginLink>
-          </li>
-          <li>
-            <GoogleBtn />
           </li>
           <li>
             <SignupLink to={'/register'}>
