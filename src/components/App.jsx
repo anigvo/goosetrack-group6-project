@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@emotion/react';
 import { lazy, useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useSearchParams } from 'react-router-dom';
 import { GlobalStyles } from 'utils/GlobalStyle';
 import { darkTheme, lightTheme } from 'utils/colors';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,7 +16,7 @@ import { PrivateRoute } from './Routes/PrivateRoute';
 import { Toaster } from 'react-hot-toast';
 import { refreshUser } from 'redux/auth/operations';
 import { Loader } from './Loader/Loader';
-import { GoogleOAuthProvider } from '@react-oauth/google';
+import { setToken } from 'redux/auth/authSlice';
 
 const AccountPage = lazy(() => import('../pages/AccountPage/AccountPage'));
 const CalendarPage = lazy(() => import('../pages/CalendarPage/CalendarPage'));
@@ -28,6 +28,8 @@ const ChoosedMonth = lazy(() => import('../layout/ChoosedMonth/ChoosedMonth'));
 
 export const App = () => {
   const [pageName, setPageName] = useState(null);
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get("token");
   const { isRefreshing } = useAuth();
   const dispatch = useDispatch();
   const theme = useSelector(selectTheme);
@@ -37,11 +39,13 @@ export const App = () => {
   };
 
   useEffect(() => {
+    if (token) {
+      dispatch(setToken(token));
+    }
     dispatch(refreshUser())
-  }, [dispatch])
+  }, [dispatch, token])
 
   return (
-    <GoogleOAuthProvider clientId="<871874326899-54e1ks937ni88hrv1es4isk2509s0ejg.apps.googleusercontent.com>">
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       {isRefreshing ? <Loader /> :
         (<Routes>
@@ -72,6 +76,5 @@ export const App = () => {
       <GlobalStyles />
       <Toaster />
     </ThemeProvider>
-    </GoogleOAuthProvider>
   );
 };
