@@ -176,11 +176,4 @@ const LoaderCont = styled.div`
   height: 30vh; 
 `;
 
-export const GooseImageForFeed = styled.img`
-  width: 81px;
-  height: 188px;
-  transform: translateY(10px) rotate(31deg);
-
-`;
-
 export { FeedbackFormWrapper, StyledRatingContainer, LoaderCont };
