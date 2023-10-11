@@ -20,6 +20,11 @@ const handleFulfilled = (state, action) => {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
+  reducers: {
+    setToken(state, action) {
+      state.token = action.payload;
+    }
+  },
   extraReducers: builder => {
     builder
       .addCase(registerUser.pending, handlePending)
@@ -76,5 +81,7 @@ const authPersistConfig = {
   storage,
   whitelist: ['token'],
 };
+
+export const {setToken} = authSlice.actions;
 
 export const authReducer = persistReducer(authPersistConfig, authSlice.reducer);
