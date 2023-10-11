@@ -37,7 +37,14 @@ export const TaskToolbar = ({ currentGroup, id}) => {
   const openEditModal = () => {
     setIsModalOpen(true);
   };
-  const closeModal = () => setIsModalOpen(false);
+  
+  const closeModal = () => {
+    document.querySelector(".ReactModal__Overlay").classList.add("ReactModal__Overlay--before-close");
+      setTimeout(() => {
+      setIsModalOpen(false);
+    }, 400); 
+  };
+
 
   const deleteTask = () => {
     dispatch(deleteUserTask(id));
