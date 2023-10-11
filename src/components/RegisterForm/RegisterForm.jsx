@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useState } from 'react';
+import { useGoogleLogin } from '@react-oauth/google';
 import {
   MainContainer,
   FormContainer,
@@ -26,6 +27,7 @@ import {
   PasswordVisibilityIcon,
   IconButtonSubmitSpan,
   SubContainer,
+  GoogleButton
 } from './RegisterForm.styled';
 import icons from '../../assets/icons/icons.svg';
 import { logInUser, registerUser } from 'redux/auth/operations';
@@ -46,6 +48,10 @@ const initialValues = {
 const RegisterForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const googleAuth = useGoogleLogin ({
+    onSuccess: codeResponse => console.log(codeResponse),
+    flow: 'auth-code',
+  });
   const nameid = nanoid();
   const emailid = nanoid();
   const passwdid = nanoid();
@@ -223,6 +229,9 @@ const RegisterForm = () => {
                     </IconButtonSubmit>
                   </IconButtonSubmitSpan>
                 </ButtonSubmit>
+                <GoogleButton onClick={() => googleAuth()}>
+  Sign Up with Google 🚀{' '}
+</GoogleButton>
               </Form>
             )}
           </Formik>
@@ -234,6 +243,7 @@ const RegisterForm = () => {
           </ButtonSignup>
         </SignupContainer>
       </SubContainer>
+      
       <GusContainer>
         <img
           src={require('../../assets/images/loginpage-goose-form.png')}
@@ -242,8 +252,8 @@ const RegisterForm = () => {
           width={400}
         />
       </GusContainer>
-    </MainContainer>
-  );
-};
+         </MainContainer>
+  )
+}
 
 export default RegisterForm;
