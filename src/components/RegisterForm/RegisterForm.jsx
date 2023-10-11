@@ -230,7 +230,7 @@ const RegisterForm = () => {
                   </IconButtonSubmitSpan>
                 </ButtonSubmit>
                 <GoogleButton onClick={() => googleAuth()}>
-  Sign up with Google 🚀{' '}
+  Sign Up with Google 🚀{' '}
 </GoogleButton>
               </Form>
             )}

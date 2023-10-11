@@ -16,6 +16,7 @@ import { PrivateRoute } from './Routes/PrivateRoute';
 import { Toaster } from 'react-hot-toast';
 import { refreshUser } from 'redux/auth/operations';
 import { Loader } from './Loader/Loader';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const AccountPage = lazy(() => import('../pages/AccountPage/AccountPage'));
 const CalendarPage = lazy(() => import('../pages/CalendarPage/CalendarPage'));
@@ -40,6 +41,7 @@ export const App = () => {
   }, [dispatch])
 
   return (
+    <GoogleOAuthProvider clientId="<871874326899-54e1ks937ni88hrv1es4isk2509s0ejg.apps.googleusercontent.com>">
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       {isRefreshing ? <Loader /> :
         (<Routes>
@@ -70,5 +72,6 @@ export const App = () => {
       <GlobalStyles />
       <Toaster />
     </ThemeProvider>
+    </GoogleOAuthProvider>
   );
 };

@@ -5,11 +5,11 @@ import { registerPageColors } from 'utils/colors';
 
 export const GoogleButton = styled.button`
 border-radius: 16px;
-  background: #3e85f3;
+  background:  ${registerPageColors.buttonColor};
   box-shadow: 4px 2px 16px 0px rgba(136, 165, 191, 0.48);
   width: 100%;
   height: 46px;
-  margin-top: 32px;
+  margin-top: 20px;
   border: none;
   color: ${registerPageColors.formColor};
   font-size: 14px;
@@ -28,13 +28,12 @@ border-radius: 16px;
   @media (min-width: 768px) {
     width: 100%;
     height: 56px;
-    margin-top: 48px;
+    margin-top: 28px;
     font-size: 18px;
     line-height: 24px;
     letter-spacing: -0.36px;
   }
 `;
-
 export const MainContainer = styled.div`
   display: flex;
   height: 100vh;
@@ -231,7 +230,7 @@ export const CorrectMsg = styled.p`
 `;
 export const ButtonSubmit = styled.button`
   border-radius: 16px;
-  background: #3e85f3;
+  background:  ${registerPageColors.buttonColor};
   box-shadow: 4px 2px 16px 0px rgba(136, 165, 191, 0.48);
   width: 100%;
   height: 46px;
