@@ -4,7 +4,7 @@ import { ErrorMessage, Field } from 'formik';
 import { ReactComponent as UpdateAvatarIcon } from '../../assets/icons/add-avatar.svg';
 import { ReactComponent as ErrorIcon } from '../../assets/icons/error.svg';
 import { ReactComponent as ValidIcon } from '../../assets/icons/valid.svg';
-import { ReactComponent as ChevronDown } from '../../assets/icons/chevron-down.svg';
+// import { ReactComponent as ChevronDown } from '../../assets/icons/chevron-down.svg';
 
 export const UserSection = styled.div`
   //   display: flex;
