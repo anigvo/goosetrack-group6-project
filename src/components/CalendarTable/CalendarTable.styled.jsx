@@ -146,7 +146,7 @@ export const CalendarTaskItem = styled.li`
       : props.theme.calendarHighTaskBackground};
 `;
 
-export const TaskSpan = styled.span`
+export const TaskSpan = styled.li`
   color: ${props => props.theme.calendarTextColor};
   font-size: 10px;
   line-height: 1.4;

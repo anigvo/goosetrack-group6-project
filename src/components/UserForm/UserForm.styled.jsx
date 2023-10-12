@@ -186,7 +186,6 @@ export const Label = styled.label`
     `}
 `;
 export const BoxInput = styled.label`
-  //   position:;
 `;
 
 export const FormInput = styled(Field)`

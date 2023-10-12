@@ -96,6 +96,7 @@ export const PeriodPaginator = ({
                 ? true
                 : false
             }
+            aria-label="Paginator Button Left"
           >
             <ArrowLeft />
           </PaginatorBtn>
@@ -107,6 +108,7 @@ export const PeriodPaginator = ({
             aria-label='descrease day'
             disabled={checkDate(currentDate)}
             disabledStyle={checkDate(currentDate)}
+            aria-label="Paginator Button Left"
           >
             <ArrowLeft />
           </PaginatorBtn>
@@ -117,6 +119,7 @@ export const PeriodPaginator = ({
             type="button"
             aria-label='increase month'
             onClick={handleNextMonth}
+            aria-label="Paginator Button Right"
           >
             <ArrowRight />
           </PaginatorBtn>
@@ -126,6 +129,7 @@ export const PeriodPaginator = ({
             type="button"
             aria-label='increase day'
             onClick={handleNextDay}
+            aria-label="Paginator Button Right"
           >
             <ArrowRight />
           </PaginatorBtn>

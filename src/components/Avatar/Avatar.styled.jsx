@@ -7,7 +7,6 @@ export const CircularAvatar = styled.img`
   object-fit: cover;
   background-color: ${props => props.theme.userAvatarInsideBackground};
   border-radius: 50%;
-  // position: absolute;
 
   ${media('tablet', '')`
         width: 124px;

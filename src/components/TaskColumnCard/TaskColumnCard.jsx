@@ -5,13 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectAvatar } from "redux/selectors";
 import { updateUserTask } from "redux/tasks/operations";
 
-// const toolVar = {
-//   initial: { opacity: 0 },
-//   isOn: { opacity: 1, transition: { type: 'spring', stiffness: 100, duration: 0.8 } },
-//   exit: { opacity: 0 },
-// };
-
-
 export const TaskColumnCard = ({ id, text, board, priority, currentGroup, currentBoard, setCurrentBoard, setTasks, allTasks, item, setCurrentItem, currentItem }) => {
   const avatar = useSelector(selectAvatar);
   const cardRef = useRef(null);
@@ -46,10 +39,6 @@ export const TaskColumnCard = ({ id, text, board, priority, currentGroup, curren
 
   const dropHandler = (e, board, item) => {
     e.preventDefault();
-    // const currentIndex = currentBoard.tasks.indexOf(currentItem);
-    // currentBoard.tasks.splice(currentIndex, 1);
-    // const dropIndex = board.tasks.indexOf(item);
-    // board.tasks.splice(dropIndex, 0, currentItem);
     updateTaskCategory(board.category, currentItem._id);
     setTasks(allTasks.map(b => {
       if (b.id === board.id) {
@@ -65,7 +54,6 @@ export const TaskColumnCard = ({ id, text, board, priority, currentGroup, curren
 
   return (
     <Task
-      // variants={toolVar}
       draggable={true}
       onDragOver={(e) => dragOverHandler(e)}
       onDragEnd={(e) => dragEndHandler(e)}
