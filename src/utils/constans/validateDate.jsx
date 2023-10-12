@@ -1,4 +1,5 @@
 export const validateDate = (date) => {
+  console.log(date);
   const [year, month, day] = date.split(".");
   if (isNaN(new Date(year, month, day))) {
     return 'Date is invalid';
@@ -12,7 +13,7 @@ export const validateDate = (date) => {
   if (day > 31 || day < 1) {
     return 'Invalid day';
   }
-  const resultDate = new Date(year, month, day);
+  const resultDate = new Date(year, month - 1, day);
   const currentFullDate = new Date();
   if (resultDate > currentFullDate) {
     return 'The input date is in the future';
