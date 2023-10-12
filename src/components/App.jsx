@@ -52,7 +52,7 @@ export const App = () => {
           <Route path='/'>
             <Route
               index
-              element={<PublicRoute redirectTo='/calendar' component={<MainPage />} />} />
+              element={<PublicRoute redirectTo="calendar" component={<MainPage />} />} />
             <Route path="login" element={<PublicRoute redirectTo={'/'} component={<LoginPage />} />} />
             <Route path="register" element={<PublicRoute redirectTo={'/'} component={<RegisterPage />} />} />
             <Route path='/' element={<PrivateRoute redirectTo='/' component={<MainLayout pageName={pageName} />} />}>

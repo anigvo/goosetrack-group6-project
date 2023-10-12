@@ -12,7 +12,6 @@ const ChoosedDay = () => {
     setPeriodType('day');
   }, [setPeriodType]);
 
-
   return (
     <ChoosedDayContainer>
       <DayCalendarHead
