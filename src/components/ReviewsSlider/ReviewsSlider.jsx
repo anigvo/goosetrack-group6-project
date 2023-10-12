@@ -69,7 +69,7 @@ const ReviewSlider = () => {
             swiperInstance.current = swiper;
           }}
         >
-          {reviews.map(review => <SwiperSlide key={review.avatarURL}><ReviewItem name={review.name} comment={review.comment} rate={review.rating} avatar={review.avatarURL} /></SwiperSlide>)}
+          {reviews.map(review => <SwiperSlide key={reviews.indexOf(review)}><ReviewItem name={review.name} comment={review.comment} rate={review.rating} avatar={review.avatarURL} /></SwiperSlide>)}
         
         </Swiper>
       
