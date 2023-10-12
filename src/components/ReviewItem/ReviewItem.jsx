@@ -1,12 +1,23 @@
-import { ReviewItemStyled, UserComment, UserInfo, UserName, UserPhoto } from "./ReviewItem.styled";
+import { ReviewItemStyled, UserComment, UserInfo, UserName, UserPhoto, UserSpareAvatar } from "./ReviewItem.styled";
 import user from '../../assets/icons/user.svg'
 import StarRatings from 'react-star-ratings';
 
-const ReviewItem = ({comment, name, rate, avatar}) => {
+const ReviewItem = ({ comment, name, rate, avatar }) => {
+    
+    function getRandomColor() {
+        const r = Math.floor(Math.random() * (186 - 70) + 70);
+        const g = Math.floor(Math.random() * (186 - 70) + 70);
+        const b = Math.floor(Math.random() * (186 - 70) + 70);
+
+        return `rgb(${r}, ${g}, ${b})`;
+    }   
+
     return (
         <ReviewItemStyled>
             <UserInfo>
-                <UserPhoto src={avatar ? avatar : user} alt={`Photo of ${name}`} />
+                {avatar ? <UserPhoto src={avatar ? avatar : user} alt={`Photo of ${name}`} />
+                    : <UserSpareAvatar style={{backgroundColor:getRandomColor()}}>{name.slice(0,1)}</UserSpareAvatar>}
+                
                 <div>
                     <UserName>{name}</UserName>
                     <StarRatings

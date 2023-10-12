@@ -31,7 +31,7 @@ export const NextIconArrow = styled(nextIcon)`
 
 export const MissedReviewsMessage = styled.p`
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.28;
 `
 
