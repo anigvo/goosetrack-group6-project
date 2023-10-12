@@ -39,27 +39,3 @@ const ReviewItem = ({ comment, name, rate, avatar }) => {
 }
 
 export default ReviewItem;
-
-
-// items:
-//         type: object
-//         properties:
-//           _id:
-//             type: string
-//             example: "651578edcb9480926aadc04f"
-//           rating:
-//             type: integer
-//             format: int32
-//             example: 5
-//           comment:
-//             type: string
-//             example: "Good app!"
-//           name:
-//             type: string
-//             example: "Nik"
-//           createdAt:
-//             type: string
-//             format: date-time
-//           updatedAt:
-//             type: string
-//             format: date-time

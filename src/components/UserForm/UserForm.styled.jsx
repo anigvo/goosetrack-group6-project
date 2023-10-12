@@ -6,7 +6,6 @@ import { ReactComponent as ErrorIcon } from '../../assets/icons/error.svg';
 import { ReactComponent as ValidIcon } from '../../assets/icons/valid.svg';
 
 export const UserSection = styled.div`
-  //   display: flex;
 `;
 
 export const ContainerForm = styled.div`
@@ -189,7 +188,6 @@ export const Label = styled.label`
     `}
 `;
 export const BoxInput = styled.label`
-  //   position:;
 `;
 
 export const FormInput = styled(Field)`

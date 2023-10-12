@@ -8,7 +8,6 @@ import { nanoid } from "@reduxjs/toolkit";
 
 export const TasksColumnsList = () => {
     const { todo, inProgress, done } = useSelector(selectCategoryTasks);
-    // console.log(allTasks);
     const [boards, setBoards] = useState([
         { id: nanoid(), groupName: 'To do', category: 'to-do' },
         { id: nanoid(), groupName: 'In progress', category: 'in-progress' },

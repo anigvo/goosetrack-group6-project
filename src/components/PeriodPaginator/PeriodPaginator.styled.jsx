@@ -51,28 +51,3 @@ export const PaginatorBtn = styled.button`
     height: 34px;
     `}
 `;
-
-export const DayTitle = styled.button`
-  text-transform: uppercase;
-  width: 157px;
-  height: 30px;
-  background-color: ${props => props.theme.btnBackgroundColor};
-  padding: 6px 12px;
-  border: 0;
-  border-radius: 8px;
-  color: ${props => props.theme.btnTextColor};
-  font-size: 14px;
-  line-height: 1.28;
-  font-weight: 700;
-  text-align: center;
-  font-family: 'Inter', sans-serif;
-  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  ${media('tablet', '')`
-  margin-right: 8px;
-        width: 170px;
-        height: 34px;
-        font-size: 16px;
-        line-height: 1.12;
-        padding: 8px 12px;
-    `}
-`;
