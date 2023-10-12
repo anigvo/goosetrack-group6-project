@@ -85,7 +85,6 @@ export const PeriodPaginator = ({
             direction={'left'}
             type="button"
             onClick={handlePrevMonth}
-            aria-label='descrease month'
             disabled={
               new Date().getMonth() === filterMonth &&
               new Date().getFullYear() === filterYear
@@ -105,7 +104,6 @@ export const PeriodPaginator = ({
             direction={'left'}
             type="button"
             onClick={handlePrevDay}
-            aria-label='descrease day'
             disabled={checkDate(currentDate)}
             disabledStyle={checkDate(currentDate)}
             aria-label="Paginator Button Left"
@@ -117,7 +115,6 @@ export const PeriodPaginator = ({
           <PaginatorBtn
             direction={'right'}
             type="button"
-            aria-label='increase month'
             onClick={handleNextMonth}
             aria-label="Paginator Button Right"
           >
@@ -127,7 +124,6 @@ export const PeriodPaginator = ({
           <PaginatorBtn
             direction={'right'}
             type="button"
-            aria-label='increase day'
             onClick={handleNextDay}
             aria-label="Paginator Button Right"
           >
