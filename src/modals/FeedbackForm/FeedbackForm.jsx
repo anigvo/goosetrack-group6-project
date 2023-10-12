@@ -3,6 +3,7 @@ import StarRatings from 'react-star-ratings';
 import { FeedbackFormWrapper, StyledRatingContainer, PencilIcon, TrashIcon, LoaderCont } from './FeedbackForm.styled';
 import { createReview, getReview, updateReview, deleteReview } from '../../api/reviews'; 
 import { toast } from 'react-hot-toast';
+import { nanoid } from '@reduxjs/toolkit';
 
 const FeedbackForm = ({ onCancel, onReviewStatusChange, onUpdateStyles, onEditStatusChange }) => {
   const [rating, setRating] = useState(0);
@@ -124,7 +125,7 @@ const FeedbackForm = ({ onCancel, onReviewStatusChange, onUpdateStyles, onEditSt
       toast.error('An error occurred while processing your request.');
     }
   };
-  
+  const textId = nanoid();
   return (
     <FeedbackFormWrapper >
       {isLoading ? (
@@ -132,7 +133,7 @@ const FeedbackForm = ({ onCancel, onReviewStatusChange, onUpdateStyles, onEditSt
       ) : (
         <div>
           <StyledRatingContainer>
-            <label>Rating</label>
+            <span>Rating</span>
             <StarRatings
               rating={rating}
               starRatedColor="#FFAC33"
@@ -147,7 +148,7 @@ const FeedbackForm = ({ onCancel, onReviewStatusChange, onUpdateStyles, onEditSt
           </StyledRatingContainer>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px' }}>
-              <label style={{ margin: '0' }}>Review</label>
+              <label style={{ margin: '0' }} htmlFor={textId}>Review</label>
               <div style={{ display: 'flex', gap: '10px' }}>
                 {userHasComment && (
                   <button className="fakeIcon" type="button" onClick={handleEditClick}>
@@ -168,6 +169,7 @@ const FeedbackForm = ({ onCancel, onReviewStatusChange, onUpdateStyles, onEditSt
               onKeyDown={handleEnterKey} 
               rows={4}
               cols={50}
+              id={textId}
               readOnly={userHasComment && !isEditing}
             />
           </div>

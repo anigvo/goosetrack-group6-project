@@ -20,7 +20,7 @@ const FeedbackFormWrapper = styled.div`
 
  
 
-  label {
+  label, span {
     font-size: 12px;
     font-family: Inter, sans-serif;
     color: ${props => props.theme.userNameTextColor}; 

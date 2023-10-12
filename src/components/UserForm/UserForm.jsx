@@ -32,6 +32,7 @@ import { Notify } from 'notiflix';
 import { Avatar } from 'components/Avatar/Avatar';
 import { DateInput } from 'utils/constans/DateInput';
 import { validateDate } from 'utils/constans/validateDate';
+import { nanoid } from '@reduxjs/toolkit';
 
 export const UserForm = () => {
   const userInfo = useSelector(selectUser);
@@ -151,6 +152,12 @@ export const UserForm = () => {
     })
   };
 
+  const nameId = nanoid();
+  const birthdayId = nanoid();
+  const emailId = nanoid();
+  const phoneId = nanoid();
+  const skypeId = nanoid();
+
   return (
     <>
       <Formik
@@ -196,7 +203,7 @@ export const UserForm = () => {
                   <BoxAllInputs>
                     <ContainerInputs>
                       <BoxInput>
-                        <Label htmlFor="name">
+                        <Label htmlFor={nameId}>
                           <LabelText
                             status={
                               errors.name
@@ -207,10 +214,11 @@ export const UserForm = () => {
                             User Name
                           </LabelText>
                           <FormInput
-                            id="name"
+                            id={nameId}
                             type="text"
                             name="name"
                             placeholder="User name"
+                            autoComplete="off"
                             status={
                               errors.name
                                 ? 'error'
@@ -234,7 +242,7 @@ export const UserForm = () => {
                         </Label>
                       </BoxInput>
                       <BoxInput>
-                        <Label htmlFor="birthday">
+                        <Label htmlFor={birthdayId}>
                           <LabelText
                             status={
                               errors.birthday
@@ -245,7 +253,7 @@ export const UserForm = () => {
                             Birthday
                           </LabelText>
                           <FormInput
-                            id="birthday"
+                            id={birthdayId}
                             type="text"
                             name="birthday"
                             status={
@@ -271,7 +279,7 @@ export const UserForm = () => {
                         </Label>
                       </BoxInput>
                       <BoxInput>
-                        <Label htmlFor="email">
+                        <Label htmlFor={emailId}>
                           <LabelText
                             status={
                               errors.email
@@ -282,8 +290,10 @@ export const UserForm = () => {
                             Email
                           </LabelText>
                           <FormInput
+                            id={emailId}
                             type="email"
                             name="email"
+                            autoComplete="off"
                             placeholder="Enter your email"
                             status={
                               errors.email
@@ -311,7 +321,7 @@ export const UserForm = () => {
                     <ContainerInputs>
                       {' '}
                       <BoxInput>
-                        <Label htmlFor="phone">
+                        <Label htmlFor={phoneId}>
                           <LabelText
                             status={
                               errors.phone
@@ -322,10 +332,11 @@ export const UserForm = () => {
                             Phone
                           </LabelText>
                           <FormInput
-                            id="phone"
+                            id={phoneId}
                             type="tel"
                             name="phone"
                             placeholder="Enter your phone"
+                            autoComplete="off"
                             component={CustomFormInput}
                             status={
                               errors.phone
@@ -350,7 +361,7 @@ export const UserForm = () => {
                         </Label>
                       </BoxInput>
                       <BoxInput>
-                        <Label htmlFor="skype">
+                        <Label htmlFor={skypeId}>
                           <LabelText
                             status={
                               errors.skype && touched.skype
@@ -361,7 +372,7 @@ export const UserForm = () => {
                             Skype
                           </LabelText>
                           <FormInput
-                            id="skype"
+                            id={skypeId}
                             type="text"
                             name="skype"
                             placeholder="Add a skype number"

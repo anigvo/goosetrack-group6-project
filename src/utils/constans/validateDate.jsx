@@ -1,5 +1,4 @@
 export const validateDate = (date) => {
-  console.log(date);
   const [year, month, day] = date.split(".");
   if (isNaN(new Date(year, month, day))) {
     return 'Date is invalid';
