@@ -11,6 +11,7 @@ import { LuTimerOff } from 'react-icons/lu';
 import { BsDatabaseExclamation } from 'react-icons/bs'
 import { FaRegCalendarTimes } from 'react-icons/fa'
 import { BiTask } from 'react-icons/bi';
+import { nanoid } from '@reduxjs/toolkit';
 
 function TaskForm({ taskToEdit, onCancel, id, category }) {
   const currentDate = useSelector(selectFullDate);
@@ -78,7 +79,7 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
             });
           }
         } catch (error) {
-          console.error('Error fetching task by id:', error);
+          return;
         } finally {
           setIsLoading(false);
         }
@@ -232,7 +233,9 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
 
     return true;
   };
-
+  const taskId = nanoid();
+  const startId = nanoid();
+  const endId = nanoid();
   return (
     <TaskFormWrapper>
       {isLoading && formData.isEditing ? (
@@ -240,11 +243,12 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
       ) : (
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Title</label>
+          <label htmlFor={taskId}>Title</label>
           <input
             placeholder="Enter text"
             type="text"
             name="title"
+            id={taskId}
             value={formData.title}
             onChange={handleChange}
             required
@@ -253,11 +257,12 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
         </div>
         <TimeDiv>
           <div>
-            <label>Start</label>
+            <label htmlFor={startId}>Start</label>
             <select
               name="start"
               value={formData.start}
               onChange={handleChange}
+              id={startId}
               required
             >
               {Array.from({ length: 24 }, (_, i) => (
@@ -268,11 +273,12 @@ function TaskForm({ taskToEdit, onCancel, id, category }) {
             </select>
           </div>
           <div>
-            <label>End</label>
+            <label htmlFor={endId}>End</label>
             <select
               name="end"
               value={formData.end}
               onChange={handleChange}
+              id={endId}
               required
             >
               {Array.from({ length: 24 }, (_, i) => (

@@ -47,4 +47,5 @@ display: block;
 export const UserL = styled.p`
     text-transform: uppercase;
     font-size: 18px;
+    font-weight: 600;
 `

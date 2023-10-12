@@ -55,10 +55,7 @@ const LoginForm = () => {
 
   const handleSubmit = (values, { resetForm }) => {
     dispatch(logInUser(values))
-      .then(data => {
-        if (data.error) {
-          throw new Error();
-        }
+      .then(_=> {
         resetForm();
       })
   };
