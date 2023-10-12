@@ -42,6 +42,12 @@ export const Options = styled.ul`
     gap: 14px;
 `;
 
+export const OptionButton = styled.button`
+    background-color: transparent;
+    border: none;
+    padding: 0;
+`
+
 export const Option = styled.li`
     color: ${props => props.theme.calendarTextColor};
 font-size: 12px;

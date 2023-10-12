@@ -5,10 +5,13 @@ import { ReactComponent as Moon } from '../../assets/icons/moon.svg';
 import { ReactComponent as Sun } from '../../assets/icons/sun.svg';
 import { motion } from 'framer-motion';
 
-export const ThemeWrapper = styled.div`
+export const ThemeWrapper = styled.button`
     margin-left: 20px;
     margin-right: 10px;
     padding: 0;
+    background-color: transparent;
+    padding: 0;
+    border: none;
     ${media('tablet', '')`
         margin-right: 14px;
         margin-left: 24px;

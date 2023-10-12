@@ -9,10 +9,10 @@ export const PeriodTypeSelect = ({ changePeriod }) => {
 
   return (
     <PeriodBtnWrapper>
-      <PeriodBtn direction={'left'} to={`month/${month}`} onClick={() => changePeriod('month')}>
+      <PeriodBtn aria-label='select period month' direction={'left'} to={`month/${month}`} onClick={() => changePeriod('month')}>
         Month
       </PeriodBtn>
-      <PeriodBtn direction={'right'} to={`day/${day}`} onClick={() => changePeriod('day')}>
+      <PeriodBtn aria-label='select period day' direction={'right'} to={`day/${day}`} onClick={() => changePeriod('day')}>
         Day
       </PeriodBtn>
     </PeriodBtnWrapper>

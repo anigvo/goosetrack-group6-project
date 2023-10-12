@@ -85,6 +85,7 @@ export const DatePickerCustom = ({
     return (
       <DatePickerCustomHeader>
         <DatePickerButton
+          aria-label='decrease period'
           onClick={decrease}
           disabled={
             selectedMonth === currentMonth && selectedYear === currentYear
@@ -110,7 +111,7 @@ export const DatePickerCustom = ({
                 year: 'numeric',
               })}
         </DatePickerCustomHeaderTitle>
-        <DatePickerButton onClick={increase}>
+        <DatePickerButton onClick={increase} aria-label='increase period'>
           <ArrowRight />
         </DatePickerButton>
       </DatePickerCustomHeader>
@@ -127,7 +128,7 @@ export const DatePickerCustom = ({
       filterDate={filterDate}
       renderCustomHeader={customHeader}
       customInput={
-        <CalendarBtn type="button">
+        <CalendarBtn type="button" aria-label='calendar button'>
           {periodType === 'month'
             ? currentDate.toLocaleDateString('en-GB', {
                 month: 'long',

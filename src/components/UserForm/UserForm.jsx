@@ -1,6 +1,5 @@
 import { Field, Form, Formik } from 'formik';
 import {
-  UserSection,
   AvatarContainer,
   AvatarUploadBtn,
   AvatarUploadContainer,
@@ -154,7 +153,7 @@ export const UserForm = () => {
   };
 
   return (
-    <UserSection>
+    <>
       <Formik
         initialValues={initialValues}
         validate={validateForm}
@@ -402,6 +401,6 @@ export const UserForm = () => {
           );
         }}
       </Formik>
-    </UserSection>
+    </>
   );
 };

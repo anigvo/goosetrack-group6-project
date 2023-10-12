@@ -18,7 +18,7 @@ export const AddFeedbackBtn = () => {
 
   return (
     <>
-      <FeedbackBtn onClick={openModal}>Feedback</FeedbackBtn>
+      <FeedbackBtn aria-label="manage feedback" onClick={openModal}>Feedback</FeedbackBtn>
       {isModalOpen && (
         <AddFeedbackModal isOpen={isModalOpen} onClose={closeModal} />
       )}

@@ -5,8 +5,6 @@ import { ReactComponent as UpdateAvatarIcon } from '../../assets/icons/add-avata
 import { ReactComponent as ErrorIcon } from '../../assets/icons/error.svg';
 import { ReactComponent as ValidIcon } from '../../assets/icons/valid.svg';
 
-export const UserSection = styled.div`
-`;
 
 export const ContainerForm = styled.div`
   display: flex;
