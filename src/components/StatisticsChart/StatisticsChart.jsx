@@ -35,16 +35,28 @@ const fontSizeByInterest = {
   small: 12, 
   large: 16,
   };
-  const fontSizeByGroup = {
-    small: 12,  
-    large: 14,
-  };
+
+const fontSizeByGroup = {
+  small: 12,  
+  large: 14,
+};
  
 const tickWidth = {
   small: 14,  
   medium: 32, 
   large: 61,  
-};  
+  };  
+  
+  const maxBarThickness = {
+    small: 22,  
+    large: 27,
+};
+ const categoryPercentage = {
+   small: 0.7,
+   medium: 0.5,
+   large: 0.35,
+ };
+
   
   useEffect(() => {
     const handleResize = () => {
@@ -59,28 +71,39 @@ const tickWidth = {
     };
   }, []);
 
-  const getFontSize = () => {
+  const getSizeMin = () => {
     if (windowWidth < 768) {
       return {
+        maxBarThickness: maxBarThickness.small,
         fontSizeByInterest: fontSizeByInterest.small,
         fontSizeByGroup: fontSizeByGroup.small,
       };
     } else {
       return {
+        maxBarThickness: maxBarThickness.large,
         fontSizeByInterest: fontSizeByInterest.large,
         fontSizeByGroup: fontSizeByGroup.large,
-      } 
+      }; 
     }
   };
- const getTickWidth = () => {
-   if (windowWidth < 768) {
-     return tickWidth.small;
+ const getSizeMax = () => {
+   if (windowWidth > 1439) {
+     return {
+       tickWidth: tickWidth.large,
+       categoryPercentage: categoryPercentage.large,
+     };
    } else if (windowWidth > 767) {
-     return tickWidth.medium;
-   } else if (windowWidth > 1439) {
-     return tickWidth.large;
+     return {
+       tickWidth: tickWidth.medium,
+       categoryPercentage: categoryPercentage.medium,
+     };
+   } else if (windowWidth < 768) {
+     return {
+       tickWidth: tickWidth.small,
+       categoryPercentage: categoryPercentage.small,
+     };
    }
-  };
+ };
   
   const colorDay = '#FFD2DD';
   const colorMonth = '#3E85F3';
@@ -90,6 +113,11 @@ const tickWidth = {
     theme === 'light'
       ? lightTheme.statisticsTextColor
       : darkTheme.statisticsTextColor;
+  
+  const gridColor =
+    theme === 'light'
+      ? lightTheme.chartBorderColor
+      : darkTheme.chartBorderColor;
 
   const gradientMonth = context => {
     const chart = context.chart;
@@ -212,7 +240,7 @@ const tickWidth = {
         display: true,
         backgroundColor: gradientDay,
         borderSkipped: false,
-        maxBarThickness: 27,
+        maxBarThickness: getSizeMin().maxBarThickness,
         borderRadius: {
           bottomLeft: 10,
           bottomRight: 10,
@@ -232,10 +260,10 @@ const tickWidth = {
         }),
 
         display: true,
-        
+
         backgroundColor: gradientMonth,
         borderSkipped: false,
-        maxBarThickness: 27,
+        maxBarThickness: getSizeMin().maxBarThickness,
         borderRadius: {
           bottomLeft: 10,
           bottomRight: 10,
@@ -247,18 +275,18 @@ const tickWidth = {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
-    categoryPercentage: 0.6,
-    barPercentage: 0.9,
+    categoryPercentage: getSizeMax().categoryPercentage,
+    barPercentage: 1,
 
     scales: {
       x: {
         ticks: {
           font: {
-            size: getFontSize().fontSizeByGroup,
+            size: getSizeMin().fontSizeByGroup,
           },
           color: textColor,
         },
-        barPercentage: 0.1,
+        // barPercentage: 0.9,
         drawBorder: false,
 
         grid: {
@@ -273,13 +301,13 @@ const tickWidth = {
         responsive: true,
         offset: true,
         grid: {
-          color: 'rgba(227, 243, 255, 1)',
+          color: gridColor,
           border: {
             display: false,
           },
           tickColor: 'rgba(0, 0, 0, 0)',
-          tickLength: getTickWidth(),
-          tickWidth: getTickWidth(),
+          tickLength: getSizeMax().tickWidth,
+          tickWidth: getSizeMax().tickWidth,
 
           offsetGridLines: true,
         },
@@ -307,13 +335,13 @@ const tickWidth = {
 
     plugins: {
       title: {
-        display: true, 
-        text: 'Tasks', 
+        display: true,
+        text: 'Tasks',
         color: textColor,
-        position: 'top', 
-        align: 'start', 
-        font: {
-          size: 14, 
+        position: 'top',
+        align: 'start',
+        font: {          
+          size: 14,          
         },
       },
       datalabels: {
@@ -321,7 +349,7 @@ const tickWidth = {
         anchor: 'end',
         align: 'top',
         font: {
-          size: getFontSize().fontSizeByInterest,
+          size: getSizeMin().fontSizeByInterest,
         },
         formatter: function (value, _) {
           return Math.round(value) + '%';
