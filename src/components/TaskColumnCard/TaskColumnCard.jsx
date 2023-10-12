@@ -1,12 +1,13 @@
-import { Task, TaskFeatures, TaskOwner, TaskPriority, TaskSettings, TaskTitle } from "./TaskColumnCard.styled";
+import { AvatarSample, MiniAvatar, Task, TaskFeatures, TaskOwner, TaskPriority, TaskSettings, TaskTitle } from "./TaskColumnCard.styled";
 import { TaskToolbar } from "components/TaskToolbar/TaskToolbar";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectAvatar } from "redux/selectors";
+import { selectAvatar, selectUser } from "redux/selectors";
 import { updateUserTask } from "redux/tasks/operations";
 
 export const TaskColumnCard = ({ id, text, board, priority, currentGroup, currentBoard, setCurrentBoard, setTasks, allTasks, item, setCurrentItem, currentItem }) => {
   const avatar = useSelector(selectAvatar);
+  const {name} = useSelector(selectUser);
   const cardRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -64,7 +65,10 @@ export const TaskColumnCard = ({ id, text, board, priority, currentGroup, curren
       <TaskTitle>{text}</TaskTitle>
       <TaskFeatures>
         <TaskSettings>
-          <TaskOwner src={avatar} />
+          <TaskOwner>
+            {avatar ? <MiniAvatar src={avatar} width={32} height={32} />
+            : <AvatarSample>{name[0]}</AvatarSample>}
+          </TaskOwner>
           <TaskPriority priority={priority}>{priority}</TaskPriority>
         </TaskSettings>
         <TaskToolbar currentGroup={currentGroup} id={id} />

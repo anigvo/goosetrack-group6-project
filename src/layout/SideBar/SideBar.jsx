@@ -24,14 +24,16 @@ export const SideBar = ({ closeMethod, openBtnRef }) => {
 
     useEffect(() => {
         const closeOutside = (event) => {
-            if (sideBarRef.current && !sideBarRef.current.contains(event.target)
-            && !openBtnRef.current.contains(event.target)) closeMethod();
+            if (sideBarRef.current) {
+                if (sideBarRef.current && !sideBarRef.current.contains(event.target)
+                && (openBtnRef.current && !openBtnRef.current.contains(event.target)) && !isDesktop) closeMethod();
+            }
           };
           if (sideBarRef.current) {
             window.addEventListener("click", closeOutside);
             return () => window.removeEventListener("click", closeOutside)
           }
-    }, [sideBarRef, closeMethod, openBtnRef])
+    }, [sideBarRef, closeMethod, openBtnRef, isDesktop])
 
     return (
         <Aside

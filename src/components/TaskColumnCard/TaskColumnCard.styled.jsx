@@ -21,29 +21,45 @@ font-weight: 500;
 line-height: 1.28;
 `
 
-export const TaskOwner = styled.img`
+export const TaskOwner = styled.div`
 border: 1.8px solid ${props => props.theme.userAvatarBorder};
 border-radius: 50%;
 width: 32px;
 height: 32px;
-object-fit: cover;
+overflow: hidden;
+display: flex;
+justify-content: center;
+align-items: center;
+`
+
+export const MiniAvatar = styled.img`
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    `
+
+export const AvatarSample = styled.p`
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
 `
 
 export const TaskPriority = styled.p`
 text-transform: capitalize;
 color: ${props => props.theme.taskPriorityTextColor};
 background-color: ${props => {
-    switch (props.priority) {
-        case 'low':
-            return props.theme.taskLowPriority;
-        case 'medium':
-            return props.theme.taskMediumPriority;
-        case 'high':
-            return props.theme.taskHighPriority;
-        default:
-            return props.theme.mainFont;
-    }
-}};
+        switch (props.priority) {
+            case 'low':
+                return props.theme.taskLowPriority;
+            case 'medium':
+                return props.theme.taskMediumPriority;
+            case 'high':
+                return props.theme.taskHighPriority;
+            default:
+                return props.theme.mainFont;
+        }
+    }};
 font-size: 10px;
 font-weight: 600;
 line-height: 1.2;
