@@ -21,7 +21,19 @@ export const UserPhoto = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-
+`;
+export const UserSpareAvatar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 18px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: black;
 `;
 
 export const UserName = styled.p`
