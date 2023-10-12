@@ -2,37 +2,6 @@ import styled from 'styled-components';
 import { Field } from 'formik';
 import { registerPageColors } from 'utils/colors';
 
-export const GoogleButton = styled.button`
-border-radius: 16px;
-  background:  ${registerPageColors.buttonColor};
-  box-shadow: 4px 2px 16px 0px rgba(136, 165, 191, 0.48);
-  width: 100%;
-  height: 46px;
-  margin-top: 20px;
-  border: none;
-  color: ${registerPageColors.formColor};
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 18px;
-  letter-spacing: -0.28px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 11px;
-  cursor: pointer;
-  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  &:hover {
-    background: ${registerPageColors.buttonHoverColor};
-  }
-  @media (min-width: 768px) {
-    width: 100%;
-    height: 56px;
-    margin-top: 28px;
-    font-size: 18px;
-    line-height: 24px;
-    letter-spacing: -0.36px;
-  }
-`;
 export const MainContainer = styled.div`
   display: flex;
   height: 100vh;
@@ -153,7 +122,6 @@ export const PasswordInput = styled(Field)`
   &:hover {
     border-color: ${registerPageColors.borderHoverColor};
   }
-
   @media (min-width: 768px) {
     max-width: 400px;
     height: 54px;
@@ -164,7 +132,6 @@ export const PasswordInput = styled(Field)`
     }
   }
 `;
-
 export const PasswordVisibilityIcon = styled.span`
   position: absolute;
   top: 75%;
@@ -177,7 +144,6 @@ export const PasswordVisibilityIcon = styled.span`
     height: 20px;
   }
 `;
-
 export const ErrorMsg = styled.p`
   color: ${registerPageColors.errorMessage};
   font-size: 12px;
