@@ -123,6 +123,7 @@ export const CalendarTable = ({ changePeriod }) => {
                 key={format(dayItem, 'ddMMyyyy')}
                 onClick={() => handleDateClick(dayItem)}
                 disabled={!isSameMonth(dayItem, currentDate)}
+                aria-label={`${format(dayItem, 'ddMMyyyy')}`}
               >
                 <CalendarDayWrapper>
                   <CalendarDay

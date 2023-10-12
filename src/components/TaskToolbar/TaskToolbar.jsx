@@ -8,6 +8,7 @@ import {
   PencilIcon,
   TrashIcon,
   Wrapper,
+  OptionButton,
 } from './TaskToolbar.styled';
 import { nanoid } from '@reduxjs/toolkit';
 import { AnimatePresence } from 'framer-motion';
@@ -21,7 +22,7 @@ const toolVar = {
   exit: { opacity: 0 },
 };
 
-export const TaskToolbar = ({ currentGroup, id}) => {
+export const TaskToolbar = ({ currentGroup, id }) => {
   const dispatch = useDispatch();
   const [isOpenOptions, setIsOpenOptions] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,12 +38,12 @@ export const TaskToolbar = ({ currentGroup, id}) => {
   const openEditModal = () => {
     setIsModalOpen(true);
   };
-  
+
   const closeModal = () => {
     document.querySelector(".ReactModal__Overlay").classList.add("ReactModal__Overlay--before-close");
-      setTimeout(() => {
+    setTimeout(() => {
       setIsModalOpen(false);
-    }, 400); 
+    }, 400);
   };
 
 
@@ -72,13 +73,13 @@ export const TaskToolbar = ({ currentGroup, id}) => {
     <Wrapper>
       <ToolList>
         <li key={'change priority'} onClick={toggleOptions} ref={openOptionsRef}>
-          <ArrowIcon />
+          <OptionButton aria-label='change priority'><ArrowIcon /></OptionButton>
         </li>
         <li key={'edit'} onClick={openEditModal}>
-          <PencilIcon />
+          <OptionButton aria-label='edit task'><PencilIcon /></OptionButton>
         </li>
         <li key={'delete'} onClick={deleteTask}>
-          <TrashIcon />
+          <OptionButton aria-label='delete task'><TrashIcon /></OptionButton>
         </li>
         {isModalOpen && (
           <TaskModal
@@ -90,25 +91,25 @@ export const TaskToolbar = ({ currentGroup, id}) => {
       </ToolList>
       <AnimatePresence>
         {isOpenOptions && (
-            <OtherOptions
-              initial={'initial'}
-              animate={'isOn'}
-              exit={'exit'}
-              variants={toolVar}
-              ref={optionsRef}
-            >
-              <Options>
-                {allGroups.map(group => (
-                  <Option
-                    key={nanoid()}
-                    onClick={() => updateTaskCategory(group)}
-                  >
-                    {group}
-                    <ArrowIcon />
-                  </Option>
-                ))}
-              </Options>
-            </OtherOptions>
+          <OtherOptions
+            initial={'initial'}
+            animate={'isOn'}
+            exit={'exit'}
+            variants={toolVar}
+            ref={optionsRef}
+          >
+            <Options>
+              {allGroups.map(group => (
+                <Option
+                  key={nanoid()}
+                  onClick={() => updateTaskCategory(group)}
+                >
+                  {group}
+                  <ArrowIcon />
+                </Option>
+              ))}
+            </Options>
+          </OtherOptions>
         )}
       </AnimatePresence>
     </Wrapper>

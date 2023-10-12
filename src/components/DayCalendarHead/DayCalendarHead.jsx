@@ -57,6 +57,7 @@ export const DayCalendarHead = ({ checkDate }) => {
         {daysArray.map(dayItem => (
           <DayNumberOfWeekWrapper key={format(dayItem, 'ddMMyyyy')}>
             <DayNumberOfWeek
+              aria-label='change day'
               isCurrentDay={isCurrentDay(dayItem)}
               onClick={() => handleDateClick(dayItem)}
               disabled={checkDate(addDays(dayItem, 2))}

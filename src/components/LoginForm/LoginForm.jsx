@@ -174,7 +174,7 @@ const LoginForm = () => {
 
                   <FormError name="password" />
                 </LabelInput>
-                <ButtonSubmit type="submit">
+                <ButtonSubmit type="submit" aria-label='submit log in'>
                   <span> Log In</span>
                   <IconButtonSubmitSpan>
                     <IconButtonSubmit>
@@ -189,7 +189,7 @@ const LoginForm = () => {
         </FormContainer>
 
         <SignupContainer>
-          <ButtonSignup type="button" onClick={() => navigate('/register')}>
+          <ButtonSignup aria-label='sign up' type="button" onClick={() => navigate('/register')}>
             Sign Up
           </ButtonSignup>
         </SignupContainer>
