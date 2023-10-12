@@ -43,8 +43,15 @@ const FeedbackForm = ({ onCancel, onReviewStatusChange, onUpdateStyles, onEditSt
   };
 
   const handleReviewChange = (e) => {
-    if (!userHasComment || isEditing) { 
+    if (!userHasComment || isEditing) {
       setReview(e.target.value);
+    }
+  };
+  
+  const handleEnterKey = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault(); 
+      handleSubmit(); 
     }
   };
 
@@ -158,6 +165,7 @@ const FeedbackForm = ({ onCancel, onReviewStatusChange, onUpdateStyles, onEditSt
               placeholder="Enter text"
               value={review}
               onChange={handleReviewChange}
+              onKeyDown={handleEnterKey} 
               rows={4}
               cols={50}
               readOnly={userHasComment && !isEditing}
