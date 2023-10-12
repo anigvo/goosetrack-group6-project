@@ -36,10 +36,11 @@ export const CalendarItem = styled.button`
 
   ${media('tablet', '')`
 height: 150px;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.15;
     `}
   ${media('desktop', '')`
+    font-size: 16px;
 height: 140px;
     `}
 `;
@@ -70,10 +71,12 @@ export const CalendarDay = styled.div`
     props.isCurrentDay
       ? props.theme.btnTextColor
       : props.theme.calendarTextColor};
+  ${media('tablet', '')`
+  padding: 4px 8px;
+    `}
   ${media('desktop', '')`
   width: 27px;
   height: 26px;
-  padding: 4px 8px;
     border-radius: 8px;
     `}
 `;
