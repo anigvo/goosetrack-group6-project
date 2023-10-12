@@ -340,8 +340,8 @@ const tickWidth = {
         color: textColor,
         position: 'top',
         align: 'start',
-        font: {          
-          size: 14,          
+        font: {
+          size: 14,
         },
       },
       datalabels: {
@@ -350,6 +350,8 @@ const tickWidth = {
         align: 'top',
         font: {
           size: getSizeMin().fontSizeByInterest,
+          weight: 500,
+          family: 'Poppins',
         },
         formatter: function (value, _) {
           return Math.round(value) + '%';
