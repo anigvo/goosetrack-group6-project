@@ -11,14 +11,15 @@ export const BoxBar = styled.div`
   padding: 40px 14px;
 
   ${media('tablet', '')`
+        padding: 32px;
         border-radius: 29px;
         max-width: 640px;
         height: 424px;
-        padding: 32px 32px;
+        
             
     `}
   ${media('desktop', '')`   
-        padding: 20px;     
+        padding: 40px;     
         max-width: 860px;
         height: 440px;
     `}
@@ -26,14 +27,6 @@ export const BoxBar = styled.div`
 
 export const BoxPeriodPaginator = styled.div` 
 
-     
-    ${media('tablet', '')`
-           
-    `}
-    ${media('desktop', '')`        
-        
-        
-    `}
 `;
 export const ConteinerData = styled.div` 
    display: flex;

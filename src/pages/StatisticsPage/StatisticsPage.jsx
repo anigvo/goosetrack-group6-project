@@ -8,8 +8,9 @@ import {
   BoxStatistics,
   ConteinerData,
 } from './StatisticsPage.styled';
+
 import LegendsStatistic from 'components/LegendsStatistic/LegendsStatistic';
-// import { Loader } from 'components/Loader/Loader';
+
 const StatisticsPage = ({ updatePageName }) => {
   const month = useSelector(selectMonth);
   const year = useSelector(selectYear);
@@ -43,14 +44,7 @@ const StatisticsPage = ({ updatePageName }) => {
         </BoxPeriodPaginator>
         <LegendsStatistic />
       </ConteinerData>
-      <StatisticsChart
-      // todoByDay={todoByDay}
-      // todoByMonth={todoByMonth}
-      // inprogressByDay={inprogressByDay}
-      // inprogressByMonth={inprogressByMonth}
-      // doneByDay={doneByDay}
-      // doneByMonth={doneByMonth}
-      />
+      <StatisticsChart/>
     </BoxStatistics>
   );
 };

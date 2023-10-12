@@ -6,9 +6,19 @@ export const LegendsBox = styled.div`
   gap: 20px;
 `;
 export const Legend = styled.div`
-  display: flex;
+  font-size: 14px;
+  line-height: 1.29;
 
+  color: ${props => props.theme.statisticsTextColor};
+
+  display: flex;
   align-items: center;
+  ${media('tablet', '')`
+  font-size: 16px;
+  line-height: 1.13;
+  `}
+  ${media('desktop', '')` 
+  `}
 `;
 
 export const LegendColor = styled.div`
