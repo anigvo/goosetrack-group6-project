@@ -4,7 +4,6 @@ import { ErrorMessage, Field } from 'formik';
 import { ReactComponent as UpdateAvatarIcon } from '../../assets/icons/add-avatar.svg';
 import { ReactComponent as ErrorIcon } from '../../assets/icons/error.svg';
 import { ReactComponent as ValidIcon } from '../../assets/icons/valid.svg';
-// import { ReactComponent as ChevronDown } from '../../assets/icons/chevron-down.svg';
 
 export const UserSection = styled.div`
   //   display: flex;
@@ -235,9 +234,7 @@ export const FormInput = styled(Field)`
 `;
 
 export const Feedback = styled.div`
-  //   height: 25px;
-  //   margin-top: 8px;
-  //   margin-left: 10px;
+
 `;
 
 export const ValidFeedback = styled.div`

@@ -1,7 +1,7 @@
 import { Bar } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-
+import { selectTheme } from 'redux/selectors';
 import { Loader } from 'components/Loader/Loader';
 
 import 'react-datepicker/dist/react-datepicker.css';
@@ -16,7 +16,8 @@ import {
 } from 'redux/selectors';
 import { getUserTasks } from 'redux/tasks/operations';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { lightTheme, darkTheme } from '../../utils/colors';
 
 Chart.register(...registerables);
 Chart.register(ChartDataLabels);
@@ -28,8 +29,67 @@ const StatisticsChart = () => {
   const year = useSelector(selectYear);
   const tasks = useSelector(selectTasks);
 
+const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+const fontSizeByInterest = {
+  small: 12, 
+  large: 16,
+  };
+  const fontSizeByGroup = {
+    small: 12,  
+    large: 14,
+  };
+ 
+const tickWidth = {
+  small: 14,  
+  medium: 32, 
+  large: 61,  
+};  
+  
+  useEffect(() => {
+    const handleResize = () => {
+      const newWidth = window.innerWidth;
+      setWindowWidth(newWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const getFontSize = () => {
+    if (windowWidth < 768) {
+      return {
+        fontSizeByInterest: fontSizeByInterest.small,
+        fontSizeByGroup: fontSizeByGroup.small,
+      };
+    } else {
+      return {
+        fontSizeByInterest: fontSizeByInterest.large,
+        fontSizeByGroup: fontSizeByGroup.large,
+      } 
+    }
+  };
+ const getTickWidth = () => {
+   if (windowWidth < 768) {
+     return tickWidth.small;
+   } else if (windowWidth > 767) {
+     return tickWidth.medium;
+   } else if (windowWidth > 1439) {
+     return tickWidth.large;
+   }
+  };
+  
   const colorDay = '#FFD2DD';
   const colorMonth = '#3E85F3';
+
+  const theme = useSelector(selectTheme);
+  const textColor =
+    theme === 'light'
+      ? lightTheme.statisticsTextColor
+      : darkTheme.statisticsTextColor;
 
   const gradientMonth = context => {
     const chart = context.chart;
@@ -52,16 +112,15 @@ const StatisticsChart = () => {
 
   const gradientDay = context => {
     const chart = context.chart;
-    const { ctx, chartArea } = chart; // Додали scale
+    const { ctx, chartArea } = chart; 
 
     if (!chartArea) {
       return null;
     }
 
-    const height = chartArea.bottom - chartArea.top; // Висота стовпця
-    const top = chartArea.top; // Початок стовпця
+    const height = chartArea.bottom - chartArea.top; 
+    const top = chartArea.top; 
 
-    // Створення градієнта на основі висоти стовпця
     const gradient = ctx.createLinearGradient(0, top + height, 0, top);
     gradient.addColorStop(0, colorDay);
     gradient.addColorStop(0.9687, 'rgba(255, 210, 221, 0.00)');
@@ -173,6 +232,7 @@ const StatisticsChart = () => {
         }),
 
         display: true,
+        
         backgroundColor: gradientMonth,
         borderSkipped: false,
         maxBarThickness: 27,
@@ -185,21 +245,18 @@ const StatisticsChart = () => {
   };
 
   const options = {
-    // title: {
-    //   display: true,
-    //   text: 'Назва вашого графіка',
-    //   position: 'top',
-    // },
     responsive: true,
     maintainAspectRatio: false,
     categoryPercentage: 0.6,
     barPercentage: 0.9,
+
     scales: {
       x: {
         ticks: {
           font: {
-            size: 14,
+            size: getFontSize().fontSizeByGroup,
           },
+          color: textColor,
         },
         barPercentage: 0.1,
         drawBorder: false,
@@ -221,8 +278,8 @@ const StatisticsChart = () => {
             display: false,
           },
           tickColor: 'rgba(0, 0, 0, 0)',
-          tickLength: 60,
-          tickWidth: 60,
+          tickLength: getTickWidth(),
+          tickWidth: getTickWidth(),
 
           offsetGridLines: true,
         },
@@ -232,6 +289,7 @@ const StatisticsChart = () => {
         beginAtZero: true,
         max: 100,
         ticks: {
+          color: textColor,
           max: 100,
           min: 0,
           stepSize: 20,
@@ -249,20 +307,23 @@ const StatisticsChart = () => {
 
     plugins: {
       title: {
-        // Додаємо секцію для заголовку графіку
-        display: true, // Відображати заголовок
-        text: 'Tasks', // Текст заголовка графіку
-        position: 'top', // Позиція заголовка (зверху)
-        align: 'start', // Вирівнювання заголовка (по центру)
+        display: true, 
+        text: 'Tasks', 
+        color: textColor,
+        position: 'top', 
+        align: 'start', 
         font: {
-          size: 14, // Розмір шрифта заголовка
+          size: 14, 
         },
       },
       datalabels: {
-        color: 'black',
+        color: textColor,
         anchor: 'end',
         align: 'top',
-        formatter: function (value, context) {
+        font: {
+          size: getFontSize().fontSizeByInterest,
+        },
+        formatter: function (value, _) {
           return Math.round(value) + '%';
         },
       },
