@@ -37,7 +37,7 @@ import { GoogleBtn } from 'buttons/GoogleBtn/GoogleBtn';
 const userShema = object({
   name: string().min(3).required(),
   email: string().email('This is an ERROR email').required(),
-  password: string().min(6).max(16).required(),
+  password: string().min(6).max(100).required(),
 });
 
 const initialValues = {
