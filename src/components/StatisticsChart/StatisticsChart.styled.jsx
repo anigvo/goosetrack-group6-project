@@ -3,7 +3,9 @@ import { media } from 'utils/queries';
 
 export const BoxBar = styled.div`
   border-radius: 20px;
-  border: 0.8px solid #e3f3ff;
+  border: 0.8px solid ${props => props.theme.chartBorderColor};
+
+  //   border: 0.8px solid #e3f3ff;
   width: 100%;
   height: 100%;
   max-width: 307px;
