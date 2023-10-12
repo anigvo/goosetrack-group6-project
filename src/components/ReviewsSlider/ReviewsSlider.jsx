@@ -69,7 +69,7 @@ const ReviewSlider = () => {
             swiperInstance.current = swiper;
           }}
         >
-          {reviews.map(review => <SwiperSlide key={review.avatarURL}><ReviewItem name={review.name} comment={review.comment} rate={review.rating} avatar={review.avatarURL} /></SwiperSlide>)}
+          {reviews.map(review => <SwiperSlide key={reviews.indexOf(review)}><ReviewItem name={review.name} comment={review.comment} rate={review.rating} avatar={review.avatarURL} /></SwiperSlide>)}
         
         </Swiper>
       
@@ -77,7 +77,7 @@ const ReviewSlider = () => {
           <PrevIconArrow onClick={slidePrev} alt="previous slide" />
           <NextIconArrow onClick={slideNext} alt="next slide" />
         </div>
-      </> : <MissedReviewsMessage>Here can be your review, just sign up and express your thoughts about our service ;)</MissedReviewsMessage>
+      </> : <MissedReviewsMessage>Your review can be first, just sign up and express your thoughts about our service ;)</MissedReviewsMessage>
       }
     </ReviewSection>
   )

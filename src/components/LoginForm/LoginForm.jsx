@@ -33,7 +33,7 @@ import { GoogleBtn } from 'buttons/GoogleBtn/GoogleBtn';
 
 const userShema = object({
   email: string().email('This is an ERROR email').required(),
-  password: string().min(6).max(16).required(),
+  password: string().min(6).max(100).required(),
 });
 
 const initialValues = {
@@ -47,7 +47,7 @@ const LoginForm = () => {
   const passwdid = nanoid();
   const emailid = nanoid();
 
-  const [showPassword, setShowPassword] = useState(false); // Додати стан для відображення пароля
+  const [showPassword, setShowPassword] = useState(false); 
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -140,7 +140,7 @@ const LoginForm = () => {
 
                   <PasswordInput
                     autoComplete="off"
-                    type={showPassword ? 'text' : 'password'} // Встановити тип в залежності від стану showPassword
+                    type={showPassword ? 'text' : 'password'} 
                     name="password"
                     id={passwdid}
                     placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"

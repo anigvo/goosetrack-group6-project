@@ -4,7 +4,7 @@ import { LogoutBtn } from "buttons/LogoutBtn/LogoutBtn";
 import { ReactComponent as CloseIcon } from '../../assets/icons/close.svg';
 import logo from '../../assets/images/logo.png';
 import { useMediaQuery } from "hooks/useMediaQuery";
-import { forwardRef } from "react";
+import { useEffect, useRef } from "react";
 
 const sideBarVars = {
     initial: { x: '-100%' },
@@ -18,15 +18,28 @@ const desktopVars = {
     exit: { x: '0%' }
 }
 
-export const SideBar = forwardRef(({ closeMethod }, ref) => {
+export const SideBar = ({ closeMethod, openBtnRef }) => {
     const isDesktop = useMediaQuery('(min-width: 1440px)')
+    const sideBarRef = useRef(null);
+
+    useEffect(() => {
+        const closeOutside = (event) => {
+            if (sideBarRef.current && !sideBarRef.current.contains(event.target)
+            && !openBtnRef.current.contains(event.target)) closeMethod();
+          };
+          if (sideBarRef.current) {
+            window.addEventListener("click", closeOutside);
+            return () => window.removeEventListener("click", closeOutside)
+          }
+    }, [sideBarRef, closeMethod, openBtnRef])
+
     return (
         <Aside
             initial={"initial"}
             animate={"isOn"}
             exit={"exit"}
             variants={isDesktop ? desktopVars : sideBarVars}
-            ref={ref}>
+            ref={sideBarRef}>
             <div>
                 <LogoWrapper>
                     <Logo src={logo} alt="logo" width={60}/>
@@ -37,4 +50,4 @@ export const SideBar = forwardRef(({ closeMethod }, ref) => {
             </div>
             <LogoutBtn />
         </Aside>)
-});
+};
