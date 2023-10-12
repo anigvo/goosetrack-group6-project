@@ -62,11 +62,11 @@ export const TaskToolbar = ({ currentGroup, id}) => {
     const closeOutside = (event) => {
       if (optionsRef.current && !optionsRef.current.contains(event.target) && !openOptionsRef.current.contains(event.target)) setIsOpenOptions(false);
     };
-    if (optionsRef) {
+    if (isOpenOptions) {
       window.addEventListener("click", closeOutside);
       return () => window.removeEventListener("click", closeOutside)
     }
-  }, [optionsRef]);
+  }, [optionsRef, isOpenOptions]);
 
   return (
     <Wrapper>
