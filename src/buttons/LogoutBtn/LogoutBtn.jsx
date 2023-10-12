@@ -9,6 +9,6 @@ export const LogoutBtn = () => {
         dispatch(logOutUser());
     }
     return (
-        <LogBtn onClick={handleLogOut}>Log out<LogOutIcon /></LogBtn>
+        <LogBtn aria-label="log out" onClick={handleLogOut}>Log out<LogOutIcon /></LogBtn>
     )
 };

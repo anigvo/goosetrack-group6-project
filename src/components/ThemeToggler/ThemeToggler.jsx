@@ -21,7 +21,7 @@ export const ThemeToggler = () => {
         : dispatch(setTheme(THEME.LIGHT))
     }
 
-    return (<ThemeWrapper onClick={changeTheme}>
+    return (<ThemeWrapper onClick={changeTheme} aria-label='theme changer'>
         <AnimatePresence mode='wait'>
             {currentTheme === THEME.DARK ? <SunIcon
                 initial={"initial"}

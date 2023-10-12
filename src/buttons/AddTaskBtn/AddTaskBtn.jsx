@@ -19,7 +19,7 @@ export const AddTaskButton = ({ category}) => {
 
   return (
     <>
-      <Button onClick={openModal}>
+      <Button onClick={openModal} aria-label="add task">
         <AddIcon />
         Add task
       </Button>

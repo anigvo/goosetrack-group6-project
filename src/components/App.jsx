@@ -52,14 +52,14 @@ export const App = () => {
           <Route path='/'>
             <Route
               index
-              element={<PublicRoute redirectTo='/calendar' component={<MainPage />} />} />
-            <Route path="login" element={<PublicRoute redirectTo={'/'} component={<LoginPage />} />} />
-            <Route path="register" element={<PublicRoute redirectTo={'/'} component={<RegisterPage />} />} />
+              element={<PublicRoute redirectTo="calendar" component={<MainPage />} />} />
+            <Route path="login" element={<PublicRoute redirectTo={'/calendar'} component={<LoginPage />} />} />
+            <Route path="register" element={<PublicRoute redirectTo={'/calendar'} component={<RegisterPage />} />} />
             <Route path='/' element={<PrivateRoute redirectTo='/' component={<MainLayout pageName={pageName} />} />}>
               <Route path="calendar"
                 element={<PrivateRoute redirectTo='/' component={<CalendarPage updatePageName={updatePageName} />} />}>
-                <Route path="month/:currentDate" element={<PrivateRoute redirectTo='/' component={<ChoosedMonth />} />} />
-                <Route path="day/:currentDay" element={<PrivateRoute redirectTo='/' component={<ChoosedDay />} />} />
+                <Route path="month/:currentDate" element={<PrivateRoute component={<ChoosedMonth />} />} />
+                <Route path="day/:currentDay" element={<PrivateRoute component={<ChoosedDay />} />} />
               </Route>
               <Route
                 path="account"

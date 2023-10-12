@@ -218,7 +218,7 @@ const RegisterForm = () => {
                   ) : null}
                   <FormError name="password" />
                 </LabelInput>
-                <ButtonSubmit type="submit">
+                <ButtonSubmit type="submit" aria-label='sign up'>
                   <span> Sign Up </span>
                   <IconButtonSubmitSpan>
                     <IconButtonSubmit>
@@ -233,7 +233,7 @@ const RegisterForm = () => {
         </FormContainer>
 
         <SignupContainer>
-          <ButtonSignup type="button" onClick={() => navigate('/login')}>
+          <ButtonSignup aria-label='to log in' type="button" onClick={() => navigate('/login')}>
             Log In
           </ButtonSignup>
         </SignupContainer>

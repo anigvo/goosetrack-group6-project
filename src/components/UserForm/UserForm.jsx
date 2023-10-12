@@ -1,6 +1,5 @@
 import { Field, Form, Formik } from 'formik';
 import {
-  UserSection,
   AvatarContainer,
   AvatarUploadBtn,
   AvatarUploadContainer,
@@ -98,12 +97,11 @@ export const UserForm = () => {
         errors.email = 'Invalid type of email';
       }
     }
-    if (birthday !== userInfo.birthday) {
-      if (!birthday) {
-        errors.birthday = 'Birthday can`t be empty';
-      }
+    if (birthday !== new Date(userInfo.birthday).toISOString().split('T')[0].replaceAll('-', '.')) {
+      if (!birthday.includes('-')) {
       const errorDate = validateDate(birthday);
       if (errorDate) errors.birthday = errorDate;
+      }
     }
     if (skype !== userInfo.skype) {
       if (skype.length > 16) {
@@ -129,7 +127,7 @@ export const UserForm = () => {
     if (email && email !== userInfo.email) {
       formData.append("email", email);
     }
-    if (birthday && birthday !== new Date(userInfo.birthday).toISOString().split('T')[0].replaceAll('-', '.')) {
+    if (!birthday.includes('-') && birthday !== new Date(userInfo.birthday).toISOString().split('T')[0].replaceAll('-', '.')) {
       formData.append("birthday", birthday.replaceAll('.', '-'));
     }
     if (skype && skype !== userInfo.skype) {
@@ -154,7 +152,7 @@ export const UserForm = () => {
   };
 
   return (
-    <UserSection>
+    <>
       <Formik
         initialValues={initialValues}
         validate={validateForm}
@@ -402,6 +400,6 @@ export const UserForm = () => {
           );
         }}
       </Formik>
-    </UserSection>
+    </>
   );
 };

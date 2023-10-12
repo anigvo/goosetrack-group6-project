@@ -22,7 +22,7 @@ export const ColumnHeadBar = ({ groupName, category}) => {
   return (
     <ColumnHeader>
       <GroupName>{groupName}</GroupName>
-      <IconTaskAdd onClick={openModal}>
+      <IconTaskAdd onClick={openModal} aria-label="add new task">
         <CircleIcon />
       </IconTaskAdd>
       {isModalOpen && (

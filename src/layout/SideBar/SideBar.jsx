@@ -44,7 +44,7 @@ export const SideBar = ({ closeMethod, openBtnRef }) => {
                 <LogoWrapper>
                     <Logo src={logo} alt="logo" width={60}/>
                     <Title>G<TitleOutline>oo</TitleOutline>seTrack</Title>
-                    <CloseBtn onClick={closeMethod}><CloseIcon /></CloseBtn>
+                    <CloseBtn onClick={closeMethod} aria-label="close sidebar"><CloseIcon /></CloseBtn>
                 </LogoWrapper>
                 <UserNav />
             </div>
